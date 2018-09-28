@@ -10,8 +10,9 @@
 typedef void(^LDSocketManagerBlock)(NSData * data);
 @interface LDSocketManager : NSObject
 + (instancetype)shared;
-+ (NSString *)hostIP;
-+ (BOOL)connectServer:(NSString *)hostIP port:(NSString *)port success:(LDSocketManagerBlock)success failure:(LDSocketManagerBlock)failure;
++ (NSString *)host;
++ (NSInteger)port;
++ (BOOL)connectServer:(NSString *)host port:(NSInteger) port success:(LDSocketManagerBlock)success failure:(LDSocketManagerBlock)failure;
 + (void)sendMessage:(NSString *)message success:(LDSocketManagerBlock)success failure:(LDSocketManagerBlock)failure;
 + (void)startSSL;
 @end

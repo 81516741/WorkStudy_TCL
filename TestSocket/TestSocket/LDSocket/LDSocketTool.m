@@ -11,9 +11,9 @@
 #import "LDXMLParseTool.h"
 
 @implementation LDSocketTool
-+ (BOOL)connectServer:(NSString *)hostIP port:(NSString *)port success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
++ (BOOL)connectServer:(NSString *)host port:(NSString *)port success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
 {
-    return [LDSocketManager connectServer:hostIP port:port success:success failure:failure];
+    return [LDSocketManager connectServer:host port:port.integerValue success:success failure:failure];
 }
 
 + (void)sendMessage:(NSString *)message Success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
@@ -41,7 +41,7 @@
 
 + (void)sendHandshakeMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
 {
-    NSString * startHandshakeMessage=[NSString stringWithFormat:@"<stream:stream to=\"%@\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">",[LDSocketManager hostIP]];
+    NSString * startHandshakeMessage=[NSString stringWithFormat:@"<stream:stream to=\"%@\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">",[LDSocketManager host]];
     NSString * endHandshakeMessage = @"<stream:stream to=\"tcl.com\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">";
     NSLog(@"握手（1）");
     [LDSocketTool sendMessage:startHandshakeMessage Success:^(id data) {
@@ -49,11 +49,11 @@
         [LDSocketTool sendMessage:data Success:^(id data) {
             NSLog(@"握手（3）");
             [LDSocketManager startSSL];
-//            [LDSocketTool sendMessage:endHandshakeMessage Success:^(id data) {
-//
-//            } failure:^(id data) {
-//
-//            }];
+            [LDSocketTool sendMessage:endHandshakeMessage Success:^(id data) {
+
+            } failure:^(id data) {
+
+            }];
 
         } failure:^(id data) {
             
