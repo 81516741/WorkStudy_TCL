@@ -7,9 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+
 typedef void(^LDSocketToolBlock)(id data);
-@interface LDSocketTool : NSObject
+
+@protocol LDSocketDistributeProtocol
+@optional
+- (void)receiveMessage:(id)message messageIDPrefix:(NSString *)messageIDPrefix success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
+@end
+
+@interface LDSocketTool : NSObject<LDSocketDistributeProtocol>
+
+@property (nonatomic,strong) NSMutableDictionary *  requestBlocks;
+
++ (instancetype)shared;
 + (BOOL)connectServer:(NSString *)host port:(NSString *)port success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
++ (void)sendMessage:(NSString *)message messageID:(NSString *)messageID success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
+
 + (void)sendHandshakeMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
-+ (void)sendHeartMessage;
++ (void)sendHeartMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
+
 @end

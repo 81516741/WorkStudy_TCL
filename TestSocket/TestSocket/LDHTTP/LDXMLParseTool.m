@@ -20,9 +20,8 @@
     return _instance;
 }
 
-+ (id)parseData:(NSData *)data
++ (id)parseData:(NSString *)XMLString
 {
-    NSString * XMLString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (XMLString.length <= 0) {
         NSLog(@"xml数据解析错误");
         return nil;

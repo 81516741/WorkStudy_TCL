@@ -7,12 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef void(^LDSocketManagerBlock)(NSData * data);
+
+@class LDSocketManager;
+@protocol LDSocketManagerConnectProtocol <NSObject>
+@optional
+- (void)receiveConnectServiceResult:(id)result manager:(LDSocketManager *)manager;
+@end
+
+@protocol LDSocketManagerSendMessageProtocol <NSObject>
+@optional
+- (void)receiveMessageResult:(id)result manager:(LDSocketManager *)manager;
+@end
+
 @interface LDSocketManager : NSObject
 + (instancetype)shared;
 + (NSString *)host;
 + (NSInteger)port;
-+ (BOOL)connectServer:(NSString *)host port:(NSInteger) port success:(LDSocketManagerBlock)success failure:(LDSocketManagerBlock)failure;
-+ (void)sendMessage:(NSString *)message success:(LDSocketManagerBlock)success failure:(LDSocketManagerBlock)failure;
++ (BOOL)connectServer:(NSString *)host port:(NSInteger) port delegate:(id<LDSocketManagerConnectProtocol>)delegate;
++ (void)sendMessage:(NSString *)message delegate:(id<LDSocketManagerSendMessageProtocol>)delegate;
 + (void)startSSL;
 @end

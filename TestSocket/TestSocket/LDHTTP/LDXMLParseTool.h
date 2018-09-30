@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface LDXMLParseTool : NSObject<NSXMLParserDelegate>
-+ (id)parseData:(NSData *)data;
++ (id)parseData:(NSString *)XMLString;
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D749C0E215F6DE500A85C49 /* LDSocketTool+ld_Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D749C0D215F6DE500A85C49 /* LDSocketTool+ld_Login.m */; };
+		0D749C11215F784E00A85C49 /* MessageIDTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D749C10215F784E00A85C49 /* MessageIDTool.m */; };
 		B00AC9252114265D006E427E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B00AC9242114265D006E427E /* AppDelegate.m */; };
 		B00AC9282114265D006E427E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00AC9272114265D006E427E /* ViewController.m */; };
 		B00AC92B2114265D006E427E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B00AC9292114265D006E427E /* Main.storyboard */; };
@@ -27,6 +29,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D749C0C215F6DE500A85C49 /* LDSocketTool+ld_Login.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+ld_Login.h"; sourceTree = "<group>"; };
+		0D749C0D215F6DE500A85C49 /* LDSocketTool+ld_Login.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+ld_Login.m"; sourceTree = "<group>"; };
+		0D749C0F215F784E00A85C49 /* MessageIDTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageIDTool.h; sourceTree = "<group>"; };
+		0D749C10215F784E00A85C49 /* MessageIDTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageIDTool.m; sourceTree = "<group>"; };
 		74493FDF61B5AFB79083E9C1 /* Pods-TestSocket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestSocket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestSocket/Pods-TestSocket.debug.xcconfig"; sourceTree = "<group>"; };
 		8BEEF7B4B2B63D61BB5AF520 /* Pods_TestSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A385069A832077EFB92E8094 /* Pods-TestSocket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestSocket.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestSocket/Pods-TestSocket.release.xcconfig"; sourceTree = "<group>"; };
@@ -161,6 +167,10 @@
 				B00AC95321145C67006E427E /* LDSocketManager.m */,
 				B00AC9552117D9BB006E427E /* LDSocketTool.h */,
 				B00AC9562117D9BB006E427E /* LDSocketTool.m */,
+				0D749C0C215F6DE500A85C49 /* LDSocketTool+ld_Login.h */,
+				0D749C0D215F6DE500A85C49 /* LDSocketTool+ld_Login.m */,
+				0D749C0F215F784E00A85C49 /* MessageIDTool.h */,
+				0D749C10215F784E00A85C49 /* MessageIDTool.m */,
 			);
 			path = LDSocket;
 			sourceTree = "<group>";
@@ -284,9 +294,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D749C0E215F6DE500A85C49 /* LDSocketTool+ld_Login.m in Sources */,
 				B00AC94B2114269B006E427E /* Target_LDHTTP.m in Sources */,
 				B00AC9282114265D006E427E /* ViewController.m in Sources */,
 				B00AC9572117D9BB006E427E /* LDSocketTool.m in Sources */,
+				0D749C11215F784E00A85C49 /* MessageIDTool.m in Sources */,
 				B00AC93321142669006E427E /* main.m in Sources */,
 				B00AC9252114265D006E427E /* AppDelegate.m in Sources */,
 				B00AC9492114269B006E427E /* LDHTTPModel.m in Sources */,

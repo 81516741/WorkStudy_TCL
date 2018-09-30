@@ -10,12 +10,12 @@
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
 @interface LDSocketManager()<GCDAsyncSocketDelegate>
-@property (nonatomic,strong) NSMutableDictionary *  requestBlocks;
 @property (nonatomic,strong) GCDAsyncSocket *     socket;
 @property (nonatomic,copy)   NSString *           host;
 @property (nonatomic,assign) NSInteger            port;
 @property (nonatomic,strong) dispatch_queue_t     socketQueue;
-@property (nonatomic,assign) long                 connectTag;
+@property(weak, nonatomic) id<LDSocketManagerConnectProtocol>  connectDelegate;
+@property(weak, nonatomic) id<LDSocketManagerSendMessageProtocol>  sendMessageDelegate;
 @end
 
 @implementation LDSocketManager
@@ -28,7 +28,6 @@
     dispatch_once(&onceToken, ^{
         _instance = [LDSocketManager new];
         _instance.socketQueue=dispatch_queue_create("socket request queue",NULL);
-        _instance.connectTag = 666888;
     });
     return _instance;
 }
@@ -40,30 +39,33 @@
     return [LDSocketManager shared].port;
 }
 
-+ (BOOL)connectServer:(NSString *)host port:(NSInteger) port success:(LDSocketManagerBlock)success failure:(LDSocketManagerBlock)failure
+
++ (BOOL)connectServer:(NSString *)host port:(NSInteger) port delegate:(id<LDSocketManagerConnectProtocol>)delegate
 {
-    return [[LDSocketManager shared] connectServer:host port:port success:success failure:failure];
+    return [[LDSocketManager shared] connectServer:host port:port delegate:delegate];
 }
-- (BOOL)connectServer:(NSString *)host port:(NSInteger)port success:(LDSocketManagerBlock)success failure:(LDSocketManagerBlock)failure
+- (BOOL)connectServer:(NSString *)host port:(NSInteger)port delegate:(id<LDSocketManagerConnectProtocol>)delegate
 {
     self.host = host;
     self.port = port;
     if (self.socket == nil) {
         self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:self.socketQueue];
-        [self saveSuccess:success failure:failure tag:self.connectTag];
-        return [_socket connectToHost:host onPort:port error:nil];
+        self.connectDelegate = delegate;
+        return [self.socket connectToHost:host onPort:port withTimeout:30 error:nil];
+    } else if (!self.socket.isConnected) {
+        return [self.socket connectToHost:host onPort:port withTimeout:30 error:nil];
     }
     return self.socket.isConnected;
 }
 
-+ (void)sendMessage:(NSString *)message success:(LDSocketManagerBlock)success failure:(LDSocketManagerBlock)failure
++ (void)sendMessage:(NSString *)message delegate:(id<LDSocketManagerSendMessageProtocol>)delegate
 {
-    [[LDSocketManager shared] sendMessage:message success:success failure:failure];
+    [[LDSocketManager shared] sendMessage:message delegate:delegate];
 }
-- (void)sendMessage:(NSString *) message success:(LDSocketManagerBlock)success failure:(LDSocketManagerBlock)failure{
+- (void)sendMessage:(NSString *) message delegate:(id<LDSocketManagerSendMessageProtocol>)delegate{
+    self.sendMessageDelegate = delegate;
     NSData *data =[message dataUsingEncoding:NSUTF8StringEncoding];
-    long tag = [self saveSuccess:success failure:failure];
-    [self.socket writeData:data withTimeout:-1 tag:tag];
+    [self.socket writeData:data withTimeout:30 tag:0];
 }
 
 + (void)startSSL
@@ -84,89 +86,40 @@
 #pragma mark - socket delegate
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
-    NSArray * blocks = [self.requestBlocks objectForKey:[NSString stringWithFormat:@"%ld",self.connectTag]];
-    BOOL state = [self.socket isConnected];  // 判断是否连接成功
-    if (state) {
-        NSLog(@"socket 连接成功");
-        if (blocks.firstObject) {
-            ((LDSocketManagerBlock)(blocks.firstObject))([@"success" dataUsingEncoding:NSUTF8StringEncoding]);
-        }
-    }else{
-        NSLog(@"socket 没有连接");
-        if (blocks.lastObject) {
-            ((LDSocketManagerBlock)(blocks.lastObject))([@"failure" dataUsingEncoding:NSUTF8StringEncoding]);
-        }
+    if ([self.connectDelegate respondsToSelector:@selector(receiveConnectServiceResult:manager:)]) {
+       [self.connectDelegate receiveConnectServiceResult:@"连接成功" manager:self];
     }
+    
+    NSLog(@"连接成功");
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReceiveTrust:(SecTrustRef)trust
-completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler
-{
+completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler {
     completionHandler(YES);
 }
 
 -(void)socket:(GCDAsyncSocket *)sock
-didWriteDataWithTag:(long)tag{
+didWriteDataWithTag:(long)tag {
     NSLog(@"[客户端]:发送数据完毕");
     [self.socket readDataWithTimeout:-1 tag:tag];
 }
 
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
-    NSString * tagString = [NSString stringWithFormat:@"%ld",tag];
-    NSArray * blocks = [self.requestBlocks objectForKey:tagString];
-    if (blocks.firstObject && data.length > 0) {
-        ((LDSocketManagerBlock)(blocks.firstObject))(data);
+    if ([self.sendMessageDelegate respondsToSelector:@selector(receiveMessageResult:manager:)]) {
+        [self.sendMessageDelegate receiveMessageResult:data manager:self];
     }
-    if (blocks.lastObject && data.length > 0) {
-        ((LDSocketManagerBlock)(blocks.lastObject))(data);
-    }
-  
-    [self.requestBlocks removeObjectForKey:tagString];
 }
 
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
-    NSLog(@"socket 断开连接");
-}
-#pragma mark - method
-- (long)saveSuccess:(LDSocketManagerBlock)success failure:(LDSocketManagerBlock)failure
-{
-    long tag = random();
-    [self saveSuccess:success failure:failure tag:tag];
-    return tag;
-}
-
-- (void)saveSuccess:(LDSocketManagerBlock)success failure:(LDSocketManagerBlock)failure tag:(long)tag
-{
-    NSMutableArray * blockArray = [NSMutableArray arrayWithCapacity:2];
-    if (success) {
-        [blockArray addObject:success];
-    } else {
-        [blockArray addObject:@"nil"];
+    NSString * errorDes =  err.userInfo[NSLocalizedDescriptionKey];
+    if ([errorDes isEqualToString:@"Attempt to connect to host timed out"]) {
+        if ([self.connectDelegate respondsToSelector:@selector(receiveConnectServiceResult:manager:)]) {
+            [self.connectDelegate receiveConnectServiceResult:@"连接超时" manager:self];
+        }
     }
-    if (failure) {
-        [blockArray addObject:failure];
-    } else {
-        [blockArray addObject:@"nil"];
-    }
-    NSString * tagString = [NSString stringWithFormat:@"%ld",tag];
-    [self.requestBlocks setObject:blockArray forKey:tagString];
-}
-
-- (void)removeSuccessAndFailureBlockByTag:(long)tag
-{
-    NSString * tagString = [NSString stringWithFormat:@"%ld",tag];
-    [self.requestBlocks removeObjectForKey:tagString];
-}
-
-#pragma mark - lazy load
-- (NSMutableDictionary *)requestBlocks
-{
-    if (_requestBlocks == nil) {
-        _requestBlocks = [NSMutableDictionary dictionary];
-    }
-    return _requestBlocks;
+    NSLog(@"socket 断开连接:%@",errorDes);
 }
 
 @end

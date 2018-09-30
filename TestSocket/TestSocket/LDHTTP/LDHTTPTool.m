@@ -29,7 +29,10 @@ NSMutableDictionary * taskDescriptions;
     [[LDHTTPManager shared] sendMessage:model success:^(LDHTTPModel *responseObject) {
         //打印回调信息
         NSLog(@"[发起请求的类:%@][请求描述:%@][请求URL:%@][请求参数:%@][服务器返回的数据:%@]",responseObject.VCName,responseObject.taskDescription,[responseObject.url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[responseObject.parameters description],responseObject.dataOrigin);
-        responseObject.dataOrigin = [LDXMLParseTool parseData:(NSData *)responseObject.dataOrigin];
+        
+        
+        NSString * XMLString = [[NSString alloc] initWithData:(NSData *)responseObject.dataOrigin encoding:NSUTF8StringEncoding];
+        responseObject.dataOrigin = [LDXMLParseTool parseData:XMLString];
         if ([responseObject.dataOrigin[@"errorcode"] integerValue] == 0) {
             success(responseObject);
         } else {
