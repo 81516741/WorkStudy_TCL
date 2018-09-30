@@ -11,6 +11,7 @@
 #import "LDSocketTool.h"
 #import "LDSocketTool+ld_Login.h"
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *desLable;
 @end
 
 @implementation ViewController
@@ -35,19 +36,15 @@
     } ];
 }
 
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    
-}
-
 - (void)autoConnect
 {
     [LDHTTPTool getIPAndPortSuccess:^(LDHTTPModel * model) {
         [LDSocketTool connectServer:model.dataOrigin[@"ip"] port:model.dataOrigin[@"port"] success:^(id data) {
             [LDSocketTool sendHandshakeMessageSuccess:^(id data) {
-                
-            } failure:nil];
+                self.desLable.text = @"握手成功";
+            } failure:^(id data) {
+                self.desLable.text = @"握手失败";
+            }];
         } failure:nil];
     } failure:nil];
 }

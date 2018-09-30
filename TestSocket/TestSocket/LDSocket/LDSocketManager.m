@@ -87,7 +87,10 @@
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
     if ([self.connectDelegate respondsToSelector:@selector(receiveConnectServiceResult:manager:)]) {
-       [self.connectDelegate receiveConnectServiceResult:@"连接成功" manager:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.connectDelegate receiveConnectServiceResult:@"连接成功" manager:self];
+        });
+       
     }
     
     NSLog(@"连接成功");
@@ -107,7 +110,9 @@ didWriteDataWithTag:(long)tag {
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
     if ([self.sendMessageDelegate respondsToSelector:@selector(receiveMessageResult:manager:)]) {
-        [self.sendMessageDelegate receiveMessageResult:data manager:self];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+           [self.sendMessageDelegate receiveMessageResult:data manager:self];
+        });
     }
 }
 
@@ -116,7 +121,9 @@ didWriteDataWithTag:(long)tag {
     NSString * errorDes =  err.userInfo[NSLocalizedDescriptionKey];
     if ([errorDes isEqualToString:@"Attempt to connect to host timed out"]) {
         if ([self.connectDelegate respondsToSelector:@selector(receiveConnectServiceResult:manager:)]) {
-            [self.connectDelegate receiveConnectServiceResult:@"连接超时" manager:self];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self.connectDelegate receiveConnectServiceResult:@"连接超时" manager:self];
+            });
         }
     }
     NSLog(@"socket 断开连接:%@",errorDes);

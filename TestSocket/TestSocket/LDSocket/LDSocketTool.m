@@ -104,31 +104,39 @@
     NSString * startHandshakeMessage = [NSString stringWithFormat:@"<stream:stream to=\"%@\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">",[LDSocketManager host]];
     NSString * openSSLMessage = @"<starttls xmlns=\"urn:ietf:params:xml:ns:xmpp-tls\"/>";
     NSString * endHandshakeMessage = @"<stream:stream to=\"tcl.com\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">";
-    NSLog(@"（1）");
     [LDSocketTool shared].startHandMessageID = [MessageIDTool getMessageID:kStartHandMessageIDPrefix];
     [LDSocketTool shared].openSSLMessageID = [MessageIDTool getMessageID:kOpenSSLMessageIDPrefix];
     [LDSocketTool shared].endHandMessgeID = [MessageIDTool getMessageID:kEndHandMessageIDPrefix];
+    NSLog(@"（1）");
     [LDSocketTool sendMessage:startHandshakeMessage messageID:[LDSocketTool shared].startHandMessageID success:^(id data) {
-        NSLog(@"握手成功");
         [LDSocketTool shared].isHanding = false;
-        if (success) {
-            success(nil);
-        }
-//        NSLog(@"（2）");
-//        [LDSocketTool sendMessage:openSSLMessage messageID:[LDSocketTool shared].openSSLMessageID success:^(id data) {
-//            NSLog(@"（3）");
-//            [LDSocketManager startSSL];
-//            [LDSocketTool sendMessage:endHandshakeMessage messageID:[LDSocketTool shared].endHandMessgeID success:^(id data) {
-//                [LDSocketTool shared].isHanding = false;
-//            } failure:^(id data) {
-//                [LDSocketTool shared].isHanding = false;
-//            }];
-//        } failure:^(id data) {
-//            [LDSocketTool shared].isHanding = false;
-//        }];
+        NSLog(@"（2）");
+        [LDSocketTool sendMessage:openSSLMessage messageID:[LDSocketTool shared].openSSLMessageID success:^(id data) {
+            NSLog(@"（3）");
+            [LDSocketManager startSSL];
+            [LDSocketTool sendMessage:endHandshakeMessage messageID:[LDSocketTool shared].endHandMessgeID success:^(id data) {
+                [LDSocketTool shared].isHanding = false;
+                NSLog(@"握手成功");
+                if (success) {
+                    success(nil);
+                }
+            } failure:^(id data) {
+                [LDSocketTool shared].isHanding = false;
+                if (failure) {
+                    failure(nil);
+                }
+            }];
+        } failure:^(id data) {
+            [LDSocketTool shared].isHanding = false;
+            if (failure) {
+                failure(nil);
+            }
+        }];
     } failure:^(id data) {
         [LDSocketTool shared].isHanding = false;
-        failure(nil);
+        if (failure) {
+            failure(nil);
+        }
     }];
 }
 
@@ -150,7 +158,7 @@
                 [self receiveMessage:XMLString messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject success:success failure:failure];
             }
         }];
-    } else if ([XMLString containsString:@"starttls"] && [XMLString containsString:@"auth"] && [XMLString containsString:@"register"] && ![XMLString containsString:@"mechanisms"]) {
+    } else if ([XMLString containsString:@"<stream:features"] && [XMLString containsString:@"starttls"]) {
         //开始握手的回调，在TCL项目中，此消息没有消息id
         [self callBackByMessageID:[LDSocketTool shared].startHandMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
             if (success) {
@@ -164,7 +172,7 @@
                 success(nil);
             }
         }];
-    } else if ([XMLString containsString:@"starttls"] && [XMLString containsString:@"auth"] && [XMLString containsString:@"register"] && [XMLString containsString:@"mechanisms"]) {
+    } else if ([XMLString containsString:@"<stream:features"]) {
         //结束握手的回调，在TCL项目中，此消息没有消息id
         [self callBackByMessageID:[LDSocketTool shared].endHandMessgeID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
             if (success) {
