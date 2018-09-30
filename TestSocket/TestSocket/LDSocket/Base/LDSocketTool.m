@@ -8,31 +8,9 @@
 
 #import "LDSocketTool.h"
 #import "LDSocketManager.h"
-#import "MessageIDTool.h"
+#import "MessageIDConst.h"
 #import "LDXMLParseTool.h"
-
-@interface NSString(ld_Extension)
-@end
-
-@implementation NSString(ld_Extension)
-- (NSString *)ld_subStringNear:(NSString *) startStr  endStr:(NSString *)endStr {
-    NSRange range = [self rangeOfString:startStr];
-    NSString * handleStr;
-    if (range.length > 0) {
-        handleStr = [self substringFromIndex:range.location + startStr.length];
-        range = [handleStr rangeOfString:endStr];
-        handleStr = [handleStr substringToIndex:range.location];
-    }
-    return handleStr;
-}
-- (NSString *)tcl_messageID
-{
-    NSString * messageID = [[self stringByReplacingOccurrencesOfString:@" " withString:@""] ld_subStringNear:@"id=\"" endStr:@"\""];
-    return messageID;
-    
-}
-@end
-
+#import "NSString+tcl_xml.h"
 
 @interface LDSocketTool()<LDSocketManagerConnectProtocol,LDSocketManagerSendMessageProtocol>
 @property(assign, nonatomic) BOOL isConnecting;
@@ -59,7 +37,7 @@
         return NO;
     }
     [LDSocketTool shared].isConnecting = YES;
-    [LDSocketTool shared].connectMessageID = [MessageIDTool getMessageID:kConnecctServiceMessageIDPrefix];
+    [LDSocketTool shared].connectMessageID = getMessageID(kConnecctServiceMessageIDPrefix);
     [LDSocketTool saveSuccessBlock:success
                       failureBlock:failure messageID:[LDSocketTool shared].connectMessageID];
     return [LDSocketManager connectServer:host port:port.integerValue delegate:[LDSocketTool shared]];
@@ -84,7 +62,7 @@
 #pragma mark - 发消息给服务器
 + (void)sendHeartMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
 {
-    NSString * messageID = [MessageIDTool getMessageID:kHeartMessageIDPrefix];
+    NSString * messageID = getMessageID(kHeartMessageIDPrefix);
     NSString * heartMessage =
     [NSString stringWithFormat:@"\
 <?xml version=\"1.0\" encoding=\"utf-8\"?>\
@@ -104,9 +82,9 @@
     NSString * startHandshakeMessage = [NSString stringWithFormat:@"<stream:stream to=\"%@\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">",[LDSocketManager host]];
     NSString * openSSLMessage = @"<starttls xmlns=\"urn:ietf:params:xml:ns:xmpp-tls\"/>";
     NSString * endHandshakeMessage = @"<stream:stream to=\"tcl.com\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">";
-    [LDSocketTool shared].startHandMessageID = [MessageIDTool getMessageID:kStartHandMessageIDPrefix];
-    [LDSocketTool shared].openSSLMessageID = [MessageIDTool getMessageID:kOpenSSLMessageIDPrefix];
-    [LDSocketTool shared].endHandMessgeID = [MessageIDTool getMessageID:kEndHandMessageIDPrefix];
+    [LDSocketTool shared].startHandMessageID = getMessageID(kStartHandMessageIDPrefix);
+    [LDSocketTool shared].openSSLMessageID = getMessageID(kOpenSSLMessageIDPrefix);
+    [LDSocketTool shared].endHandMessgeID = getMessageID(kEndHandMessageIDPrefix);
     NSLog(@"（1）");
     [LDSocketTool sendMessage:startHandshakeMessage messageID:[LDSocketTool shared].startHandMessageID success:^(id data) {
         [LDSocketTool shared].isHanding = false;

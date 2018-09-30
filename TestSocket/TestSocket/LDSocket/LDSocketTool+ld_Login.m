@@ -7,11 +7,27 @@
 //
 
 #import "LDSocketTool+ld_Login.h"
-#import "MessageIDTool.h"
+#import "MessageIDConst.h"
+#import "NSString+tcl_xml.h"
+
 
 @implementation LDSocketTool (ld_Login)
++ (void)getCountByPhoneNum:(NSString *)phoneNum success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+    NSString * messageID = getMessageID(kGetCountMessageIDPrefix);
+    NSString * message = [NSString stringWithFormat:@"\
+        <?xml version=\"1.0\" encoding=\"utf-8\"?>\
+        <iq id=\"%@\" type=\"get\">\
+            <bundling xmlns=\"jabber:iq:checkguide\">\
+                <type>tel</type>\
+                <username>%@</username>\
+            </bundling>\
+        </iq>",messageID,phoneNum];
+    [LDSocketTool sendMessage:message messageID:messageID success:success failure:failure];
+    
+}
+
 + (void)loginSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure{
-    NSString * messageID = [MessageIDTool getMessageID:kLoginMessageIDPrefix];
+    NSString * messageID = getMessageID(kLoginMessageIDPrefix);
     NSString * message = [NSString stringWithFormat:@"\
     <?xml version=\"1.0\" encoding=\"utf-8\"?>\
     <iq type=\"set\" id=\"%@\">\
@@ -36,7 +52,13 @@
 }
 
 - (void)receiveMessage:(NSString *)message messageIDPrefix:(NSString *)messageIDPrefix success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
-    if ([messageIDPrefix isEqualToString:kLoginMessageIDPrefix]) {
+    if ([messageIDPrefix isEqualToString:kGetCountMessageIDPrefix]) {
+        if ([message.tcl_errorCode isEqualToString:@"0"]) {
+            success(message.tcl_userID);
+        } else {
+            failure(nil);
+        }
+    } else if ([messageIDPrefix isEqualToString:kLoginMessageIDPrefix]) {
         
     }
 }

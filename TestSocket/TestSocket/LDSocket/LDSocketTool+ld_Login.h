@@ -9,6 +9,6 @@
 #import "LDSocketTool.h"
 
 @interface LDSocketTool (ld_Login)
-
++ (void)getCountByPhoneNum:(NSString *)phoneNum success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 + (void)loginSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 @end

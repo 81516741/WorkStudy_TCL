@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0D749C0E215F6DE500A85C49 /* LDSocketTool+ld_Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D749C0D215F6DE500A85C49 /* LDSocketTool+ld_Login.m */; };
-		0D749C11215F784E00A85C49 /* MessageIDTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D749C10215F784E00A85C49 /* MessageIDTool.m */; };
+		0D749C11215F784E00A85C49 /* MessageIDConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D749C10215F784E00A85C49 /* MessageIDConst.m */; };
+		0D749C142160A97D00A85C49 /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D749C132160A97D00A85C49 /* Const.m */; };
+		0D749C172160BBA300A85C49 /* NSString+tcl_xml.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D749C162160BBA300A85C49 /* NSString+tcl_xml.m */; };
 		B00AC9252114265D006E427E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B00AC9242114265D006E427E /* AppDelegate.m */; };
 		B00AC9282114265D006E427E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00AC9272114265D006E427E /* ViewController.m */; };
 		B00AC92B2114265D006E427E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B00AC9292114265D006E427E /* Main.storyboard */; };
@@ -31,8 +33,13 @@
 /* Begin PBXFileReference section */
 		0D749C0C215F6DE500A85C49 /* LDSocketTool+ld_Login.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+ld_Login.h"; sourceTree = "<group>"; };
 		0D749C0D215F6DE500A85C49 /* LDSocketTool+ld_Login.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+ld_Login.m"; sourceTree = "<group>"; };
-		0D749C0F215F784E00A85C49 /* MessageIDTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageIDTool.h; sourceTree = "<group>"; };
-		0D749C10215F784E00A85C49 /* MessageIDTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageIDTool.m; sourceTree = "<group>"; };
+		0D749C0F215F784E00A85C49 /* MessageIDConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageIDConst.h; sourceTree = "<group>"; };
+		0D749C10215F784E00A85C49 /* MessageIDConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageIDConst.m; sourceTree = "<group>"; };
+		0D749C122160A97D00A85C49 /* Const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
+		0D749C132160A97D00A85C49 /* Const.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Const.m; sourceTree = "<group>"; };
+		0D749C152160BBA300A85C49 /* NSString+tcl_xml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+tcl_xml.h"; sourceTree = "<group>"; };
+		0D749C162160BBA300A85C49 /* NSString+tcl_xml.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+tcl_xml.m"; sourceTree = "<group>"; };
+		0D749C182160C31900A85C49 /* ErrorCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ErrorCode.h; sourceTree = "<group>"; };
 		74493FDF61B5AFB79083E9C1 /* Pods-TestSocket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestSocket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestSocket/Pods-TestSocket.debug.xcconfig"; sourceTree = "<group>"; };
 		8BEEF7B4B2B63D61BB5AF520 /* Pods_TestSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A385069A832077EFB92E8094 /* Pods-TestSocket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestSocket.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestSocket/Pods-TestSocket.release.xcconfig"; sourceTree = "<group>"; };
@@ -78,6 +85,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D749C1B2160C39A00A85C49 /* Const */ = {
+			isa = PBXGroup;
+			children = (
+				0D749C182160C31900A85C49 /* ErrorCode.h */,
+				0D749C0F215F784E00A85C49 /* MessageIDConst.h */,
+				0D749C10215F784E00A85C49 /* MessageIDConst.m */,
+				0D749C122160A97D00A85C49 /* Const.h */,
+				0D749C132160A97D00A85C49 /* Const.m */,
+			);
+			path = Const;
+			sourceTree = "<group>";
+		};
+		0D749C1C2160C3AB00A85C49 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				0D749C152160BBA300A85C49 /* NSString+tcl_xml.h */,
+				0D749C162160BBA300A85C49 /* NSString+tcl_xml.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		0D749C1D2160C3DA00A85C49 /* File */ = {
+			isa = PBXGroup;
+			children = (
+				B00AC9582117DC0D006E427E /* ios_client.p12 */,
+			);
+			path = File;
+			sourceTree = "<group>";
+		};
+		0D749C1E2160C3E600A85C49 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B00AC95221145C67006E427E /* LDSocketManager.h */,
+				B00AC95321145C67006E427E /* LDSocketManager.m */,
+				B00AC9552117D9BB006E427E /* LDSocketTool.h */,
+				B00AC9562117D9BB006E427E /* LDSocketTool.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		6BF6EC3A925533327DAEB91A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,15 +209,12 @@
 		B00AC95121145C41006E427E /* LDSocket */ = {
 			isa = PBXGroup;
 			children = (
-				B00AC9582117DC0D006E427E /* ios_client.p12 */,
-				B00AC95221145C67006E427E /* LDSocketManager.h */,
-				B00AC95321145C67006E427E /* LDSocketManager.m */,
-				B00AC9552117D9BB006E427E /* LDSocketTool.h */,
-				B00AC9562117D9BB006E427E /* LDSocketTool.m */,
+				0D749C1E2160C3E600A85C49 /* Base */,
+				0D749C1D2160C3DA00A85C49 /* File */,
+				0D749C1C2160C3AB00A85C49 /* Category */,
+				0D749C1B2160C39A00A85C49 /* Const */,
 				0D749C0C215F6DE500A85C49 /* LDSocketTool+ld_Login.h */,
 				0D749C0D215F6DE500A85C49 /* LDSocketTool+ld_Login.m */,
-				0D749C0F215F784E00A85C49 /* MessageIDTool.h */,
-				0D749C10215F784E00A85C49 /* MessageIDTool.m */,
 			);
 			path = LDSocket;
 			sourceTree = "<group>";
@@ -294,17 +338,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D749C172160BBA300A85C49 /* NSString+tcl_xml.m in Sources */,
 				0D749C0E215F6DE500A85C49 /* LDSocketTool+ld_Login.m in Sources */,
 				B00AC94B2114269B006E427E /* Target_LDHTTP.m in Sources */,
 				B00AC9282114265D006E427E /* ViewController.m in Sources */,
 				B00AC9572117D9BB006E427E /* LDSocketTool.m in Sources */,
-				0D749C11215F784E00A85C49 /* MessageIDTool.m in Sources */,
+				0D749C11215F784E00A85C49 /* MessageIDConst.m in Sources */,
 				B00AC93321142669006E427E /* main.m in Sources */,
 				B00AC9252114265D006E427E /* AppDelegate.m in Sources */,
 				B00AC9492114269B006E427E /* LDHTTPModel.m in Sources */,
 				B00AC94A2114269B006E427E /* LDHTTPTool.m in Sources */,
 				B00AC950211432BA006E427E /* LDXMLParseTool.m in Sources */,
 				B00AC9482114269B006E427E /* LDHTTPManager.m in Sources */,
+				0D749C142160A97D00A85C49 /* Const.m in Sources */,
 				B00AC95421145C67006E427E /* LDSocketManager.m in Sources */,
 				B00AC9472114269B006E427E /* LDHTTPConst.m in Sources */,
 			);

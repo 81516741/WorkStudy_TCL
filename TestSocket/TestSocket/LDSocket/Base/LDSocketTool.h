@@ -27,3 +27,7 @@ typedef void(^LDSocketToolBlock)(id data);
 + (void)sendHeartMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 
 @end
+
+@interface NSString(ld_Extension)
+@end
+

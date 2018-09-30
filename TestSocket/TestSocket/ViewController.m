@@ -29,11 +29,11 @@
 }
 
 - (void)login {
-    [LDSocketTool loginSuccess:^(id data) {
+    [LDSocketTool getCountByPhoneNum:@"13104475087" success:^(id data) {
         
     } failure:^(id data) {
         
-    } ];
+    }];
 }
 
 - (void)autoConnect
