@@ -125,6 +125,13 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		0D749C222160D02300A85C49 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		6BF6EC3A925533327DAEB91A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +171,7 @@
 		B00AC9222114265D006E427E /* TestSocket */ = {
 			isa = PBXGroup;
 			children = (
+				0D749C222160D02300A85C49 /* Category */,
 				B00AC95121145C41006E427E /* LDSocket */,
 				B00AC93B2114269B006E427E /* LDHTTP */,
 				B00AC9232114265D006E427E /* AppDelegate.h */,

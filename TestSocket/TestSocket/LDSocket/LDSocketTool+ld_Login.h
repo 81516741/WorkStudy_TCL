@@ -10,5 +10,5 @@
 
 @interface LDSocketTool (ld_Login)
 + (void)getCountByPhoneNum:(NSString *)phoneNum success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
-+ (void)loginSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
++ (void)login:(NSString *)userID password:(NSString *)password Success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 @end

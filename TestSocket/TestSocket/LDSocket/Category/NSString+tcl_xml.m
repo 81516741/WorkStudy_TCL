@@ -13,7 +13,7 @@
 
 - (NSString *)tcl_subStringNear:(NSString *) startStr  endStr:(NSString *)endStr {
     NSRange range = [self rangeOfString:startStr];
-    NSString * handleStr;
+    NSString * handleStr = nil;
     if (range.length > 0) {
         handleStr = [self substringFromIndex:range.location + startStr.length];
         range = [handleStr rangeOfString:endStr];
@@ -33,6 +33,11 @@
 
 - (NSString *)tcl_errorCode {
     NSString * str = [self.tcl_noSpaceStr tcl_subStringNear:@"<errorcode>" endStr:@"</"];
+    return str;
+}
+
+- (NSString *)tcl_loginErrorCode {
+    NSString * str = [self.tcl_noSpaceStr tcl_subStringNear:@"errorcode=\"" endStr:@"\""];
     return str;
 }
 

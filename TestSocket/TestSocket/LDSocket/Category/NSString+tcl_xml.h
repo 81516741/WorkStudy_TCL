@@ -13,5 +13,6 @@
 @property(copy, nonatomic) NSString * tcl_noSpaceStr;
 @property(copy, nonatomic) NSString * tcl_messageID;
 @property(copy, nonatomic) NSString * tcl_errorCode;
+@property(copy, nonatomic) NSString * tcl_loginErrorCode;
 @property(copy, nonatomic) NSString * tcl_userID;
 @end

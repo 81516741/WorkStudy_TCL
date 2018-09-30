@@ -160,7 +160,7 @@
     }
 }
 
-#pragma mark - common method
+#pragma mark - 工具方法  只在此文件中用
 + (void)saveSuccessBlock:(LDSocketToolBlock)success failureBlock:(LDSocketToolBlock)failure messageID:(NSString *)messageID {
     [[LDSocketTool shared] saveSuccessBlock:success failureBlock:failure messageID:messageID];
 }
@@ -210,6 +210,27 @@
         NSLog(@"⚠️⚠️⚠️没有找到与MessageID:%@对应的blocks",messageID);
     }
     
+}
+
+#pragma mark - 工具方法 分类也要用到的
++ (NSString *)dicToStr:(NSDictionary *)dic {
+    NSError * parseError = nil;
+    NSData  * jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
++ (NSDictionary *)strToDic:(NSString *)str {
+    if (str.length > 0) {
+        NSData * jsonData = [str dataUsingEncoding:NSUTF8StringEncoding]; NSError *err;
+        NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+        if(err) {
+            NSLog(@"json解析失败：%@",err);
+            return nil;
+        } else {
+            return dic;
+        }
+    }
+    return nil;
 }
 
 #pragma mark - lazy load

@@ -30,7 +30,11 @@
 
 - (void)login {
     [LDSocketTool getCountByPhoneNum:@"13104475087" success:^(id data) {
-        
+        [LDSocketTool login:data password:@"" Success:^(id data) {
+            
+        } failure:^(id data) {
+            
+        }];
     } failure:^(id data) {
         
     }];

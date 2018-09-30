@@ -11,9 +11,13 @@
 typedef void(^LDSocketToolBlock)(id data);
 
 @protocol LDSocketDistributeProtocol
+
 @optional
 - (void)receiveMessage:(id)message messageIDPrefix:(NSString *)messageIDPrefix success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
+
 @end
+
+
 
 @interface LDSocketTool : NSObject<LDSocketDistributeProtocol>
 
@@ -26,8 +30,9 @@ typedef void(^LDSocketToolBlock)(id data);
 + (void)sendHandshakeMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 + (void)sendHeartMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 
+#pragma mark - 工具方法 分类也要用到的
++ (NSString *)dicToStr:(NSDictionary *)dic;
++ (NSDictionary *)strToDic:(NSString *)str;
 @end
 
-@interface NSString(ld_Extension)
-@end
 
