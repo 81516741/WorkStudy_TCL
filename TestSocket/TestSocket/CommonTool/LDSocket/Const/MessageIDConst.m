@@ -16,6 +16,8 @@ NSString * const kHeartMessageIDPrefix = @"heart";
 
 NSString * const kGetCountMessageIDPrefix = @"getCount";
 NSString * const kLoginMessageIDPrefix = @"login";
+NSString * const kGetConfigParamIDPrefix = @"getConfigParam";
+
 
 NSString * getMessageID(NSString * messageIDPrefix) {
     NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970] * 1000;

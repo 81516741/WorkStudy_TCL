@@ -6,13 +6,15 @@
 //  Copyright © 2018年 TCL-MAC. All rights reserved.
 //
 
-#import "LDSocketTool+ld_Login.h"
+#import "LDSocketTool+login.h"
 #import "MessageIDConst.h"
 #import "NSString+tcl_xml.h"
 #import "ErrorCode.h"
+#import "LDSysTool.h"
+#import "NSString+ld_Security.h"
 
 
-@implementation LDSocketTool (ld_Login)
+@implementation LDSocketTool (login)
 + (void)getCountByPhoneNum:(NSString *)phoneNum success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
     NSString * messageID = getMessageID(kGetCountMessageIDPrefix);
     NSString * message = [NSString stringWithFormat:@"\
@@ -30,15 +32,15 @@
 + (void)login:(NSString *)userID password:(NSString *)password Success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
     NSString * messageID = getMessageID(kLoginMessageIDPrefix);
     NSDictionary * dic = @{
-        @"joinid":@"f6hek6hdpt64jrw596",
-        @"configversion":@"10307",
-        @"lang":@"cn",
-        @"devicetype":@"iPhone SE",
-        @"company":@"TCLYJY",
-        @"version":@"1.63",
-        @"token":@"2ABAEAC2-027D-4CD4-AD1B-493434DC9CA3",
-        @"type":@"TID",
-        @"pwd":@"ba3da472cb1a59f523b87f74c4e42c860c2aa5d0"
+        @"joinid":[LDSysTool joinID],
+        @"configversion":@"10310",
+        @"lang":[LDSysTool languageType],
+        @"devicetype":[LDSysTool deviceType],
+        @"company":[LDSysTool company],
+        @"version":[LDSysTool version],
+        @"token":[LDSysTool UUIDString],
+        @"type":[LDSysTool TID],
+        @"pwd":@"123456".sha1String
                            };
     NSString * passwordStr = [LDSocketTool dicToStr:dic];
     
@@ -50,9 +52,43 @@
            <resource>PH-ios-zx01-4</resource>\
            <password>%@</password>\
         </query>\
-    </iq>",messageID,@"2003232",passwordStr];
+    </iq>",messageID,userID,passwordStr];
     
     [LDSocketTool sendMessage:message messageID:messageID success:success failure:failure];
+}
+
++ (void)loging:(NSString *)num password:(NSString *)password Success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+    if (num.length == 11) {
+        [self getCountByPhoneNum:num success:^(id data) {
+            [self login:data password:password Success:^(id data) {
+                success(nil);
+            } failure:^(id data) {
+                failure(data);
+            }];
+        } failure:^(id data) {
+            failure(data);
+        }];
+    } else if (num.length == 7) {
+        [self login:num password:password Success:^(id data) {
+            success(nil);
+        } failure:^(id data) {
+            failure(data);
+        }];
+    } else {
+        failure(@"请输入正确的账号");
+    }
+}
+
++ (void)getConfigParam {
+    NSString * messageID = getMessageID(kGetConfigParamIDPrefix);
+    NSString * message = [NSString stringWithFormat:@"\
+        <iq id=\"%@\" type=\"get\">\
+            <configparam xmlns=\" tcl:im:info\">\
+                <lang>%@</lang>\
+            </configparam>\
+        </iq>",messageID,[LDSysTool languageType]];
+    [self sendMessage:message messageID:nil success:nil failure:nil];
+
 }
 
 - (void)receiveMessage:(NSString *)message messageIDPrefix:(NSString *)messageIDPrefix success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {

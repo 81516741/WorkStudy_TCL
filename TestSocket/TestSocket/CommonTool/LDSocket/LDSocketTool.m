@@ -9,7 +9,6 @@
 #import "LDSocketTool.h"
 #import "LDSocketManager.h"
 #import "MessageIDConst.h"
-#import "LDXMLParseTool.h"
 #import "NSString+tcl_xml.h"
 
 @interface LDSocketTool()<LDSocketManagerConnectProtocol,LDSocketManagerSendMessageProtocol>
@@ -87,7 +86,13 @@
     [LDSocketTool shared].endHandMessgeID = getMessageID(kEndHandMessageIDPrefix);
     NSLog(@"（1）");
     [LDSocketTool sendMessage:startHandshakeMessage messageID:[LDSocketTool shared].startHandMessageID success:^(id data) {
-        [LDSocketTool shared].isHanding = false;
+        //如果是回这个代表已经握手成功了，不需要继续走握手流程了
+        if ([data isEqualToString:@"握手成功"]) {
+            if (success) {
+                success(nil);
+                return ;
+            }
+        }
         NSLog(@"（2）");
         [LDSocketTool sendMessage:openSSLMessage messageID:[LDSocketTool shared].openSSLMessageID success:^(id data) {
             NSLog(@"（3）");
@@ -130,13 +135,23 @@
     NSString * XMLString = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
     NSString * messageID = [XMLString tcl_messageID];
     NSLog(@"收到服务器数据-messageID=%@\n%@",messageID,XMLString);
-    if (messageID.length > 0 && [messageID containsString:@"-"]) {
-        [self callBackByMessageID:messageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
-            if ([self respondsToSelector:@selector(receiveMessage:messageIDPrefix:success:failure:)]) {
-                [self receiveMessage:XMLString messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject success:success failure:failure];
+    //所有由服务器主动推送的消息应该是有个标识的，然后在这里统一分发
+    if ([XMLString containsString:@"<configparam"] ||
+        [XMLString containsString:@"服务器主动推送的消息"]) {
+        [LDInitiativeMsgHandle handleMessage:XMLString];
+        return;
+    }
+    if ([XMLString containsString:@"<stream:stream"] &&
+        ![XMLString containsString:@"<stream:features"]) {
+        [self callBackByMessageID:[LDSocketTool shared].startHandMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
+            if (success) {
+                success(@"握手成功");
             }
         }];
-    } else if ([XMLString containsString:@"<stream:features"] && [XMLString containsString:@"starttls"]) {
+        return;
+    }
+    //握手三步走
+    if ([XMLString containsString:@"<stream:features"] && [XMLString containsString:@"starttls"]) {
         //开始握手的回调，在TCL项目中，此消息没有消息id
         [self callBackByMessageID:[LDSocketTool shared].startHandMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
             if (success) {
@@ -158,6 +173,15 @@
             }
         }];
     }
+    
+    //标准请求回调的消息，应该是有消息id的
+    if (messageID.length > 0 && [messageID containsString:@"-"]) {
+        [self callBackByMessageID:messageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
+            if ([self respondsToSelector:@selector(receiveMessage:messageIDPrefix:success:failure:)]) {
+                [self receiveMessage:XMLString messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject success:success failure:failure];
+            }
+        }];
+    }
 }
 
 #pragma mark - 工具方法  只在此文件中用
@@ -166,6 +190,9 @@
 }
 - (void)saveSuccessBlock:(LDSocketToolBlock)success failureBlock:(LDSocketToolBlock)failure messageID:(NSString *)messageID
 {
+    if (messageID.length == 0) {
+        return;
+    }
     NSMutableArray * blocks = [NSMutableArray arrayWithCapacity:2];
     if (success) {
         [blocks addObject:success];
@@ -212,7 +239,7 @@
     
 }
 
-#pragma mark - 工具方法 分类也要用到的
+#pragma mark - 工具方法 LDSocketTool分类也会用到的
 + (NSString *)dicToStr:(NSDictionary *)dic {
     NSError * parseError = nil;
     NSData  * jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];

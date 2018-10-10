@@ -8,7 +8,7 @@
 
 #import "LDHTTPTool.h"
 #import "LDHTTPManager.h"
-#import "LDXMLParseTool.h"
+#import "NSString+tcl_xml.h"
 
 NSMutableDictionary * taskDescriptions;
 
@@ -27,16 +27,18 @@ NSMutableDictionary * taskDescriptions;
     NSLog(@"[发起请求的类:%@][请求描述:%@][请求URL:%@][请求参数:%@]",model.VCName,model.taskDescription,[model.url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[model.parameters description]);
     [LDHTTPTool cancelHTTPTask:model.taskDescription];//每次请求前先取消相同描述的请求
     [[LDHTTPManager shared] sendMessage:model success:^(LDHTTPModel *responseObject) {
-        //打印回调信息
-        NSLog(@"[发起请求的类:%@][请求描述:%@][请求URL:%@][请求参数:%@][服务器返回的数据:%@]",responseObject.VCName,responseObject.taskDescription,[responseObject.url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[responseObject.parameters description],responseObject.dataOrigin);
-        
-        
         NSString * XMLString = [[NSString alloc] initWithData:(NSData *)responseObject.dataOrigin encoding:NSUTF8StringEncoding];
-        responseObject.dataOrigin = [LDXMLParseTool parseData:XMLString];
+        //打印回调信息
+        NSLog(@"[发起请求的类:%@][请求描述:%@][请求URL:%@][请求参数:%@][服务器返回的数据:%@]",responseObject.VCName,responseObject.taskDescription,[responseObject.url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[responseObject.parameters description],XMLString);
+        responseObject.dataOrigin = XMLString.tcl_hostAndPort;
         if ([responseObject.dataOrigin[@"errorcode"] integerValue] == 0) {
-            success(responseObject);
+            if (success) {
+              success(responseObject);
+            }
         } else {
-            failure(responseObject);
+            if (failure) {
+              failure(responseObject);
+            }
         }
         
     } failure:^(LDHTTPModel * responseObject) {
@@ -131,15 +133,6 @@ NSMutableDictionary * taskDescriptions;
         model.parameters = @{@"sign":[self jsonStringFrom:parameters]};
     }
     return model;
-}
-
-#pragma mark - all request method
-+ (void)getIPAndPortSuccess:(void (^)(LDHTTPModel *))success failure:(void (^)(LDHTTPModel *))failure
-{
-    NSLog(@"发送获取IP 和 端口的请求");
-    LDHTTPModel * model = [LDHTTPModel new];
-    model = [LDHTTPTool decorate:model httpType:LDHTTPTypeGet url:@"http://ds.zx.test.tcljd.net:8500/distribute-server/get_as_addr?method=get_as&clienttype=4&userid=2004050&replyproto=xml" parameters:nil];
-    [LDHTTPTool sendModel:model success:success failure:failure];
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LDInitiativeMsgHandle.h"
 
 typedef void(^LDSocketToolBlock)(id data);
 
@@ -30,9 +31,10 @@ typedef void(^LDSocketToolBlock)(id data);
 + (void)sendHandshakeMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 + (void)sendHeartMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 
-#pragma mark - 工具方法 分类也要用到的
+#pragma mark - 工具方法 LDSocketTool分类也会用到的
 + (NSString *)dicToStr:(NSDictionary *)dic;
 + (NSDictionary *)strToDic:(NSString *)str;
+
 @end
 
 

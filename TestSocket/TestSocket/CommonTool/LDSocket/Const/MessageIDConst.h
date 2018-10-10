@@ -15,6 +15,7 @@ extern  NSString * const kEndHandMessageIDPrefix;
 extern  NSString * const kHeartMessageIDPrefix;
 extern  NSString * const kLoginMessageIDPrefix;
 extern  NSString * const kGetCountMessageIDPrefix;
+extern  NSString * const kGetConfigParamIDPrefix;
 
 NSString * getMessageID(NSString * messageIDPrefix);
 

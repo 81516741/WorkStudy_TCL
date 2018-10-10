@@ -41,5 +41,4 @@
  */
 +(NSString *)jsonStringFrom:(NSDictionary *)dic;
 
-+ (void)getIPAndPortSuccess:(void (^)(LDHTTPModel *))success failure:(void (^)(LDHTTPModel *))failure;
 @end

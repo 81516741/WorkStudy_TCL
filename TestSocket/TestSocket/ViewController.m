@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "LDHTTPTool.h"
-#import "LDSocketTool.h"
-#import "LDSocketTool+ld_Login.h"
+#import "LDHTTPTool+login.h"
+#import "LDSocketTool+login.h"
+#import "LDInitiativeMsgHandle.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *desLable;
 @end
@@ -23,18 +23,13 @@
     btn.frame = CGRectMake(100, 100, 100, 100);
     [btn setBackgroundColor:[UIColor redColor]];
     [self.view addSubview:btn];
-    
-
     [self autoConnect];
 }
 
 - (void)login {
-    [LDSocketTool getCountByPhoneNum:@"13104475087" success:^(id data) {
-        [LDSocketTool login:data password:@"" Success:^(id data) {
-            
-        } failure:^(id data) {
-            
-        }];
+    [LDSocketTool loging:@"13104475087" password:@"123456" Success:^(id data) {
+        [LDSocketTool getConfigParam];
+        notiReceiveMsg(self, @selector(receiveConfigParam:), kGetParamNotification);
     } failure:^(id data) {
         
     }];
@@ -53,5 +48,8 @@
     } failure:nil];
 }
 
+- (void)receiveConfigParam:(NSNotification *)noti {
+    
+}
 
 @end

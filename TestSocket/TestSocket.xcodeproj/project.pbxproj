@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D749C0E215F6DE500A85C49 /* LDSocketTool+ld_Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D749C0D215F6DE500A85C49 /* LDSocketTool+ld_Login.m */; };
+		0D25332B216CB09F00310FFA /* LDSysTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25332A216CB09F00310FFA /* LDSysTool.m */; };
+		0D25332F216CB49600310FFA /* NSString+ld_Security.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25332E216CB49600310FFA /* NSString+ld_Security.m */; };
+		0D253334216D968A00310FFA /* LDHTTPTool+login.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D253333216D968A00310FFA /* LDHTTPTool+login.m */; };
+		0D25333E216DAAEE00310FFA /* LDInitiativeMsgHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25333D216DAAEE00310FFA /* LDInitiativeMsgHandle.m */; };
+		0D749C0E215F6DE500A85C49 /* LDSocketTool+login.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D749C0D215F6DE500A85C49 /* LDSocketTool+login.m */; };
 		0D749C11215F784E00A85C49 /* MessageIDConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D749C10215F784E00A85C49 /* MessageIDConst.m */; };
 		0D749C142160A97D00A85C49 /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D749C132160A97D00A85C49 /* Const.m */; };
 		0D749C172160BBA300A85C49 /* NSString+tcl_xml.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D749C162160BBA300A85C49 /* NSString+tcl_xml.m */; };
@@ -23,7 +27,6 @@
 		B00AC94A2114269B006E427E /* LDHTTPTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B00AC9432114269B006E427E /* LDHTTPTool.m */; };
 		B00AC94B2114269B006E427E /* Target_LDHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = B00AC9462114269B006E427E /* Target_LDHTTP.m */; };
 		B00AC94D211426E7006E427E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B00AC94C211426E7006E427E /* Podfile */; };
-		B00AC950211432BA006E427E /* LDXMLParseTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B00AC94F211432BA006E427E /* LDXMLParseTool.m */; };
 		B00AC95421145C67006E427E /* LDSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B00AC95321145C67006E427E /* LDSocketManager.m */; };
 		B00AC9572117D9BB006E427E /* LDSocketTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B00AC9562117D9BB006E427E /* LDSocketTool.m */; };
 		B00AC9592117DC0D006E427E /* ios_client.p12 in Resources */ = {isa = PBXBuildFile; fileRef = B00AC9582117DC0D006E427E /* ios_client.p12 */; };
@@ -31,8 +34,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0D749C0C215F6DE500A85C49 /* LDSocketTool+ld_Login.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+ld_Login.h"; sourceTree = "<group>"; };
-		0D749C0D215F6DE500A85C49 /* LDSocketTool+ld_Login.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+ld_Login.m"; sourceTree = "<group>"; };
+		0D253329216CB09F00310FFA /* LDSysTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDSysTool.h; sourceTree = "<group>"; };
+		0D25332A216CB09F00310FFA /* LDSysTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDSysTool.m; sourceTree = "<group>"; };
+		0D25332D216CB49500310FFA /* NSString+ld_Security.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ld_Security.h"; sourceTree = "<group>"; };
+		0D25332E216CB49600310FFA /* NSString+ld_Security.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ld_Security.m"; sourceTree = "<group>"; };
+		0D253332216D968A00310FFA /* LDHTTPTool+login.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LDHTTPTool+login.h"; sourceTree = "<group>"; };
+		0D253333216D968A00310FFA /* LDHTTPTool+login.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LDHTTPTool+login.m"; sourceTree = "<group>"; };
+		0D25333C216DAAEE00310FFA /* LDInitiativeMsgHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDInitiativeMsgHandle.h; sourceTree = "<group>"; };
+		0D25333D216DAAEE00310FFA /* LDInitiativeMsgHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDInitiativeMsgHandle.m; sourceTree = "<group>"; };
+		0D749C0C215F6DE500A85C49 /* LDSocketTool+login.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+login.h"; sourceTree = "<group>"; };
+		0D749C0D215F6DE500A85C49 /* LDSocketTool+login.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+login.m"; sourceTree = "<group>"; };
 		0D749C0F215F784E00A85C49 /* MessageIDConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageIDConst.h; sourceTree = "<group>"; };
 		0D749C10215F784E00A85C49 /* MessageIDConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageIDConst.m; sourceTree = "<group>"; };
 		0D749C122160A97D00A85C49 /* Const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
@@ -64,8 +75,6 @@
 		B00AC9452114269B006E427E /* Target_LDHTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Target_LDHTTP.h; sourceTree = "<group>"; };
 		B00AC9462114269B006E427E /* Target_LDHTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Target_LDHTTP.m; sourceTree = "<group>"; };
 		B00AC94C211426E7006E427E /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B00AC94E211432BA006E427E /* LDXMLParseTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDXMLParseTool.h; sourceTree = "<group>"; };
-		B00AC94F211432BA006E427E /* LDXMLParseTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDXMLParseTool.m; sourceTree = "<group>"; };
 		B00AC95221145C67006E427E /* LDSocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDSocketManager.h; sourceTree = "<group>"; };
 		B00AC95321145C67006E427E /* LDSocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDSocketManager.m; sourceTree = "<group>"; };
 		B00AC9552117D9BB006E427E /* LDSocketTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDSocketTool.h; sourceTree = "<group>"; };
@@ -85,6 +94,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D25332C216CB0A700310FFA /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				0D253329216CB09F00310FFA /* LDSysTool.h */,
+				0D25332A216CB09F00310FFA /* LDSysTool.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		0D253330216D949300310FFA /* LDSocketLogin */ = {
+			isa = PBXGroup;
+			children = (
+				0D749C0C215F6DE500A85C49 /* LDSocketTool+login.h */,
+				0D749C0D215F6DE500A85C49 /* LDSocketTool+login.m */,
+			);
+			path = LDSocketLogin;
+			sourceTree = "<group>";
+		};
+		0D253331216D965C00310FFA /* LDHttpLogin */ = {
+			isa = PBXGroup;
+			children = (
+				0D253332216D968A00310FFA /* LDHTTPTool+login.h */,
+				0D253333216D968A00310FFA /* LDHTTPTool+login.m */,
+			);
+			path = LDHttpLogin;
+			sourceTree = "<group>";
+		};
+		0D253335216D975400310FFA /* CommonTool */ = {
+			isa = PBXGroup;
+			children = (
+				0D25332C216CB0A700310FFA /* Tool */,
+				0D749C222160D02300A85C49 /* Category */,
+				B00AC95121145C41006E427E /* LDSocket */,
+				B00AC93B2114269B006E427E /* LDHTTP */,
+			);
+			path = CommonTool;
+			sourceTree = "<group>";
+		};
+		0D253336216D977C00310FFA /* LoginModule */ = {
+			isa = PBXGroup;
+			children = (
+				0D253338216D97B100310FFA /* Net */,
+			);
+			path = LoginModule;
+			sourceTree = "<group>";
+		};
+		0D253338216D97B100310FFA /* Net */ = {
+			isa = PBXGroup;
+			children = (
+				0D253331216D965C00310FFA /* LDHttpLogin */,
+				0D253330216D949300310FFA /* LDSocketLogin */,
+			);
+			path = Net;
+			sourceTree = "<group>";
+		};
 		0D749C1B2160C39A00A85C49 /* Const */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,15 +161,6 @@
 			path = Const;
 			sourceTree = "<group>";
 		};
-		0D749C1C2160C3AB00A85C49 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				0D749C152160BBA300A85C49 /* NSString+tcl_xml.h */,
-				0D749C162160BBA300A85C49 /* NSString+tcl_xml.m */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
 		0D749C1D2160C3DA00A85C49 /* File */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,20 +169,13 @@
 			path = File;
 			sourceTree = "<group>";
 		};
-		0D749C1E2160C3E600A85C49 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				B00AC95221145C67006E427E /* LDSocketManager.h */,
-				B00AC95321145C67006E427E /* LDSocketManager.m */,
-				B00AC9552117D9BB006E427E /* LDSocketTool.h */,
-				B00AC9562117D9BB006E427E /* LDSocketTool.m */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
 		0D749C222160D02300A85C49 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				0D749C152160BBA300A85C49 /* NSString+tcl_xml.h */,
+				0D749C162160BBA300A85C49 /* NSString+tcl_xml.m */,
+				0D25332D216CB49500310FFA /* NSString+ld_Security.h */,
+				0D25332E216CB49600310FFA /* NSString+ld_Security.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -171,9 +219,8 @@
 		B00AC9222114265D006E427E /* TestSocket */ = {
 			isa = PBXGroup;
 			children = (
-				0D749C222160D02300A85C49 /* Category */,
-				B00AC95121145C41006E427E /* LDSocket */,
-				B00AC93B2114269B006E427E /* LDHTTP */,
+				0D253336216D977C00310FFA /* LoginModule */,
+				0D253335216D975400310FFA /* CommonTool */,
 				B00AC9232114265D006E427E /* AppDelegate.h */,
 				B00AC9242114265D006E427E /* AppDelegate.m */,
 				B00AC9262114265D006E427E /* ViewController.h */,
@@ -198,8 +245,6 @@
 				B00AC9412114269B006E427E /* LDHTTPModel.m */,
 				B00AC9422114269B006E427E /* LDHTTPTool.h */,
 				B00AC9432114269B006E427E /* LDHTTPTool.m */,
-				B00AC94E211432BA006E427E /* LDXMLParseTool.h */,
-				B00AC94F211432BA006E427E /* LDXMLParseTool.m */,
 				B00AC9442114269B006E427E /* Target */,
 			);
 			path = LDHTTP;
@@ -217,12 +262,14 @@
 		B00AC95121145C41006E427E /* LDSocket */ = {
 			isa = PBXGroup;
 			children = (
-				0D749C1E2160C3E600A85C49 /* Base */,
+				B00AC95221145C67006E427E /* LDSocketManager.h */,
+				B00AC95321145C67006E427E /* LDSocketManager.m */,
+				B00AC9552117D9BB006E427E /* LDSocketTool.h */,
+				B00AC9562117D9BB006E427E /* LDSocketTool.m */,
+				0D25333C216DAAEE00310FFA /* LDInitiativeMsgHandle.h */,
+				0D25333D216DAAEE00310FFA /* LDInitiativeMsgHandle.m */,
 				0D749C1D2160C3DA00A85C49 /* File */,
-				0D749C1C2160C3AB00A85C49 /* Category */,
 				0D749C1B2160C39A00A85C49 /* Const */,
-				0D749C0C215F6DE500A85C49 /* LDSocketTool+ld_Login.h */,
-				0D749C0D215F6DE500A85C49 /* LDSocketTool+ld_Login.m */,
 			);
 			path = LDSocket;
 			sourceTree = "<group>";
@@ -347,17 +394,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D749C172160BBA300A85C49 /* NSString+tcl_xml.m in Sources */,
-				0D749C0E215F6DE500A85C49 /* LDSocketTool+ld_Login.m in Sources */,
+				0D749C0E215F6DE500A85C49 /* LDSocketTool+login.m in Sources */,
+				0D25332F216CB49600310FFA /* NSString+ld_Security.m in Sources */,
 				B00AC94B2114269B006E427E /* Target_LDHTTP.m in Sources */,
 				B00AC9282114265D006E427E /* ViewController.m in Sources */,
 				B00AC9572117D9BB006E427E /* LDSocketTool.m in Sources */,
 				0D749C11215F784E00A85C49 /* MessageIDConst.m in Sources */,
 				B00AC93321142669006E427E /* main.m in Sources */,
+				0D25332B216CB09F00310FFA /* LDSysTool.m in Sources */,
 				B00AC9252114265D006E427E /* AppDelegate.m in Sources */,
 				B00AC9492114269B006E427E /* LDHTTPModel.m in Sources */,
 				B00AC94A2114269B006E427E /* LDHTTPTool.m in Sources */,
-				B00AC950211432BA006E427E /* LDXMLParseTool.m in Sources */,
+				0D253334216D968A00310FFA /* LDHTTPTool+login.m in Sources */,
 				B00AC9482114269B006E427E /* LDHTTPManager.m in Sources */,
+				0D25333E216DAAEE00310FFA /* LDInitiativeMsgHandle.m in Sources */,
 				0D749C142160A97D00A85C49 /* Const.m in Sources */,
 				B00AC95421145C67006E427E /* LDSocketManager.m in Sources */,
 				B00AC9472114269B006E427E /* LDHTTPConst.m in Sources */,

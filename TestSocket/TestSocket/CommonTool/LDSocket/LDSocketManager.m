@@ -18,6 +18,8 @@
 @property(weak, nonatomic) id<LDSocketManagerSendMessageProtocol>  sendMessageDelegate;
 @end
 
+NSInteger timeOutConst = 30;
+
 @implementation LDSocketManager
 
 #pragma mark - public method
@@ -51,9 +53,9 @@
     if (self.socket == nil) {
         self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:self.socketQueue];
         self.connectDelegate = delegate;
-        return [self.socket connectToHost:host onPort:port withTimeout:30 error:nil];
+        return [self.socket connectToHost:host onPort:port withTimeout:timeOutConst error:nil];
     } else if (!self.socket.isConnected) {
-        return [self.socket connectToHost:host onPort:port withTimeout:30 error:nil];
+        return [self.socket connectToHost:host onPort:port withTimeout:timeOutConst error:nil];
     }
     return self.socket.isConnected;
 }
@@ -63,9 +65,12 @@
     [[LDSocketManager shared] sendMessage:message delegate:delegate];
 }
 - (void)sendMessage:(NSString *) message delegate:(id<LDSocketManagerSendMessageProtocol>)delegate{
-    self.sendMessageDelegate = delegate;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        self.sendMessageDelegate = delegate;
+    });
     NSData *data =[message dataUsingEncoding:NSUTF8StringEncoding];
-    [self.socket writeData:data withTimeout:30 tag:0];
+    [self.socket writeData:data withTimeout:timeOutConst tag:0];
 }
 
 + (void)startSSL
@@ -104,7 +109,7 @@ completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler {
 -(void)socket:(GCDAsyncSocket *)sock
 didWriteDataWithTag:(long)tag {
     NSLog(@"[客户端]:发送数据完毕");
-    [self.socket readDataWithTimeout:-1 tag:tag];
+    [self.socket readDataWithTimeout:timeOutConst tag:tag];
 }
 
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag

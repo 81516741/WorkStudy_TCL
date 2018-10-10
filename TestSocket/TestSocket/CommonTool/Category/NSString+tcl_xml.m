@@ -9,7 +9,7 @@
 #import "NSString+tcl_xml.h"
 
 @implementation NSString(tcl_xml)
-@dynamic tcl_noSpaceStr,tcl_messageID,tcl_userID,tcl_errorCode;
+@dynamic tcl_noSpaceStr,tcl_messageID,tcl_userID,tcl_errorCode,tcl_loginErrorCode,tcl_hostAndPort;
 
 - (NSString *)tcl_subStringNear:(NSString *) startStr  endStr:(NSString *)endStr {
     NSRange range = [self rangeOfString:startStr];
@@ -44,5 +44,25 @@
 - (NSString *)tcl_userID {
     NSString * str = [self.tcl_noSpaceStr tcl_subStringNear:@"<userid>" endStr:@"</"];
     return str;
+}
+
+- (NSDictionary *)tcl_hostAndPort {
+    NSString * ip = [self.tcl_noSpaceStr tcl_subStringNear:@"<ip>" endStr:@"</"];
+    if (ip.length == 0) {
+        return nil;
+    }
+    NSString * port = [self.tcl_noSpaceStr tcl_subStringNear:@"<port>" endStr:@"</"];
+    if (port.length == 0) {
+        return nil;
+    }
+    NSString * errorcode = [self.tcl_noSpaceStr tcl_subStringNear:@"<errorcode>" endStr:@"</"];
+    if (errorcode.length == 0) {
+        errorcode = @"1";
+    }
+    return @{
+             @"ip":ip,
+             @"port":port,
+             @"errorcode":errorcode
+             };
 }
 @end
