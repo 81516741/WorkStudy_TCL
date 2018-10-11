@@ -14,7 +14,8 @@ typedef void(^LDSocketToolBlock)(id data);
 @protocol LDSocketDistributeProtocol
 
 @optional
-- (void)receiveMessage:(id)message messageIDPrefix:(NSString *)messageIDPrefix success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
+- (void)receiveLoginModuleMessage:(id)message messageIDPrefix:(NSString *)messageIDPrefix success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
+- (void)receiveHomeModuleMessage:(id)message messageIDPrefix:(NSString *)messageIDPrefix success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 
 @end
 
@@ -22,7 +23,7 @@ typedef void(^LDSocketToolBlock)(id data);
 
 @interface LDSocketTool : NSObject<LDSocketDistributeProtocol>
 
-@property (nonatomic,strong) NSMutableDictionary *  requestBlocks;
+@property (nonatomic,strong) NSMutableArray *  requestBlocks;
 
 + (instancetype)shared;
 + (BOOL)connectServer:(NSString *)host port:(NSString *)port success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;

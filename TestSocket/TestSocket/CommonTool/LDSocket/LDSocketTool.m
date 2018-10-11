@@ -9,7 +9,10 @@
 #import "LDSocketTool.h"
 #import "LDSocketManager.h"
 #import "MessageIDConst.h"
-#import "NSString+tcl_xml.h"
+#import "NSString+tcl_parseXML.h"
+#import "LDSocketTool+login.h"
+
+NSString * const quickHand = @"quickHand";
 
 @interface LDSocketTool()<LDSocketManagerConnectProtocol,LDSocketManagerSendMessageProtocol>
 @property(assign, nonatomic) BOOL isConnecting;
@@ -84,18 +87,18 @@
     [LDSocketTool shared].startHandMessageID = getMessageID(kStartHandMessageIDPrefix);
     [LDSocketTool shared].openSSLMessageID = getMessageID(kOpenSSLMessageIDPrefix);
     [LDSocketTool shared].endHandMessgeID = getMessageID(kEndHandMessageIDPrefix);
-    NSLog(@"（1）");
+    NSLog(@"握手（1）");
     [LDSocketTool sendMessage:startHandshakeMessage messageID:[LDSocketTool shared].startHandMessageID success:^(id data) {
-        //如果是回这个代表已经握手成功了，不需要继续走握手流程了
-        if ([data isEqualToString:@"握手成功"]) {
+        if ([data isEqualToString:quickHand]) {
             if (success) {
+                NSLog(@"快速握手完成");
                 success(nil);
                 return ;
             }
         }
-        NSLog(@"（2）");
+        NSLog(@"握手（2）");
         [LDSocketTool sendMessage:openSSLMessage messageID:[LDSocketTool shared].openSSLMessageID success:^(id data) {
-            NSLog(@"（3）");
+            NSLog(@"握手（3）");
             [LDSocketManager startSSL];
             [LDSocketTool sendMessage:endHandshakeMessage messageID:[LDSocketTool shared].endHandMessgeID success:^(id data) {
                 [LDSocketTool shared].isHanding = false;
@@ -106,26 +109,26 @@
             } failure:^(id data) {
                 [LDSocketTool shared].isHanding = false;
                 if (failure) {
-                    failure(nil);
+                    failure(data);
                 }
             }];
         } failure:^(id data) {
             [LDSocketTool shared].isHanding = false;
             if (failure) {
-                failure(nil);
+                failure(data);
             }
         }];
     } failure:^(id data) {
         [LDSocketTool shared].isHanding = false;
         if (failure) {
-            failure(nil);
+            failure(data);
         }
     }];
 }
 
 + (void)sendMessage:(NSString *)message messageID:(NSString *)messageID success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
 {
-    NSLog(@"给服务器发送信息:%@",message);
+    NSLog(@"\n---【发送信息到服务器】---\n%@",message);
     [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
     [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
 }
@@ -133,24 +136,32 @@
 #pragma mark - 发完消息后的回调
 - (void)receiveMessageResult:(id)result manager:(LDSocketManager *)manager {
     NSString * XMLString = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
-    NSString * messageID = [XMLString tcl_messageID];
-    NSLog(@"收到服务器数据-messageID=%@\n%@",messageID,XMLString);
-    //所有由服务器主动推送的消息应该是有个标识的，然后在这里统一分发
+    NSString * messageID = XMLString.tcl_messageID;
+    NSLog(@"\n---【收到服务器数据】---【messageID=%@、\n%@",messageID,XMLString);
+    /*所有由服务器主动推送的消息应该是有个标识的，然后在这里统一分发
+     这里因为服务器并为对此做规范，所以暂时用 ||服务器主动推送的消息
+     */
     if ([XMLString containsString:@"<configparam"] ||
         [XMLString containsString:@"服务器主动推送的消息"]) {
         [LDInitiativeMsgHandle handleMessage:XMLString];
         return;
     }
+    //握手第一步如果只回了一部分数据,则我理解为快速握手
     if ([XMLString containsString:@"<stream:stream"] &&
         ![XMLString containsString:@"<stream:features"]) {
         [self callBackByMessageID:[LDSocketTool shared].startHandMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
             if (success) {
-                success(@"握手成功");
+                success(quickHand);
             }
         }];
         return;
     }
-    //握手三步走
+    //快速握手时，是先回一段数据，紧接着再回下面的数据，此数据可以忽略掉
+    if ([XMLString isEqualToString:@"<stream:features><starttls xmlns=\"urn:ietf:params:xml:ns:xmpp-tls\"></starttls><auth xmlns=\"http://jabber.org/features/iq-auth\"/><register xmlns=\"http://jabber.org/features/iq-register\"/></stream:features>"]) {
+        return;
+    }
+    
+    //正常握手三步走
     if ([XMLString containsString:@"<stream:features"] && [XMLString containsString:@"starttls"]) {
         //开始握手的回调，在TCL项目中，此消息没有消息id
         [self callBackByMessageID:[LDSocketTool shared].startHandMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
@@ -177,8 +188,32 @@
     //标准请求回调的消息，应该是有消息id的
     if (messageID.length > 0 && [messageID containsString:@"-"]) {
         [self callBackByMessageID:messageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
-            if ([self respondsToSelector:@selector(receiveMessage:messageIDPrefix:success:failure:)]) {
-                [self receiveMessage:XMLString messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject success:success failure:failure];
+            //如果为响应消息,则直接将该状态消息回传到控制器
+            if ([XMLString containsString:@"reportmsgstatus"]) {
+                NSString * status = XMLString.tcl_reportMsgStatus;
+                if (status) {
+                    if (success) {
+                        success(status);
+                    }
+                } else {
+                    if (failure) {
+                        failure(XMLString);
+                    }
+                }
+                return;
+            }
+            //非响应消息，则分发到各个模块的分类进行处理
+            if ([messageID containsString:@"login_"]) {
+                if ([self respondsToSelector:@selector(receiveLoginModuleMessage:messageIDPrefix:success:failure:)]) {
+                    [self receiveLoginModuleMessage:XMLString messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject success:success failure:failure];
+                }
+                
+            }
+            
+            if ([messageID containsString:@"home_"]) {
+                if ([self respondsToSelector:@selector(receiveHomeModuleMessage:messageIDPrefix:success:failure:)]) {
+                    [self receiveHomeModuleMessage:XMLString messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject success:success failure:failure];
+                }
             }
         }];
     }
@@ -193,7 +228,7 @@
     if (messageID.length == 0) {
         return;
     }
-    NSMutableArray * blocks = [NSMutableArray arrayWithCapacity:2];
+    NSMutableArray * blocks = [NSMutableArray arrayWithCapacity:3];
     if (success) {
         [blocks addObject:success];
     } else {
@@ -204,35 +239,36 @@
     } else {
         [blocks addObject:@"nil"];
     }
-    [self.requestBlocks setObject:blocks forKey:messageID];
+    [blocks addObject:messageID];
+    [self.requestBlocks addObject:blocks];
+    
 }
 
 - (NSArray *)getBlocksByMessageID:(NSString *)messageID {
-    NSArray * blocks = [self.requestBlocks objectForKey:messageID];
-    return blocks;
+    for (NSArray * item in self.requestBlocks) {
+        if ([item.lastObject isEqualToString:messageID]) {
+            return item;
+        }
+    }
+    return nil;
 }
 
-- (void)removeBlocksByMessageID:(NSString *)messageID
-{
-    [self.requestBlocks removeObjectForKey:messageID];
-}
 
 -(void)callBackByMessageID:(NSString *)messageID excuteCode:(void (^)(LDSocketToolBlock success, LDSocketToolBlock failure))excuteCode {
     NSArray *  blocks = [self getBlocksByMessageID:messageID];
-    if (blocks.count == 2) {
+    if (blocks.count == 3) {
         if (excuteCode) {
             LDSocketToolBlock success;
-            if(![blocks.firstObject isKindOfClass:NSString.self]) {
-                success = blocks.firstObject;
+            if(![blocks[0] isKindOfClass:NSString.self]) {
+                success = blocks[0] ;
             }
             LDSocketToolBlock failure;
-            if(![blocks.lastObject isKindOfClass:NSString.self]) {
-                failure = blocks.lastObject;
+            if(![blocks[1] isKindOfClass:NSString.self]) {
+                failure = blocks[1] ;
             }
             excuteCode(success,failure);
             
         }
-        [self removeBlocksByMessageID:messageID];
     } else {
         NSLog(@"⚠️⚠️⚠️没有找到与MessageID:%@对应的blocks",messageID);
     }
@@ -261,10 +297,10 @@
 }
 
 #pragma mark - lazy load
-- (NSMutableDictionary *)requestBlocks
+- (NSMutableArray *)requestBlocks
 {
     if (_requestBlocks == nil) {
-        _requestBlocks = [NSMutableDictionary dictionary];
+        _requestBlocks = [NSMutableArray array];
     }
     return _requestBlocks;
 }

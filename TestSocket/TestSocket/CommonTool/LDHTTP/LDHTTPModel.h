@@ -53,7 +53,7 @@ typedef void(^ _Nonnull Block)( LDHTTPModel * _Nonnull );
 /**
  * 响应的原始数据
  */
-@property(nonatomic ,strong ,nullable) NSDictionary * dataOrigin;
+@property(nonatomic ,strong ,nullable) id dataOrigin;
 
 /**
  * 响应数据

@@ -10,5 +10,4 @@
 
 @interface LDSocketTool (login)
 + (void)loging:(NSString *)num password:(NSString *)password Success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
-+ (void)getConfigParam;
 @end

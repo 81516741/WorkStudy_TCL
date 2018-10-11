@@ -8,7 +8,7 @@
 
 #import "LDSocketTool+login.h"
 #import "MessageIDConst.h"
-#import "NSString+tcl_xml.h"
+#import "NSString+tcl_parseXML.h"
 #import "ErrorCode.h"
 #import "LDSysTool.h"
 #import "NSString+ld_Security.h"
@@ -61,6 +61,7 @@
     if (num.length == 11) {
         [self getCountByPhoneNum:num success:^(id data) {
             [self login:data password:password Success:^(id data) {
+                NSLog(@"登录成功");
                 success(nil);
             } failure:^(id data) {
                 failure(data);
@@ -70,6 +71,7 @@
         }];
     } else if (num.length == 7) {
         [self login:num password:password Success:^(id data) {
+            NSLog(@"登录成功");
             success(nil);
         } failure:^(id data) {
             failure(data);
@@ -79,37 +81,33 @@
     }
 }
 
-+ (void)getConfigParam {
-    NSString * messageID = getMessageID(kGetConfigParamIDPrefix);
-    NSString * message = [NSString stringWithFormat:@"\
-        <iq id=\"%@\" type=\"get\">\
-            <configparam xmlns=\" tcl:im:info\">\
-                <lang>%@</lang>\
-            </configparam>\
-        </iq>",messageID,[LDSysTool languageType]];
-    [self sendMessage:message messageID:nil success:nil failure:nil];
-
-}
-
-- (void)receiveMessage:(NSString *)message messageIDPrefix:(NSString *)messageIDPrefix success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+- (void)receiveLoginModuleMessage:(NSString *)message messageIDPrefix:(NSString *)messageIDPrefix success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
     if ([messageIDPrefix isEqualToString:kGetCountMessageIDPrefix]) {
-        if ([message.tcl_errorCode isEqualToString:@"0"]) {
-            success(message.tcl_userID);
-        } else {
-            failure(getErrorDescription(message.tcl_errorCode));
-        }
+        [self handleGetCountMessage:message success:success failure:failure];
     } else if ([messageIDPrefix isEqualToString:kLoginMessageIDPrefix]) {
-        if (message.tcl_loginErrorCode == nil) {
-            success(nil);
-        } else if ([message.tcl_loginErrorCode isEqualToString:@"401"]) {//认证失败
-            failure(@"认证失败");
-        } else if ([message.tcl_loginErrorCode isEqualToString:@"403"]) {//禁用
-            failure(@"禁用");
-        } else if ([message.tcl_loginErrorCode isEqualToString:@"404"]) {//账号不存在
-            failure(@"账号不存在");
-        } else if ([message.tcl_loginErrorCode isEqualToString:@"405"]) {//连续3次密码错误
-            failure(@"连续3次密码错误");
-        }
+        [self handleLoginMessage:message success:success failure:failure];
     }
 }
+- (void)handleGetCountMessage:(NSString *)message success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+    if ([message.tcl_errorCode isEqualToString:@"0"]) {
+        success(message.tcl_userID);
+    } else {
+        failure(getErrorDescription(message.tcl_errorCode));
+    }
+}
+
+- (void)handleLoginMessage:(NSString *)message success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+    if (message.tcl_errorCode == nil) {
+        success(nil);
+    } else if ([message.tcl_errorCode isEqualToString:@"401"]) {//认证失败
+        failure(@"认证失败");
+    } else if ([message.tcl_errorCode isEqualToString:@"403"]) {//禁用
+        failure(@"禁用");
+    } else if ([message.tcl_errorCode isEqualToString:@"404"]) {//账号不存在
+        failure(@"账号不存在");
+    } else if ([message.tcl_errorCode isEqualToString:@"405"]) {//连续3次密码错误
+        failure(@"连续3次密码错误");
+    }
+}
+
 @end

@@ -8,7 +8,7 @@
 
 #import "LDInitiativeMsgHandle.h"
 
-NSString * const kGetParamNotification = @"kGetParamNotification";
+NSString * const kGetConfigParamNotification = @"kGetConfigParamNotification";
 
 @implementation LDInitiativeMsgHandle
 
@@ -23,7 +23,7 @@ void notiReceiveMsg(id observer,SEL selector,NSString * name) {
 + (void)handleMessage:(NSString *)msg {
     if ([msg containsString:@"<configparam"]) {
         //获取配置参数的消息
-        notiSendMsg(kGetParamNotification, msg);
+        notiSendMsg(kGetConfigParamNotification, msg);
     }
 }
 @end

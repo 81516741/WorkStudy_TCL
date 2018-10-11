@@ -13,10 +13,12 @@ NSString * const kStartHandMessageIDPrefix = @"first_hand";
 NSString * const kOpenSSLMessageIDPrefix = @"open_ssl";
 NSString * const kEndHandMessageIDPrefix = @"second_hand";
 NSString * const kHeartMessageIDPrefix = @"heart";
-
-NSString * const kGetCountMessageIDPrefix = @"getCount";
-NSString * const kLoginMessageIDPrefix = @"login";
-NSString * const kGetConfigParamIDPrefix = @"getConfigParam";
+//登录模块的
+NSString * const kGetCountMessageIDPrefix = @"login_getCount";
+NSString * const kLoginMessageIDPrefix = @"login_log";
+//首页模块的
+NSString * const kGetConfigParamIDPrefix = @"home_getConfigParam";
+NSString * const kGetDeviceListIDPrefix = @"home_getDeviceList";
 
 
 NSString * getMessageID(NSString * messageIDPrefix) {

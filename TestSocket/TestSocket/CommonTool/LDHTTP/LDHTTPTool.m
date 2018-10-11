@@ -8,7 +8,7 @@
 
 #import "LDHTTPTool.h"
 #import "LDHTTPManager.h"
-#import "NSString+tcl_xml.h"
+#import "NSString+tcl_parseXML.h"
 
 NSMutableDictionary * taskDescriptions;
 
@@ -24,14 +24,14 @@ NSMutableDictionary * taskDescriptions;
         [taskDescriptions setObject:model.VCName forKey:model.taskDescription];
     }
     //打印请求信息
-    NSLog(@"[发起请求的类:%@][请求描述:%@][请求URL:%@][请求参数:%@]",model.VCName,model.taskDescription,[model.url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[model.parameters description]);
+    NSLog(@"\n[发起请求的类:%@][请求描述:%@][请求URL:%@][请求参数:%@]",model.VCName,model.taskDescription,[model.url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[model.parameters description]);
     [LDHTTPTool cancelHTTPTask:model.taskDescription];//每次请求前先取消相同描述的请求
     [[LDHTTPManager shared] sendMessage:model success:^(LDHTTPModel *responseObject) {
-        NSString * XMLString = [[NSString alloc] initWithData:(NSData *)responseObject.dataOrigin encoding:NSUTF8StringEncoding];
+        responseObject.dataOrigin = [[NSString alloc] initWithData:(NSData *)responseObject.dataOrigin encoding:NSUTF8StringEncoding];
         //打印回调信息
-        NSLog(@"[发起请求的类:%@][请求描述:%@][请求URL:%@][请求参数:%@][服务器返回的数据:%@]",responseObject.VCName,responseObject.taskDescription,[responseObject.url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[responseObject.parameters description],XMLString);
-        responseObject.dataOrigin = XMLString.tcl_hostAndPort;
-        if ([responseObject.dataOrigin[@"errorcode"] integerValue] == 0) {
+        NSLog(@"\n[发起请求的类:%@][请求描述:%@][请求URL:%@][请求参数:%@][服务器返回的数据:%@]",responseObject.VCName,responseObject.taskDescription,[responseObject.url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[responseObject.parameters description],responseObject.dataOrigin);
+        if ([[responseObject.dataOrigin tcl_errorCode] isEqualToString:@"0"] ||
+            [[responseObject.dataOrigin tcl_errorCode] isEqualToString:@"0"]) {
             if (success) {
               success(responseObject);
             }
@@ -42,10 +42,10 @@ NSMutableDictionary * taskDescriptions;
         }
         
     } failure:^(LDHTTPModel * responseObject) {
-        NSLog(@"服务器返回的错误:%@",responseObject.errorOfAFN);
+        NSLog(@"\n服务器返回的错误:%@",responseObject.errorOfAFN);
         NSString * errorStr = responseObject.errorOfAFN.userInfo[NSLocalizedDescriptionKey];
         if([errorStr isEqualToString:@"cancelled"]) {
-            NSLog(@"[发起请求的类:%@][请求描述:%@][请求取消]",responseObject.VCName,responseObject.taskDescription);
+            NSLog(@"\n[发起请求的类:%@][请求描述:%@][请求取消]",responseObject.VCName,responseObject.taskDescription);
             if (failure) {
                 responseObject.errorOfMy = @"请求取消";
                 failure(responseObject);

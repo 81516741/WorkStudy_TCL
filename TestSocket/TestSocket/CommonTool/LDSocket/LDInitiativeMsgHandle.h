@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const kGetParamNotification;
+extern NSString * const kGetConfigParamNotification;
 
 void notiSendMsg(NSString * name,id obj);
 void notiReceiveMsg(id observer,SEL selector,NSString * name);

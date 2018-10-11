@@ -9,6 +9,5 @@
 #import "LDHTTPTool.h"
 
 @interface LDHTTPTool (login)
-
 + (void)getIPAndPortSuccess:(void (^)(LDHTTPModel *))success failure:(void (^)(LDHTTPModel *))failure;
 @end

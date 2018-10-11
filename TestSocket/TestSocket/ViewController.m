@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "LDHTTPTool+login.h"
 #import "LDSocketTool+login.h"
+#import "LDSocketTool+home.h"
 #import "LDInitiativeMsgHandle.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *desLable;
@@ -18,27 +19,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIButton * btn = [UIButton new];
-    [btn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-    btn.frame = CGRectMake(100, 100, 100, 100);
-    [btn setBackgroundColor:[UIColor redColor]];
-    [self.view addSubview:btn];
     [self autoConnect];
-}
-
-- (void)login {
-    [LDSocketTool loging:@"13104475087" password:@"123456" Success:^(id data) {
-        [LDSocketTool getConfigParam];
-        notiReceiveMsg(self, @selector(receiveConfigParam:), kGetParamNotification);
-    } failure:^(id data) {
-        
-    }];
 }
 
 - (void)autoConnect
 {
     [LDHTTPTool getIPAndPortSuccess:^(LDHTTPModel * model) {
-        [LDSocketTool connectServer:model.dataOrigin[@"ip"] port:model.dataOrigin[@"port"] success:^(id data) {
+        [LDSocketTool connectServer:model.data[@"ip"] port:model.data[@"port"] success:^(id data) {
             [LDSocketTool sendHandshakeMessageSuccess:^(id data) {
                 self.desLable.text = @"握手成功";
             } failure:^(id data) {
@@ -48,8 +35,22 @@
     } failure:nil];
 }
 
-- (void)receiveConfigParam:(NSNotification *)noti {
-    
+- (IBAction)login {
+    [LDSocketTool loging:@"13104475087" password:@"123456" Success:^(id data) {
+    } failure:^(id data) {
+    }];
+}
+
+- (IBAction)getDeviceList:(UIButton *)sender {
+    [LDSocketTool getDeviceListSuccess:^(id data) {
+        if ([data length] == 1) {
+            NSLog(@"收到服务器返回的状态：%@",data);
+        } else {
+            
+        }
+    } failure:^(id data) {
+        
+    }];
 }
 
 @end

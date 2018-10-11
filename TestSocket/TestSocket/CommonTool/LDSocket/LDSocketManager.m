@@ -18,8 +18,6 @@
 @property(weak, nonatomic) id<LDSocketManagerSendMessageProtocol>  sendMessageDelegate;
 @end
 
-NSInteger timeOutConst = 30;
-
 @implementation LDSocketManager
 
 #pragma mark - public method
@@ -53,9 +51,9 @@ NSInteger timeOutConst = 30;
     if (self.socket == nil) {
         self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:self.socketQueue];
         self.connectDelegate = delegate;
-        return [self.socket connectToHost:host onPort:port withTimeout:timeOutConst error:nil];
+        return [self.socket connectToHost:host onPort:port withTimeout:-1 error:nil];
     } else if (!self.socket.isConnected) {
-        return [self.socket connectToHost:host onPort:port withTimeout:timeOutConst error:nil];
+        return [self.socket connectToHost:host onPort:port withTimeout:-1 error:nil];
     }
     return self.socket.isConnected;
 }
@@ -70,7 +68,7 @@ NSInteger timeOutConst = 30;
         self.sendMessageDelegate = delegate;
     });
     NSData *data =[message dataUsingEncoding:NSUTF8StringEncoding];
-    [self.socket writeData:data withTimeout:timeOutConst tag:0];
+    [self.socket writeData:data withTimeout:-1 tag:0];
 }
 
 + (void)startSSL
@@ -108,8 +106,8 @@ completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler {
 
 -(void)socket:(GCDAsyncSocket *)sock
 didWriteDataWithTag:(long)tag {
-    NSLog(@"[客户端]:发送数据完毕");
-    [self.socket readDataWithTimeout:timeOutConst tag:tag];
+    NSLog(@"\n---【客户端发送数据完毕】---");
+    [self.socket readDataWithTimeout:-1 tag:tag];
 }
 
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
@@ -119,6 +117,7 @@ didWriteDataWithTag:(long)tag {
            [self.sendMessageDelegate receiveMessageResult:data manager:self];
         });
     }
+    [sock readDataWithTimeout:-1 tag:0];
 }
 
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
