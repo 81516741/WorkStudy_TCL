@@ -11,8 +11,11 @@
 #import "MessageIDConst.h"
 #import "NSString+tcl_parseXML.h"
 #import "LDSocketTool+login.h"
+#import "LDPacketHandle.h"
 
-NSString * const quickHand = @"quickHand";
+NSString * const quickHand0 = @"quickHand0";
+NSString * const quickHand1 = @"quickHand1";
+BOOL useSSL = false;
 
 @interface LDSocketTool()<LDSocketManagerConnectProtocol,LDSocketManagerSendMessageProtocol>
 @property(assign, nonatomic) BOOL isConnecting;
@@ -21,6 +24,9 @@ NSString * const quickHand = @"quickHand";
 @property(copy, nonatomic) NSString * startHandMessageID;
 @property(copy, nonatomic) NSString * openSSLMessageID;
 @property(copy, nonatomic) NSString * endHandMessgeID;
+
+@property(strong, nonatomic) NSMutableString * tempXML;
+
 @end
 
 @implementation LDSocketTool
@@ -87,22 +93,37 @@ NSString * const quickHand = @"quickHand";
     [LDSocketTool shared].startHandMessageID = getMessageID(kStartHandMessageIDPrefix);
     [LDSocketTool shared].openSSLMessageID = getMessageID(kOpenSSLMessageIDPrefix);
     [LDSocketTool shared].endHandMessgeID = getMessageID(kEndHandMessageIDPrefix);
-    NSLog(@"握手（1）");
-    [LDSocketTool sendMessage:startHandshakeMessage messageID:[LDSocketTool shared].startHandMessageID success:^(id data) {
-        if ([data isEqualToString:quickHand]) {
+    NSLog(@"\n---【开始握手】---");
+    NSLog(@"\n握手（1）");
+    [LDSocketTool sendMessage:startHandshakeMessage messageID:[LDSocketTool shared].startHandMessageID success:^(NSString * data) {
+        if (!useSSL) {
+            if (![data isEqualToString:quickHand0]) {
+                NSLog(@"\n不启用SSL加密");
+                if (success) {
+                    success(nil);
+                }
+            }
+            return ;
+        }
+        if ([data isEqualToString:quickHand0]) {
             if (success) {
-                NSLog(@"快速握手完成");
-                success(nil);
+                NSLog(@"\n快速握手开始");
                 return ;
             }
         }
-        NSLog(@"握手（2）");
+        if ([data isEqualToString:quickHand1]) {
+            if (success) {
+                NSLog(@"\n快速握手完成");
+                return ;
+            }
+        }
+        NSLog(@"\n握手（2）");
         [LDSocketTool sendMessage:openSSLMessage messageID:[LDSocketTool shared].openSSLMessageID success:^(id data) {
-            NSLog(@"握手（3）");
+            NSLog(@"\n握手（3）");
             [LDSocketManager startSSL];
             [LDSocketTool sendMessage:endHandshakeMessage messageID:[LDSocketTool shared].endHandMessgeID success:^(id data) {
                 [LDSocketTool shared].isHanding = false;
-                NSLog(@"握手成功");
+                NSLog(@"\n握手成功");
                 if (success) {
                     success(nil);
                 }
@@ -136,29 +157,47 @@ NSString * const quickHand = @"quickHand";
 #pragma mark - 发完消息后的回调
 - (void)receiveMessageResult:(id)result manager:(LDSocketManager *)manager {
     NSString * XMLString = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
-    NSString * messageID = XMLString.tcl_messageID;
-    NSLog(@"\n---【收到服务器数据】---【messageID=%@、\n%@",messageID,XMLString);
-    /*所有由服务器主动推送的消息应该是有个标识的，然后在这里统一分发
-     这里因为服务器并为对此做规范，所以暂时用 ||服务器主动推送的消息
-     */
-    if ([XMLString containsString:@"<configparam"] ||
-        [XMLString containsString:@"服务器主动推送的消息"]) {
-        [LDInitiativeMsgHandle handleMessage:XMLString];
+    NSLog(@"\n---【收到服务器数据】---\n%@",XMLString);
+    //处理握手消息
+    BOOL isShakeMessage = [self handleShakeMessage:XMLString];
+    if (isShakeMessage) {
         return;
     }
+    //断开连接
+    if ([XMLString isEqualToString:@"</stream:stream>"]) {
+        NSLog(@"\n---【收到服务器主动断开连接的消息】---");
+        return;
+    }
+    //处理其他消息
+    NSArray * xmlArray = [LDPacketHandle xml:XMLString];
+    if (xmlArray.count == 0) {
+        return;
+    }
+    for (NSString * xml in xmlArray) {
+        [self handleMessage:xml];
+    }
+}
+
+#pragma mark - 工具方法  只在此文件中用
+- (BOOL)handleShakeMessage:(NSString *)XMLString {
     //握手第一步如果只回了一部分数据,则我理解为快速握手
     if ([XMLString containsString:@"<stream:stream"] &&
         ![XMLString containsString:@"<stream:features"]) {
         [self callBackByMessageID:[LDSocketTool shared].startHandMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
             if (success) {
-                success(quickHand);
+                success(quickHand0);
             }
         }];
-        return;
+        return YES;
     }
     //快速握手时，是先回一段数据，紧接着再回下面的数据，此数据可以忽略掉
     if ([XMLString isEqualToString:@"<stream:features><starttls xmlns=\"urn:ietf:params:xml:ns:xmpp-tls\"></starttls><auth xmlns=\"http://jabber.org/features/iq-auth\"/><register xmlns=\"http://jabber.org/features/iq-register\"/></stream:features>"]) {
-        return;
+        [self callBackByMessageID:[LDSocketTool shared].startHandMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
+            if (success) {
+                success(quickHand1);
+            }
+        }];
+        return YES;
     }
     
     //正常握手三步走
@@ -169,6 +208,7 @@ NSString * const quickHand = @"quickHand";
                 success(nil);
             }
         }];
+        return YES;
     } else if ([XMLString containsString:@"proceed"]) {
         //开启SSL的回调，在TCL项目中，此消息没有消息id
         [self callBackByMessageID:[LDSocketTool shared].openSSLMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
@@ -176,6 +216,7 @@ NSString * const quickHand = @"quickHand";
                 success(nil);
             }
         }];
+        return YES;
     } else if ([XMLString containsString:@"<stream:features"]) {
         //结束握手的回调，在TCL项目中，此消息没有消息id
         [self callBackByMessageID:[LDSocketTool shared].endHandMessgeID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
@@ -183,21 +224,31 @@ NSString * const quickHand = @"quickHand";
                 success(nil);
             }
         }];
+        return YES;
     }
-    
+    return NO;
+}
+
+- (void)handleMessage:(NSString *)message {
+    if ([LDInitiativeMsgHandle handleMessage:message]) {
+        //如果是主动消息，则不用进行下一步处理
+        return;
+    }
+    NSString * messageID = message.tcl_messageID;
     //标准请求回调的消息，应该是有消息id的
     if (messageID.length > 0 && [messageID containsString:@"-"]) {
+        //因为服务器返回的数据可能会有些未转义的字符
         [self callBackByMessageID:messageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
             //如果为响应消息,则直接将该状态消息回传到控制器
-            if ([XMLString containsString:@"reportmsgstatus"]) {
-                NSString * status = XMLString.tcl_reportMsgStatus;
+            if ([message containsString:@"reportmsgstatus"]) {
+                NSString * status = message.tcl_reportMsgStatus;
                 if (status) {
                     if (success) {
                         success(status);
                     }
                 } else {
                     if (failure) {
-                        failure(XMLString);
+                        failure(message);
                     }
                 }
                 return;
@@ -205,21 +256,19 @@ NSString * const quickHand = @"quickHand";
             //非响应消息，则分发到各个模块的分类进行处理
             if ([messageID containsString:@"login_"]) {
                 if ([self respondsToSelector:@selector(receiveLoginModuleMessage:messageIDPrefix:success:failure:)]) {
-                    [self receiveLoginModuleMessage:XMLString messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject success:success failure:failure];
+                    [self receiveLoginModuleMessage:message messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject success:success failure:failure];
                 }
                 
             }
             
             if ([messageID containsString:@"home_"]) {
                 if ([self respondsToSelector:@selector(receiveHomeModuleMessage:messageIDPrefix:success:failure:)]) {
-                    [self receiveHomeModuleMessage:XMLString messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject success:success failure:failure];
+                    [self receiveHomeModuleMessage:message messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject success:success failure:failure];
                 }
             }
         }];
     }
 }
-
-#pragma mark - 工具方法  只在此文件中用
 + (void)saveSuccessBlock:(LDSocketToolBlock)success failureBlock:(LDSocketToolBlock)failure messageID:(NSString *)messageID {
     [[LDSocketTool shared] saveSuccessBlock:success failureBlock:failure messageID:messageID];
 }
@@ -241,6 +290,10 @@ NSString * const quickHand = @"quickHand";
     }
     [blocks addObject:messageID];
     [self.requestBlocks addObject:blocks];
+    //内存中保留的block超过30就移除第一个
+    if (self.requestBlocks.count > 30) {
+        [self.requestBlocks removeObjectAtIndex:0];
+    }
     
 }
 
@@ -305,5 +358,11 @@ NSString * const quickHand = @"quickHand";
     return _requestBlocks;
 }
 
+- (NSMutableString *)tempXML {
+    if (_tempXML == nil) {
+        _tempXML = [NSMutableString string];
+    }
+    return _tempXML;
+}
 
 @end

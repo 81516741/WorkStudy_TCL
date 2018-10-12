@@ -15,6 +15,6 @@ void notiReceiveMsg(id observer,SEL selector,NSString * name);
 
 @interface LDInitiativeMsgHandle : NSObject
 
-+ (void)handleMessage:(NSString *)msg;
++ (BOOL)handleMessage:(NSString *)message;
 
 @end

@@ -82,6 +82,8 @@
                  forKey:GCDAsyncSocketManuallyEvaluateTrust];
     [settings setObject:@"192.168.4.1:443"
                  forKey:GCDAsyncSocketSSLPeerName];
+//    [settings setObject:self.host
+//                 forKey:GCDAsyncSocketSSLPeerName];
     [self.socket startTLS:settings]; // 开始SSL握手
 }
 
@@ -93,33 +95,10 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.connectDelegate receiveConnectServiceResult:@"连接成功" manager:self];
         });
-       
     }
-    
+    [self.socket readDataWithTimeout:-1 tag:0];
     NSLog(@"连接成功");
 }
-
-- (void)socket:(GCDAsyncSocket *)sock didReceiveTrust:(SecTrustRef)trust
-completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler {
-    completionHandler(YES);
-}
-
--(void)socket:(GCDAsyncSocket *)sock
-didWriteDataWithTag:(long)tag {
-    NSLog(@"\n---【客户端发送数据完毕】---");
-    [self.socket readDataWithTimeout:-1 tag:tag];
-}
-
--(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
-{
-    if ([self.sendMessageDelegate respondsToSelector:@selector(receiveMessageResult:manager:)]) {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-           [self.sendMessageDelegate receiveMessageResult:data manager:self];
-        });
-    }
-    [sock readDataWithTimeout:-1 tag:0];
-}
-
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
     NSString * errorDes =  err.userInfo[NSLocalizedDescriptionKey];
@@ -131,6 +110,20 @@ didWriteDataWithTag:(long)tag {
         }
     }
     NSLog(@"socket 断开连接:%@",errorDes);
+}
+
+-(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+    if ([self.sendMessageDelegate respondsToSelector:@selector(receiveMessageResult:manager:)]) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+           [self.sendMessageDelegate receiveMessageResult:data manager:self];
+        });
+    }
+     [self.socket readDataWithTimeout:-1 tag:0];
+}
+
+- (void)socket:(GCDAsyncSocket *)sock didReceiveTrust:(SecTrustRef)trust
+completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler {
+    completionHandler(YES);
 }
 
 @end

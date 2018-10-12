@@ -9,6 +9,5 @@
 #import "LDSocketTool.h"
 
 @interface LDSocketTool (home)
-+ (void)getConfigParam;
 + (void)getDeviceListSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 @end

@@ -20,10 +20,10 @@ void notiReceiveMsg(id observer,SEL selector,NSString * name) {
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:name object:nil];
 }
 
-+ (void)handleMessage:(NSString *)msg {
-    if ([msg containsString:@"<configparam"]) {
-        //获取配置参数的消息
-        notiSendMsg(kGetConfigParamNotification, msg);
++ (BOOL)handleMessage:(NSString *)message {
+    if ([message containsString:@"<configparam"]) {
+        return YES;
     }
+    return NO;
 }
 @end

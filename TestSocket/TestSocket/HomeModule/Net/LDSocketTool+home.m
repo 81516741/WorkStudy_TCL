@@ -9,20 +9,9 @@
 #import "LDSocketTool+home.h"
 #import "MessageIDConst.h"
 #import "LDSysTool.h"
+#import <GDataXML_HTML/GDataXMLNode.h>
 
 @implementation LDSocketTool (home)
-
-+ (void)getConfigParam {
-    NSString * messageID = getMessageID(kGetConfigParamIDPrefix);
-    NSString * message = [NSString stringWithFormat:@"\
-                          <iq id=\"%@\" type=\"get\">\
-                          <configparam xmlns=\" tcl:im:info\">\
-                          <lang>%@</lang>\
-                          </configparam>\
-                          </iq>",messageID,[LDSysTool languageType]];
-    [self sendMessage:message messageID:nil success:nil failure:nil];
-    
-}
 
 + (void)getDeviceListSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
 {
@@ -45,13 +34,26 @@
     [self sendMessage:message messageID:messageID success:success failure:failure];
 }
 - (void)receiveHomeModuleMessage:(id)message messageIDPrefix:(NSString *)messageIDPrefix success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+    GDataXMLDocument * doc = [[GDataXMLDocument alloc] initWithXMLString:message error:nil];
+    if (doc == nil) {
+        NSLog(@"\n无法将下面的XML解析成Document\n%@",message);
+        return;
+    }
     if ([messageIDPrefix isEqualToString:kGetDeviceListIDPrefix]) {
-        [self handleDeviceListMessage:message success:success failure:failure];
+        [self handleDeviceListMessage:doc success:success failure:failure];
     }
 }
-- (void)handleDeviceListMessage:(NSString *)message success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
-    if (success) {
-        success(message);
+- (void)handleDeviceListMessage:(GDataXMLDocument *)doc success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+    NSMutableArray * deviceList = [NSMutableArray array];
+    NSArray * items = [[[[[[[doc.rootElement children].lastObject children].firstObject children].firstObject children].firstObject children] lastObject] children];
+    for (GDataXMLElement * itemEle in items) {
+        NSMutableDictionary * itemDic = [NSMutableDictionary dictionary];
+        for (GDataXMLNode * node in itemEle.attributes) {
+            [itemDic setObject:node.stringValue forKey:node.name];
+        }
+        [deviceList addObject:itemDic];
     }
+    success(deviceList);
+    
 }
 @end
