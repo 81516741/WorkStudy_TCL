@@ -43,11 +43,13 @@
 
 - (IBAction)getDeviceList:(UIButton *)sender {
     [LDSocketTool getDeviceListSuccess:^(id data) {
-        if ([data length] == 1) {
+        if ([data isKindOfClass:NSString.self]) {
+            //消息响应包
             NSLog(@"收到服务器返回的状态：%@",data);
         } else {
-            
+            NSLog(@"%@",data);
         }
+        
     } failure:^(id data) {
         
     }];
