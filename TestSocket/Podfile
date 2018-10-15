@@ -4,6 +4,7 @@ use_frameworks!
 pod 'CocoaAsyncSocket', '7.6.3'
 pod 'AFNetworking', '3.2.0'
 pod 'GDataXML-HTML', '1.4.1'
-pod 'SDWebImage', '~> 4.0'
+pod 'SDWebImage', '4.0'
+pod 'RealmSwift'
 target ‘TestSocket’ do
 end
