@@ -16,11 +16,6 @@ PODS:
     - AFNetworking/NSURLSession
   - CocoaAsyncSocket (7.6.3)
   - GDataXML-HTML (1.4.1)
-  - Realm (3.5.0):
-    - Realm/Headers (= 3.5.0)
-  - Realm/Headers (3.5.0)
-  - RealmSwift (3.5.0):
-    - Realm (= 3.5.0)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -29,7 +24,6 @@ DEPENDENCIES:
   - AFNetworking (= 3.2.0)
   - CocoaAsyncSocket (= 7.6.3)
   - GDataXML-HTML (= 1.4.1)
-  - RealmSwift
   - SDWebImage (= 4.0)
 
 SPEC REPOS:
@@ -37,18 +31,14 @@ SPEC REPOS:
     - AFNetworking
     - CocoaAsyncSocket
     - GDataXML-HTML
-    - Realm
-    - RealmSwift
     - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: 8ac6017b94ea105479f7776e5288e48ae9c59bb4
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   GDataXML-HTML: a4f11079b48d9fe96ff1fe478943a317185227e2
-  Realm: 0378021c424e4e2bd6a0e63b27881e929d9b9ad1
-  RealmSwift: 3322562622fda2ad596985ead4d8d8be30cf838c
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: b2c04e191d5cf10363f6b9167dd88ce280807278
+PODFILE CHECKSUM: a99e04941b7ef7e4319e1af8bb19cb4c756b0a1f
 
 COCOAPODS: 1.5.3
