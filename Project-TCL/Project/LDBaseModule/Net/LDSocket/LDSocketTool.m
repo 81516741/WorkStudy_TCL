@@ -18,9 +18,19 @@ NSString * const quickHand0 = @"quickHand0";
 NSString * const quickHand1 = @"quickHand1";
 BOOL useSSL = false;
 
+//为什么没有handFailure，因为握手失败就是超时，此时会断开连接
+typedef enum {
+    disConnect = 10,
+    connecting,
+    connected,
+    handing,
+    handed
+}ConnectState;
+
 @interface LDSocketTool()<LDSocketManagerConnectProtocol,LDSocketManagerSendMessageProtocol>
-@property(assign, nonatomic) BOOL isConnecting;
-@property(assign, nonatomic) BOOL isHanding;
+@property(assign, nonatomic) ConnectState connectState;
+@property(assign, nonatomic) NSInteger checkNetCount;
+@property(strong, nonatomic) dispatch_source_t timer;
 @property(copy, nonatomic) NSString * connectMessageID;
 @property(copy, nonatomic) NSString * startHandMessageID;
 @property(copy, nonatomic) NSString * openSSLMessageID;
@@ -36,38 +46,64 @@ BOOL useSSL = false;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _instance = [LDSocketTool new];
+        _instance.connectState = disConnect;
     });
     return _instance;
+}
+#pragma mark - 连接和心跳
++ (void)startConnectAndHeart {
+    if ([LDSocketTool shared].timer == nil) {
+       [LDSocketTool shared].timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+    }
+    static NSInteger checkCount = 0;
+    dispatch_source_set_timer([LDSocketTool shared].timer, 0, 5ull * NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler([LDSocketTool shared].timer, ^{
+        checkCount ++;
+        if ([LDSocketTool shared].connectState == disConnect) {
+            [LDSocketTool buildConnectingSuccess:nil failure:nil];
+        } else if ([LDSocketTool shared].connectState == handed && checkCount > 4) {
+            checkCount = 0;
+            [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
+        }
+    });
+    dispatch_resume([LDSocketTool shared].timer);
+}
++ (void)cancelConnectAndHeart {
+    
 }
 #pragma  mark - 连接服务器
 + (BOOL)connectServer:(NSString *)host port:(NSString *)port success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
 {
-    if ([LDSocketTool shared].isConnecting) {
+    if ([LDSocketTool shared].connectState == connecting) {
         return NO;
     }
-    [LDSocketTool shared].isConnecting = YES;
+    [LDSocketTool shared].connectState = connecting;
     [LDSocketTool shared].connectMessageID = getMessageID(kConnecctServiceMessageIDPrefix);
     [LDSocketTool saveSuccessBlock:success
                       failureBlock:failure messageID:[LDSocketTool shared].connectMessageID];
     return [LDSocketManager connectServer:host port:port.integerValue delegate:[LDSocketTool shared]];
 }
+
 - (void)receiveConnectServiceResult:(id)result manager:(LDSocketManager *)manager {
+    if ([result isEqualToString:@"连接断开"]) {
+        [LDSocketTool shared].connectState = disConnect;
+    }
     [self callBackByMessageID:[LDSocketTool shared].connectMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
         if ([result isKindOfClass:NSString.self]) {
             if ([result isEqualToString:@"连接成功"]) {
                 if (success) {
                     success(nil);
                 }
-            } else if ([result isEqualToString:@"连接失败"]) {
+                [LDSocketTool shared].connectState = connected;
+            } else if ([result isEqualToString:@"连接断开"]) {
                 if (failure) {
                     failure(nil);
                 }
+                [LDSocketTool shared].connectState = disConnect;
             }
         }
     }];
-    [LDSocketTool shared].isConnecting = false;
 }
-
 #pragma mark - 发消息给服务器
 + (void)sendHeartMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
 {
@@ -84,10 +120,10 @@ BOOL useSSL = false;
 
 + (void)sendHandshakeMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
 {
-    if ([LDSocketTool shared].isHanding) {
+    if ([LDSocketTool shared].connectState == handing) {
         return;
     }
-    [LDSocketTool shared].isHanding = YES;
+    [LDSocketTool shared].connectState = handing;
     NSString * startHandshakeMessage = [NSString stringWithFormat:@"<stream:stream to=\"%@\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">",[LDSocketManager host]];
     NSString * openSSLMessage = @"<starttls xmlns=\"urn:ietf:params:xml:ns:xmpp-tls\"/>";
     NSString * endHandshakeMessage = @"<stream:stream to=\"tcl.com\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">";
@@ -99,6 +135,7 @@ BOOL useSSL = false;
     [LDSocketTool sendMessage:startHandshakeMessage messageID:[LDSocketTool shared].startHandMessageID success:^(NSString * data) {
         if (!useSSL) {
             if (![data isEqualToString:quickHand0]) {
+                [LDSocketTool shared].connectState = handed;
                 NSLog(@"\n不启用SSL加密");
                 if (success) {
                     success(nil);
@@ -115,6 +152,7 @@ BOOL useSSL = false;
         if ([data isEqualToString:quickHand1]) {
             if (success) {
                 NSLog(@"\n快速握手完成");
+                [LDSocketTool shared].connectState = handed;
                 return ;
             }
         }
@@ -123,29 +161,14 @@ BOOL useSSL = false;
             NSLog(@"\n握手（3）");
             [LDSocketManager startSSL];
             [LDSocketTool sendMessage:endHandshakeMessage messageID:[LDSocketTool shared].endHandMessgeID success:^(id data) {
-                [LDSocketTool shared].isHanding = false;
                 NSLog(@"\n握手成功");
+                [LDSocketTool shared].connectState = handed;
                 if (success) {
                     success(nil);
                 }
-            } failure:^(id data) {
-                [LDSocketTool shared].isHanding = false;
-                if (failure) {
-                    failure(data);
-                }
-            }];
-        } failure:^(id data) {
-            [LDSocketTool shared].isHanding = false;
-            if (failure) {
-                failure(data);
-            }
-        }];
-    } failure:^(id data) {
-        [LDSocketTool shared].isHanding = false;
-        if (failure) {
-            failure(data);
-        }
-    }];
+            } failure:nil];
+        } failure:nil];
+    } failure:nil];
 }
 
 + (void)sendMessage:(NSString *)message messageID:(NSString *)messageID success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
@@ -162,17 +185,10 @@ BOOL useSSL = false;
                 if (success) {
                    success(data);
                 }
-            } failure:^(id data) {
-                if (failure) {
-                    failure(data);
-                }
-            }];
-        } failure:^(id data) {
-            if (failure) {
-                failure(data);
-            }
-        }];
+            } failure:nil];
+        } failure:nil];
     } failure:^(LDHTTPModel * model) {
+        [LDSocketTool shared].connectState = disConnect;
         if (failure) {
             failure(model);
         }

@@ -18,6 +18,7 @@
 @property(weak, nonatomic) id<LDSocketManagerSendMessageProtocol>  sendMessageDelegate;
 @end
 
+NSInteger timerOutSec = 30;
 @implementation LDSocketManager
 
 #pragma mark - public method
@@ -51,9 +52,9 @@
     if (self.socket == nil) {
         self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:self.socketQueue];
         self.connectDelegate = delegate;
-        return [self.socket connectToHost:host onPort:port withTimeout:-1 error:nil];
+        return [self.socket connectToHost:host onPort:port withTimeout:timerOutSec error:nil];
     } else if (!self.socket.isConnected) {
-        return [self.socket connectToHost:host onPort:port withTimeout:-1 error:nil];
+        return [self.socket connectToHost:host onPort:port withTimeout:timerOutSec error:nil];
     }
     return self.socket.isConnected;
 }
@@ -68,7 +69,7 @@
         self.sendMessageDelegate = delegate;
     });
     NSData *data =[message dataUsingEncoding:NSUTF8StringEncoding];
-    [self.socket writeData:data withTimeout:-1 tag:0];
+    [self.socket writeData:data withTimeout:timerOutSec tag:0];
 }
 
 + (void)startSSL
@@ -96,18 +97,16 @@
             [self.connectDelegate receiveConnectServiceResult:@"连接成功" manager:self];
         });
     }
-    [self.socket readDataWithTimeout:-1 tag:0];
+    [self.socket readDataWithTimeout:timerOutSec tag:0];
     NSLog(@"连接成功");
 }
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
     NSString * errorDes =  err.userInfo[NSLocalizedDescriptionKey];
-    if ([errorDes isEqualToString:@"Attempt to connect to host timed out"]) {
-        if ([self.connectDelegate respondsToSelector:@selector(receiveConnectServiceResult:manager:)]) {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self.connectDelegate receiveConnectServiceResult:@"连接超时" manager:self];
-            });
-        }
+    if ([self.connectDelegate respondsToSelector:@selector(receiveConnectServiceResult:manager:)]) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.connectDelegate receiveConnectServiceResult:@"连接断开" manager:self];
+        });
     }
     NSLog(@"socket 断开连接:%@",errorDes);
 }
@@ -118,7 +117,7 @@
            [self.sendMessageDelegate receiveMessageResult:data manager:self];
         });
     }
-     [self.socket readDataWithTimeout:-1 tag:0];
+     [self.socket readDataWithTimeout:timerOutSec tag:0];
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReceiveTrust:(SecTrustRef)trust

@@ -63,6 +63,7 @@
 		0D69FF292078BEF10090D89A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D69FF282078BEF10090D89A /* Assets.xcassets */; };
 		0D69FF2C2078BEF10090D89A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D69FF2A2078BEF10090D89A /* LaunchScreen.storyboard */; };
 		0D69FF2F2078BEF10090D89A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D69FF2E2078BEF10090D89A /* main.m */; };
+		0D6E3F5C217583A700B59EAC /* NotificationConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F5B217583A700B59EAC /* NotificationConst.m */; };
 		0D8FE551217424830092955B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE550217424830092955B /* LoginVC.swift */; };
 		0D8FE554217426870092955B /* LDAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE553217426870092955B /* LDAppDelegate.swift */; };
 		0D8FE55621742ABF0092955B /* LDMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE55521742ABF0092955B /* LDMacro.swift */; };
@@ -198,6 +199,8 @@
 		0D69FF2B2078BEF10090D89A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D69FF2D2078BEF10090D89A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D69FF2E2078BEF10090D89A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0D6E3F5A217583A700B59EAC /* NotificationConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationConst.h; sourceTree = "<group>"; };
+		0D6E3F5B217583A700B59EAC /* NotificationConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationConst.m; sourceTree = "<group>"; };
 		0D8FE550217424830092955B /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		0D8FE5522174249B0092955B /* Project-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project-Bridging-Header.h"; sourceTree = "<group>"; };
 		0D8FE553217426870092955B /* LDAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDAppDelegate.swift; sourceTree = "<group>"; };
@@ -304,6 +307,8 @@
 				0D2533A92170A3A100310FFA /* ErrorCode.m */,
 				0D2533AB2170A3A100310FFA /* MessageIDConst.h */,
 				0D2533AC2170A3A100310FFA /* MessageIDConst.m */,
+				0D6E3F5A217583A700B59EAC /* NotificationConst.h */,
+				0D6E3F5B217583A700B59EAC /* NotificationConst.m */,
 			);
 			path = Const;
 			sourceTree = "<group>";
@@ -861,6 +866,7 @@
 				0D6901C2207DD1880090D89A /* UINavigationController+LDBase.m in Sources */,
 				0D69FF2F2078BEF10090D89A /* main.m in Sources */,
 				0D8FE55621742ABF0092955B /* LDMacro.swift in Sources */,
+				0D6E3F5C217583A700B59EAC /* NotificationConst.m in Sources */,
 				0D69012E207B5DD80090D89A /* Target_Home.m in Sources */,
 				0D6900BB2079F0430090D89A /* LDOtherVC.m in Sources */,
 				0D690160207C92100090D89A /* UIImage+WCTColumnCoding.mm in Sources */,

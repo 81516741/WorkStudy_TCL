@@ -15,7 +15,7 @@ class LoginVC: UIViewController  {
         ld_titleColor = UIColor.white
         ld_naviBarColor = rgb(r: 110, g: 110, b: 123)
         title = "登录"
-        LDSocketTool.buildConnectingSuccess(nil, failure: nil)
+        LDSocketTool.startConnectAndHeart()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
