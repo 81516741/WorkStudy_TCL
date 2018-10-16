@@ -105,7 +105,7 @@ NSInteger timerOutSec = 30;
     NSString * errorDes =  err.userInfo[NSLocalizedDescriptionKey];
     if ([self.connectDelegate respondsToSelector:@selector(receiveConnectServiceResult:manager:)]) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            [self.connectDelegate receiveConnectServiceResult:@"连接断开" manager:self];
+            [self.connectDelegate receiveConnectServiceResult:errorDes manager:self];
         });
     }
     NSLog(@"socket 断开连接:%@",errorDes);

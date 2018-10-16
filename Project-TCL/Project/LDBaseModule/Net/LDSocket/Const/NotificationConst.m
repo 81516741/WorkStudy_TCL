@@ -8,4 +8,4 @@
 
 #import "NotificationConst.h"
 
-NSString * const kNotificationDisconnected = @"kNotificationDisconnected";
+NSString * const kNotificationxxx = @"kNotificationxxx";

@@ -85,7 +85,9 @@ typedef enum {
 }
 
 - (void)receiveConnectServiceResult:(id)result manager:(LDSocketManager *)manager {
-    if ([result isEqualToString:@"连接断开"]) {
+    if ([result isEqualToString:@"连接成功"]) {
+        [LDSocketTool shared].connectState = connected;
+    } else {
         [LDSocketTool shared].connectState = disConnect;
     }
     [self callBackByMessageID:[LDSocketTool shared].connectMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
@@ -94,12 +96,10 @@ typedef enum {
                 if (success) {
                     success(nil);
                 }
-                [LDSocketTool shared].connectState = connected;
-            } else if ([result isEqualToString:@"连接断开"]) {
+            } else {
                 if (failure) {
-                    failure(nil);
+                    failure(result);
                 }
-                [LDSocketTool shared].connectState = disConnect;
             }
         }
     }];
