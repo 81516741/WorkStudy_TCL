@@ -62,22 +62,34 @@
         [self getCountByPhoneNum:num success:^(id data) {
             [self login:data password:password Success:^(id data) {
                 NSLog(@"登录成功");
-                success(nil);
+                if (success) {
+                    success(nil);
+                }
             } failure:^(id data) {
-                failure(data);
+                if (failure) {
+                    failure(data);
+                }
             }];
         } failure:^(id data) {
-            failure(data);
+            if (failure) {
+                failure(data);
+            }
         }];
     } else if (num.length == 7) {
         [self login:num password:password Success:^(id data) {
             NSLog(@"登录成功");
-            success(nil);
+            if (success) {
+                success(nil);
+            }
         } failure:^(id data) {
-            failure(data);
+            if (failure) {
+                failure(data);
+            }
         }];
     } else {
-        failure(@"请输入正确的账号");
+        if (failure) {
+            failure(@"请输入正确的账号");
+        }
     }
 }
 

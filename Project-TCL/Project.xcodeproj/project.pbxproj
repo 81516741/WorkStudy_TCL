@@ -64,6 +64,7 @@
 		0D69FF2C2078BEF10090D89A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D69FF2A2078BEF10090D89A /* LaunchScreen.storyboard */; };
 		0D69FF2F2078BEF10090D89A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D69FF2E2078BEF10090D89A /* main.m */; };
 		0D6E3F5C217583A700B59EAC /* NotificationConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F5B217583A700B59EAC /* NotificationConst.m */; };
+		0D6E3F622175BDDD00B59EAC /* LDNetTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F612175BDDD00B59EAC /* LDNetTool.m */; };
 		0D8FE551217424830092955B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE550217424830092955B /* LoginVC.swift */; };
 		0D8FE554217426870092955B /* LDAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE553217426870092955B /* LDAppDelegate.swift */; };
 		0D8FE55621742ABF0092955B /* LDMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE55521742ABF0092955B /* LDMacro.swift */; };
@@ -201,6 +202,8 @@
 		0D69FF2E2078BEF10090D89A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0D6E3F5A217583A700B59EAC /* NotificationConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationConst.h; sourceTree = "<group>"; };
 		0D6E3F5B217583A700B59EAC /* NotificationConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationConst.m; sourceTree = "<group>"; };
+		0D6E3F602175BDDD00B59EAC /* LDNetTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDNetTool.h; sourceTree = "<group>"; };
+		0D6E3F612175BDDD00B59EAC /* LDNetTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDNetTool.m; sourceTree = "<group>"; };
 		0D8FE550217424830092955B /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		0D8FE5522174249B0092955B /* Project-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project-Bridging-Header.h"; sourceTree = "<group>"; };
 		0D8FE553217426870092955B /* LDAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDAppDelegate.swift; sourceTree = "<group>"; };
@@ -247,13 +250,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0D2533972170A3A100310FFA /* Net */ = {
+		0D2533972170A3A100310FFA /* NetRequest */ = {
 			isa = PBXGroup;
 			children = (
 				0D2533982170A3A100310FFA /* LDHTTP */,
 				0D2533A42170A3A100310FFA /* LDSocket */,
 			);
-			path = Net;
+			path = NetRequest;
 			sourceTree = "<group>";
 		};
 		0D2533982170A3A100310FFA /* LDHTTP */ = {
@@ -421,7 +424,7 @@
 			isa = PBXGroup;
 			children = (
 				0D2533C62170A3B900310FFA /* Category */,
-				0D2533972170A3A100310FFA /* Net */,
+				0D2533972170A3A100310FFA /* NetRequest */,
 				0D69019E207DD1880090D89A /* LDBase */,
 				0D690193207DD1880090D89A /* LDMediator */,
 				0D6900ED2079F4210090D89A /* LDTool */,
@@ -439,6 +442,8 @@
 				0D6901032079FC740090D89A /* LDLogTool.m */,
 				0D69021B207F54D50090D89A /* LDFunctionTool.h */,
 				0D69021C207F54D50090D89A /* LDFunctionTool.m */,
+				0D6E3F602175BDDD00B59EAC /* LDNetTool.h */,
+				0D6E3F612175BDDD00B59EAC /* LDNetTool.m */,
 			);
 			path = LDTool;
 			sourceTree = "<group>";
@@ -877,6 +882,7 @@
 				0D6901B9207DD1880090D89A /* LDConfigVCUtil.m in Sources */,
 				0D2533B82170A3A100310FFA /* LDHTTPConst.m in Sources */,
 				0D69020C207E2C970090D89A /* LDBehavior.m in Sources */,
+				0D6E3F622175BDDD00B59EAC /* LDNetTool.m in Sources */,
 				0D2533BE2170A3A100310FFA /* ErrorCode.m in Sources */,
 				0D2533BC2170A3A100310FFA /* Target_LDHTTP.m in Sources */,
 				0D6901C3207DD1880090D89A /* UITabBarController+LDBase.m in Sources */,

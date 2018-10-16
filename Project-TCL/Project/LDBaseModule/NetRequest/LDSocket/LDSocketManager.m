@@ -122,6 +122,7 @@ NSInteger timerOutSec = 30;
 
 - (void)socket:(GCDAsyncSocket *)sock didReceiveTrust:(SecTrustRef)trust
 completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler {
+    NSLog(@"无条件信任证书");
     completionHandler(YES);
 }
 

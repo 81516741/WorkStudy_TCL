@@ -12,6 +12,7 @@
 #import "NSString+tcl_parseXML.h"
 #import "LDPacketHandle.h"
 #import "LDHTTPTool.h"
+#import "LDNetTool.h"
 #import "Project-Swift.h"
 
 NSString * const quickHand0 = @"quickHand0";
@@ -31,12 +32,15 @@ typedef enum {
 @property(assign, nonatomic) ConnectState connectState;
 @property(assign, nonatomic) NSInteger checkNetCount;
 @property(strong, nonatomic) dispatch_source_t timer;
+@property(strong, nonatomic) dispatch_queue_t messageQueue;
+@property(strong, nonatomic) dispatch_queue_t handQueue;
 @property(copy, nonatomic) NSString * connectMessageID;
 @property(copy, nonatomic) NSString * startHandMessageID;
 @property(copy, nonatomic) NSString * openSSLMessageID;
 @property(copy, nonatomic) NSString * endHandMessgeID;
-
-@property(strong, nonatomic) NSMutableString * tempXML;
+@property(copy, nonatomic) NSString * startHandshakeMessage;
+@property(copy, nonatomic) NSString * openSSLMessage;
+@property(copy, nonatomic) NSString * endHandshakeMessage;
 
 @end
 
@@ -47,6 +51,8 @@ typedef enum {
     dispatch_once(&onceToken, ^{
         _instance = [LDSocketTool new];
         _instance.connectState = disConnect;
+        _instance.messageQueue = dispatch_queue_create("message_queue", DISPATCH_QUEUE_SERIAL);
+        _instance.handQueue = dispatch_queue_create("hand_queue", DISPATCH_QUEUE_SERIAL);
     });
     return _instance;
 }
@@ -58,12 +64,14 @@ typedef enum {
     static NSInteger checkCount = 0;
     dispatch_source_set_timer([LDSocketTool shared].timer, 0, 5ull * NSEC_PER_SEC, 0);
     dispatch_source_set_event_handler([LDSocketTool shared].timer, ^{
-        checkCount ++;
-        if ([LDSocketTool shared].connectState == disConnect) {
-            [LDSocketTool buildConnectingSuccess:nil failure:nil];
-        } else if ([LDSocketTool shared].connectState == handed && checkCount > 4) {
-            checkCount = 0;
-            [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
+        if ([LDNetTool networkReachable]) {
+            checkCount ++;
+            if ([LDSocketTool shared].connectState == disConnect) {
+                [LDSocketTool buildConnectingSuccess:nil failure:nil];
+            } else if ([LDSocketTool shared].connectState == handed && checkCount > 4) {
+                checkCount = 0;
+                [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
+            }
         }
     });
     dispatch_resume([LDSocketTool shared].timer);
@@ -125,8 +133,11 @@ typedef enum {
     }
     [LDSocketTool shared].connectState = handing;
     NSString * startHandshakeMessage = [NSString stringWithFormat:@"<stream:stream to=\"%@\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">",[LDSocketManager host]];
+    [LDSocketTool shared].startHandshakeMessage = startHandshakeMessage;
     NSString * openSSLMessage = @"<starttls xmlns=\"urn:ietf:params:xml:ns:xmpp-tls\"/>";
+    [LDSocketTool shared].openSSLMessageID =openSSLMessage;
     NSString * endHandshakeMessage = @"<stream:stream to=\"tcl.com\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">";
+    [LDSocketTool shared].endHandshakeMessage = endHandshakeMessage;
     [LDSocketTool shared].startHandMessageID = getMessageID(kStartHandMessageIDPrefix);
     [LDSocketTool shared].openSSLMessageID = getMessageID(kOpenSSLMessageIDPrefix);
     [LDSocketTool shared].endHandMessgeID = getMessageID(kEndHandMessageIDPrefix);
@@ -173,9 +184,31 @@ typedef enum {
 
 + (void)sendMessage:(NSString *)message messageID:(NSString *)messageID success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
 {
-    NSLog(@"\n---【发送信息到服务器】---\n%@",message);
-    [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
-    [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
+     BOOL isHandMessage = [message isEqualToString:[LDSocketTool shared].startHandshakeMessage] || [message isEqualToString:[LDSocketTool shared].openSSLMessage] || [message isEqualToString:[LDSocketTool shared].endHandshakeMessage];
+    if (isHandMessage) {
+        dispatch_async([LDSocketTool shared].handQueue, ^{
+            NSLog(@"\n---【发送信息到服务器】---\n%@",message);
+            [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
+            [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
+        });
+    } else {
+        dispatch_async([LDSocketTool shared].messageQueue, ^{
+            {
+                while (([LDSocketTool shared].connectState != handed || ![LDNetTool networkReachable])) {
+                    NSLog(@"\n---【没网了或者没握手,所以暂停发送信息】---\n%@",message);
+                    sleep(2);
+                }
+                NSLog(@"\n---【发送信息到服务器】---\n%@",message);
+                [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
+                [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
+            }
+            
+        });
+    }
+    
+    
+    
+    
 }
 + (void)buildConnectingSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
     
@@ -397,11 +430,5 @@ typedef enum {
     return _requestBlocks;
 }
 
-- (NSMutableString *)tempXML {
-    if (_tempXML == nil) {
-        _tempXML = [NSMutableString string];
-    }
-    return _tempXML;
-}
 
 @end
