@@ -20,7 +20,8 @@
         case LDFunctionOtherVC:
         {
             UINavigationController * navi = [[LDMediator sharedInstance] login_getLoginController];
-        navi.childViewControllers.firstObject.ld_loginSuccessBlock = ^(id data){
+        navi.childViewControllers.firstObject.ld_loginSuccessBlock = ^(id data,UIViewController * loginVC){
+            [loginVC dismissViewControllerAnimated:YES completion:nil];
             [vc.navigationController pushViewController:[[LDMediator sharedInstance] home_getOtherController] animated:YES];
             };
             [vc presentViewController:navi animated:YES completion:nil];

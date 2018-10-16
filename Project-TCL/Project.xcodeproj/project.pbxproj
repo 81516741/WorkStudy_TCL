@@ -25,12 +25,9 @@
 		0D2533CC2170A3B900310FFA /* NSString+tcl_parseXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533CA2170A3B900310FFA /* NSString+tcl_parseXML.m */; };
 		0D2533DA2170A47C00310FFA /* LDDBTool+Login.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533CF2170A47C00310FFA /* LDDBTool+Login.mm */; };
 		0D2533E12170A8C000310FFA /* LDSocketTool+home.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533E02170A8BF00310FFA /* LDSocketTool+home.m */; };
-		0D6900B92079F0430090D89A /* LDHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6900A22079F0420090D89A /* LDHomeVC.m */; };
 		0D6900BA2079F0430090D89A /* LDHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A32079F0420090D89A /* LDHomeVC.xib */; };
-		0D6900BB2079F0430090D89A /* LDOtherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6900A52079F0420090D89A /* LDOtherVC.m */; };
 		0D6900BC2079F0430090D89A /* first_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A72079F0420090D89A /* first_normal.png */; };
 		0D6900BD2079F0430090D89A /* first_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A82079F0420090D89A /* first_selected.png */; };
-		0D6900C22079F0430090D89A /* LDMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6900B32079F0430090D89A /* LDMineVC.m */; };
 		0D6900C32079F0430090D89A /* second_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900B52079F0430090D89A /* second_normal.png */; };
 		0D6900C42079F0430090D89A /* second_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900B62079F0430090D89A /* second_selected.png */; };
 		0D6901012079F4210090D89A /* LDDBTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D6900EF2079F4210090D89A /* LDDBTool.mm */; };
@@ -65,6 +62,9 @@
 		0D69FF2F2078BEF10090D89A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D69FF2E2078BEF10090D89A /* main.m */; };
 		0D6E3F5C217583A700B59EAC /* NotificationConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F5B217583A700B59EAC /* NotificationConst.m */; };
 		0D6E3F622175BDDD00B59EAC /* LDNetTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F612175BDDD00B59EAC /* LDNetTool.m */; };
+		0D6E3F662175DACD00B59EAC /* LDMineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F652175DACD00B59EAC /* LDMineVC.swift */; };
+		0D6E3F6A2175DBFD00B59EAC /* LDHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F692175DBFD00B59EAC /* LDHomeVC.swift */; };
+		0D6E3F6C2175DC7200B59EAC /* LDOtherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F6B2175DC7200B59EAC /* LDOtherVC.swift */; };
 		0D8FE551217424830092955B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE550217424830092955B /* LoginVC.swift */; };
 		0D8FE554217426870092955B /* LDAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE553217426870092955B /* LDAppDelegate.swift */; };
 		0D8FE55621742ABF0092955B /* LDMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE55521742ABF0092955B /* LDMacro.swift */; };
@@ -131,15 +131,9 @@
 		0D2533CF2170A47C00310FFA /* LDDBTool+Login.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "LDDBTool+Login.mm"; sourceTree = "<group>"; };
 		0D2533DF2170A8BF00310FFA /* LDSocketTool+home.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+home.h"; sourceTree = "<group>"; };
 		0D2533E02170A8BF00310FFA /* LDSocketTool+home.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+home.m"; sourceTree = "<group>"; };
-		0D6900A12079F0420090D89A /* LDHomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDHomeVC.h; sourceTree = "<group>"; };
-		0D6900A22079F0420090D89A /* LDHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDHomeVC.m; sourceTree = "<group>"; };
 		0D6900A32079F0420090D89A /* LDHomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LDHomeVC.xib; sourceTree = "<group>"; };
-		0D6900A42079F0420090D89A /* LDOtherVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDOtherVC.h; sourceTree = "<group>"; };
-		0D6900A52079F0420090D89A /* LDOtherVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDOtherVC.m; sourceTree = "<group>"; };
 		0D6900A72079F0420090D89A /* first_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_normal.png; sourceTree = "<group>"; };
 		0D6900A82079F0420090D89A /* first_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_selected.png; sourceTree = "<group>"; };
-		0D6900B22079F0430090D89A /* LDMineVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDMineVC.h; sourceTree = "<group>"; };
-		0D6900B32079F0430090D89A /* LDMineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDMineVC.m; sourceTree = "<group>"; };
 		0D6900B52079F0430090D89A /* second_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second_normal.png; sourceTree = "<group>"; };
 		0D6900B62079F0430090D89A /* second_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second_selected.png; sourceTree = "<group>"; };
 		0D6900EE2079F4210090D89A /* LDDBTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDDBTool.h; sourceTree = "<group>"; };
@@ -204,6 +198,9 @@
 		0D6E3F5B217583A700B59EAC /* NotificationConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationConst.m; sourceTree = "<group>"; };
 		0D6E3F602175BDDD00B59EAC /* LDNetTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDNetTool.h; sourceTree = "<group>"; };
 		0D6E3F612175BDDD00B59EAC /* LDNetTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDNetTool.m; sourceTree = "<group>"; };
+		0D6E3F652175DACD00B59EAC /* LDMineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDMineVC.swift; sourceTree = "<group>"; };
+		0D6E3F692175DBFD00B59EAC /* LDHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDHomeVC.swift; sourceTree = "<group>"; };
+		0D6E3F6B2175DC7200B59EAC /* LDOtherVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDOtherVC.swift; sourceTree = "<group>"; };
 		0D8FE550217424830092955B /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		0D8FE5522174249B0092955B /* Project-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project-Bridging-Header.h"; sourceTree = "<group>"; };
 		0D8FE553217426870092955B /* LDAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDAppDelegate.swift; sourceTree = "<group>"; };
@@ -335,14 +332,13 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
-		0D2533CD2170A47C00310FFA /* LoginTool */ = {
+		0D2533CD2170A47C00310FFA /* DBTool */ = {
 			isa = PBXGroup;
 			children = (
 				0D2533CE2170A47C00310FFA /* LDDBTool+Login.h */,
 				0D2533CF2170A47C00310FFA /* LDDBTool+Login.mm */,
-				0D2533D02170A47C00310FFA /* Net */,
 			);
-			path = LoginTool;
+			path = DBTool;
 			sourceTree = "<group>";
 		};
 		0D2533D02170A47C00310FFA /* Net */ = {
@@ -366,13 +362,9 @@
 		0D6900A02079F0420090D89A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0D6E3F6F2175DDA900B59EAC /* MVC */,
 				0D2533DE2170A8BF00310FFA /* Net */,
 				0D69012B207B5DD80090D89A /* Target */,
-				0D6900A12079F0420090D89A /* LDHomeVC.h */,
-				0D6900A22079F0420090D89A /* LDHomeVC.m */,
-				0D6900A32079F0420090D89A /* LDHomeVC.xib */,
-				0D6900A42079F0420090D89A /* LDOtherVC.h */,
-				0D6900A52079F0420090D89A /* LDOtherVC.m */,
 				0D6900A62079F0420090D89A /* Source */,
 			);
 			path = Home;
@@ -390,12 +382,11 @@
 		0D6900AB2079F0420090D89A /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				0D6E3F6E2175DD8400B59EAC /* MVC */,
+				0D2533D02170A47C00310FFA /* Net */,
 				0D8FE561217441730092955B /* Target */,
-				0D2533CD2170A47C00310FFA /* LoginTool */,
+				0D2533CD2170A47C00310FFA /* DBTool */,
 				0D6901FC207E2ACB0090D89A /* Source */,
-				0D69014B207C53F30090D89A /* Model */,
-				0D8FE550217424830092955B /* LoginVC.swift */,
-				0D8FE56B2174878D0092955B /* LoginVC.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -403,9 +394,8 @@
 		0D6900B12079F0430090D89A /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				0D6E3F702175DDC800B59EAC /* MVC */,
 				0D690133207B5E370090D89A /* Target */,
-				0D6900B22079F0430090D89A /* LDMineVC.h */,
-				0D6900B32079F0430090D89A /* LDMineVC.m */,
 				0D6900B42079F0430090D89A /* Souce */,
 			);
 			path = Mine;
@@ -607,6 +597,34 @@
 				0D69FF2E2078BEF10090D89A /* main.m */,
 			);
 			path = Project;
+			sourceTree = "<group>";
+		};
+		0D6E3F6E2175DD8400B59EAC /* MVC */ = {
+			isa = PBXGroup;
+			children = (
+				0D69014B207C53F30090D89A /* Model */,
+				0D8FE550217424830092955B /* LoginVC.swift */,
+				0D8FE56B2174878D0092955B /* LoginVC.xib */,
+			);
+			path = MVC;
+			sourceTree = "<group>";
+		};
+		0D6E3F6F2175DDA900B59EAC /* MVC */ = {
+			isa = PBXGroup;
+			children = (
+				0D6E3F692175DBFD00B59EAC /* LDHomeVC.swift */,
+				0D6900A32079F0420090D89A /* LDHomeVC.xib */,
+				0D6E3F6B2175DC7200B59EAC /* LDOtherVC.swift */,
+			);
+			path = MVC;
+			sourceTree = "<group>";
+		};
+		0D6E3F702175DDC800B59EAC /* MVC */ = {
+			isa = PBXGroup;
+			children = (
+				0D6E3F652175DACD00B59EAC /* LDMineVC.swift */,
+			);
+			path = MVC;
 			sourceTree = "<group>";
 		};
 		0D8FE561217441730092955B /* Target */ = {
@@ -857,6 +875,7 @@
 				0D2533DA2170A47C00310FFA /* LDDBTool+Login.mm in Sources */,
 				0D2533BB2170A3A100310FFA /* LDHTTPTool.m in Sources */,
 				0D69020D207E2C970090D89A /* LDImageViewBehavior.m in Sources */,
+				0D6E3F6A2175DBFD00B59EAC /* LDHomeVC.swift in Sources */,
 				0D2533CC2170A3B900310FFA /* NSString+tcl_parseXML.m in Sources */,
 				0D2533E12170A8C000310FFA /* LDSocketTool+home.m in Sources */,
 				0D6901C4207DD1880090D89A /* UIViewController+LDLogin.m in Sources */,
@@ -865,16 +884,16 @@
 				0D6901B8207DD1880090D89A /* LDMediator.m in Sources */,
 				0D8FE5682174792E0092955B /* LDSocketTool+login.m in Sources */,
 				0D69020B207E2C970090D89A /* LDButtonBehavior.m in Sources */,
-				0D6900B92079F0430090D89A /* LDHomeVC.m in Sources */,
 				0D2533BA2170A3A100310FFA /* LDHTTPModel.m in Sources */,
 				0D2533C22170A3A100310FFA /* LDInitiativeMsgHandle.m in Sources */,
 				0D6901C2207DD1880090D89A /* UINavigationController+LDBase.m in Sources */,
+				0D6E3F6C2175DC7200B59EAC /* LDOtherVC.swift in Sources */,
 				0D69FF2F2078BEF10090D89A /* main.m in Sources */,
 				0D8FE55621742ABF0092955B /* LDMacro.swift in Sources */,
 				0D6E3F5C217583A700B59EAC /* NotificationConst.m in Sources */,
 				0D69012E207B5DD80090D89A /* Target_Home.m in Sources */,
-				0D6900BB2079F0430090D89A /* LDOtherVC.m in Sources */,
 				0D690160207C92100090D89A /* UIImage+WCTColumnCoding.mm in Sources */,
+				0D6E3F662175DACD00B59EAC /* LDMineVC.swift in Sources */,
 				0D6901B4207DD1880090D89A /* LDMediator+Home.m in Sources */,
 				0D6901B7207DD1880090D89A /* LDMediator+Mine.m in Sources */,
 				0D2533B92170A3A100310FFA /* LDHTTPManager.m in Sources */,
@@ -893,7 +912,6 @@
 				0D69017D207CDEED0090D89A /* LDLoginModel.mm in Sources */,
 				0D69020E207E2C970090D89A /* LDTextFieldBehavior.m in Sources */,
 				0D6901042079FC740090D89A /* LDLogTool.m in Sources */,
-				0D6900C22079F0430090D89A /* LDMineVC.m in Sources */,
 				0D690136207B5E370090D89A /* Target_Mine.m in Sources */,
 				0D6901B5207DD1880090D89A /* LDMediator+HTTP.m in Sources */,
 				0D8FE551217424830092955B /* LoginVC.swift in Sources */,

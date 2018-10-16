@@ -58,27 +58,26 @@ typedef enum {
 }
 #pragma mark - 连接和心跳
 + (void)startConnectAndHeart {
-    if ([LDSocketTool shared].timer == nil) {
-       [LDSocketTool shared].timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
-    }
-    static NSInteger checkCount = 0;
-    dispatch_source_set_timer([LDSocketTool shared].timer, 0, 5ull * NSEC_PER_SEC, 0);
-    dispatch_source_set_event_handler([LDSocketTool shared].timer, ^{
-        if ([LDNetTool networkReachable]) {
-            checkCount ++;
-            if ([LDSocketTool shared].connectState == disConnect) {
-                [LDSocketTool buildConnectingSuccess:nil failure:nil];
-            } else if ([LDSocketTool shared].connectState == handed && checkCount > 4) {
-                checkCount = 0;
-                [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [LDSocketTool shared].timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+        dispatch_source_set_timer([LDSocketTool shared].timer, 0, 5ull * NSEC_PER_SEC, 0);
+        dispatch_source_set_event_handler([LDSocketTool shared].timer, ^{
+            static NSInteger checkCount = 0;
+            if ([LDNetTool networkReachable]) {
+                checkCount ++;
+                if ([LDSocketTool shared].connectState == disConnect) {
+                    [LDSocketTool buildConnectingSuccess:nil failure:nil];
+                } else if ([LDSocketTool shared].connectState == handed && checkCount > 4) {
+                    checkCount = 0;
+                    [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
+                }
             }
-        }
+        });
+        dispatch_resume([LDSocketTool shared].timer);
     });
-    dispatch_resume([LDSocketTool shared].timer);
 }
-+ (void)cancelConnectAndHeart {
-    
-}
+
 #pragma  mark - 连接服务器
 + (BOOL)connectServer:(NSString *)host port:(NSString *)port success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
 {

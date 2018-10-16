@@ -9,9 +9,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LDHomeVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LDHomeVC" customModule="Project" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="nlx-qY-X25" id="YNc-gm-OvL"/>
                 <outlet property="view" destination="iN0-l3-epB" id="YyE-5T-92L"/>
             </connections>
         </placeholder>
@@ -32,24 +31,12 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
-                        <action selector="jump:" destination="-1" eventType="touchUpInside" id="82C-Xy-zkA"/>
+                        <action selector="jump:" destination="-1" eventType="touchUpInside" id="KgK-SA-2wc"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nlx-qY-X25">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="441"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="q7K-81-WNt"/>
-                        <outlet property="delegate" destination="-1" id="Izq-2p-EbR"/>
-                    </connections>
-                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="0.9778828955766381" blue="0.16802777355823884" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="nlx-qY-X25" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BMA-fo-pzd"/>
-                <constraint firstItem="nlx-qY-X25" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZUU-eb-lTN"/>
-                <constraint firstAttribute="trailing" secondItem="nlx-qY-X25" secondAttribute="trailing" id="bbd-fW-M8y"/>
-                <constraint firstItem="gF8-AU-wTv" firstAttribute="top" secondItem="nlx-qY-X25" secondAttribute="bottom" constant="88" id="qko-RE-gGQ"/>
                 <constraint firstAttribute="bottom" secondItem="gF8-AU-wTv" secondAttribute="bottom" constant="88" id="vhX-43-qh9"/>
                 <constraint firstItem="gF8-AU-wTv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="xFT-wY-uck"/>
             </constraints>

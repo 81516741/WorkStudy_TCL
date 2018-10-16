@@ -33,7 +33,7 @@ NSString * const kLoginStateKey = @"kLoginStateKey";
         if (isLogin) {//代表登录了
             [LDConfigVCUtil configTabCToRootVC];
         }else {
-            [LDConfigVCUtil configLoginVCToRootVC];
+            [LDConfigVCUtil configLoginVCToRootVC:mustLogin];
         }
     } else {
         [LDConfigVCUtil configTabCToRootVC];
@@ -41,9 +41,15 @@ NSString * const kLoginStateKey = @"kLoginStateKey";
     
 }
 
-+ (void)configLoginVCToRootVC
++ (void)configLoginVCToRootVC:(BOOL)mustLogin
 {
     UINavigationController * loginVCNavi = [[LDMediator sharedInstance] login_getLoginController];
+    if (mustLogin) {
+        UIViewController * loginVC = loginVCNavi.topViewController;
+        loginVC.ld_loginSuccessBlock = ^(id data,UIViewController * vc) {
+            [self configTabCToRootVC];
+        };
+    }
     if (loginVCNavi != nil) {
         //是否需要展示新特性
         if ([self isShowIntroductionVC]) {
@@ -51,6 +57,8 @@ NSString * const kLoginStateKey = @"kLoginStateKey";
             [loginVCNavi.view addSubview:view];
         }
         [UIApplication sharedApplication].delegate.window.rootViewController = loginVCNavi;
+    } else {
+        [UIApplication sharedApplication].delegate.window.rootViewController = [UIViewController new];
     }
     
 }

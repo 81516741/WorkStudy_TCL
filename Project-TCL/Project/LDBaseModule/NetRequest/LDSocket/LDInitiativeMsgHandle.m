@@ -12,13 +12,6 @@
 NSString * const kGetConfigParamNotification = @"kGetConfigParamNotification";
 
 @implementation LDInitiativeMsgHandle
-+ (BOOL)handleMessage:(NSString *)message {
-    if ([message containsString:@"<configparam"]) {
-        [self handleConfigParamMessage:message];
-        return YES;
-    }
-    return NO;
-}
 
 + (void)documentFromMessage:(NSString *)message block:(void(^)(GDataXMLDocument * doc))block {
     GDataXMLDocument * doc = [[GDataXMLDocument alloc] initWithXMLString:message error:nil];
@@ -29,6 +22,14 @@ NSString * const kGetConfigParamNotification = @"kGetConfigParamNotification";
             block(doc);
         }
     }
+}
+
++ (BOOL)handleMessage:(NSString *)message {
+    if ([message containsString:@"<configparam"]) {
+        [self handleConfigParamMessage:message];
+        return YES;
+    }
+    return NO;
 }
 
 + (void)handleConfigParamMessage:(NSString *)message {

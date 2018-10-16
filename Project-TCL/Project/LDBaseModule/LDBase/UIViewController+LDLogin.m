@@ -9,11 +9,11 @@
 #import <objc/runtime.h>
 
 @implementation UIViewController (LDLogin)
-- (void)setLd_loginSuccessBlock:(void (^)(id))ld_loginSuccessBlock
+- (void)setLd_loginSuccessBlock:(void (^)(id, UIViewController *))ld_loginSuccessBlock
 {
     objc_setAssociatedObject(self, @selector(ld_loginSuccessBlock), ld_loginSuccessBlock, OBJC_ASSOCIATION_COPY);
 }
-- (void (^)(id))ld_loginSuccessBlock
+- (void (^)(id, UIViewController *))ld_loginSuccessBlock
 {
     return objc_getAssociatedObject(self, _cmd);
 }

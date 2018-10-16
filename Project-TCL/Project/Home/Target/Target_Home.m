@@ -7,8 +7,7 @@
 //
 
 #import "Target_Home.h"
-#import "LDHomeVC.h"
-#import "LDOtherVC.h"
+#import "Project-Swift.h"
 
 @implementation Target_Home
     

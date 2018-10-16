@@ -11,6 +11,6 @@
 /**
  这个block是登录成功用的
  */
-@property (nonatomic,copy) void(^ld_loginSuccessBlock)(id data);
+@property (nonatomic,copy) void(^ld_loginSuccessBlock)(id data,UIViewController * vc);
 
 @end

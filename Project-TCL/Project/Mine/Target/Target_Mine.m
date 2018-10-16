@@ -7,7 +7,8 @@
 //
 
 #import "Target_Mine.h"
-#import "LDMineVC.h"
+#import "Project-Swift.h"
+
 @implementation Target_Mine
 - (UIViewController *)Action_nativeFetchMineVC:(NSDictionary *)params
 {

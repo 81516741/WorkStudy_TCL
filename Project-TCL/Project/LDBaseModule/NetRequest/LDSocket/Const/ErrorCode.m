@@ -20,7 +20,7 @@ NSString * getErrorDescription(NSString * errorCode) {
             return @"没有找到此用户";
             break;
         default:
-            return nil;
+            return @"未知错误";
             break;
     }
 }

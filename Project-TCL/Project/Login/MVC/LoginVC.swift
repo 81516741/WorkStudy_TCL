@@ -18,11 +18,14 @@ class LoginVC: UIViewController  {
         ld_titleColor = UIColor.white
         ld_naviBarColor = rgb(r: 110, g: 110, b: 123)
         title = "登录"
-        LDSocketTool.startConnectAndHeart()
     }
     
     @IBAction func loginBtnClick(_ sender: UIButton) {
-        LDSocketTool.loging("13104475087", password: "123456", success: nil, failure: nil)
+        LDSocketTool.loging(countTextField.text, password: passwordTextField.text, success: { (data) in
+            self.ld_loginSuccessBlock(data,self)
+        }) { (error) in
+            print(error as! String)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

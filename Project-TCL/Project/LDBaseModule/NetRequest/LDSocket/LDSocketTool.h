@@ -19,8 +19,6 @@ typedef void(^LDSocketToolBlock)(id data);
 
 @end
 
-
-
 @interface LDSocketTool : NSObject<LDSocketDistributeProtocol>
 
 @property (nonatomic,strong) NSMutableArray *  requestBlocks;

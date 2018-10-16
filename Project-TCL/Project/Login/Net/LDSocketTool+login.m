@@ -119,6 +119,8 @@
         failure(@"账号不存在");
     } else if ([message.tcl_errorCode isEqualToString:@"405"]) {//连续3次密码错误
         failure(@"连续3次密码错误");
+    } else {
+        failure(@"未知错误");
     }
 }
 
