@@ -12,6 +12,9 @@ NSString  * const kLDMediatorTargetHome = @"Home";
 NSString  * const kLDMediatorActionNativeFetchHomeVC = @"nativeFetchHomeVC";
 NSString  * const kLDMediatorActionNativeFetchHomeOtherVC = @"nativeFetchOtherVC";
 
+NSString  * const kLDMediatorActionCreateModuleHomeTables = @"nativeCreateModuleHomeDBTables";
+NSString  * const kLDMediatorActionClearModuleHomeModels = @"nativeClearModuleHomeModels";
+
 @implementation LDMediator (Home)
 - (UINavigationController *)home_getHomeController;
 {
@@ -48,5 +51,14 @@ NSString  * const kLDMediatorActionNativeFetchHomeOtherVC = @"nativeFetchOtherVC
     } else {
         return nil;
     }
+}
+
+- (void)home_createModuleLoginTables
+{
+    [self performTarget:kLDMediatorTargetHome action:kLDMediatorActionCreateModuleHomeTables params:nil shouldCacheTarget:NO];
+}
+- (void)home_clearModuleLoginModels
+{
+    [self performTarget:kLDMediatorTargetHome action:kLDMediatorActionClearModuleHomeModels params:nil shouldCacheTarget:NO];
 }
 @end

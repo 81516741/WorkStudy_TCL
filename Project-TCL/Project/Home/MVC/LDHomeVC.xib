@@ -34,9 +34,26 @@
                         <action selector="jump:" destination="-1" eventType="touchUpInside" id="KgK-SA-2wc"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JA1-rI-OqL">
+                    <rect key="frame" x="143" y="458" width="88" height="50"/>
+                    <color key="backgroundColor" red="1" green="0.2820968405" blue="0.29083118959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="PUZ-tG-s1T"/>
+                        <constraint firstAttribute="width" constant="88" id="S50-2B-uEa"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <state key="normal" title="获取设备">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="getDeviceList:" destination="-1" eventType="touchUpInside" id="3Qt-ji-BNt"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="0.9778828955766381" blue="0.16802777355823884" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="gF8-AU-wTv" firstAttribute="top" secondItem="JA1-rI-OqL" secondAttribute="bottom" constant="21" id="0aP-kj-TG8"/>
+                <constraint firstItem="JA1-rI-OqL" firstAttribute="leading" secondItem="gF8-AU-wTv" secondAttribute="leading" id="I1z-p0-j8T"/>
                 <constraint firstAttribute="bottom" secondItem="gF8-AU-wTv" secondAttribute="bottom" constant="88" id="vhX-43-qh9"/>
                 <constraint firstItem="gF8-AU-wTv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="xFT-wY-uck"/>
             </constraints>

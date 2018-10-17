@@ -10,8 +10,10 @@
 #import "MessageIDConst.h"
 #import "LDSysTool.h"
 #import "GDataXMLNode.h"
-#import "ErrorCode.h"
 #import "NSString+tcl_parseXML.h"
+#import "DeviceModel.h"
+#import <MJExtension/MJExtension.h>
+#import "LDDBTool+home.h"
 
 @implementation LDSocketTool (home)
 
@@ -55,7 +57,9 @@
         }
         [deviceList addObject:itemDic];
     }
-    success(deviceList);
+    NSArray * arr = [DeviceModel mj_objectArrayWithKeyValuesArray:deviceList];
+    [LDDBTool saveDeviceList:arr];
+    success(arr);
     
 }
 @end

@@ -16,14 +16,9 @@ NSString  * const kLDMediatorActionClearModuleLoginModels = @"nativeClearModuleL
 
 @implementation LDMediator (Login)
 
-- (id)_performAction:(NSString *)action params:(NSDictionary *)params shouldCacheTarget:(BOOL)shouldCache
-{
-    return [self performTarget:kLDMediatorTargetLogin action:action params:params shouldCacheTarget:shouldCache];
-}
-
 - (UINavigationController *)login_getLoginController
 {
-    UIViewController *viewController = [self _performAction:kLDMediatorActionNativeFetchLoginVC
+    UIViewController *viewController = [self performTarget:kLDMediatorTargetLogin action:kLDMediatorActionNativeFetchLoginVC
                                                     params:nil
                                          shouldCacheTarget:NO
                                         ];
@@ -37,10 +32,10 @@ NSString  * const kLDMediatorActionClearModuleLoginModels = @"nativeClearModuleL
 
 - (void)login_createModuleLoginTables
 {
-    [self _performAction:kLDMediatorActionCreateModuleLoginTables params:nil shouldCacheTarget:NO];
+    [self performTarget:kLDMediatorTargetLogin action:kLDMediatorActionCreateModuleLoginTables params:nil shouldCacheTarget:NO];
 }
 - (void)login_clearModuleLoginModels
 {
-    [self _performAction:kLDMediatorActionClearModuleLoginModels params:nil shouldCacheTarget:NO];
+    [self performTarget:kLDMediatorTargetLogin action:kLDMediatorActionClearModuleLoginModels params:nil shouldCacheTarget:NO];
 }
 @end

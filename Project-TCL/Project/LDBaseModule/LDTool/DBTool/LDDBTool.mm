@@ -9,6 +9,7 @@
 #import "LDDBTool.h"
 #import "LDDBTool+Base.h"
 #import "LDMediator+Login.h"
+#import "LDMediator+Home.h"
 
 @implementation LDDBTool
 
@@ -57,11 +58,13 @@
 {
     [LDDBTool createDatabase];
     [[LDMediator sharedInstance] login_createModuleLoginTables];
+    [[LDMediator sharedInstance] home_createModuleLoginTables];
 }
 
 + (void)clearSomeUselessData
 {
     [[LDMediator sharedInstance] login_clearModuleLoginModels];
+    [[LDMediator sharedInstance] home_clearModuleLoginModels];
 }
 @end
 

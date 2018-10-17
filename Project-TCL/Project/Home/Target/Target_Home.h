@@ -12,5 +12,8 @@
 
 - (UIViewController *)Action_nativeFetchHomeVC:(NSDictionary *)params;
 - (UIViewController *)Action_nativeFetchOtherVC:(NSDictionary *)params;
+
+- (void)Action_nativeCreateModuleHomeDBTables:(NSDictionary *)params;
+- (void)Action_nativeClearModuleHomeModels:(NSDictionary *)params;
     
 @end

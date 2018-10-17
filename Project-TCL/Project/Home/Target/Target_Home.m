@@ -7,6 +7,7 @@
 //
 
 #import "Target_Home.h"
+#import "LDDBTool+home.h"
 #import "Project-Swift.h"
 
 @implementation Target_Home
@@ -24,5 +25,12 @@
 {
     LDOtherVC * vc = [[LDOtherVC alloc] init];
     return vc;
+}
+
+- (void)Action_nativeCreateModuleHomeDBTables:(NSDictionary *)params {
+    [LDDBTool createHomeTables];
+}
+- (void)Action_nativeClearModuleHomeModels:(NSDictionary *)params {
+    [LDDBTool clearnAllDevice];
 }
 @end

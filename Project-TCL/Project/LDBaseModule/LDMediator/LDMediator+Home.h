@@ -15,6 +15,6 @@
 - (UINavigationController *)home_getHomeController;
 
 - (UIViewController *)home_getOtherController;
-
-
+- (void)home_createModuleLoginTables;
+- (void)home_clearModuleLoginModels;
 @end

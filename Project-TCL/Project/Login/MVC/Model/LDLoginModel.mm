@@ -7,7 +7,6 @@
 //
 
 #import "LDLoginModel+WCTTableCoding.h"
-#import "LDLoginModel.h"
 #import <WCDB/WCDB.h>
 #import <MJExtension/MJExtension.h>
 

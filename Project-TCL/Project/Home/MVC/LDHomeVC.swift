@@ -19,4 +19,11 @@ class LDHomeVC: UIViewController {
     @IBAction func jump(_ sender: Any) {
         LDFunctionTool.gotoFunction(by: .otherVC, inVC: self)
     }
+    @IBAction func getDeviceList(_ sender: Any) {
+        LDSocketTool.getDeviceListSuccess({ (data) in
+            
+        }) { (data) in
+        
+        }
+    }
 }

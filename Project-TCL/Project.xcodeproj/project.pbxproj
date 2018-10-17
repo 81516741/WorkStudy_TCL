@@ -65,6 +65,8 @@
 		0D6E3F662175DACD00B59EAC /* LDMineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F652175DACD00B59EAC /* LDMineVC.swift */; };
 		0D6E3F6A2175DBFD00B59EAC /* LDHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F692175DBFD00B59EAC /* LDHomeVC.swift */; };
 		0D6E3F6C2175DC7200B59EAC /* LDOtherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F6B2175DC7200B59EAC /* LDOtherVC.swift */; };
+		0D6E3F802176E2FE00B59EAC /* DeviceModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F7D2176E2FE00B59EAC /* DeviceModel.mm */; };
+		0D6E3F872177085400B59EAC /* LDDBTool+home.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D6E3F862177085400B59EAC /* LDDBTool+home.mm */; };
 		0D8FE551217424830092955B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE550217424830092955B /* LoginVC.swift */; };
 		0D8FE554217426870092955B /* LDAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE553217426870092955B /* LDAppDelegate.swift */; };
 		0D8FE55621742ABF0092955B /* LDMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE55521742ABF0092955B /* LDMacro.swift */; };
@@ -201,6 +203,11 @@
 		0D6E3F652175DACD00B59EAC /* LDMineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDMineVC.swift; sourceTree = "<group>"; };
 		0D6E3F692175DBFD00B59EAC /* LDHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDHomeVC.swift; sourceTree = "<group>"; };
 		0D6E3F6B2175DC7200B59EAC /* LDOtherVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDOtherVC.swift; sourceTree = "<group>"; };
+		0D6E3F7D2176E2FE00B59EAC /* DeviceModel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceModel.mm; sourceTree = "<group>"; };
+		0D6E3F7E2176E2FE00B59EAC /* DeviceModel+WCTTableCoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DeviceModel+WCTTableCoding.h"; sourceTree = "<group>"; };
+		0D6E3F7F2176E2FE00B59EAC /* DeviceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceModel.h; sourceTree = "<group>"; };
+		0D6E3F852177085400B59EAC /* LDDBTool+home.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LDDBTool+home.h"; sourceTree = "<group>"; };
+		0D6E3F862177085400B59EAC /* LDDBTool+home.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "LDDBTool+home.mm"; sourceTree = "<group>"; };
 		0D8FE550217424830092955B /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		0D8FE5522174249B0092955B /* Project-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project-Bridging-Header.h"; sourceTree = "<group>"; };
 		0D8FE553217426870092955B /* LDAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDAppDelegate.swift; sourceTree = "<group>"; };
@@ -362,6 +369,7 @@
 		0D6900A02079F0420090D89A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0D6E3F81217707BC00B59EAC /* DBTool */,
 				0D6E3F6F2175DDA900B59EAC /* MVC */,
 				0D2533DE2170A8BF00310FFA /* Net */,
 				0D69012B207B5DD80090D89A /* Target */,
@@ -615,6 +623,7 @@
 				0D6E3F692175DBFD00B59EAC /* LDHomeVC.swift */,
 				0D6900A32079F0420090D89A /* LDHomeVC.xib */,
 				0D6E3F6B2175DC7200B59EAC /* LDOtherVC.swift */,
+				0D6E3F7C2176E2F000B59EAC /* Model */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -625,6 +634,25 @@
 				0D6E3F652175DACD00B59EAC /* LDMineVC.swift */,
 			);
 			path = MVC;
+			sourceTree = "<group>";
+		};
+		0D6E3F7C2176E2F000B59EAC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0D6E3F7D2176E2FE00B59EAC /* DeviceModel.mm */,
+				0D6E3F7E2176E2FE00B59EAC /* DeviceModel+WCTTableCoding.h */,
+				0D6E3F7F2176E2FE00B59EAC /* DeviceModel.h */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0D6E3F81217707BC00B59EAC /* DBTool */ = {
+			isa = PBXGroup;
+			children = (
+				0D6E3F852177085400B59EAC /* LDDBTool+home.h */,
+				0D6E3F862177085400B59EAC /* LDDBTool+home.mm */,
+			);
+			path = DBTool;
 			sourceTree = "<group>";
 		};
 		0D8FE561217441730092955B /* Target */ = {
@@ -900,6 +928,7 @@
 				0D690175207CD87B0090D89A /* LDDBTool+Base.mm in Sources */,
 				0D6901B9207DD1880090D89A /* LDConfigVCUtil.m in Sources */,
 				0D2533B82170A3A100310FFA /* LDHTTPConst.m in Sources */,
+				0D6E3F802176E2FE00B59EAC /* DeviceModel.mm in Sources */,
 				0D69020C207E2C970090D89A /* LDBehavior.m in Sources */,
 				0D6E3F622175BDDD00B59EAC /* LDNetTool.m in Sources */,
 				0D2533BE2170A3A100310FFA /* ErrorCode.m in Sources */,
@@ -916,6 +945,7 @@
 				0D6901B5207DD1880090D89A /* LDMediator+HTTP.m in Sources */,
 				0D8FE551217424830092955B /* LoginVC.swift in Sources */,
 				0D6901B6207DD1880090D89A /* LDMediator+Login.m in Sources */,
+				0D6E3F872177085400B59EAC /* LDDBTool+home.mm in Sources */,
 				0D2533912170A28E00310FFA /* LDSysTool.m in Sources */,
 				0D6901012079F4210090D89A /* LDDBTool.mm in Sources */,
 				0D2533BD2170A3A100310FFA /* Const.m in Sources */,

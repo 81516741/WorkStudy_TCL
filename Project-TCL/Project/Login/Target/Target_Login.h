@@ -10,6 +10,6 @@
 
 @interface Target_Login : NSObject
 - (UIViewController *)Action_nativeFetchModuleLoginVC:(NSDictionary *)params;
-- (void)Action_nativeCreateModuleLoginDBTables;
-- (void)Action_nativeClearModuleLoginModels;
+- (void)Action_nativeCreateModuleLoginDBTables:(NSDictionary *)params;
+- (void)Action_nativeClearModuleLoginModels:(NSDictionary *)params;
 @end

@@ -16,9 +16,9 @@
     NSString * tableName = [NSStringFromClass([models.lastObject class]) lowercaseString];
     BOOL isOK = [[LDDBTool share].database insertObjects:models into:tableName];
     if (isOK) {
-//        LDLog(@"向表:%@中插入数据 成功",tableName);
+        NSLog(@"向表:%@中插入数据 成功",tableName);
     } else {
-//        LDLog(@"向表:%@中插入数据 失败",tableName);
+        NSLog(@"向表:%@中插入数据 失败",tableName);
     }
     return isOK;
 }
