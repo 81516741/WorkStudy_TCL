@@ -18,6 +18,14 @@ class LoginVC: UIViewController  {
         ld_titleColor = UIColor.white
         ld_naviBarColor = rgb(r: 110, g: 110, b: 123)
         title = "登录"
+        let item = UIBarButtonItem.init(title: "返回", style: .plain, target: self, action: #selector(dismissSelf))
+        item.tintColor = UIColor.white
+        navigationItem.leftBarButtonItem = item
+    }
+    
+    
+    @objc func dismissSelf() {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func loginBtnClick(_ sender: UIButton) {

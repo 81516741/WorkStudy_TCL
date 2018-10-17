@@ -13,6 +13,7 @@ class LDHomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ld_naviBarColor = UIColor.orange
+        
     }
 
     @IBAction func jump(_ sender: Any) {
