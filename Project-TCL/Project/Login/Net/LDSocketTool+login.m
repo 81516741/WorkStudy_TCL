@@ -12,7 +12,6 @@
 #import "ErrorCode.h"
 #import "LDSysTool.h"
 #import "NSString+ld_Security.h"
-#import "Project-Swift.h"
 
 
 @implementation LDSocketTool (login)
