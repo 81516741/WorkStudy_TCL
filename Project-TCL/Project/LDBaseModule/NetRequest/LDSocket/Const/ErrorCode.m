@@ -8,19 +8,41 @@
 
 #import "ErrorCode.h"
 
+NSString const * errorDesSuccess = @"成功";
+NSString const * errorDesConfirmFailure = @"认证失败";
+NSString const * errorDesForbidden = @"禁用";
+NSString const * errorDesNotFoundCount = @"账号没找到";
+NSString const * errorDesThreeErrorPassword = @"密码错误三次";
+NSString const * errorDesSysError = @"系统错误";
+NSString const * errorDesNotFoundUser = @"没有找到此用户";
+NSString const * errorDesUnKnow = @"未知错误";
+
 NSString * getErrorDescription(NSString * errorCode) {
     switch (errorCode.integerValue) {
         case success:
-            return @"成功";
+            return errorDesSuccess.copy;
+            break;
+        case confirmFailue:
+            return errorDesConfirmFailure.copy;
+            break;
+        case forbidden:
+            return errorDesForbidden.copy;
+            break;
+        case notFount:
+            return errorDesNotFoundCount.copy;
+            break;
+        case threeErrorPassword:
+            return errorDesThreeErrorPassword.copy;
             break;
         case sysError:
-            return @"系统错误";
+            return errorDesSysError.copy;
             break;
         case notFoundUser:
-            return @"没有找到此用户";
+            return errorDesNotFoundUser.copy;
             break;
         default:
-            return @"未知错误";
+            return errorDesUnKnow.copy;
             break;
     }
 }
+

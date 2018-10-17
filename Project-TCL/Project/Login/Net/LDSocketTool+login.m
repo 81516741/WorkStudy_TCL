@@ -12,6 +12,7 @@
 #import "ErrorCode.h"
 #import "LDSysTool.h"
 #import "NSString+ld_Security.h"
+#import "Project-Swift.h"
 
 
 @implementation LDSocketTool (login)
@@ -93,34 +94,30 @@
     }
 }
 
-- (void)receiveLoginModuleMessage:(NSString *)message messageIDPrefix:(NSString *)messageIDPrefix success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+- (void)receiveLoginModuleMessage:(NSString *)message messageIDPrefix:(NSString *)messageIDPrefix messageError:(NSString *)messageError success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
     if ([messageIDPrefix isEqualToString:kGetCountMessageIDPrefix]) {
-        [self handleGetCountMessage:message success:success failure:failure];
+        [self handleGetCountMessage:message errorDes:messageError success:success failure:failure];
     } else if ([messageIDPrefix isEqualToString:kLoginMessageIDPrefix]) {
-        [self handleLoginMessage:message success:success failure:failure];
+        [self handleLoginMessage:message errorDes:messageError success:success failure:failure];
     }
 }
-- (void)handleGetCountMessage:(NSString *)message success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
-    if ([message.tcl_errorCode isEqualToString:@"0"]) {
+- (void)handleGetCountMessage:(NSString *)message errorDes:(NSString *)errorDes success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+    if ([errorDes isEqualToString:@"成功"]) {
         success(message.tcl_userID);
     } else {
-        failure(getErrorDescription(message.tcl_errorCode));
+        failure(getErrorDescription(errorDes));
     }
 }
 
-- (void)handleLoginMessage:(NSString *)message success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
-    if (message.tcl_errorCode == nil) {
-        success(nil);
-    } else if ([message.tcl_errorCode isEqualToString:@"401"]) {//认证失败
-        failure(@"认证失败");
-    } else if ([message.tcl_errorCode isEqualToString:@"403"]) {//禁用
-        failure(@"禁用");
-    } else if ([message.tcl_errorCode isEqualToString:@"404"]) {//账号不存在
-        failure(@"账号不存在");
-    } else if ([message.tcl_errorCode isEqualToString:@"405"]) {//连续3次密码错误
-        failure(@"连续3次密码错误");
+- (void)handleLoginMessage:(NSString *)message errorDes:(NSString *)errorDes success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+    if ([errorDes isEqualToString:@"成功"]) {
+        if (success) {
+            success(errorDes);
+        }
     } else {
-        failure(@"未知错误");
+        if (failure) {
+            failure(errorDes);
+        }
     }
 }
 

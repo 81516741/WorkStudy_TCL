@@ -10,6 +10,8 @@
 #import "MessageIDConst.h"
 #import "LDSysTool.h"
 #import "GDataXMLNode.h"
+#import "ErrorCode.h"
+#import "NSString+tcl_parseXML.h"
 
 @implementation LDSocketTool (home)
 
@@ -33,17 +35,17 @@
     messageID,kGetDeviceListIDPrefix];
     [self sendMessage:message messageID:messageID success:success failure:failure];
 }
-- (void)receiveHomeModuleMessage:(id)message messageIDPrefix:(NSString *)messageIDPrefix success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+- (void)receiveHomeModuleMessage:(NSString *)message messageIDPrefix:(NSString *)messageIDPrefix messageError:(NSString *)messageError success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
     GDataXMLDocument * doc = [[GDataXMLDocument alloc] initWithXMLString:message error:nil];
     if (doc == nil) {
         NSLog(@"\n无法将下面的XML解析成Document\n%@",message);
         return;
     }
     if ([messageIDPrefix isEqualToString:kGetDeviceListIDPrefix]) {
-        [self handleDeviceListMessage:doc success:success failure:failure];
+        [self handleDeviceListMessage:doc errorDes:messageError success:success failure:failure];
     }
 }
-- (void)handleDeviceListMessage:(GDataXMLDocument *)doc success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+- (void)handleDeviceListMessage:(GDataXMLDocument *)doc errorDes:(NSString *)errorDes  success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
     NSMutableArray * deviceList = [NSMutableArray array];
     NSArray * items = [[[[[[[doc.rootElement children].lastObject children].firstObject children].firstObject children].firstObject children] lastObject] children];
     for (GDataXMLElement * itemEle in items) {

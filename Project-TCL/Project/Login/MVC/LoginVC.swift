@@ -30,6 +30,7 @@ class LoginVC: UIViewController  {
     
     @IBAction func loginBtnClick(_ sender: UIButton) {
         LDSocketTool.loging(countTextField.text, password: passwordTextField.text, success: { (data) in
+            print("是不是真的成功了")
             self.ld_loginSuccessBlock(data,self)
         }) { (error) in
             print(error as! String)

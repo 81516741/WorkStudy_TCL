@@ -24,7 +24,7 @@ NSString * const kGetConfigParamNotification = @"kGetConfigParamNotification";
     }
 }
 
-+ (BOOL)handleMessage:(NSString *)message {
++ (BOOL)handleMessage:(NSString *)message messageID:(NSString *)messageID messageError:(NSString *)messageError {
     if ([message containsString:@"<configparam"]) {
         [self handleConfigParamMessage:message];
         return YES;

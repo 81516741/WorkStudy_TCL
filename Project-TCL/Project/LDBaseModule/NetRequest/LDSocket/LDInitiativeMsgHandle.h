@@ -12,6 +12,6 @@ extern NSString * const kGetConfigParamNotification;
 
 @interface LDInitiativeMsgHandle : NSObject
 
-+ (BOOL)handleMessage:(NSString *)message;
++ (BOOL)handleMessage:(NSString *)message messageID:(NSString *)messageID messageError:(NSString *)messageError;
 
 @end

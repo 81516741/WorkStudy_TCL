@@ -13,6 +13,7 @@
 #import "LDPacketHandle.h"
 #import "LDHTTPTool.h"
 #import "LDNetTool.h"
+#import "ErrorCode.h"
 #import "Project-Swift.h"
 
 NSString * const quickHand0 = @"quickHand0";
@@ -302,11 +303,12 @@ typedef enum {
 }
 
 - (void)handleMessage:(NSString *)message {
-    if ([LDInitiativeMsgHandle handleMessage:message]) {
+    NSString * messageID = message.tcl_messageID;
+    NSString * messageError = getErrorDescription (message.tcl_errorCode);
+    if ([LDInitiativeMsgHandle handleMessage:message messageID:messageID messageError:messageError]) {
         //如果是主动消息，则不用进行下一步处理
         return;
     }
-    NSString * messageID = message.tcl_messageID;
     //标准请求回调的消息，应该是有消息id的
     if (messageID.length > 0 && [messageID containsString:@"-"]) {
         //因为服务器返回的数据可能会有些未转义的字符
@@ -327,14 +329,14 @@ typedef enum {
             }
             //非响应消息，则分发到各个模块的分类进行处理
             if ([messageID containsString:@"login_"]) {
-                if ([self respondsToSelector:@selector(receiveLoginModuleMessage:messageIDPrefix:success:failure:)]) {
-                    [self receiveLoginModuleMessage:message messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject success:success failure:failure];
+                if ([self respondsToSelector:@selector(receiveLoginModuleMessage:messageIDPrefix:messageError:success:failure:)]) {
+                    [self receiveLoginModuleMessage:message messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject messageError:messageError success:success failure:failure];
                 }  
             }
             
             if ([messageID containsString:@"home_"]) {
-                if ([self respondsToSelector:@selector(receiveHomeModuleMessage:messageIDPrefix:success:failure:)]) {
-                    [self receiveHomeModuleMessage:message messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject success:success failure:failure];
+                if ([self respondsToSelector:@selector(receiveHomeModuleMessage:messageIDPrefix: messageError:success:failure:)]) {
+                    [self receiveHomeModuleMessage:message messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject messageError:messageError success:success failure:failure];
                 }
             }
         }];
