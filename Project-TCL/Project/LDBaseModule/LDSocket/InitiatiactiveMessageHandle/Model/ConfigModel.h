@@ -1,5 +1,5 @@
 //
-//  TCLConfigModel.h
+//  ConfigModel.h
 //  Project
 //
 //  Created by lingda on 2018/10/18.
@@ -10,16 +10,15 @@
 
 @class SceneVersionModel,SceneDevIconModel,NameModel,ADModel,CLKDevsModel,APConfigModel,CategorynameModel;
 
-@interface TCLConfigModel : NSObject
-
-@property (nonatomic , strong)NSArray              * companyname;
+@interface ConfigModel : NSObject
+@property (nonatomic , strong) NSArray               * companyname;
 @property (nonatomic , strong) NSArray              * ad;
 @property (nonatomic , strong) NSArray              * brandname;
 @property (nonatomic , strong) NSArray              * clkdevs;
 @property (nonatomic , strong) NSArray              * apconfig;
 @property (nonatomic , strong) NSArray              * categoryname;
-@property (nonatomic , strong) SceneVersionModel    *                 sceneversion;
-@property (nonatomic , strong) SceneDevIconModel    *                 scenedevicon;
+@property (nonatomic , strong) SceneVersionModel    * sceneversion;
+@property (nonatomic , strong) SceneDevIconModel    * scenedevicon;
 @property (nonatomic , copy) NSString              * newhelpandroid;
 @property (nonatomic , copy) NSString              * newhelpios;
 @property (nonatomic , copy) NSString              * clkdev;
@@ -51,6 +50,9 @@
 @property (nonatomic , copy) NSString              * IOSWifiPrivateAPI;
 @property (nonatomic , copy) NSString              * logontimeoutcnt;
 @property (nonatomic , copy) NSString              * flatlocationversion;
+
+@property (nonatomic,strong)NSString * randCode;//保存登录成功后的会话随机数
+@property (nonatomic,strong)NSString * currentUserID;//当前用户的智讯ID
 
 @end
 

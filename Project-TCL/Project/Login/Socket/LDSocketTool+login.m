@@ -12,6 +12,8 @@
 #import "ErrorCode.h"
 #import "LDSysTool.h"
 #import "NSString+ld_Security.h"
+#import "LDDBTool+initiative.h"
+#import "ConfigModel.h"
 
 
 @implementation LDSocketTool (login)
@@ -31,9 +33,14 @@
 
 + (void)login:(NSString *)userID password:(NSString *)password Success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
     NSString * messageID = getMessageID(kLoginMessageIDPrefix);
+    ConfigModel * configModel = [LDDBTool getConfigModel];
+    NSString * configVersion = @"0";
+    if (configModel.configversion.length > 0) {
+        configVersion = configModel.configversion;
+    }
     NSDictionary * dic = @{
         @"joinid":[LDSysTool joinID],
-        @"configversion":@"10310",
+        @"configversion":configVersion,
         @"lang":[LDSysTool languageType],
         @"devicetype":[LDSysTool deviceType],
         @"company":[LDSysTool company],
@@ -59,9 +66,10 @@
 
 + (void)loging:(NSString *)num password:(NSString *)password Success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
     if (num.length == 11) {
-        [self getCountByPhoneNum:num success:^(id count) {
+        [self getCountByPhoneNum:num success:^(NSString * count) {
             [self login:count password:password Success:^(id data) {
                 NSLog(@"登录成功");
+                [LDDBTool updateConfigModelCurrentUserID:count];
                 if (success) {
                     success(data);
                 }
@@ -78,6 +86,7 @@
     } else if (num.length == 7) {
         [self login:num password:password Success:^(id data) {
             NSLog(@"登录成功");
+            [LDDBTool updateConfigModelCurrentUserID:num];
             if (success) {
                 success(data);
             }

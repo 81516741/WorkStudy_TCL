@@ -6,10 +6,10 @@
 //  Copyright © 2018年 令达. All rights reserved.
 //
 
-#import "TCLConfigModel.h"
+#import "ConfigModel.h"
 #import <WCDB/WCDB.h>
 
-@interface TCLConfigModel (WCTTableCoding) <WCTTableCoding>
+@interface ConfigModel (WCTTableCoding) <WCTTableCoding>
 WCDB_PROPERTY(newhelpandroid)
 WCDB_PROPERTY(newhelpios)
 WCDB_PROPERTY(clkdev)
@@ -49,6 +49,10 @@ WCDB_PROPERTY(apconfig)
 WCDB_PROPERTY(logontimeoutcnt)
 WCDB_PROPERTY(flatlocationversion)
 WCDB_PROPERTY(categoryname)
+
+WCDB_PROPERTY(randCode)
+WCDB_PROPERTY(currentUserID)
+
 @end
 
 

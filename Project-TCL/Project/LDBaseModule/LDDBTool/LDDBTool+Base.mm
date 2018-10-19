@@ -16,9 +16,9 @@
     NSString * tableName = [NSStringFromClass([models.lastObject class]) lowercaseString];
     BOOL isOK = [[LDDBTool share].database insertObjects:models into:tableName];
     if (isOK) {
-        NSLog(@"向表:%@中插入数据 成功",tableName);
+        [LDLogTool Log:[NSString stringWithFormat:@"向表:%@中插入数据 成功",tableName]];
     } else {
-        NSLog(@"向表:%@中插入数据 失败",tableName);
+        [LDLogTool Log:[NSString stringWithFormat:@"向表:%@中插入数据 失败",tableName]];
     }
     return isOK;
 }
@@ -28,9 +28,9 @@
     NSString * tableName = [NSStringFromClass(modelClass) lowercaseString];
     BOOL isOK = [[LDDBTool share].database deleteAllObjectsFromTable:tableName];
     if (isOK) {
-//        LDLog(@"删除表:%@中所有数据 成功",tableName);
+        [LDLogTool Log:[NSString stringWithFormat:@"删除表:%@中所有数据 成功",tableName]];
     } else {
-//        LDLog(@"删除表:%@中所有数据 失败",tableName);
+        [LDLogTool Log:[NSString stringWithFormat:@"删除表:%@中所有数据 失败",tableName]];
     }
     return isOK;
 }
@@ -40,9 +40,9 @@
     NSString * tableName = [NSStringFromClass(modelClass) lowercaseString];
     BOOL isOK = [[LDDBTool share].database deleteObjectsFromTable:tableName where:condition];
     if (isOK) {
-//        LDLog(@"删除表:%@中单个数据 成功",tableName);
+        [LDLogTool Log:[NSString stringWithFormat:@"删除表:%@中单个数据 成功",tableName]];
     } else {
-//        LDLog(@"删除表:%@中单个数据 失败",tableName);
+        [LDLogTool Log:[NSString stringWithFormat:@"删除表:%@中单个数据 失败",tableName]];
     }
     return isOK;
 }
@@ -59,9 +59,9 @@
                                                   withObject:object
                                                        where:condition];
     if (isOK) {
-//        LDLog(@"更新表:%@中数据 成功",tableName);
+        [LDLogTool Log:[NSString stringWithFormat:@"更新表:%@中数据 成功",tableName]];
     } else {
-//        LDLog(@"更新表:%@中数据 失败",tableName);
+        [LDLogTool Log:[NSString stringWithFormat:@"更新表:%@中数据 失败",tableName]];
     }
     return isOK;
 }
@@ -73,9 +73,9 @@
     NSString * tableName = [NSStringFromClass(modelClass) lowercaseString];
     BOOL isOK = [[LDDBTool share].database updateAllRowsInTable:tableName onProperties:propertyList withObject:object];
     if (isOK) {
-//        LDLog(@"更新表:%@中数据 成功",tableName);
+        [LDLogTool Log:[NSString stringWithFormat:@"更新表:%@中数据 成功",tableName]];
     } else {
-//        LDLog(@"更新表:%@中数据 失败",tableName);
+        [LDLogTool Log:[NSString stringWithFormat:@"更新表:%@中数据 失败",tableName]];
     }
     return isOK;
 }

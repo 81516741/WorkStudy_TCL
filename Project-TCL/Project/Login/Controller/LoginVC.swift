@@ -31,7 +31,7 @@ class LoginVC: UIViewController  {
     }
     
     @IBAction func loginBtnClick(_ sender: UIButton) {
-        LDSocketTool.loging("13104475087", password: "123456", success: { (data) in
+        LDSocketTool.loging("2004050", password: "123456", success: { (data) in
             self.ld_loginSuccessBlock(data,self)
         }) { (error) in
             print(error as! String)

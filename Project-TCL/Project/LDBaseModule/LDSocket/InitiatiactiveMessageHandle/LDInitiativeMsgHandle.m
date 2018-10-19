@@ -9,7 +9,9 @@
 #import "LDInitiativeMsgHandle.h"
 #import "GDataXMLNode.h"
 #import "LDLogTool.h"
-#import "TCLConfigModel.h"
+#import "ConfigModel.h"
+#import "LDDBTool+initiative.h"
+#import "NSString+tcl_parseXML.h"
 #import <MJExtension/MJExtension.h>
 
 NSString * const kGetConfigParamNotification = @"kGetConfigParamNotification";
@@ -31,6 +33,16 @@ NSString * const kGetConfigParamNotification = @"kGetConfigParamNotification";
     if ([message containsString:@"<configparam"]) {
         [self handleConfigParamMessage:message];
         return YES;
+    } else if ([message containsString:@"randcode"]) {
+        if ([LDDBTool getConfigModel]) {
+            NSString * randCode = [message tcl_subStringNear:@"<randcode>" endStr:@"</"];
+            [LDDBTool updateConfigModelRandCode:randCode];
+        }
+        if (![message containsString:@"login_log"]) {
+            //不含login_log代表是主动推的消息，含就是登录完成后，随登录成功回调一起返回的
+            return YES;
+        }
+        
     }
     return NO;
 }
@@ -42,9 +54,9 @@ NSString * const kGetConfigParamNotification = @"kGetConfigParamNotification";
         for (GDataXMLElement * ele in arr) {
             [dic setValue:ele.stringValue forKey:ele.name];
         }
-        Log([NSString stringWithFormat:@"%@",dic]);
-        TCLConfigModel * model = [TCLConfigModel mj_objectWithKeyValues:dic];
-        NSLog(@"%@",model);
+        Log([NSString stringWithFormat:@"获取配置参数\n%@",dic]);
+        ConfigModel * model = [ConfigModel mj_objectWithKeyValues:dic];
+        [LDDBTool saveConfigModel:model];
     }];
 }
 

@@ -1,17 +1,17 @@
 //
-//  TCLConfigModel.mm
+//  ConfigModel.mm
 //  Project
 //
 //  Created by lingda on 2018/10/18.
 //  Copyright © 2018年 令达. All rights reserved.
 //
 
-#import "TCLConfigModel+WCTTableCoding.h"
-#import "TCLConfigModel.h"
+#import "ConfigModel+WCTTableCoding.h"
+#import "ConfigModel.h"
 #import <WCDB/WCDB.h>
 #import <MJExtension/MJExtension.h>
-@implementation TCLConfigModel
-
+@implementation ConfigModel
+MJCodingImplementation
 + (NSDictionary *)mj_objectClassInArray {
     return @{@"companyname":@"NameModel",
              @"ad":@"ADModel",
@@ -22,53 +22,53 @@
              };
 }
 
+WCDB_IMPLEMENTATION(ConfigModel)
+WCDB_SYNTHESIZE(ConfigModel,  companyname)
+WCDB_SYNTHESIZE(ConfigModel,  ad)
+WCDB_SYNTHESIZE(ConfigModel,  brandname)
+WCDB_SYNTHESIZE(ConfigModel,  clkdevs)
+WCDB_SYNTHESIZE(ConfigModel,  apconfig)
+WCDB_SYNTHESIZE(ConfigModel,  categoryname)
+WCDB_SYNTHESIZE(ConfigModel,  newhelpandroid)
+WCDB_SYNTHESIZE(ConfigModel,  newhelpios)
+WCDB_SYNTHESIZE(ConfigModel,  clkdev)
+WCDB_SYNTHESIZE(ConfigModel,  cateoptinfosversion)
+WCDB_SYNTHESIZE(ConfigModel,  serviceagreement)
+WCDB_SYNTHESIZE(ConfigModel,  tvbindphoneurl)
+WCDB_SYNTHESIZE(ConfigModel,  scenedevicon)
+WCDB_SYNTHESIZE(ConfigModel,  reconcnt)
+WCDB_SYNTHESIZE(ConfigModel,  scanuseridurl)
+WCDB_SYNTHESIZE(ConfigModel,  reqsharedevurl)
+WCDB_SYNTHESIZE(ConfigModel,  helpandroid)
+WCDB_SYNTHESIZE(ConfigModel,  sharecbctime)
+WCDB_SYNTHESIZE(ConfigModel,  logontimeoutlen)
+WCDB_SYNTHESIZE(ConfigModel,  banner)
+WCDB_SYNTHESIZE(ConfigModel,  IOSConfigConsistant)
+WCDB_SYNTHESIZE(ConfigModel,  configConsistant)
+WCDB_SYNTHESIZE(ConfigModel,  invitecontent)
+WCDB_SYNTHESIZE(ConfigModel,  helpios)
+WCDB_SYNTHESIZE(ConfigModel,  acdirections)
+WCDB_SYNTHESIZE(ConfigModel,  backreconinterval)
+WCDB_SYNTHESIZE(ConfigModel,  configversion)
+WCDB_SYNTHESIZE(ConfigModel,  wifiexchangelimit)
+WCDB_SYNTHESIZE(ConfigModel,  sceneversion)
+WCDB_SYNTHESIZE(ConfigModel,  uploadsizelimit)
+WCDB_SYNTHESIZE(ConfigModel,  bannerpic)
+WCDB_SYNTHESIZE(ConfigModel,  reconinterval)
+WCDB_SYNTHESIZE(ConfigModel,  heartbeattime)
+WCDB_SYNTHESIZE(ConfigModel,  privacypolicy)
+WCDB_SYNTHESIZE(ConfigModel,  reportvideotime)
+WCDB_SYNTHESIZE(ConfigModel,  sharedevurl)
+WCDB_SYNTHESIZE(ConfigModel,  IOSWifiPrivateAPI)
+WCDB_SYNTHESIZE(ConfigModel,  logontimeoutcnt)
+WCDB_SYNTHESIZE(ConfigModel,  flatlocationversion)
+WCDB_SYNTHESIZE(ConfigModel,  randCode)
+WCDB_SYNTHESIZE(ConfigModel,  currentUserID)
 
-MJCodingImplementation
-WCDB_IMPLEMENTATION(TCLConfigModel)
-
-WCDB_SYNTHESIZE(TCLConfigModel,  newhelpandroid)
-WCDB_SYNTHESIZE(TCLConfigModel,  newhelpios)
-WCDB_SYNTHESIZE(TCLConfigModel,  clkdev)
-WCDB_SYNTHESIZE(TCLConfigModel,  cateoptinfosversion)
-WCDB_SYNTHESIZE(TCLConfigModel,  companyname)
-WCDB_SYNTHESIZE(TCLConfigModel,  serviceagreement)
-WCDB_SYNTHESIZE(TCLConfigModel,  tvbindphoneurl)
-WCDB_SYNTHESIZE(TCLConfigModel,  scenedevicon)
-WCDB_SYNTHESIZE(TCLConfigModel,  reconcnt)
-WCDB_SYNTHESIZE(TCLConfigModel,  scanuseridurl)
-WCDB_SYNTHESIZE(TCLConfigModel,  reqsharedevurl)
-WCDB_SYNTHESIZE(TCLConfigModel,  helpandroid)
-WCDB_SYNTHESIZE(TCLConfigModel,  sharecbctime)
-WCDB_SYNTHESIZE(TCLConfigModel,  logontimeoutlen)
-WCDB_SYNTHESIZE(TCLConfigModel,  banner)
-WCDB_SYNTHESIZE(TCLConfigModel,  IOSConfigConsistant)
-WCDB_SYNTHESIZE(TCLConfigModel,  ad)
-WCDB_SYNTHESIZE(TCLConfigModel,  brandname)
-WCDB_SYNTHESIZE(TCLConfigModel,  configConsistant)
-WCDB_SYNTHESIZE(TCLConfigModel,  invitecontent)
-WCDB_SYNTHESIZE(TCLConfigModel,  helpios)
-WCDB_SYNTHESIZE(TCLConfigModel,  acdirections)
-WCDB_SYNTHESIZE(TCLConfigModel,  backreconinterval)
-WCDB_SYNTHESIZE(TCLConfigModel,  configversion)
-WCDB_SYNTHESIZE(TCLConfigModel,  wifiexchangelimit)
-WCDB_SYNTHESIZE(TCLConfigModel,  sceneversion)
-WCDB_SYNTHESIZE(TCLConfigModel,  uploadsizelimit)
-WCDB_SYNTHESIZE(TCLConfigModel,  bannerpic)
-WCDB_SYNTHESIZE(TCLConfigModel,  reconinterval)
-WCDB_SYNTHESIZE(TCLConfigModel,  heartbeattime)
-WCDB_SYNTHESIZE(TCLConfigModel,  privacypolicy)
-WCDB_SYNTHESIZE(TCLConfigModel,  reportvideotime)
-WCDB_SYNTHESIZE(TCLConfigModel,  sharedevurl)
-WCDB_SYNTHESIZE(TCLConfigModel,  IOSWifiPrivateAPI)
-WCDB_SYNTHESIZE(TCLConfigModel,  clkdevs)
-WCDB_SYNTHESIZE(TCLConfigModel,  apconfig)
-WCDB_SYNTHESIZE(TCLConfigModel,  logontimeoutcnt)
-WCDB_SYNTHESIZE(TCLConfigModel,  flatlocationversion)
-WCDB_SYNTHESIZE(TCLConfigModel,  categoryname)
-  
 @end
 
 @implementation SceneDevIconModel
+MJCodingImplementation
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{@"ECT_100":@"ECT-100",
              @"WDR_200":@"WDR-200",
@@ -156,7 +156,8 @@ WCDB_SYNTHESIZE(SceneDevIconModel, zytdsp_chn)
 
 @end
 
-@implementation SceneVersionModel 
+@implementation SceneVersionModel
+MJCodingImplementation
 
 WCDB_IMPLEMENTATION(SceneVersionModel)
 WCDB_SYNTHESIZE(SceneVersionModel, cstconditionver)
@@ -167,24 +168,28 @@ WCDB_SYNTHESIZE(SceneVersionModel, devactionver)
 @end
 
 @implementation NameModel
+MJCodingImplementation
 WCDB_IMPLEMENTATION(NameModel)
 WCDB_SYNTHESIZE(NameModel, enname)
 WCDB_SYNTHESIZE(NameModel, znname)
 @end
 
 @implementation ADModel
+MJCodingImplementation
 WCDB_IMPLEMENTATION(ADModel)
 WCDB_SYNTHESIZE(ADModel, pic)
 WCDB_SYNTHESIZE(ADModel, link)
 @end
 
 @implementation CLKDevsModel
+MJCodingImplementation
 WCDB_IMPLEMENTATION(CLKDevsModel)
 WCDB_SYNTHESIZE(CLKDevsModel, ctgr)
 WCDB_SYNTHESIZE(CLKDevsModel, page)
 @end
 
 @implementation APConfigModel
+MJCodingImplementation
 WCDB_IMPLEMENTATION(APConfigModel)
 WCDB_SYNTHESIZE(APConfigModel, company)
 WCDB_SYNTHESIZE(APConfigModel, category)
@@ -194,6 +199,7 @@ WCDB_SYNTHESIZE(APConfigModel, pwd)
 @end
 
 @implementation CategorynameModel
+MJCodingImplementation
 WCDB_IMPLEMENTATION(CategorynameModel)
 WCDB_SYNTHESIZE(CategorynameModel, company)
 WCDB_SYNTHESIZE(CategorynameModel, brand)

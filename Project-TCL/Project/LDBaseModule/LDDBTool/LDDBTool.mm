@@ -10,6 +10,8 @@
 #import "LDDBTool+Base.h"
 #import "LDMediator+Login.h"
 #import "LDMediator+Home.h"
+#import "LDDBTool+initiative.h"
+#import "LDLogTool.h"
 
 @implementation LDDBTool
 
@@ -29,7 +31,7 @@
     NSString *documentsWCDB = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"WCDB"];
     // 文件路径
     NSString *filePath = [documentsWCDB stringByAppendingPathComponent:@"LDCacheData.sqlite"];
-    NSLog(@"\n-------【WCDB_path】-------\n%@",filePath);
+    [LDLogTool Log:[NSString stringWithFormat:@"\n-------【WCDB_path】-------\n%@",filePath]];
     [LDDBTool share].database = [[WCTDatabase alloc]initWithPath:filePath];
     
     // 数据库加密
@@ -44,12 +46,12 @@
         // 创建方法
         BOOL isOK = [[LDDBTool share].database createTableAndIndexesOfName:tableName withClass:modelClass];
         if (isOK) {
-            NSLog(@"\n----------------创建成功table:%@ 成功--------\n",tableName);
+            [LDLogTool Log:[NSString stringWithFormat:@"\n----------------创建成功table:%@ 成功--------\n",tableName]];
         } else {
-            NSLog(@"\n----------------创建成功table:%@ 失败--------\n",tableName);
+            [LDLogTool Log:[NSString stringWithFormat:@"\n----------------创建成功table:%@ 失败--------\n",tableName]];
         }
     } else{
-        NSLog(@"\n----------------数据库打开失败--------\n");
+        [LDLogTool Log:@"\n----------------数据库打开失败--------\n"];
     }
 }
 
@@ -57,12 +59,14 @@
 + (void)createDatabaseAndAllTable
 {
     [LDDBTool createDatabase];
+    [LDDBTool createInitiativeTables];
     [[LDMediator sharedInstance] login_createModuleLoginTables];
     [[LDMediator sharedInstance] home_createModuleLoginTables];
 }
 
 + (void)clearSomeUselessData
 {
+    [LDDBTool clearnInitiativeTables];
     [[LDMediator sharedInstance] login_clearModuleLoginModels];
     [[LDMediator sharedInstance] home_clearModuleLoginModels];
 }

@@ -38,5 +38,7 @@ void Log(id message) {
 #else
 #endif
 }
-
++ (void)Log:(id)message {
+    Log(message);
+}
 @end

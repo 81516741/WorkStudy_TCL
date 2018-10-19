@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
 @interface LDLogTool : NSObject
 + (void)configDDLog;
 void Log(id message);
++ (void)Log:(id) message;
 @end
