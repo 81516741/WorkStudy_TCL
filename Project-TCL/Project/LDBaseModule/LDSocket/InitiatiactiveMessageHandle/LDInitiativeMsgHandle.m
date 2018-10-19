@@ -9,12 +9,14 @@
 #import "LDInitiativeMsgHandle.h"
 #import "GDataXMLNode.h"
 #import "LDLogTool.h"
+#import "LDSocketTool.h"
 #import "ConfigModel.h"
 #import "LDDBTool+initiative.h"
 #import "NSString+tcl_parseXML.h"
 #import <MJExtension/MJExtension.h>
+#import "ErrorCode.h"
 
-NSString * const kGetConfigParamNotification = @"kGetConfigParamNotification";
+NSString * const kAutoLoginSuccessNotification = @"kAutoLoginSuccessNotification";
 
 @implementation LDInitiativeMsgHandle
 
@@ -30,12 +32,24 @@ NSString * const kGetConfigParamNotification = @"kGetConfigParamNotification";
 }
 
 + (BOOL)handleMessage:(NSString *)message messageID:(NSString *)messageID messageError:(NSString *)messageError {
-    if ([message containsString:@"<configparam"]) {
+    if ([message containsString:@"auto_login"]) {
+        if ([messageError isEqualToString:errorNone]) {
+            [LDSocketTool shared].loginState = @"0";
+            [LDSocketTool shared].autoLoginErrorCount = 0;
+            Log(@"\n---自动登录成功---");
+        } else {
+            Log([NSString stringWithFormat:@"\n---自动登录失败---%ld",(long)[LDSocketTool shared].autoLoginErrorCount]);
+            [LDSocketTool shared].autoLoginErrorCount ++;
+        }
+        
+        return YES;
+    }else if ([message containsString:@"<configparam"]) {
         [self handleConfigParamMessage:message];
         return YES;
     } else if ([message containsString:@"randcode"]) {
         if ([LDDBTool getConfigModel]) {
             NSString * randCode = [message tcl_subStringNear:@"<randcode>" endStr:@"</"];
+            Log(@"更新配置模型的randCode");
             [LDDBTool updateConfigModelRandCode:randCode];
         }
         if (![message containsString:@"login_log"]) {

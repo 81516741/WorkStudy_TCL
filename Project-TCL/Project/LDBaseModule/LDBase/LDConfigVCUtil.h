@@ -29,7 +29,7 @@ extern NSString * const kLoginStateKey;
  切换登录控制器为根控制器，该架构是这样设计的，如果登录控制器成为根控制器，
  那么就一定是必须登录架构
  */
-+ (void)configLoginVCToRootVC;
++ (void)configLoginVCToRootVC:(BOOL)mustLogin;
 
 
 @end

@@ -29,7 +29,7 @@ NSString * const kLoginStateKey = @"kLoginStateKey";
     [window makeKeyAndVisible];
     
     if (mustLogin) {
-        BOOL isLogin = [[[NSUserDefaults standardUserDefaults] objectForKey:kLoginStateKey] boolValue];
+        BOOL isLogin = [[LDMediator sharedInstance] login_isLogin];
         if (isLogin) {//代表登录了
             [LDConfigVCUtil configTabCToRootVC];
         }else {

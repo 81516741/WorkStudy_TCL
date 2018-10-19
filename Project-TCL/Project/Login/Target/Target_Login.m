@@ -8,6 +8,8 @@
 
 #import "Target_Login.h"
 #import "LDDBTool+Login.h"
+#import "LDDBTool+initiative.h"
+#import "ConfigModel.h"
 #import "Project-Swift.h"
 
 @implementation Target_Login
@@ -25,5 +27,14 @@
 - (void)Action_nativeClearModuleLoginModels:(NSDictionary *)params
 {
     [LDDBTool clearnLoginModel];
+}
+
+- (BOOL)Action_getLoginState:(NSDictionary *)params {
+    ConfigModel * model = [LDDBTool getConfigModel];
+    if (model.currentUserPassword.length > 0) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 @end

@@ -19,12 +19,9 @@ class LDHomeVC: UIViewController {
        navigationController?.pushViewController(LDOtherVC(), animated: true)
     }
     @IBAction func getDeviceList(_ sender: Any) {
-        LDSocketTool.getDeviceListSuccess({ (data) in
-            if let deviceList = data as? NSArray {
-                print(deviceList)
-            }
-        }) { (error) in
-            
-        }
+        LDSocketTool.getDeviceListSuccess(nil, failure: nil)
+    }
+    @IBAction func getSceneList(_ sender: Any) {
+        LDSocketTool.getSceneListSuccess(nil, failure: nil)
     }
 }

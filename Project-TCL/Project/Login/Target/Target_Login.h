@@ -12,4 +12,5 @@
 - (UIViewController *)Action_nativeFetchModuleLoginVC:(NSDictionary *)params;
 - (void)Action_nativeCreateModuleLoginDBTables:(NSDictionary *)params;
 - (void)Action_nativeClearModuleLoginModels:(NSDictionary *)params;
+- (BOOL)Action_getLoginState:(NSDictionary *)params;
 @end

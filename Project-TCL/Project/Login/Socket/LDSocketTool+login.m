@@ -14,6 +14,7 @@
 #import "NSString+ld_Security.h"
 #import "LDDBTool+initiative.h"
 #import "ConfigModel.h"
+#import "LDLogTool.h"
 
 
 @implementation LDSocketTool (login)
@@ -39,27 +40,27 @@
         configVersion = configModel.configversion;
     }
     NSDictionary * dic = @{
-        @"joinid":[LDSysTool joinID],
-        @"configversion":configVersion,
-        @"lang":[LDSysTool languageType],
-        @"devicetype":[LDSysTool deviceType],
-        @"company":[LDSysTool company],
-        @"version":[LDSysTool version],
-        @"token":[LDSysTool UUIDString],
-        @"type":[LDSysTool TID],
-        @"pwd":password.sha1String
+                           @"joinid":[LDSysTool joinID],
+                           @"configversion":configVersion,
+                           @"lang":[LDSysTool languageType],
+                           @"devicetype":[LDSysTool deviceType],
+                           @"company":[LDSysTool company],
+                           @"version":[LDSysTool version],
+                           @"token":[LDSysTool UUIDString],
+                           @"type":[LDSysTool TID],
+                           @"pwd":password
                            };
     NSString * passwordStr = [LDSocketTool dicToStr:dic];
     
     NSString * message = [NSString stringWithFormat:@"\
-    <?xml version=\"1.0\" encoding=\"utf-8\"?>\
-    <iq type=\"set\" id=\"%@\">\
-        <query xmlns=\"jabber:iq:auth\">\
-           <username>%@</username>\
-           <resource>PH-ios-zx01-4</resource>\
-           <password>%@</password>\
-        </query>\
-    </iq>",messageID,userID,passwordStr];
+                          <?xml version=\"1.0\" encoding=\"utf-8\"?>\
+                          <iq type=\"set\" id=\"%@\">\
+                          <query xmlns=\"jabber:iq:auth\">\
+                          <username>%@</username>\
+                          <resource>PH-ios-zx01-4</resource>\
+                          <password>%@</password>\
+                          </query>\
+                          </iq>",messageID,userID,passwordStr];
     
     [LDSocketTool sendMessage:message messageID:messageID success:success failure:failure];
 }
@@ -67,9 +68,9 @@
 + (void)loging:(NSString *)num password:(NSString *)password Success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
     if (num.length == 11) {
         [self getCountByPhoneNum:num success:^(NSString * count) {
-            [self login:count password:password Success:^(id data) {
-                NSLog(@"登录成功");
-                [LDDBTool updateConfigModelCurrentUserID:count];
+            [self login:count password:password.sha1String Success:^(id data) {
+                Log(@"登录成功,更新账号和密码");
+                [LDDBTool updateConfigModelCurrentUserID:count password:password.sha1String];
                 if (success) {
                     success(data);
                 }
@@ -84,9 +85,9 @@
             }
         }];
     } else if (num.length == 7) {
-        [self login:num password:password Success:^(id data) {
-            NSLog(@"登录成功");
-            [LDDBTool updateConfigModelCurrentUserID:num];
+        [self login:num password:password.sha1String Success:^(id data) {
+            Log(@"登录成功,更新账号和密码");
+            [LDDBTool updateConfigModelCurrentUserID:num password:password.sha1String];
             if (success) {
                 success(data);
             }

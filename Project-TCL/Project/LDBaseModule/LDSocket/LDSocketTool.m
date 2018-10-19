@@ -6,21 +6,25 @@
 //  Copyright © 2018年 TCL-MAC. All rights reserved.
 //
 
+#import "LDDBTool+initiative.h"
+#import "ConfigModel.h"
+
 #import "LDSocketTool.h"
 #import "LDSocketManager.h"
 #import "MessageIDConst.h"
-#import "NSString+tcl_parseXML.h"
 #import "LDPacketHandle.h"
 #import "LDHTTPTool.h"
 #import "LDNetTool.h"
 #import "ErrorCode.h"
 #import "LDLogTool.h"
-#import "Project-Swift.h"
+#import "LDSysTool.h"
+#import "NSString+tcl_parseXML.h"
+
 
 NSString * const quickHand0 = @"quickHand0";
 NSString * const quickHand1 = @"quickHand1";
 BOOL useSSL = false;
-
+NSInteger autoLoginMaxCount = 3;
 //为什么没有handFailure，因为握手失败就是超时，此时会断开连接
 typedef enum {
     disConnect = 10,
@@ -31,11 +35,33 @@ typedef enum {
 }ConnectState;
 
 @interface LDSocketTool()<LDSocketManagerConnectProtocol,LDSocketManagerSendMessageProtocol>
+/**
+ 连接状态
+ */
 @property(assign, nonatomic) ConnectState connectState;
+
+/**
+ 检查网络的次数，心跳用
+ */
 @property(assign, nonatomic) NSInteger checkNetCount;
+/**
+ 心跳用的计时器
+ */
 @property(strong, nonatomic) dispatch_source_t timer;
+/**
+ 发消息的队列   串行
+ */
 @property(strong, nonatomic) dispatch_queue_t messageQueue;
+/**
+ 发握手的队列   串行
+ */
 @property(strong, nonatomic) dispatch_queue_t handQueue;
+/**
+ 自动登录的队列   串行
+ */
+@property(strong, nonatomic) dispatch_queue_t autoLoginQueue;
+
+//以下几个属性是用来辅助block回调的，因为没有和服务器约定id，属于历史遗留问题
 @property(copy, nonatomic) NSString * connectMessageID;
 @property(copy, nonatomic) NSString * startHandMessageID;
 @property(copy, nonatomic) NSString * openSSLMessageID;
@@ -53,8 +79,11 @@ typedef enum {
     dispatch_once(&onceToken, ^{
         _instance = [LDSocketTool new];
         _instance.connectState = disConnect;
+        _instance.loginState = @"1";
+        _instance.autoLoginErrorCount = 0;
         _instance.messageQueue = dispatch_queue_create("message_queue", DISPATCH_QUEUE_SERIAL);
         _instance.handQueue = dispatch_queue_create("hand_queue", DISPATCH_QUEUE_SERIAL);
+        _instance.autoLoginQueue = dispatch_queue_create("autoLogin_queue", DISPATCH_QUEUE_SERIAL);
     });
     return _instance;
 }
@@ -98,6 +127,7 @@ typedef enum {
         [LDSocketTool shared].connectState = connected;
     } else {
         [LDSocketTool shared].connectState = disConnect;
+        [LDSocketTool shared].loginState = @"1";
     }
     [self callBackByMessageID:[LDSocketTool shared].connectMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
         if ([result isKindOfClass:NSString.self]) {
@@ -114,6 +144,75 @@ typedef enum {
     }];
 }
 #pragma mark - 发消息给服务器
++ (void)sendMessage:(NSString *)message messageID:(NSString *)messageID success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
+{
+    //是否是握手消息
+    BOOL isHandMessage = [message isEqualToString:[LDSocketTool shared].startHandshakeMessage] || [message isEqualToString:[LDSocketTool shared].openSSLMessage] || [message isEqualToString:[LDSocketTool shared].endHandshakeMessage];
+    if (isHandMessage) {
+        dispatch_async([LDSocketTool shared].handQueue, ^{
+            Log([NSString stringWithFormat:@"\n---【发送信息到服务器】---\n%@",message]);
+            [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
+            [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
+        });
+    } else {
+        ConfigModel * model = [LDDBTool getConfigModel];
+        if ([[LDSocketTool shared].loginState isEqualToString:@"1"] &&
+            [LDNetTool networkReachable] &&
+            model.currentUserPassword.length > 0) {
+            if ([LDSocketTool shared].autoLoginErrorCount < autoLoginMaxCount) {
+                dispatch_async([LDSocketTool shared].autoLoginQueue, ^{
+                    while ([[LDSocketTool shared].loginState isEqualToString:@"1"]) {
+                        if ([LDSocketTool shared].autoLoginErrorCount > autoLoginMaxCount) {
+                            break;
+                        }
+                        [LDSocketTool autoLogin:model];
+                        /*因为消息超时是30s，所以31秒是会有
+                        结果的，要么成功，要么超时断开连接
+                         
+                         如果本地密码错误，则会登录错误，
+                         （因为应该登录却没有登录成功）此时消息
+                         线程是发不了心跳给服务器的，等到30
+                         秒服务器没收到心跳，连接会断开，
+                         此时如果重连机制没有连上，则发
+                         出的自动登录消息会石沉大海，
+                         然后等下一次发送自动登录消息时...
+                         */
+                        sleep(31);
+                    }
+                });
+            }
+            
+        }
+        dispatch_async([LDSocketTool shared].messageQueue, ^{
+            {
+                //应该登录
+                BOOL shouldLogin = model.currentUserPassword.length > 0 && [LDSocketTool shared].autoLoginErrorCount < autoLoginMaxCount;
+                if (shouldLogin) {//应该是登录的
+                    //没有登录就卡死
+                    while ([[LDSocketTool shared].loginState isEqualToString:@"1"]) {
+                        if ([LDSocketTool shared].autoLoginErrorCount > autoLoginMaxCount) {
+                            break;
+                        }
+                        Log([NSString stringWithFormat:@"\n---【没网了或者没握手,所以暂停发送信息】---\n%@",message]);
+                        sleep(2);
+                    }
+                } else {
+                    while (![LDNetTool networkReachable] ||[LDSocketTool shared].connectState != handed) {
+                        Log([NSString stringWithFormat:@"\n---【没网了或者没握手,所以暂停发送信息】---\n%@",message]);
+                        sleep(2);
+                    }
+                }
+                
+                
+                Log([NSString stringWithFormat:@"\n---【发送信息到服务器】---\n%@",message]);
+                [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
+                [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
+            }
+            
+        });
+    }
+}
+
 + (void)sendHeartMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
 {
     NSString * messageID = getMessageID(kHeartMessageIDPrefix);
@@ -147,8 +246,9 @@ typedef enum {
     [LDSocketTool sendMessage:startHandshakeMessage messageID:[LDSocketTool shared].startHandMessageID success:^(NSString * data) {
         if (!useSSL) {
             if (![data isEqualToString:quickHand0]) {
-                [LDSocketTool shared].connectState = handed;
                 Log(@"\n不启用SSL加密");
+                [LDSocketTool shared].connectState = handed;
+                [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
                 if (success) {
                     success(nil);
                 }
@@ -165,6 +265,7 @@ typedef enum {
             if (success) {
                 Log(@"\n快速握手完成");
                 [LDSocketTool shared].connectState = handed;
+                [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
                 return ;
             }
         }
@@ -175,6 +276,7 @@ typedef enum {
             [LDSocketTool sendMessage:endHandshakeMessage messageID:[LDSocketTool shared].endHandMessgeID success:^(id data) {
                 Log(@"\n握手成功");
                 [LDSocketTool shared].connectState = handed;
+                [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
                 if (success) {
                     success(nil);
                 }
@@ -182,34 +284,37 @@ typedef enum {
         } failure:nil];
     } failure:nil];
 }
-
-+ (void)sendMessage:(NSString *)message messageID:(NSString *)messageID success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
++ (void)autoLogin:(ConfigModel *)configModel
 {
-     BOOL isHandMessage = [message isEqualToString:[LDSocketTool shared].startHandshakeMessage] || [message isEqualToString:[LDSocketTool shared].openSSLMessage] || [message isEqualToString:[LDSocketTool shared].endHandshakeMessage];
-    if (isHandMessage) {
-        dispatch_async([LDSocketTool shared].handQueue, ^{
-            Log([NSString stringWithFormat:@"\n---【发送信息到服务器】---\n%@",message]);
-            [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
-            [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
-        });
-    } else {
-        dispatch_async([LDSocketTool shared].messageQueue, ^{
-            {
-                while (([LDSocketTool shared].connectState != handed || ![LDNetTool networkReachable])) {
-                    Log([NSString stringWithFormat:@"\n---【没网了或者没握手,所以暂停发送信息】---\n%@",message]);
-                    sleep(2);
-                }
-                Log([NSString stringWithFormat:@"\n---【发送信息到服务器】---\n%@",message]);
-                [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
-                [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
-            }
-            
-        });
+    NSString * messageID = getMessageID(kAutoLoginMessageIDPrefix);
+    NSString * configVersion = @"0";
+    if (configModel.configversion.length > 0) {
+        configVersion = configModel.configversion;
     }
+    NSDictionary * dic = @{
+                           @"joinid":[LDSysTool joinID],
+                           @"configversion":configVersion,
+                           @"lang":[LDSysTool languageType],
+                           @"devicetype":[LDSysTool deviceType],
+                           @"company":[LDSysTool company],
+                           @"version":[LDSysTool version],
+                           @"token":[LDSysTool UUIDString],
+                           @"type":[LDSysTool TID],
+                           @"pwd":configModel.currentUserPassword
+                           };
+    NSString * passwordStr = [LDSocketTool dicToStr:dic];
     
-    
-    
-    
+    NSString * message = [NSString stringWithFormat:@"\
+                          <?xml version=\"1.0\" encoding=\"utf-8\"?>\
+                          <iq type=\"set\" id=\"%@\">\
+                          <query xmlns=\"jabber:iq:auth\">\
+                          <username>%@</username>\
+                          <resource>PH-ios-zx01-4</resource>\
+                          <password>%@</password>\
+                          </query>\
+                          </iq>",messageID,configModel.currentUserID,passwordStr];
+    Log(@"\n---发起自动登录---");
+    [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
 }
 + (void)buildConnectingSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
     

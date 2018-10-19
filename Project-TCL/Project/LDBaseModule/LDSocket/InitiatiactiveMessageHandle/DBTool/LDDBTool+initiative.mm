@@ -30,10 +30,14 @@
     model.randCode = randCode;
     [LDDBTool update:ConfigModel.self onProperties:ConfigModel.randCode withObject:model];
 }
-+ (void)updateConfigModelCurrentUserID:(NSString *)currentUserID {
++ (void)updateConfigModelCurrentUserID:(NSString *)currentUserID password:(NSString *)password {
     ConfigModel * model = [ConfigModel new];
     model.currentUserID = currentUserID;
-    [LDDBTool update:ConfigModel.self onProperties:ConfigModel.currentUserID withObject:model];
+    model.currentUserPassword = password;
+    WCTPropertyList propertyList;
+    propertyList.push_front (ConfigModel.currentUserID);
+    propertyList.push_front (ConfigModel.currentUserPassword);
+    [LDDBTool update:ConfigModel.self onProperties:propertyList withObject:model];
 }
 + (ConfigModel *)getConfigModel {
     return [LDDBTool queryAllObjects:ConfigModel.self].lastObject;

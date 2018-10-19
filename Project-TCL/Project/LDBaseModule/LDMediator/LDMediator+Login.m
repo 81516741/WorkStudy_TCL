@@ -12,6 +12,7 @@ NSString  * const kLDMediatorTargetLogin = @"Login";
 NSString  * const kLDMediatorActionNativeFetchLoginVC = @"nativeFetchModuleLoginVC";
 NSString  * const kLDMediatorActionCreateModuleLoginTables = @"nativeCreateModuleLoginDBTables";
 NSString  * const kLDMediatorActionClearModuleLoginModels = @"nativeClearModuleLoginModels";
+NSString  * const kLDMediatorActionGetLoginState = @"getLoginState";
 
 
 @implementation LDMediator (Login)
@@ -37,5 +38,9 @@ NSString  * const kLDMediatorActionClearModuleLoginModels = @"nativeClearModuleL
 - (void)login_clearModuleLoginModels
 {
     [self performTarget:kLDMediatorTargetLogin action:kLDMediatorActionClearModuleLoginModels params:nil shouldCacheTarget:NO];
+}
+- (BOOL)login_isLogin {
+    BOOL isLogin = [[self performTarget:kLDMediatorTargetLogin action:kLDMediatorActionGetLoginState params:nil shouldCacheTarget:NO] boolValue];
+    return isLogin;
 }
 @end

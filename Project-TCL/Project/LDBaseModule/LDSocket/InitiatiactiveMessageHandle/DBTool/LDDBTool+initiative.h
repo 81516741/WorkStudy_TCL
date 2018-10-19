@@ -15,7 +15,7 @@
 + (void)createConfigModelTable;
 + (void)saveConfigModel:(ConfigModel *)configModel;
 + (void)updateConfigModelRandCode:(NSString *)randCode;
-+ (void)updateConfigModelCurrentUserID:(NSString *)currentUserID;
++ (void)updateConfigModelCurrentUserID:(NSString *)currentUserID password:(NSString *)password;
 + (ConfigModel *)getConfigModel;
 + (void)clearnConfigModel;
 @end

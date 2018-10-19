@@ -8,6 +8,7 @@
 
 #import "LDSocketTool.h"
 
-@interface LDSocketTool (home)
+@interface LDSocketTool (homeSend)
 + (void)getDeviceListSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
++ (void)getSceneListSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 @end

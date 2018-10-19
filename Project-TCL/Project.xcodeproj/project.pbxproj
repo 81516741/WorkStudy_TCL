@@ -24,9 +24,10 @@
 		0D2533CB2170A3B900310FFA /* NSString+ld_Security.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533C82170A3B900310FFA /* NSString+ld_Security.m */; };
 		0D2533CC2170A3B900310FFA /* NSString+tcl_parseXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533CA2170A3B900310FFA /* NSString+tcl_parseXML.m */; };
 		0D2533DA2170A47C00310FFA /* LDDBTool+Login.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533CF2170A47C00310FFA /* LDDBTool+Login.mm */; };
-		0D2533E12170A8C000310FFA /* LDSocketTool+home.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533E02170A8BF00310FFA /* LDSocketTool+home.m */; };
+		0D2533E12170A8C000310FFA /* LDSocketTool+homeSend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533E02170A8BF00310FFA /* LDSocketTool+homeSend.m */; };
 		0D4B5FF721796C7B00E174C6 /* ConfigModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D4B5FF421796C7A00E174C6 /* ConfigModel.mm */; };
 		0D4B5FFE21796E8B00E174C6 /* LDDBTool+initiative.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D4B5FFD21796E8B00E174C6 /* LDDBTool+initiative.mm */; };
+		0D4B60022179A98C00E174C6 /* LDSocketTool+homeReceive.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4B60012179A98C00E174C6 /* LDSocketTool+homeReceive.m */; };
 		0D6900BA2079F0430090D89A /* LDHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A32079F0420090D89A /* LDHomeVC.xib */; };
 		0D6900BC2079F0430090D89A /* first_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A72079F0420090D89A /* first_normal.png */; };
 		0D6900BD2079F0430090D89A /* first_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A82079F0420090D89A /* first_selected.png */; };
@@ -133,13 +134,15 @@
 		0D2533CA2170A3B900310FFA /* NSString+tcl_parseXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+tcl_parseXML.m"; sourceTree = "<group>"; };
 		0D2533CE2170A47C00310FFA /* LDDBTool+Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LDDBTool+Login.h"; sourceTree = "<group>"; };
 		0D2533CF2170A47C00310FFA /* LDDBTool+Login.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "LDDBTool+Login.mm"; sourceTree = "<group>"; };
-		0D2533DF2170A8BF00310FFA /* LDSocketTool+home.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+home.h"; sourceTree = "<group>"; };
-		0D2533E02170A8BF00310FFA /* LDSocketTool+home.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+home.m"; sourceTree = "<group>"; };
+		0D2533DF2170A8BF00310FFA /* LDSocketTool+homeSend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+homeSend.h"; sourceTree = "<group>"; };
+		0D2533E02170A8BF00310FFA /* LDSocketTool+homeSend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+homeSend.m"; sourceTree = "<group>"; };
 		0D4B5FF421796C7A00E174C6 /* ConfigModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConfigModel.mm; sourceTree = "<group>"; };
 		0D4B5FF521796C7A00E174C6 /* ConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigModel.h; sourceTree = "<group>"; };
 		0D4B5FF621796C7A00E174C6 /* ConfigModel+WCTTableCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConfigModel+WCTTableCoding.h"; sourceTree = "<group>"; };
 		0D4B5FFC21796E8B00E174C6 /* LDDBTool+initiative.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LDDBTool+initiative.h"; sourceTree = "<group>"; };
 		0D4B5FFD21796E8B00E174C6 /* LDDBTool+initiative.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "LDDBTool+initiative.mm"; sourceTree = "<group>"; };
+		0D4B60002179A98C00E174C6 /* LDSocketTool+homeReceive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+homeReceive.h"; sourceTree = "<group>"; };
+		0D4B60012179A98C00E174C6 /* LDSocketTool+homeReceive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+homeReceive.m"; sourceTree = "<group>"; };
 		0D6900A32079F0420090D89A /* LDHomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LDHomeVC.xib; sourceTree = "<group>"; };
 		0D6900A72079F0420090D89A /* first_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_normal.png; sourceTree = "<group>"; };
 		0D6900A82079F0420090D89A /* first_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_selected.png; sourceTree = "<group>"; };
@@ -357,8 +360,10 @@
 		0D2533DE2170A8BF00310FFA /* Socket */ = {
 			isa = PBXGroup;
 			children = (
-				0D2533DF2170A8BF00310FFA /* LDSocketTool+home.h */,
-				0D2533E02170A8BF00310FFA /* LDSocketTool+home.m */,
+				0D2533DF2170A8BF00310FFA /* LDSocketTool+homeSend.h */,
+				0D2533E02170A8BF00310FFA /* LDSocketTool+homeSend.m */,
+				0D4B60002179A98C00E174C6 /* LDSocketTool+homeReceive.h */,
+				0D4B60012179A98C00E174C6 /* LDSocketTool+homeReceive.m */,
 			);
 			path = Socket;
 			sourceTree = "<group>";
@@ -933,7 +938,7 @@
 				0D69020D207E2C970090D89A /* LDImageViewBehavior.m in Sources */,
 				0D6E3F6A2175DBFD00B59EAC /* LDHomeVC.swift in Sources */,
 				0D2533CC2170A3B900310FFA /* NSString+tcl_parseXML.m in Sources */,
-				0D2533E12170A8C000310FFA /* LDSocketTool+home.m in Sources */,
+				0D2533E12170A8C000310FFA /* LDSocketTool+homeSend.m in Sources */,
 				0D6901C4207DD1880090D89A /* UIViewController+LDLogin.m in Sources */,
 				0D2533C32170A3A100310FFA /* LDPacketHandle.m in Sources */,
 				0D6901C5207DD1880090D89A /* UIViewController+LDNaviBar.m in Sources */,
@@ -969,6 +974,7 @@
 				0D69017D207CDEED0090D89A /* LDLoginModel.mm in Sources */,
 				0D69020E207E2C970090D89A /* LDTextFieldBehavior.m in Sources */,
 				0D4B5FF721796C7B00E174C6 /* ConfigModel.mm in Sources */,
+				0D4B60022179A98C00E174C6 /* LDSocketTool+homeReceive.m in Sources */,
 				0D6901042079FC740090D89A /* LDLogTool.m in Sources */,
 				0D690136207B5E370090D89A /* Target_Mine.m in Sources */,
 				0D6901B5207DD1880090D89A /* LDMediator+HTTP.m in Sources */,

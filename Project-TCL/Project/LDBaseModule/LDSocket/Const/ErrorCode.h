@@ -24,6 +24,7 @@ extern NSString  *const errorDesNotFoundCount;
 extern NSString  *const errorDesThreeErrorPassword;
 extern NSString  *const errorDesSysError;
 extern NSString  *const errorDesNotFoundUser;
+extern NSString  *const errorNone;
 extern NSString  *const errorDesUnKnow;
 
 NSString * getErrorDescription(NSString * errorCode);

@@ -13,10 +13,14 @@ extern  NSString * const kStartHandMessageIDPrefix;
 extern  NSString * const kOpenSSLMessageIDPrefix;
 extern  NSString * const kEndHandMessageIDPrefix;
 extern  NSString * const kHeartMessageIDPrefix;
+extern  NSString * const kAutoLoginMessageIDPrefix;
+
 extern  NSString * const kLoginMessageIDPrefix;
 extern  NSString * const kGetCountMessageIDPrefix;
+
 extern  NSString * const kGetConfigParamIDPrefix;
 extern  NSString * const kGetDeviceListIDPrefix;
+extern  NSString * const kGetSceneListIDPrefix;
 
 NSString * getMessageID(NSString * messageIDPrefix);
 

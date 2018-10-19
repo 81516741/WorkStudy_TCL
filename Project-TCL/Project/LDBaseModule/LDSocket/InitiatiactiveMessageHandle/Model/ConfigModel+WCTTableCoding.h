@@ -52,6 +52,7 @@ WCDB_PROPERTY(categoryname)
 
 WCDB_PROPERTY(randCode)
 WCDB_PROPERTY(currentUserID)
+WCDB_PROPERTY(currentUserPassword)
 
 @end
 

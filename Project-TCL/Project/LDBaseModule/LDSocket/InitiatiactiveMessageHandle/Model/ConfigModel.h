@@ -53,6 +53,8 @@
 
 @property (nonatomic,strong)NSString * randCode;//保存登录成功后的会话随机数
 @property (nonatomic,strong)NSString * currentUserID;//当前用户的智讯ID
+@property (nonatomic,strong)NSString * currentUserPassword;//当前用户的密码摘要
+
 
 @end
 

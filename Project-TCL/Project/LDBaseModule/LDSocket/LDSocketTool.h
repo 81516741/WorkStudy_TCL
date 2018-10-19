@@ -18,10 +18,17 @@ typedef void(^LDSocketToolBlock)(id data);
 - (void)receiveHomeModuleMessage:(NSString *)message messageIDPrefix:(NSString *)messageIDPrefix messageError:(NSString *)messageError success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 
 @end
-
 @interface LDSocketTool : NSObject<LDSocketDistributeProtocol>
 
 @property (nonatomic,strong) NSMutableArray *  requestBlocks;
+/**
+ 是否处于登录状态  0登录  1未登录
+ */
+@property(copy, nonatomic) NSString * loginState;
+/**
+ 本地密码正确
+ */
+@property(assign, nonatomic) NSInteger autoLoginErrorCount;
 
 + (instancetype)shared;
 + (BOOL)connectServer:(NSString *)host port:(NSString *)port success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
