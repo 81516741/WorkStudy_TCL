@@ -38,9 +38,17 @@
     [self sendMessage:message messageID:messageID success:success failure:failure];
 }
 - (void)receiveHomeModuleMessage:(NSString *)message messageIDPrefix:(NSString *)messageIDPrefix messageError:(NSString *)messageError success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+    if (![messageError isEqualToString:@"成功"]) {
+        if (failure) {
+          failure(messageError);
+        }
+    }
     GDataXMLDocument * doc = [[GDataXMLDocument alloc] initWithXMLString:message error:nil];
     if (doc == nil) {
         NSLog(@"\n无法将下面的XML解析成Document\n%@",message);
+        if (failure) {
+            failure(@"请找个空旷的地方再试试");
+        }
         return;
     }
     if ([messageIDPrefix isEqualToString:kGetDeviceListIDPrefix]) {
@@ -55,11 +63,14 @@
         for (GDataXMLNode * node in itemEle.attributes) {
             [itemDic setObject:node.stringValue forKey:node.name];
         }
+        [itemDic setObject:@"2004050" forKey:@"licenseid"];
         [deviceList addObject:itemDic];
     }
-    NSArray * arr = [DeviceModel mj_objectArrayWithKeyValuesArray:deviceList];
-    [LDDBTool saveDeviceList:arr];
-    success(arr);
+    NSArray * data = [DeviceModel mj_objectArrayWithKeyValuesArray:deviceList];
+    [LDDBTool saveDeviceList:data];
+    if (success) {
+        success(data);
+    }
     
 }
 @end

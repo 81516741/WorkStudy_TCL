@@ -17,14 +17,14 @@ typedef NS_ENUM(NSUInteger, ErrorCode) {
     sysError             = 100000,
     notFoundUser         = 302800
 };
-extern NSString const * errorDesSuccess;
-extern NSString const * errorDesConfirmFailure;
-extern NSString const * errorDesForbidden;
-extern NSString const * errorDesNotFoundCount;
-extern NSString const * errorDesThreeErrorPassword;
-extern NSString const * errorDesSysError;
-extern NSString const * errorDesNotFoundUser;
-extern NSString const * errorDesUnKnow;
+extern NSString  *const errorDesSuccess;
+extern NSString  *const errorDesConfirmFailure;
+extern NSString  *const errorDesForbidden;
+extern NSString  *const errorDesNotFoundCount;
+extern NSString  *const errorDesThreeErrorPassword;
+extern NSString  *const errorDesSysError;
+extern NSString  *const errorDesNotFoundUser;
+extern NSString  *const errorDesUnKnow;
 
 NSString * getErrorDescription(NSString * errorCode);
 

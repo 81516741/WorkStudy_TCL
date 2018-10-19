@@ -8,6 +8,9 @@
 
 #import "LDInitiativeMsgHandle.h"
 #import "GDataXMLNode.h"
+#import "LDLogTool.h"
+#import "TCLConfigModel.h"
+#import <MJExtension/MJExtension.h>
 
 NSString * const kGetConfigParamNotification = @"kGetConfigParamNotification";
 
@@ -16,7 +19,7 @@ NSString * const kGetConfigParamNotification = @"kGetConfigParamNotification";
 + (void)documentFromMessage:(NSString *)message block:(void(^)(GDataXMLDocument * doc))block {
     GDataXMLDocument * doc = [[GDataXMLDocument alloc] initWithXMLString:message error:nil];
     if (doc == nil) {
-        NSLog(@"\n将下面的xml转化成document失败\n%@",message);
+        Log([NSString stringWithFormat:@"\n将下面的xml转化成document失败\n%@",message]);
     } else {
         if (block) {
             block(doc);
@@ -39,7 +42,9 @@ NSString * const kGetConfigParamNotification = @"kGetConfigParamNotification";
         for (GDataXMLElement * ele in arr) {
             [dic setValue:ele.stringValue forKey:ele.name];
         }
-        NSLog(@"%@",dic);
+        Log([NSString stringWithFormat:@"%@",dic]);
+        TCLConfigModel * model = [TCLConfigModel mj_objectWithKeyValues:dic];
+        NSLog(@"%@",model);
     }];
 }
 

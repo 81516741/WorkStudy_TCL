@@ -8,6 +8,7 @@
 
 #import "LDHTTPTool.h"
 #import "LDHTTPManager.h"
+#import "LDLogTool.h"
 #import "NSString+tcl_parseXML.h"
 
 NSMutableDictionary * taskDescriptions;

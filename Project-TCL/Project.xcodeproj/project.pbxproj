@@ -25,6 +25,7 @@
 		0D2533CC2170A3B900310FFA /* NSString+tcl_parseXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533CA2170A3B900310FFA /* NSString+tcl_parseXML.m */; };
 		0D2533DA2170A47C00310FFA /* LDDBTool+Login.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533CF2170A47C00310FFA /* LDDBTool+Login.mm */; };
 		0D2533E12170A8C000310FFA /* LDSocketTool+home.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533E02170A8BF00310FFA /* LDSocketTool+home.m */; };
+		0D4B5FED2178738100E174C6 /* TCLConfigModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D4B5FEB2178738100E174C6 /* TCLConfigModel.mm */; };
 		0D6900BA2079F0430090D89A /* LDHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A32079F0420090D89A /* LDHomeVC.xib */; };
 		0D6900BC2079F0430090D89A /* first_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A72079F0420090D89A /* first_normal.png */; };
 		0D6900BD2079F0430090D89A /* first_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A82079F0420090D89A /* first_selected.png */; };
@@ -133,6 +134,9 @@
 		0D2533CF2170A47C00310FFA /* LDDBTool+Login.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "LDDBTool+Login.mm"; sourceTree = "<group>"; };
 		0D2533DF2170A8BF00310FFA /* LDSocketTool+home.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+home.h"; sourceTree = "<group>"; };
 		0D2533E02170A8BF00310FFA /* LDSocketTool+home.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+home.m"; sourceTree = "<group>"; };
+		0D4B5FEA2178738000E174C6 /* TCLConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCLConfigModel.h; sourceTree = "<group>"; };
+		0D4B5FEB2178738100E174C6 /* TCLConfigModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TCLConfigModel.mm; sourceTree = "<group>"; };
+		0D4B5FEC2178738100E174C6 /* TCLConfigModel+WCTTableCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TCLConfigModel+WCTTableCoding.h"; sourceTree = "<group>"; };
 		0D6900A32079F0420090D89A /* LDHomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LDHomeVC.xib; sourceTree = "<group>"; };
 		0D6900A72079F0420090D89A /* first_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_normal.png; sourceTree = "<group>"; };
 		0D6900A82079F0420090D89A /* first_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_selected.png; sourceTree = "<group>"; };
@@ -254,15 +258,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0D2533972170A3A100310FFA /* NetRequest */ = {
-			isa = PBXGroup;
-			children = (
-				0D2533982170A3A100310FFA /* LDHTTP */,
-				0D2533A42170A3A100310FFA /* LDSocket */,
-			);
-			path = NetRequest;
-			sourceTree = "<group>";
-		};
 		0D2533982170A3A100310FFA /* LDHTTP */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,7 +323,7 @@
 			path = File;
 			sourceTree = "<group>";
 		};
-		0D2533C62170A3B900310FFA /* Category */ = {
+		0D2533C62170A3B900310FFA /* LDCategory */ = {
 			isa = PBXGroup;
 			children = (
 				0D2533C72170A3B900310FFA /* NSString+ld_Security.h */,
@@ -336,7 +331,7 @@
 				0D2533C92170A3B900310FFA /* NSString+tcl_parseXML.h */,
 				0D2533CA2170A3B900310FFA /* NSString+tcl_parseXML.m */,
 			);
-			path = Category;
+			path = LDCategory;
 			sourceTree = "<group>";
 		};
 		0D2533CD2170A47C00310FFA /* DBTool */ = {
@@ -348,30 +343,31 @@
 			path = DBTool;
 			sourceTree = "<group>";
 		};
-		0D2533D02170A47C00310FFA /* Net */ = {
+		0D2533D02170A47C00310FFA /* Socket */ = {
 			isa = PBXGroup;
 			children = (
 				0D8FE5662174792D0092955B /* LDSocketTool+login.h */,
 				0D8FE5672174792E0092955B /* LDSocketTool+login.m */,
 			);
-			path = Net;
+			path = Socket;
 			sourceTree = "<group>";
 		};
-		0D2533DE2170A8BF00310FFA /* Net */ = {
+		0D2533DE2170A8BF00310FFA /* Socket */ = {
 			isa = PBXGroup;
 			children = (
 				0D2533DF2170A8BF00310FFA /* LDSocketTool+home.h */,
 				0D2533E02170A8BF00310FFA /* LDSocketTool+home.m */,
 			);
-			path = Net;
+			path = Socket;
 			sourceTree = "<group>";
 		};
 		0D6900A02079F0420090D89A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0D6E3F7C2176E2F000B59EAC /* Model */,
 				0D6E3F81217707BC00B59EAC /* DBTool */,
-				0D6E3F6F2175DDA900B59EAC /* MVC */,
-				0D2533DE2170A8BF00310FFA /* Net */,
+				0D6E3F6F2175DDA900B59EAC /* Controller */,
+				0D2533DE2170A8BF00310FFA /* Socket */,
 				0D69012B207B5DD80090D89A /* Target */,
 				0D6900A62079F0420090D89A /* Source */,
 			);
@@ -390,8 +386,9 @@
 		0D6900AB2079F0420090D89A /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				0D6E3F6E2175DD8400B59EAC /* MVC */,
-				0D2533D02170A47C00310FFA /* Net */,
+				0D69014B207C53F30090D89A /* Model */,
+				0D6E3F6E2175DD8400B59EAC /* Controller */,
+				0D2533D02170A47C00310FFA /* Socket */,
 				0D8FE561217441730092955B /* Target */,
 				0D2533CD2170A47C00310FFA /* DBTool */,
 				0D6901FC207E2ACB0090D89A /* Source */,
@@ -421,8 +418,10 @@
 		0D6900CB2079F4210090D89A /* LDBaseModule */ = {
 			isa = PBXGroup;
 			children = (
-				0D2533C62170A3B900310FFA /* Category */,
-				0D2533972170A3A100310FFA /* NetRequest */,
+				0D69015A207C63BA0090D89A /* LDDBTool */,
+				0D2533982170A3A100310FFA /* LDHTTP */,
+				0D2533A42170A3A100310FFA /* LDSocket */,
+				0D2533C62170A3B900310FFA /* LDCategory */,
 				0D69019E207DD1880090D89A /* LDBase */,
 				0D690193207DD1880090D89A /* LDMediator */,
 				0D6900ED2079F4210090D89A /* LDTool */,
@@ -433,7 +432,6 @@
 		0D6900ED2079F4210090D89A /* LDTool */ = {
 			isa = PBXGroup;
 			children = (
-				0D69015A207C63BA0090D89A /* DBTool */,
 				0D2533902170A28D00310FFA /* LDSysTool.h */,
 				0D25338F2170A28D00310FFA /* LDSysTool.m */,
 				0D6901022079FC740090D89A /* LDLogTool.h */,
@@ -476,6 +474,9 @@
 		0D69014B207C53F30090D89A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0D4B5FEA2178738000E174C6 /* TCLConfigModel.h */,
+				0D4B5FEB2178738100E174C6 /* TCLConfigModel.mm */,
+				0D4B5FEC2178738100E174C6 /* TCLConfigModel+WCTTableCoding.h */,
 				0D69017C207CDEED0090D89A /* LDLoginModel.h */,
 				0D69017A207CDEED0090D89A /* LDLoginModel.mm */,
 				0D69017B207CDEED0090D89A /* LDLoginModel+WCTTableCoding.h */,
@@ -483,7 +484,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		0D69015A207C63BA0090D89A /* DBTool */ = {
+		0D69015A207C63BA0090D89A /* LDDBTool */ = {
 			isa = PBXGroup;
 			children = (
 				0D6900EE2079F4210090D89A /* LDDBTool.h */,
@@ -492,7 +493,7 @@
 				0D690174207CD87B0090D89A /* LDDBTool+Base.mm */,
 				0D69015F207C92100090D89A /* UIImage+WCTColumnCoding.mm */,
 			);
-			path = DBTool;
+			path = LDDBTool;
 			sourceTree = "<group>";
 		};
 		0D690193207DD1880090D89A /* LDMediator */ = {
@@ -607,25 +608,23 @@
 			path = Project;
 			sourceTree = "<group>";
 		};
-		0D6E3F6E2175DD8400B59EAC /* MVC */ = {
+		0D6E3F6E2175DD8400B59EAC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0D69014B207C53F30090D89A /* Model */,
 				0D8FE550217424830092955B /* LoginVC.swift */,
 				0D8FE56B2174878D0092955B /* LoginVC.xib */,
 			);
-			path = MVC;
+			path = Controller;
 			sourceTree = "<group>";
 		};
-		0D6E3F6F2175DDA900B59EAC /* MVC */ = {
+		0D6E3F6F2175DDA900B59EAC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				0D6E3F692175DBFD00B59EAC /* LDHomeVC.swift */,
 				0D6900A32079F0420090D89A /* LDHomeVC.xib */,
 				0D6E3F6B2175DC7200B59EAC /* LDOtherVC.swift */,
-				0D6E3F7C2176E2F000B59EAC /* Model */,
 			);
-			path = MVC;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		0D6E3F702175DDC800B59EAC /* MVC */ = {
@@ -940,6 +939,7 @@
 				0D2533CB2170A3B900310FFA /* NSString+ld_Security.m in Sources */,
 				0D69017D207CDEED0090D89A /* LDLoginModel.mm in Sources */,
 				0D69020E207E2C970090D89A /* LDTextFieldBehavior.m in Sources */,
+				0D4B5FED2178738100E174C6 /* TCLConfigModel.mm in Sources */,
 				0D6901042079FC740090D89A /* LDLogTool.m in Sources */,
 				0D690136207B5E370090D89A /* Target_Mine.m in Sources */,
 				0D6901B5207DD1880090D89A /* LDMediator+HTTP.m in Sources */,
@@ -1147,6 +1147,7 @@
 				PROVISIONING_PROFILE = "381b2968-a0ca-480d-bd90-cae6581ccd25";
 				PROVISIONING_PROFILE_SPECIFIER = "Development Provisioning";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/Mac_Document/Github/WorkStudy_TCL/Project-TCL/Project-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

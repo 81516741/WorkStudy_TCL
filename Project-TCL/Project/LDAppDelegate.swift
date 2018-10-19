@@ -11,7 +11,7 @@ import UIKit
 class LDAppDelegate : UIResponder,UIApplicationDelegate  {
     var window: UIWindow?
     func applicationDidFinishLaunching(_ application: UIApplication) {
-        LDConfigVCUtil.config(false)
+        LDConfigVCUtil.config(true)
         LDLogTool.configDDLog()
         LDDBTool.createDatabaseAndAllTable()
         LDSocketTool.startConnectAndHeart()

@@ -11,6 +11,6 @@
 @interface LDDBTool (home)
 + (void)createHomeTables;
 + (void)saveDeviceList:(NSArray *)deviceList;
-+ (NSArray *)getLoginDeviceList;
++ (NSArray *)getDeviceList;
 + (void)clearnAllDevice;
 @end

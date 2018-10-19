@@ -9,6 +9,7 @@
 #import "LDHTTPManager.h"
 #import "LDHTTPModel.h"
 #import "LDHTTPConst.h"
+#import "LDLogTool.h"
 
 @implementation LDHTTPManager
 
@@ -91,7 +92,7 @@
             [formData appendPartWithFileData:imageDic[kLDHTTPImageUploadImageDataKey] name:imageDic[kLDHTTPImageUploadImageNameKey] fileName:imageDic[kLDHTTPImageUploadFileNameKey] mimeType:imageDic[kLDHTTPImageUploadMimeTypeKey]];
         }
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        NSLog(@"上传进度:%@",uploadProgress);
+        Log([NSString stringWithFormat:@"上传进度:%@",uploadProgress]);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = false;
         message.dataOrigin = responseObject;
@@ -121,7 +122,7 @@
     for (NSURLSessionDataTask * task in self.AFNHTTPManager.tasks) {
         if ([task.taskDescription isEqualToString:taskDescription]) {
             [task cancel];
-            NSLog(@"\n---取消了taskDescription为:%@ 的请求---",task.taskDescription);
+            Log([NSString stringWithFormat:@"\n---取消了taskDescription为:%@ 的请求---",task.taskDescription]);
         }
     }
 }

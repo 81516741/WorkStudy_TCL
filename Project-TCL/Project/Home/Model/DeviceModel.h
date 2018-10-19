@@ -36,6 +36,7 @@
 @property (nonatomic , copy) NSString              * masterid;
 @property (nonatomic , copy) NSString              * bindtime;
 @property (nonatomic , copy) NSString              * categoryid;
+@property (nonatomic , copy) NSString              * licenseid;
 
 @end
 

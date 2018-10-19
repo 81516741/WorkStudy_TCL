@@ -7,7 +7,7 @@
 //
 
 #import "LDDBTool+Base.h"
-
+#import "LDLogTool.h"
 
 @implementation LDDBTool (Base)
 

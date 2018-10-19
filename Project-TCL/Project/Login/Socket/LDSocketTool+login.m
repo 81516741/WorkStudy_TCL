@@ -59,11 +59,11 @@
 
 + (void)loging:(NSString *)num password:(NSString *)password Success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
     if (num.length == 11) {
-        [self getCountByPhoneNum:num success:^(id data) {
-            [self login:data password:password Success:^(id data) {
+        [self getCountByPhoneNum:num success:^(id count) {
+            [self login:count password:password Success:^(id data) {
                 NSLog(@"登录成功");
                 if (success) {
-                    success(nil);
+                    success(data);
                 }
             } failure:^(id data) {
                 if (failure) {
@@ -79,7 +79,7 @@
         [self login:num password:password Success:^(id data) {
             NSLog(@"登录成功");
             if (success) {
-                success(nil);
+                success(data);
             }
         } failure:^(id data) {
             if (failure) {
@@ -101,15 +101,15 @@
     }
 }
 - (void)handleGetCountMessage:(NSString *)message errorDes:(NSString *)errorDes success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
-    if ([errorDes isEqualToString:@"成功"]) {
+    if ([errorDes isEqualToString:errorDesSuccess]) {
         success(message.tcl_userID);
     } else {
-        failure(getErrorDescription(errorDes));
+        failure(errorDes);
     }
 }
 
 - (void)handleLoginMessage:(NSString *)message errorDes:(NSString *)errorDes success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
-    if ([errorDes isEqualToString:@"成功"]) {
+    if ([errorDes isEqualToString:errorDesSuccess]) {
         if (success) {
             success(errorDes);
         }

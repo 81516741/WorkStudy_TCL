@@ -14,6 +14,7 @@
 #import "LDHTTPTool.h"
 #import "LDNetTool.h"
 #import "ErrorCode.h"
+#import "LDLogTool.h"
 #import "Project-Swift.h"
 
 NSString * const quickHand0 = @"quickHand0";
@@ -141,13 +142,13 @@ typedef enum {
     [LDSocketTool shared].startHandMessageID = getMessageID(kStartHandMessageIDPrefix);
     [LDSocketTool shared].openSSLMessageID = getMessageID(kOpenSSLMessageIDPrefix);
     [LDSocketTool shared].endHandMessgeID = getMessageID(kEndHandMessageIDPrefix);
-    NSLog(@"\n---【开始握手】---");
-    NSLog(@"\n握手（1）");
+    Log(@"\n---【开始握手】---");
+    Log(@"\n握手（1）");
     [LDSocketTool sendMessage:startHandshakeMessage messageID:[LDSocketTool shared].startHandMessageID success:^(NSString * data) {
         if (!useSSL) {
             if (![data isEqualToString:quickHand0]) {
                 [LDSocketTool shared].connectState = handed;
-                NSLog(@"\n不启用SSL加密");
+                Log(@"\n不启用SSL加密");
                 if (success) {
                     success(nil);
                 }
@@ -156,23 +157,23 @@ typedef enum {
         }
         if ([data isEqualToString:quickHand0]) {
             if (success) {
-                NSLog(@"\n快速握手开始");
+                Log(@"\n快速握手开始");
                 return ;
             }
         }
         if ([data isEqualToString:quickHand1]) {
             if (success) {
-                NSLog(@"\n快速握手完成");
+                Log(@"\n快速握手完成");
                 [LDSocketTool shared].connectState = handed;
                 return ;
             }
         }
-        NSLog(@"\n握手（2）");
+        Log(@"\n握手（2）");
         [LDSocketTool sendMessage:openSSLMessage messageID:[LDSocketTool shared].openSSLMessageID success:^(id data) {
-            NSLog(@"\n握手（3）");
+            Log(@"\n握手（3）");
             [LDSocketManager startSSL];
             [LDSocketTool sendMessage:endHandshakeMessage messageID:[LDSocketTool shared].endHandMessgeID success:^(id data) {
-                NSLog(@"\n握手成功");
+                Log(@"\n握手成功");
                 [LDSocketTool shared].connectState = handed;
                 if (success) {
                     success(nil);
@@ -187,7 +188,7 @@ typedef enum {
      BOOL isHandMessage = [message isEqualToString:[LDSocketTool shared].startHandshakeMessage] || [message isEqualToString:[LDSocketTool shared].openSSLMessage] || [message isEqualToString:[LDSocketTool shared].endHandshakeMessage];
     if (isHandMessage) {
         dispatch_async([LDSocketTool shared].handQueue, ^{
-            NSLog(@"\n---【发送信息到服务器】---\n%@",message);
+            Log([NSString stringWithFormat:@"\n---【发送信息到服务器】---\n%@",message]);
             [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
             [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
         });
@@ -195,10 +196,10 @@ typedef enum {
         dispatch_async([LDSocketTool shared].messageQueue, ^{
             {
                 while (([LDSocketTool shared].connectState != handed || ![LDNetTool networkReachable])) {
-                    NSLog(@"\n---【没网了或者没握手,所以暂停发送信息】---\n%@",message);
+                    Log([NSString stringWithFormat:@"\n---【没网了或者没握手,所以暂停发送信息】---\n%@",message]);
                     sleep(2);
                 }
-                NSLog(@"\n---【发送信息到服务器】---\n%@",message);
+                Log([NSString stringWithFormat:@"\n---【发送信息到服务器】---\n%@",message]);
                 [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
                 [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
             }
@@ -230,7 +231,7 @@ typedef enum {
 #pragma mark - 发完消息后的回调
 - (void)receiveMessageResult:(id)result manager:(LDSocketManager *)manager {
     NSString * XMLString = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
-    NSLog(@"\n---【收到服务器数据】---\n%@",XMLString);
+    Log([NSString stringWithFormat:@"\n---【收到服务器数据】---\n%@",XMLString]);
     //处理握手消息
     BOOL isShakeMessage = [self handleShakeMessage:XMLString];
     if (isShakeMessage) {
@@ -238,7 +239,7 @@ typedef enum {
     }
     //断开连接
     if ([XMLString isEqualToString:@"</stream:stream>"]) {
-        NSLog(@"\n---【收到服务器主动断开连接的消息】---");
+        Log(@"\n---【收到服务器主动断开连接的消息】---");
         return;
     }
     //处理其他消息
@@ -396,7 +397,7 @@ typedef enum {
             
         }
     } else {
-        NSLog(@"⚠️⚠️⚠️没有找到与MessageID:%@对应的blocks",messageID);
+        Log([NSString stringWithFormat:@"⚠️⚠️⚠️没有找到与MessageID:%@对应的blocks",messageID]);
     }
     
 }
@@ -413,7 +414,7 @@ typedef enum {
         NSData * jsonData = [str dataUsingEncoding:NSUTF8StringEncoding]; NSError *err;
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
         if(err) {
-            NSLog(@"json解析失败：%@",err);
+            Log([NSString stringWithFormat:@"json解析失败：%@",err]);
             return nil;
         } else {
             return dic;

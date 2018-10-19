@@ -7,6 +7,7 @@
 //
 
 #import "LDSocketManager.h"
+#import "LDLogTool.h"
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
 @interface LDSocketManager()<GCDAsyncSocketDelegate>
@@ -98,7 +99,7 @@ NSInteger timerOutSec = 30;
         });
     }
     [self.socket readDataWithTimeout:timerOutSec tag:0];
-    NSLog(@"连接成功");
+    Log(@"连接成功");
 }
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
@@ -108,7 +109,7 @@ NSInteger timerOutSec = 30;
             [self.connectDelegate receiveConnectServiceResult:errorDes manager:self];
         });
     }
-    NSLog(@"socket 断开连接:%@",errorDes);
+    Log([NSString stringWithFormat:@"socket 断开连接:%@",errorDes]);
 }
 
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
@@ -122,7 +123,7 @@ NSInteger timerOutSec = 30;
 
 - (void)socket:(GCDAsyncSocket *)sock didReceiveTrust:(SecTrustRef)trust
 completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler {
-    NSLog(@"无条件信任证书");
+    Log(@"无条件信任证书");
     completionHandler(YES);
 }
 

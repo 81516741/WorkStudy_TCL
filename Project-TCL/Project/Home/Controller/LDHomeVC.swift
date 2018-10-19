@@ -13,17 +13,18 @@ class LDHomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ld_naviBarColor = UIColor.orange
-        
     }
 
     @IBAction func jump(_ sender: Any) {
-        LDFunctionTool.gotoFunction(by: .otherVC, inVC: self)
+       navigationController?.pushViewController(LDOtherVC(), animated: true)
     }
     @IBAction func getDeviceList(_ sender: Any) {
         LDSocketTool.getDeviceListSuccess({ (data) in
+            if let deviceList = data as? NSArray {
+                print(deviceList)
+            }
+        }) { (error) in
             
-        }) { (data) in
-        
         }
     }
 }
