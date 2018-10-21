@@ -24,7 +24,7 @@
 NSString * const quickHand0 = @"quickHand0";
 NSString * const quickHand1 = @"quickHand1";
 BOOL useSSL = false;
-NSInteger autoLoginMaxCount = 3;
+NSInteger autoLoginMaxCount = 2;
 //为什么没有handFailure，因为握手失败就是超时，此时会断开连接
 typedef enum {
     disConnect = 10,
@@ -60,6 +60,10 @@ typedef enum {
  自动登录的队列   串行
  */
 @property(strong, nonatomic) dispatch_queue_t autoLoginQueue;
+/**
+ 心跳的队列   串行
+ */
+@property(strong, nonatomic) dispatch_queue_t heartQueue;
 
 //以下几个属性是用来辅助block回调的，因为没有和服务器约定id，属于历史遗留问题
 @property(copy, nonatomic) NSString * connectMessageID;
@@ -81,9 +85,11 @@ typedef enum {
         _instance.connectState = disConnect;
         _instance.loginState = @"1";
         _instance.autoLoginErrorCount = 0;
+        _instance.isAutoLoginFailure = YES;
         _instance.messageQueue = dispatch_queue_create("message_queue", DISPATCH_QUEUE_SERIAL);
         _instance.handQueue = dispatch_queue_create("hand_queue", DISPATCH_QUEUE_SERIAL);
         _instance.autoLoginQueue = dispatch_queue_create("autoLogin_queue", DISPATCH_QUEUE_SERIAL);
+        _instance.heartQueue = dispatch_queue_create("heart_queue", DISPATCH_QUEUE_SERIAL);
     });
     return _instance;
 }
@@ -125,9 +131,12 @@ typedef enum {
 - (void)receiveConnectServiceResult:(id)result manager:(LDSocketManager *)manager {
     if ([result isEqualToString:@"连接成功"]) {
         [LDSocketTool shared].connectState = connected;
+        //连接成功时，是肯定是没有登录服务器的
+        [LDSocketTool shared].loginState = @"1";
+        //连接成功的时候，这个值必须设置成YES，不然不会去自动登录
+        [LDSocketTool shared].isAutoLoginFailure = YES;
     } else {
         [LDSocketTool shared].connectState = disConnect;
-        [LDSocketTool shared].loginState = @"1";
     }
     [self callBackByMessageID:[LDSocketTool shared].connectMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
         if ([result isKindOfClass:NSString.self]) {
@@ -156,6 +165,7 @@ typedef enum {
         });
     } else {
         ConfigModel * model = [LDDBTool getConfigModel];
+        //自动登录
         if ([[LDSocketTool shared].loginState isEqualToString:@"1"] &&
             [LDNetTool networkReachable] &&
             model.currentUserPassword.length > 0) {
@@ -165,51 +175,51 @@ typedef enum {
                         if ([LDSocketTool shared].autoLoginErrorCount > autoLoginMaxCount) {
                             break;
                         }
-                        [LDSocketTool autoLogin:model];
-                        /*因为消息超时是30s，所以31秒是会有
-                        结果的，要么成功，要么超时断开连接
-                         
-                         如果本地密码错误，则会登录错误，
-                         （因为应该登录却没有登录成功）此时消息
-                         线程是发不了心跳给服务器的，等到30
-                         秒服务器没收到心跳，连接会断开，
-                         此时如果重连机制没有连上，则发
-                         出的自动登录消息会石沉大海，
-                         然后等下一次发送自动登录消息时...
-                         */
-                        sleep(31);
+                        if ([LDSocketTool shared].isAutoLoginFailure) {
+                            [LDSocketTool shared].isAutoLoginFailure = NO;
+                           [LDSocketTool autoLogin:model];
+                        }
+                        sleep(5);
                     }
                 });
             }
-            
         }
-        dispatch_async([LDSocketTool shared].messageQueue, ^{
-            {
-                //应该登录
-                BOOL shouldLogin = model.currentUserPassword.length > 0 && [LDSocketTool shared].autoLoginErrorCount < autoLoginMaxCount;
-                if (shouldLogin) {//应该是登录的
-                    //没有登录就卡死
-                    while ([[LDSocketTool shared].loginState isEqualToString:@"1"]) {
-                        if ([LDSocketTool shared].autoLoginErrorCount > autoLoginMaxCount) {
-                            break;
+        
+        if ([message containsString:@"heart-"]) {
+            //发送心跳消息
+            dispatch_async([LDSocketTool shared].heartQueue, ^{
+                [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
+                [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
+            });
+        } else {
+            //发送普通消息
+            dispatch_async([LDSocketTool shared].messageQueue, ^{
+                {
+                    //应该登录
+                    BOOL shouldLogin = model.currentUserPassword.length > 0 && [LDSocketTool shared].autoLoginErrorCount < autoLoginMaxCount;
+                    if (shouldLogin) {//应该是登录的
+                        //没有登录就卡死
+                        while ([[LDSocketTool shared].loginState isEqualToString:@"1"]) {
+                            if ([LDSocketTool shared].autoLoginErrorCount > autoLoginMaxCount) {
+                                break;
+                            }
+                            Log([NSString stringWithFormat:@"\n---【没网了或者没握手,所以暂停发送信息】---\n%@",message]);
+                            sleep(2);
                         }
-                        Log([NSString stringWithFormat:@"\n---【没网了或者没握手,所以暂停发送信息】---\n%@",message]);
-                        sleep(2);
                     }
-                } else {
+                    //如果没有握手 或者没有网络就卡死该线程
                     while (![LDNetTool networkReachable] ||[LDSocketTool shared].connectState != handed) {
                         Log([NSString stringWithFormat:@"\n---【没网了或者没握手,所以暂停发送信息】---\n%@",message]);
                         sleep(2);
                     }
+                    Log([NSString stringWithFormat:@"\n---【发送信息到服务器】---\n%@",message]);
+                    [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
+                    [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
                 }
-                
-                
-                Log([NSString stringWithFormat:@"\n---【发送信息到服务器】---\n%@",message]);
-                [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
-                [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
-            }
-            
-        });
+            });
+        }
+        
+        
     }
 }
 

@@ -29,6 +29,10 @@ typedef void(^LDSocketToolBlock)(id data);
  本地密码正确
  */
 @property(assign, nonatomic) NSInteger autoLoginErrorCount;
+/**
+ 自动登录是否失败 默认为YES
+ */
+@property(assign, nonatomic) BOOL isAutoLoginFailure;
 
 + (instancetype)shared;
 + (BOOL)connectServer:(NSString *)host port:(NSString *)port success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;

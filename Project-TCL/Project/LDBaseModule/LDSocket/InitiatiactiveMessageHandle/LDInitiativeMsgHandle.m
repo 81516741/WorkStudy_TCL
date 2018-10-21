@@ -15,8 +15,9 @@
 #import "NSString+tcl_parseXML.h"
 #import <MJExtension/MJExtension.h>
 #import "ErrorCode.h"
+#import "MessageIDConst.h"
 
-NSString * const kAutoLoginSuccessNotification = @"kAutoLoginSuccessNotification";
+NSString * const kAutoLoginFailureNotification = @"kAutoLoginFailureNotification";
 
 @implementation LDInitiativeMsgHandle
 
@@ -32,18 +33,28 @@ NSString * const kAutoLoginSuccessNotification = @"kAutoLoginSuccessNotification
 }
 
 + (BOOL)handleMessage:(NSString *)message messageID:(NSString *)messageID messageError:(NSString *)messageError {
-    if ([message containsString:@"auto_login"]) {
-        if ([messageError isEqualToString:errorNone]) {
+    if ([message containsString:kAutoLoginMessageIDPrefix]) {
+        if ([messageError isEqualToString:errorCodeNone]) {
             [LDSocketTool shared].loginState = @"0";
             [LDSocketTool shared].autoLoginErrorCount = 0;
             Log(@"\n---自动登录成功---");
         } else {
-            Log([NSString stringWithFormat:@"\n---自动登录失败---%ld",(long)[LDSocketTool shared].autoLoginErrorCount]);
+            [LDSocketTool shared].isAutoLoginFailure = YES;
             [LDSocketTool shared].autoLoginErrorCount ++;
+            Log([NSString stringWithFormat:@"\n---自动登录失败---%ld",(long)[LDSocketTool shared].autoLoginErrorCount]);
+            //发出自动登录失败的通知，然后外部做处理
+            if ([LDSocketTool shared].autoLoginErrorCount >= 3) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kAutoLoginFailureNotification object:nil];
+            }
         }
-        
         return YES;
-    }else if ([message containsString:@"<configparam"]) {
+    } else if ([message containsString:kLoginMessageIDPrefix]) {
+        if ([messageError isEqualToString:errorCodeNone]) {
+            [LDSocketTool shared].loginState = @"0";
+            [LDSocketTool shared].autoLoginErrorCount = 0;
+        }
+        return NO;
+    } else if ([message containsString:@"<configparam"]) {
         [self handleConfigParamMessage:message];
         return YES;
     } else if ([message containsString:@"randcode"]) {

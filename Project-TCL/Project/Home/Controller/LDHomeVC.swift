@@ -13,8 +13,13 @@ class LDHomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ld_naviBarColor = UIColor.orange
+        NotificationCenter.default.addObserver(self, selector: #selector(autoLoginFailure), name: NSNotification.Name.autoLoginFailure, object: nil)
     }
 
+    @objc func autoLoginFailure() {
+        LDConfigVCUtil.configLoginVC(toRootVC: true)
+    }
+    
     @IBAction func jump(_ sender: Any) {
        navigationController?.pushViewController(LDOtherVC(), animated: true)
     }

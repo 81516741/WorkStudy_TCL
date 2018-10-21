@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const kAutoLoginSuccessNotification;
+extern NSString * const kAutoLoginFailureNotification;
 
 @interface LDInitiativeMsgHandle : NSObject
 

@@ -119,7 +119,7 @@
 }
 
 - (void)handleLoginMessage:(NSString *)message errorDes:(NSString *)errorDes success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
-    if ([errorDes isEqualToString:errorDesSuccess]) {
+    if ([errorDes isEqualToString:errorCodeNone]) {
         if (success) {
             success(errorDes);
         }

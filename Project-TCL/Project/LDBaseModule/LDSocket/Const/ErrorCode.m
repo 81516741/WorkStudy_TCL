@@ -16,11 +16,11 @@ NSString  *const errorDesThreeErrorPassword = @"密码错误三次";
 NSString  *const errorDesSysError = @"系统错误";
 NSString  *const errorDesNotFoundUser = @"没有找到此用户";
 NSString  *const errorDesUnKnow = @"未知错误";
-NSString  *const errorNone = @"没错误码";
+NSString  *const errorCodeNone = @"没错误码";
 
 NSString * getErrorDescription(NSString * errorCode) {
     if (errorCode.length == 0) {
-        return errorNone;
+        return errorCodeNone;
     }
     switch (errorCode.integerValue) {
         case success:
