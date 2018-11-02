@@ -38,6 +38,7 @@ typedef void(^LDSocketToolBlock)(id data);
 + (BOOL)connectServer:(NSString *)host port:(NSString *)port success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 + (void)sendMessage:(NSString *)message messageID:(NSString *)messageID success:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 + (void)startConnectAndHeart;
++ (void)sendHearMessge;
 #pragma mark - 工具方法 LDSocketTool分类也会用到的
 + (NSString *)dicToStr:(NSDictionary *)dic;
 + (NSDictionary *)strToDic:(NSString *)str;

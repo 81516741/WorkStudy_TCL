@@ -11,4 +11,5 @@
 @interface LDSocketTool (homeSend)
 + (void)getDeviceListSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 + (void)getSceneListSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
++ (void)getUserInfoSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure;
 @end

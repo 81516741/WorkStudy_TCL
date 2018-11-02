@@ -7,7 +7,6 @@
 //
 
 #import "LDPictureCutController.h"
-
 @implementation UIImage(PictureCutPrivate)
 + (UIImage *)clipRect:(UIImage *)image frame:(CGRect)frame
 {

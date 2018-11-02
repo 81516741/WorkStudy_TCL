@@ -45,7 +45,7 @@ WCDB_SYNTHESIZE(DeviceModel,head);
 WCDB_SYNTHESIZE(DeviceModel,masterid);
 WCDB_SYNTHESIZE(DeviceModel,bindtime);
 WCDB_SYNTHESIZE(DeviceModel,categoryid);
-WCDB_SYNTHESIZE(DeviceModel,licenseid);
+WCDB_SYNTHESIZE(DeviceModel,currentUserID);
 
 @end
 

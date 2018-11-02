@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface DeviceModel : NSObject
-
+/**
+ 这个id代表设备的拥有者的智讯id
+ */
 @property (nonatomic , copy) NSString              * userid;
 @property (nonatomic , copy) NSString              * regdate;
 @property (nonatomic , copy) NSString              * did;
@@ -36,7 +38,10 @@
 @property (nonatomic , copy) NSString              * masterid;
 @property (nonatomic , copy) NSString              * bindtime;
 @property (nonatomic , copy) NSString              * categoryid;
-@property (nonatomic , copy) NSString              * licenseid;
+/**
+ 当前用户的智讯id，用来标识该设备是该用户列表中的数据
+ */
+@property (nonatomic , copy) NSString              * currentUserID;
 
 @end
 

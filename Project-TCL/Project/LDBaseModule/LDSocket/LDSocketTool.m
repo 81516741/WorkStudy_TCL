@@ -137,6 +137,7 @@ typedef enum {
         [LDSocketTool shared].isAutoLoginFailure = YES;
     } else {
         [LDSocketTool shared].connectState = disConnect;
+        [LDSocketTool shared].loginState = @"1";
     }
     [self callBackByMessageID:[LDSocketTool shared].connectMessageID excuteCode:^(LDSocketToolBlock success, LDSocketToolBlock failure) {
         if ([result isKindOfClass:NSString.self]) {
@@ -166,58 +167,61 @@ typedef enum {
     } else {
         ConfigModel * model = [LDDBTool getConfigModel];
         //自动登录
-        if ([[LDSocketTool shared].loginState isEqualToString:@"1"] &&
-            [LDNetTool networkReachable] &&
-            model.currentUserPassword.length > 0) {
-            if ([LDSocketTool shared].autoLoginErrorCount < autoLoginMaxCount) {
-                dispatch_async([LDSocketTool shared].autoLoginQueue, ^{
-                    while ([[LDSocketTool shared].loginState isEqualToString:@"1"]) {
-                        if ([LDSocketTool shared].autoLoginErrorCount > autoLoginMaxCount) {
-                            break;
-                        }
-                        if ([LDSocketTool shared].isAutoLoginFailure) {
-                            [LDSocketTool shared].isAutoLoginFailure = NO;
-                           [LDSocketTool autoLogin:model];
-                        }
-                        sleep(5);
-                    }
-                });
-            }
-        }
-        
-        if ([message containsString:@"heart-"]) {
-            //发送心跳消息
-            dispatch_async([LDSocketTool shared].heartQueue, ^{
-                [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
-                [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
-            });
-        } else {
-            //发送普通消息
-            dispatch_async([LDSocketTool shared].messageQueue, ^{
-                {
-                    //应该登录
-                    BOOL shouldLogin = model.currentUserPassword.length > 0 && [LDSocketTool shared].autoLoginErrorCount < autoLoginMaxCount;
-                    if (shouldLogin) {//应该是登录的
-                        //没有登录就卡死
-                        while ([[LDSocketTool shared].loginState isEqualToString:@"1"]) {
-                            if ([LDSocketTool shared].autoLoginErrorCount > autoLoginMaxCount) {
-                                break;
+        if (model.otherDeviceLoginState == otherDeviceLoginStateNone || model.otherDeviceLoginState == myDeviceRelogin || model == nil) {
+                //如果其他设备没有挤我下线，或者挤了，但是我选择重登录，才会去自动登录
+                if ([[LDSocketTool shared].loginState isEqualToString:@"1"] &&
+                    [LDNetTool networkReachable] &&
+                    model.currentUserPassword.length > 0) {
+                    if ([LDSocketTool shared].autoLoginErrorCount < autoLoginMaxCount) {
+                        dispatch_async([LDSocketTool shared].autoLoginQueue, ^{
+                            while ([[LDSocketTool shared].loginState isEqualToString:@"1"]) {
+                                if ([LDSocketTool shared].autoLoginErrorCount > autoLoginMaxCount) {
+                                    break;
+                                }
+                                if ([LDSocketTool shared].isAutoLoginFailure) {
+                                    [LDSocketTool shared].isAutoLoginFailure = NO;
+                                    [LDSocketTool autoLogin:model];
+                                }
+                                sleep(5);
                             }
+                        });
+                    }
+                }
+            }
+        
+            if ([message containsString:@"heart-"]) {
+                //发送心跳消息
+                dispatch_async([LDSocketTool shared].heartQueue, ^{
+                    [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
+                    [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
+                });
+            } else {
+                //发送普通消息
+                dispatch_async([LDSocketTool shared].messageQueue, ^{
+                    {
+                        //应该登录
+                        BOOL shouldLogin = model.currentUserPassword.length > 0 && [LDSocketTool shared].autoLoginErrorCount < autoLoginMaxCount;
+                        if (shouldLogin) {//应该是登录的
+                            //没有登录就卡死
+                            while ([[LDSocketTool shared].loginState isEqualToString:@"1"]) {
+                                if ([LDSocketTool shared].autoLoginErrorCount > autoLoginMaxCount) {
+                                    break;
+                                }
+                                Log([NSString stringWithFormat:@"\n---【没网了或者没握手,所以暂停发送信息】---\n%@",message]);
+                                sleep(20);
+                            }
+                        }
+                        //如果没有握手 或者没有网络就卡死该线程
+                        while (![LDNetTool networkReachable] ||[LDSocketTool shared].connectState != handed) {
                             Log([NSString stringWithFormat:@"\n---【没网了或者没握手,所以暂停发送信息】---\n%@",message]);
                             sleep(2);
                         }
+                        Log([NSString stringWithFormat:@"\n---【发送信息到服务器】---\n%@",message]);
+                        [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
+                        [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
                     }
-                    //如果没有握手 或者没有网络就卡死该线程
-                    while (![LDNetTool networkReachable] ||[LDSocketTool shared].connectState != handed) {
-                        Log([NSString stringWithFormat:@"\n---【没网了或者没握手,所以暂停发送信息】---\n%@",message]);
-                        sleep(2);
-                    }
-                    Log([NSString stringWithFormat:@"\n---【发送信息到服务器】---\n%@",message]);
-                    [LDSocketTool saveSuccessBlock:success failureBlock:failure messageID:messageID];
-                    [LDSocketManager sendMessage:message delegate:[LDSocketTool shared]];
-                }
-            });
-        }
+                });
+            }
         
         
     }
@@ -234,6 +238,10 @@ typedef enum {
 </iq>",messageID];
     
     [LDSocketTool sendMessage:heartMessage messageID:messageID success:success failure:failure];
+}
+
++ (void)sendHearMessge {
+    [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
 }
 
 + (void)sendHandshakeMessageSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure
@@ -454,6 +462,10 @@ typedef enum {
                 if ([self respondsToSelector:@selector(receiveHomeModuleMessage:messageIDPrefix: messageError:success:failure:)]) {
                     [self receiveHomeModuleMessage:message messageIDPrefix:[messageID componentsSeparatedByString:@"-"].firstObject messageError:messageError success:success failure:failure];
                 }
+            }
+            
+            if ([messageID containsString:@"heart-"]) {
+                Log(@"\n---【收到心跳消息】---");
             }
         }];
     }

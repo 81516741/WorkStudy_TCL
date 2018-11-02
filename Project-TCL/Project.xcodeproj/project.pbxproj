@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D121C0A2182E0C9001A9231 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D121C092182E0C9001A9231 /* Alert.swift */; };
+		0D121C1121830F5D001A9231 /* UserInfoModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D121C0E21830F5D001A9231 /* UserInfoModel.mm */; };
 		0D2533912170A28E00310FFA /* LDSysTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25338F2170A28D00310FFA /* LDSysTool.m */; };
 		0D2533B82170A3A100310FFA /* LDHTTPConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25339A2170A3A100310FFA /* LDHTTPConst.m */; };
 		0D2533B92170A3A100310FFA /* LDHTTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25339C2170A3A100310FFA /* LDHTTPManager.m */; };
@@ -25,6 +27,11 @@
 		0D2533CC2170A3B900310FFA /* NSString+tcl_parseXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533CA2170A3B900310FFA /* NSString+tcl_parseXML.m */; };
 		0D2533DA2170A47C00310FFA /* LDDBTool+Login.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533CF2170A47C00310FFA /* LDDBTool+Login.mm */; };
 		0D2533E12170A8C000310FFA /* LDSocketTool+homeSend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2533E02170A8BF00310FFA /* LDSocketTool+homeSend.m */; };
+		0D2E34542186A9880071F5C4 /* SceneModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D2E34512186A9880071F5C4 /* SceneModel.mm */; };
+		0D2E34572186DBAC0071F5C4 /* TopBarSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2E34562186DBAC0071F5C4 /* TopBarSelectView.swift */; };
+		0D2E34592186E0F60071F5C4 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2E34582186E0F60071F5C4 /* UIColor+extension.swift */; };
+		0D2E345B2186E2120071F5C4 /* TransformTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2E345A2186E2120071F5C4 /* TransformTool.swift */; };
+		0D2E345D218720590071F5C4 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2E345C218720590071F5C4 /* DeviceCell.swift */; };
 		0D4B5FF721796C7B00E174C6 /* ConfigModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D4B5FF421796C7A00E174C6 /* ConfigModel.mm */; };
 		0D4B5FFE21796E8B00E174C6 /* LDDBTool+initiative.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D4B5FFD21796E8B00E174C6 /* LDDBTool+initiative.mm */; };
 		0D4B60022179A98C00E174C6 /* LDSocketTool+homeReceive.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4B60012179A98C00E174C6 /* LDSocketTool+homeReceive.m */; };
@@ -101,6 +108,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D121C092182E0C9001A9231 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		0D121C0E21830F5D001A9231 /* UserInfoModel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = UserInfoModel.mm; sourceTree = "<group>"; };
+		0D121C0F21830F5D001A9231 /* UserInfoModel+WCTTableCoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfoModel+WCTTableCoding.h"; sourceTree = "<group>"; };
+		0D121C1021830F5D001A9231 /* UserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
 		0D25338F2170A28D00310FFA /* LDSysTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSysTool.m; sourceTree = "<group>"; };
 		0D2533902170A28D00310FFA /* LDSysTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSysTool.h; sourceTree = "<group>"; };
 		0D2533992170A3A100310FFA /* LDHTTPConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDHTTPConst.h; sourceTree = "<group>"; };
@@ -136,6 +147,13 @@
 		0D2533CF2170A47C00310FFA /* LDDBTool+Login.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "LDDBTool+Login.mm"; sourceTree = "<group>"; };
 		0D2533DF2170A8BF00310FFA /* LDSocketTool+homeSend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+homeSend.h"; sourceTree = "<group>"; };
 		0D2533E02170A8BF00310FFA /* LDSocketTool+homeSend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+homeSend.m"; sourceTree = "<group>"; };
+		0D2E34512186A9880071F5C4 /* SceneModel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SceneModel.mm; sourceTree = "<group>"; };
+		0D2E34522186A9880071F5C4 /* SceneModel+WCTTableCoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SceneModel+WCTTableCoding.h"; sourceTree = "<group>"; };
+		0D2E34532186A9880071F5C4 /* SceneModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneModel.h; sourceTree = "<group>"; };
+		0D2E34562186DBAC0071F5C4 /* TopBarSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarSelectView.swift; sourceTree = "<group>"; };
+		0D2E34582186E0F60071F5C4 /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		0D2E345A2186E2120071F5C4 /* TransformTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformTool.swift; sourceTree = "<group>"; };
+		0D2E345C218720590071F5C4 /* DeviceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
 		0D4B5FF421796C7A00E174C6 /* ConfigModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConfigModel.mm; sourceTree = "<group>"; };
 		0D4B5FF521796C7A00E174C6 /* ConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigModel.h; sourceTree = "<group>"; };
 		0D4B5FF621796C7A00E174C6 /* ConfigModel+WCTTableCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConfigModel+WCTTableCoding.h"; sourceTree = "<group>"; };
@@ -264,6 +282,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D121C082182E08B001A9231 /* CommonView */ = {
+			isa = PBXGroup;
+			children = (
+				0D121C092182E0C9001A9231 /* Alert.swift */,
+			);
+			path = CommonView;
+			sourceTree = "<group>";
+		};
 		0D2533982170A3A100310FFA /* LDHTTP */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,6 +357,7 @@
 		0D2533C62170A3B900310FFA /* LDCategory */ = {
 			isa = PBXGroup;
 			children = (
+				0D2E34582186E0F60071F5C4 /* UIColor+extension.swift */,
 				0D2533C72170A3B900310FFA /* NSString+ld_Security.h */,
 				0D2533C82170A3B900310FFA /* NSString+ld_Security.m */,
 				0D2533C92170A3B900310FFA /* NSString+tcl_parseXML.h */,
@@ -368,6 +395,15 @@
 			path = Socket;
 			sourceTree = "<group>";
 		};
+		0D2E34552186D6950071F5C4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0D2E34562186DBAC0071F5C4 /* TopBarSelectView.swift */,
+				0D2E345C218720590071F5C4 /* DeviceCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		0D4B5FEF21796BF800E174C6 /* InitiatiactiveMessageHandle */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,6 +437,7 @@
 		0D6900A02079F0420090D89A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0D2E34552186D6950071F5C4 /* View */,
 				0D6E3F7C2176E2F000B59EAC /* Model */,
 				0D6E3F81217707BC00B59EAC /* DBTool */,
 				0D6E3F6F2175DDA900B59EAC /* Controller */,
@@ -469,6 +506,7 @@
 		0D6900ED2079F4210090D89A /* LDTool */ = {
 			isa = PBXGroup;
 			children = (
+				0D2E345A2186E2120071F5C4 /* TransformTool.swift */,
 				0D2533902170A28D00310FFA /* LDSysTool.h */,
 				0D25338F2170A28D00310FFA /* LDSysTool.m */,
 				0D6901022079FC740090D89A /* LDLogTool.h */,
@@ -572,6 +610,7 @@
 		0D6901C6207DE8B20090D89A /* LDFunctionModule */ = {
 			isa = PBXGroup;
 			children = (
+				0D121C082182E08B001A9231 /* CommonView */,
 				0DAA8990209AE755008B5BEC /* LDPictureCutController */,
 				0DAA898A209AE0EF008B5BEC /* MBProgress+LDHUD */,
 				0D6901EF207E032F0090D89A /* LDBehavior */,
@@ -675,6 +714,12 @@
 				0D6E3F7D2176E2FE00B59EAC /* DeviceModel.mm */,
 				0D6E3F7E2176E2FE00B59EAC /* DeviceModel+WCTTableCoding.h */,
 				0D6E3F7F2176E2FE00B59EAC /* DeviceModel.h */,
+				0D121C0E21830F5D001A9231 /* UserInfoModel.mm */,
+				0D121C0F21830F5D001A9231 /* UserInfoModel+WCTTableCoding.h */,
+				0D121C1021830F5D001A9231 /* UserInfoModel.h */,
+				0D2E34512186A9880071F5C4 /* SceneModel.mm */,
+				0D2E34522186A9880071F5C4 /* SceneModel+WCTTableCoding.h */,
+				0D2E34532186A9880071F5C4 /* SceneModel.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -876,7 +921,12 @@
 				"${BUILT_PRODUCTS_DIR}/GDataXML-HTML/GDataXML_HTML.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/WCDB/WCDB.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -887,7 +937,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GDataXML_HTML.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WCDB.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -934,18 +989,21 @@
 				0D6901BB207DD1880090D89A /* NSObject+LDMonitor.m in Sources */,
 				0D8FE5602174416F0092955B /* Target_Login.m in Sources */,
 				0D2533DA2170A47C00310FFA /* LDDBTool+Login.mm in Sources */,
+				0D2E34542186A9880071F5C4 /* SceneModel.mm in Sources */,
 				0D2533BB2170A3A100310FFA /* LDHTTPTool.m in Sources */,
 				0D69020D207E2C970090D89A /* LDImageViewBehavior.m in Sources */,
 				0D6E3F6A2175DBFD00B59EAC /* LDHomeVC.swift in Sources */,
 				0D2533CC2170A3B900310FFA /* NSString+tcl_parseXML.m in Sources */,
 				0D2533E12170A8C000310FFA /* LDSocketTool+homeSend.m in Sources */,
 				0D6901C4207DD1880090D89A /* UIViewController+LDLogin.m in Sources */,
+				0D2E345B2186E2120071F5C4 /* TransformTool.swift in Sources */,
 				0D2533C32170A3A100310FFA /* LDPacketHandle.m in Sources */,
 				0D6901C5207DD1880090D89A /* UIViewController+LDNaviBar.m in Sources */,
 				0D6901B8207DD1880090D89A /* LDMediator.m in Sources */,
 				0D8FE5682174792E0092955B /* LDSocketTool+login.m in Sources */,
 				0D69020B207E2C970090D89A /* LDButtonBehavior.m in Sources */,
 				0D2533BA2170A3A100310FFA /* LDHTTPModel.m in Sources */,
+				0D121C0A2182E0C9001A9231 /* Alert.swift in Sources */,
 				0D2533C22170A3A100310FFA /* LDInitiativeMsgHandle.m in Sources */,
 				0D6901C2207DD1880090D89A /* UINavigationController+LDBase.m in Sources */,
 				0D6E3F6C2175DC7200B59EAC /* LDOtherVC.swift in Sources */,
@@ -966,7 +1024,9 @@
 				0D6E3F622175BDDD00B59EAC /* LDNetTool.m in Sources */,
 				0D2533BE2170A3A100310FFA /* ErrorCode.m in Sources */,
 				0D2533BC2170A3A100310FFA /* Target_LDHTTP.m in Sources */,
+				0D2E345D218720590071F5C4 /* DeviceCell.swift in Sources */,
 				0D6901C3207DD1880090D89A /* UITabBarController+LDBase.m in Sources */,
+				0D2E34572186DBAC0071F5C4 /* TopBarSelectView.swift in Sources */,
 				0D2533C42170A3A100310FFA /* LDSocketManager.m in Sources */,
 				0D8FE554217426870092955B /* LDAppDelegate.swift in Sources */,
 				0D2533C02170A3A100310FFA /* MessageIDConst.m in Sources */,
@@ -986,6 +1046,8 @@
 				0D2533BD2170A3A100310FFA /* Const.m in Sources */,
 				0DAA898D209AE17A008B5BEC /* MBProgressHUD+LDHUD.m in Sources */,
 				0DAA8995209AE78F008B5BEC /* LDPictureCutController.m in Sources */,
+				0D2E34592186E0F60071F5C4 /* UIColor+extension.swift in Sources */,
+				0D121C1121830F5D001A9231 /* UserInfoModel.mm in Sources */,
 				0D4B5FFE21796E8B00E174C6 /* LDDBTool+initiative.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1168,7 +1230,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BHD34642BX;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
@@ -1180,8 +1242,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IntellicomID.tcl.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "381b2968-a0ca-480d-bd90-cae6581ccd25";
-				PROVISIONING_PROFILE_SPECIFIER = "Development Provisioning";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/Mac_Document/Github/WorkStudy_TCL/Project-TCL/Project-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -1195,7 +1257,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BHD34642BX;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
@@ -1207,8 +1269,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IntellicomID.tcl.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "381b2968-a0ca-480d-bd90-cae6581ccd25";
-				PROVISIONING_PROFILE_SPECIFIER = "Development Provisioning";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/Mac_Document/Github/WorkStudy_TCL/Project-TCL/Project-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

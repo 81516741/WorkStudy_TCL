@@ -7,6 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+typedef enum {
+    otherDeviceLoginStateNone = 0,//其他设备没有登录
+    otherDeviceLogined,//其他设备登录了，我被挤下线
+    myDeviceRelogin,//挤下线后，我选择了重登录
+    myDeviceLoginOut//挤下线后，我选择退出登录
+}OtherDeviceLoginState;
 
 @class SceneVersionModel,SceneDevIconModel,NameModel,ADModel,CLKDevsModel,APConfigModel,CategorynameModel;
 
@@ -54,6 +60,9 @@
 @property (nonatomic,strong)NSString * randCode;//保存登录成功后的会话随机数
 @property (nonatomic,strong)NSString * currentUserID;//当前用户的智讯ID
 @property (nonatomic,strong)NSString * currentUserPassword;//当前用户的密码摘要
+/*otherDeviceLoginState 用来确定是否要重新登录的，可以直接搜项目全局
+看有哪些地方赋值和使用，一看就明白的*/
+@property(assign, nonatomic) OtherDeviceLoginState otherDeviceLoginState;
 
 
 @end

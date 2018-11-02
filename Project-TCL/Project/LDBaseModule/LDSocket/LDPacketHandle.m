@@ -19,7 +19,6 @@ NSMutableArray * _xmlArray;
     if (packets.length == 0) {
         return _xmlArray;
     }
-    packets = [[[packets stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"] stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"] stringByReplacingOccurrencesOfString:@"'" withString:@"\""];
     if(nil == _packetCatch) {
         _packetCatch = packets;
     } else {

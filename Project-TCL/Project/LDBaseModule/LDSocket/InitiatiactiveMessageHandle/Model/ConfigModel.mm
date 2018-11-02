@@ -62,9 +62,11 @@ WCDB_SYNTHESIZE(ConfigModel,  sharedevurl)
 WCDB_SYNTHESIZE(ConfigModel,  IOSWifiPrivateAPI)
 WCDB_SYNTHESIZE(ConfigModel,  logontimeoutcnt)
 WCDB_SYNTHESIZE(ConfigModel,  flatlocationversion)
+
 WCDB_SYNTHESIZE(ConfigModel,  randCode)
 WCDB_SYNTHESIZE(ConfigModel,  currentUserID)
 WCDB_SYNTHESIZE(ConfigModel,  currentUserPassword)
+WCDB_SYNTHESIZE(ConfigModel,  otherDeviceLoginState)
 
 @end
 

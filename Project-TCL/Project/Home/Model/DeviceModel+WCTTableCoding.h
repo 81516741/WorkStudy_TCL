@@ -37,6 +37,6 @@ WCDB_PROPERTY(head)
 WCDB_PROPERTY(masterid)
 WCDB_PROPERTY(bindtime)
 WCDB_PROPERTY(categoryid)
-WCDB_PROPERTY(licenseid)
+WCDB_PROPERTY(currentUserID)
 
 @end

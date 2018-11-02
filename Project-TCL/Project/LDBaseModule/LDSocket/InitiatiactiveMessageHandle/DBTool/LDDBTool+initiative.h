@@ -7,7 +7,8 @@
 //
 
 #import "LDDBTool.h"
-@class ConfigModel;
+#import "ConfigModel.h"
+
 @interface LDDBTool (initiative)
 + (void)createInitiativeTables;
 + (void)clearnInitiativeTables;
@@ -16,6 +17,7 @@
 + (void)saveConfigModel:(ConfigModel *)configModel;
 + (void)updateConfigModelRandCode:(NSString *)randCode;
 + (void)updateConfigModelCurrentUserID:(NSString *)currentUserID password:(NSString *)password;
++ (void)updateConfigModelOtherDeviceLoginState:(OtherDeviceLoginState)state;
 + (ConfigModel *)getConfigModel;
 + (void)clearnConfigModel;
 @end

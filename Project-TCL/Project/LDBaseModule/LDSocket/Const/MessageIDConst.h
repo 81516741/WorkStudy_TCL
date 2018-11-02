@@ -15,10 +15,11 @@ extern  NSString * const kEndHandMessageIDPrefix;
 extern  NSString * const kHeartMessageIDPrefix;
 extern  NSString * const kAutoLoginMessageIDPrefix;
 
+//---------登录模块------
 extern  NSString * const kLoginMessageIDPrefix;
 extern  NSString * const kGetCountMessageIDPrefix;
-
-extern  NSString * const kGetConfigParamIDPrefix;
+//---------首页模块------
+extern  NSString * const kGetUserInfoIDPrefix;
 extern  NSString * const kGetDeviceListIDPrefix;
 extern  NSString * const kGetSceneListIDPrefix;
 

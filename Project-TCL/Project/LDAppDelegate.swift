@@ -11,9 +11,10 @@ import UIKit
 class LDAppDelegate : UIResponder,UIApplicationDelegate  {
     var window: UIWindow?
     func applicationDidFinishLaunching(_ application: UIApplication) {
-        LDDBTool.createDatabaseAndAllTable()
-        LDConfigVCUtil.config(true)
         LDLogTool.configDDLog()
+        LDDBTool.createDatabaseAndAllTable()
+        LDDBTool.updateConfigModelOtherDeviceLoginState(otherDeviceLoginStateNone)
+        LDConfigVCUtil.config(true)
         LDSocketTool.startConnectAndHeart()
     }
 }

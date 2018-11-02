@@ -44,4 +44,19 @@
     [self sendMessage:message messageID:messageID success:success failure:failure];
 }
 
++ (void)getUserInfoSuccess:(LDSocketToolBlock)success failure:(LDSocketToolBlock)failure {
+    
+    ConfigModel * model = [LDDBTool getConfigModel];
+    NSString * messageID = getMessageID(kGetUserInfoIDPrefix);
+    NSString * message = [NSString stringWithFormat:@"\
+    <iq id=\"%@\" type=\"get\">\
+        <getuserinfo xmlns=\"tcl:im:info\">\
+            <apptype>0</apptype>\
+            <userid>%@</userid>\
+        </getuserinfo>\
+    </iq>\
+",messageID,model.currentUserID];
+    [self sendMessage:message messageID:messageID success:success failure:failure];
+}
+
 @end

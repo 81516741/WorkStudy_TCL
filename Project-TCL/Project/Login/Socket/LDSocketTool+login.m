@@ -69,7 +69,6 @@
     if (num.length == 11) {
         [self getCountByPhoneNum:num success:^(NSString * count) {
             [self login:count password:password.sha1String Success:^(id data) {
-                Log(@"登录成功,更新账号和密码");
                 [LDDBTool updateConfigModelCurrentUserID:count password:password.sha1String];
                 if (success) {
                     success(data);

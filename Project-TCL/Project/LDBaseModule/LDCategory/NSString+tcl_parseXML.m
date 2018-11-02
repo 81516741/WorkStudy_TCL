@@ -9,7 +9,7 @@
 #import "NSString+tcl_parseXML.h"
 
 @implementation NSString(tcl_parseXML)
-@dynamic tcl_noSpaceStr,tcl_messageID,tcl_userID,tcl_errorCode,tcl_reportMsgStatus;
+@dynamic tcl_noSpaceStr,tcl_messageID,tcl_userID,tcl_errorCode,tcl_reportMsgStatus,tcl_convertXML;
 
 - (NSString *)tcl_subStringNear:(NSString *) startStr  endStr:(NSString *)endStr {
     NSRange range = [self rangeOfString:startStr];
@@ -101,5 +101,9 @@
              @"port":port,
              @"errorcode":errorcode
              };
+}
+
+- (NSString *)tcl_convertXML {
+    return [[[self stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"] stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"] stringByReplacingOccurrencesOfString:@"'" withString:@"\""];
 }
 @end

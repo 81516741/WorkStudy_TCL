@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const kOtherDeviceLoginNotification;
 extern NSString * const kAutoLoginFailureNotification;
 
 @interface LDInitiativeMsgHandle : NSObject

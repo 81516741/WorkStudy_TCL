@@ -16,6 +16,7 @@
 @property(copy, nonatomic) NSString * tcl_messageID;
 @property(copy, nonatomic) NSString * tcl_userID;
 @property(copy, nonatomic) NSString * tcl_errorCode;
+@property(copy, nonatomic) NSString * tcl_convertXML;
 //获取响应消息的状态（有些请求发送后，服务器会马上回个响应消息）
 @property(copy, nonatomic) NSString * tcl_reportMsgStatus;
 - (NSDictionary *)tcl_hostAndPort;

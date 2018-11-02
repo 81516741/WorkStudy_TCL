@@ -18,7 +18,7 @@ NSString * const kAutoLoginMessageIDPrefix = @"auto_login";
 NSString * const kGetCountMessageIDPrefix = @"login_getCount";
 NSString * const kLoginMessageIDPrefix = @"login_log";
 //首页模块的
-NSString * const kGetConfigParamIDPrefix = @"home_getConfigParam";
+NSString * const kGetUserInfoIDPrefix = @"home_getUserInfo";
 NSString * const kGetDeviceListIDPrefix = @"home_getDeviceList";
 NSString * const kGetSceneListIDPrefix = @"home_getSceneList";
 
@@ -27,5 +27,6 @@ NSString * const kGetSceneListIDPrefix = @"home_getSceneList";
 
 NSString * getMessageID(NSString * messageIDPrefix) {
     NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970] * 1000;
+    NSTimeInterval uniquNum = currentTime + arc4random() % 10000;
     return [[NSString alloc] initWithFormat:@"%@-%@",messageIDPrefix,[[NSString alloc] initWithFormat:@"%ld",(long)currentTime]];
 }
