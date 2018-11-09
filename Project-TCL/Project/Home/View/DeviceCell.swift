@@ -19,12 +19,18 @@ class DeviceCell: UICollectionViewCell {
             $0?.size.equalTo()(CGSize(width: 50, height: 50))
             $0?.top.equalTo()(10)
         }
+        backgroundColor = UIColor.white
         addSubview(titleLabel)
         titleLabel.mas_makeConstraints{
             $0?.top.equalTo()(deviceImageView.mas_bottom)?.offset()(10)
             $0?.left.equalTo()(self)
             $0?.right.equalTo()(self.mas_right)
         }
+    }
+    
+    func updateCellViews(model:DeviceModel) {
+        deviceImageView.sd_setImage(with: URL.init(string: model.headurl), placeholderImage: UIImage.init(named: "login_avatar"), options: .retryFailed, completed: nil)
+        titleLabel.text = model.nickname
     }
     
     required init?(coder aDecoder: NSCoder) {

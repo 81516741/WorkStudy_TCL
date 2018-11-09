@@ -106,4 +106,9 @@
 - (NSString *)tcl_convertXML {
     return [[[self stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"] stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"] stringByReplacingOccurrencesOfString:@"'" withString:@"\""];
 }
+
+- (NSString *)tcl_fromID {
+    NSString * str = [self.tcl_noSpaceStr tcl_subStringNear:@"from=\"" endStr:@"@tcl"];
+    return str;
+}
 @end

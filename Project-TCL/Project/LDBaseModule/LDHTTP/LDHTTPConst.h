@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString * const kLDHTTPDomainURL;
+extern NSString * const kLDHTTPDeviceDomainURL;
+
 extern NSString * const kLDHTTPImageUploadImageDataKey;
 extern NSString * const kLDHTTPImageUploadImageNameKey;
 extern NSString * const kLDHTTPImageUploadFileNameKey;
 extern NSString * const kLDHTTPImageUploadMimeTypeKey;
-extern NSString * const kLDHTTPRequestSimulatorString;
-extern NSString * const kLDHTTPRequestTokenKey;
 
 NSString * http_realPath(NSString * path);
 

@@ -20,7 +20,7 @@
 #import "LDSysTool.h"
 #import "NSString+tcl_parseXML.h"
 
-
+NSString * const kLoginStateChangeNotification = @"kLoginStateChangeNotification";
 NSString * const quickHand0 = @"quickHand0";
 NSString * const quickHand1 = @"quickHand1";
 BOOL useSSL = false;
@@ -558,6 +558,10 @@ typedef enum {
     }
     return _requestBlocks;
 }
-
+#pragma mark - set and get
+- (void)setLoginState:(NSString *)loginState {
+    _loginState = loginState;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginStateChangeNotification object:loginState];
+}
 
 @end

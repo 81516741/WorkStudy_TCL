@@ -139,7 +139,7 @@ NSMutableDictionary * taskDescriptions;
     model.httpType = httpType;
     model.url = url;
     if (parameters) {
-        NSString * token = parameters[kLDHTTPRequestTokenKey];
+        NSString * token = parameters[@"dd"];
         if (token.length > 0) {
             model.token = token;
         }

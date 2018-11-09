@@ -26,7 +26,6 @@ class LDHomeVC: UIViewController {
         configSubViews()
         addNoti()
         netRequest()
-        netCheck()
     }
     
     func configSubViews() {
@@ -85,11 +84,13 @@ extension LDHomeVC : UICollectionViewDelegate,UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DeviceCell
-        cell.backgroundColor = UIColor.white
         let model = LDDBTool.getDeviceList()[indexPath.row] as! DeviceModel
-        cell.deviceImageView.sd_setImage(with: URL.init(string: model.headurl), placeholderImage: UIImage.init(named: "login_avatar"), options: .retryFailed, completed: nil)
-        cell.titleLabel.text = model.nickname
+        cell.updateCellViews(model: model)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let model = LDDBTool.getDeviceList()[indexPath.row] as! DeviceModel
     }
     
     
@@ -122,6 +123,7 @@ extension LDHomeVC {
     func addNoti() {
         NotificationCenter.default.addObserver(self, selector: #selector(autoLoginFailure), name: NSNotification.Name.autoLoginFailure, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(otherDeviceLoginNoti(noti:)), name: NSNotification.Name.otherDeviceLogin, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loginStateChange), name: NSNotification.Name.loginStateChange, object: nil)
     }
     
     
@@ -135,6 +137,19 @@ extension LDHomeVC {
         }) {
             LDDBTool.updateConfigModelOtherDeviceLoginState(myDeviceRelogin)
             LDSocketTool.sendHearMessge()
+        }
+    }
+    
+    @objc func loginStateChange() {
+        if LDSocketTool.shared().loginState == "0" {
+            DispatchQueue.main.async {
+                MBProgressHUD.showTipMessage(inWindow: "已经连接，隐藏无网络提醒")
+            }
+        } else {
+            DispatchQueue.main.async {
+                
+                MBProgressHUD.showTipMessage(inWindow: "断开连接，显示无网络提醒")
+            }
         }
     }
 }
@@ -152,23 +167,6 @@ extension LDHomeVC {
                 }
             } else {
                 self.allRequest()
-            }
-        }
-    }
-    
-    fileprivate func netCheck() {
-        DispatchQueue.global().async {
-            while true {
-                if LDSocketTool.shared().loginState == "0" {
-                    DispatchQueue.main.async {
-                        print("已经连接，隐藏无网络提醒")
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        print("断开连接，显示无网络提醒")
-                    }
-                }
-                sleep(3)
             }
         }
     }

@@ -35,6 +35,10 @@
 		0D4B5FF721796C7B00E174C6 /* ConfigModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D4B5FF421796C7A00E174C6 /* ConfigModel.mm */; };
 		0D4B5FFE21796E8B00E174C6 /* LDDBTool+initiative.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D4B5FFD21796E8B00E174C6 /* LDDBTool+initiative.mm */; };
 		0D4B60022179A98C00E174C6 /* LDSocketTool+homeReceive.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4B60012179A98C00E174C6 /* LDSocketTool+homeReceive.m */; };
+		0D5C10232192B5980041B337 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5C10212192B5980041B337 /* XMLReader.m */; };
+		0D5C108E219516480041B337 /* XMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5C108D219516480041B337 /* XMLWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0D5C1091219516A50041B337 /* XMLTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5C1090219516A50041B337 /* XMLTool.m */; };
+		0D5C1094219517B00041B337 /* NSString+str2Dic2str.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5C1093219517B00041B337 /* NSString+str2Dic2str.m */; };
 		0D6900BA2079F0430090D89A /* LDHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A32079F0420090D89A /* LDHomeVC.xib */; };
 		0D6900BC2079F0430090D89A /* first_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A72079F0420090D89A /* first_normal.png */; };
 		0D6900BD2079F0430090D89A /* first_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A82079F0420090D89A /* first_selected.png */; };
@@ -161,6 +165,14 @@
 		0D4B5FFD21796E8B00E174C6 /* LDDBTool+initiative.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "LDDBTool+initiative.mm"; sourceTree = "<group>"; };
 		0D4B60002179A98C00E174C6 /* LDSocketTool+homeReceive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+homeReceive.h"; sourceTree = "<group>"; };
 		0D4B60012179A98C00E174C6 /* LDSocketTool+homeReceive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+homeReceive.m"; sourceTree = "<group>"; };
+		0D5C10202192B5980041B337 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
+		0D5C10212192B5980041B337 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
+		0D5C108C219516480041B337 /* XMLWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLWriter.h; sourceTree = "<group>"; };
+		0D5C108D219516480041B337 /* XMLWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLWriter.m; sourceTree = "<group>"; };
+		0D5C108F219516A50041B337 /* XMLTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLTool.h; sourceTree = "<group>"; };
+		0D5C1090219516A50041B337 /* XMLTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLTool.m; sourceTree = "<group>"; };
+		0D5C1092219517B00041B337 /* NSString+str2Dic2str.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+str2Dic2str.h"; sourceTree = "<group>"; };
+		0D5C1093219517B00041B337 /* NSString+str2Dic2str.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+str2Dic2str.m"; sourceTree = "<group>"; };
 		0D6900A32079F0420090D89A /* LDHomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LDHomeVC.xib; sourceTree = "<group>"; };
 		0D6900A72079F0420090D89A /* first_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_normal.png; sourceTree = "<group>"; };
 		0D6900A82079F0420090D89A /* first_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_selected.png; sourceTree = "<group>"; };
@@ -318,7 +330,6 @@
 		0D2533A42170A3A100310FFA /* LDSocket */ = {
 			isa = PBXGroup;
 			children = (
-				0D4B5FEF21796BF800E174C6 /* InitiatiactiveMessageHandle */,
 				0D2533A52170A3A100310FFA /* Const */,
 				0D2533AE2170A3A100310FFA /* File */,
 				0D2533B22170A3A100310FFA /* LDPacketHandle.h */,
@@ -357,6 +368,8 @@
 		0D2533C62170A3B900310FFA /* LDCategory */ = {
 			isa = PBXGroup;
 			children = (
+				0D5C1092219517B00041B337 /* NSString+str2Dic2str.h */,
+				0D5C1093219517B00041B337 /* NSString+str2Dic2str.m */,
 				0D2E34582186E0F60071F5C4 /* UIColor+extension.swift */,
 				0D2533C72170A3B900310FFA /* NSString+ld_Security.h */,
 				0D2533C82170A3B900310FFA /* NSString+ld_Security.m */,
@@ -434,6 +447,19 @@
 			path = DBTool;
 			sourceTree = "<group>";
 		};
+		0D5C101D2192B4230041B337 /* XMLTool */ = {
+			isa = PBXGroup;
+			children = (
+				0D5C108F219516A50041B337 /* XMLTool.h */,
+				0D5C1090219516A50041B337 /* XMLTool.m */,
+				0D5C108C219516480041B337 /* XMLWriter.h */,
+				0D5C108D219516480041B337 /* XMLWriter.m */,
+				0D5C10202192B5980041B337 /* XMLReader.h */,
+				0D5C10212192B5980041B337 /* XMLReader.m */,
+			);
+			path = XMLTool;
+			sourceTree = "<group>";
+		};
 		0D6900A02079F0420090D89A /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,6 +518,8 @@
 		0D6900CB2079F4210090D89A /* LDBaseModule */ = {
 			isa = PBXGroup;
 			children = (
+				0D4B5FEF21796BF800E174C6 /* InitiatiactiveMessageHandle */,
+				0D5C101D2192B4230041B337 /* XMLTool */,
 				0D69015A207C63BA0090D89A /* LDDBTool */,
 				0D2533982170A3A100310FFA /* LDHTTP */,
 				0D2533A42170A3A100310FFA /* LDSocket */,
@@ -983,6 +1011,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D5C1094219517B00041B337 /* NSString+str2Dic2str.m in Sources */,
 				0D2533C52170A3A100310FFA /* LDSocketTool.m in Sources */,
 				0D69021D207F54D50090D89A /* LDFunctionTool.m in Sources */,
 				0D6901BA207DD1880090D89A /* LDLoadBaseSourceUtil.m in Sources */,
@@ -1034,6 +1063,7 @@
 				0D69017D207CDEED0090D89A /* LDLoginModel.mm in Sources */,
 				0D69020E207E2C970090D89A /* LDTextFieldBehavior.m in Sources */,
 				0D4B5FF721796C7B00E174C6 /* ConfigModel.mm in Sources */,
+				0D5C1091219516A50041B337 /* XMLTool.m in Sources */,
 				0D4B60022179A98C00E174C6 /* LDSocketTool+homeReceive.m in Sources */,
 				0D6901042079FC740090D89A /* LDLogTool.m in Sources */,
 				0D690136207B5E370090D89A /* Target_Mine.m in Sources */,
@@ -1047,8 +1077,10 @@
 				0DAA898D209AE17A008B5BEC /* MBProgressHUD+LDHUD.m in Sources */,
 				0DAA8995209AE78F008B5BEC /* LDPictureCutController.m in Sources */,
 				0D2E34592186E0F60071F5C4 /* UIColor+extension.swift in Sources */,
+				0D5C108E219516480041B337 /* XMLWriter.m in Sources */,
 				0D121C1121830F5D001A9231 /* UserInfoModel.mm in Sources */,
 				0D4B5FFE21796E8B00E174C6 /* LDDBTool+initiative.mm in Sources */,
+				0D5C10232192B5980041B337 /* XMLReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

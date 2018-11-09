@@ -66,6 +66,7 @@
 + (ConfigModel *)getConfigModel {
     return [LDDBTool queryAllObjects:ConfigModel.self].lastObject;
 }
+
 + (void)clearnConfigModel {
     [LDDBTool deleteAllObjects:ConfigModel.self];
 }

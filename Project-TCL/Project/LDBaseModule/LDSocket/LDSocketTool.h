@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LDInitiativeMsgHandle.h"
-
+extern NSString * const kLoginStateChangeNotification;
 typedef void(^LDSocketToolBlock)(id data);
 
 @protocol LDSocketDistributeProtocol
