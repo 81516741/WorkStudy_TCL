@@ -7,15 +7,16 @@
 //
 
 #import "LDInitiativeMsgHandle.h"
-#import "GDataXMLNode.h"
 #import "LDLogTool.h"
-#import "LDSocketTool.h"
-#import "ConfigModel.h"
-#import "LDDBTool+initiative.h"
 #import "NSString+tcl_parseXML.h"
-#import <MJExtension/MJExtension.h>
+#import "XMLTool.h"
 #import "ErrorCode.h"
 #import "MessageIDConst.h"
+
+#import <MJExtension/MJExtension.h>
+#import "LDSocketTool.h"
+#import "LDDBTool+initiative.h"
+#import "ConfigModel.h"
 
 NSString * const kOtherDeviceLoginNotification = @"kOtherDeviceLoginNotification";
 NSString * const kAutoLoginFailureNotification = @"kAutoLoginFailureNotification";
@@ -24,18 +25,8 @@ NSString * const kAutoLoginFailureNotification = @"kAutoLoginFailureNotification
 
 @implementation LDInitiativeMsgHandle
 
-+ (void)documentFromMessage:(NSString *)message block:(void(^)(GDataXMLDocument * doc))block {
-    GDataXMLDocument * doc = [[GDataXMLDocument alloc] initWithXMLString:message error:nil];
-    if (doc == nil) {
-        Log([NSString stringWithFormat:@"\n将下面的xml转化成document失败\n%@",message]);
-    } else {
-        if (block) {
-            block(doc);
-        }
-    }
-}
-
 + (BOOL)handleMessage:(NSString *)message messageID:(NSString *)messageID messageError:(NSString *)messageError {
+    NSDictionary * dataDic = [XMLTool dicFromXML:message];
     if ([message containsString:kAutoLoginMessageIDPrefix]) {//自动登录消息的处理
         if ([messageError isEqualToString:errorCodeNone]) {
             [LDSocketTool shared].loginState = @"0";
@@ -68,7 +59,7 @@ NSString * const kAutoLoginFailureNotification = @"kAutoLoginFailureNotification
         [[NSNotificationCenter defaultCenter] postNotificationName:kOtherDeviceLoginNotification object:deviceName];
     } else if ([message containsString:@"<configparam"]) {
         //全局配置参数
-        [self handleConfigParamMessage:message];
+        [self handleConfigParamMessage:dataDic];
         return YES;
     } else if ([message containsString:@"randcode"]) {
         //随机因子
@@ -83,24 +74,16 @@ NSString * const kAutoLoginFailureNotification = @"kAutoLoginFailureNotification
         
     } else if ([message containsString:@"<message"]) {
         //消息的处理--TODO:这里有很多种类型的消息，需要分别处理
-        [self documentFromMessage:message block:^(GDataXMLDocument *doc) {
-            Log([NSString stringWithFormat:@"收到消息:%@",[doc.rootElement.children.firstObject stringValue]]);
-        }];
+        
     }
     return NO;
 }
 
-+ (void)handleConfigParamMessage:(NSString *)message {
-    [self documentFromMessage:message block:^(GDataXMLDocument * doc) {
-        NSArray * arr = [doc.rootElement.children.firstObject children];
-        NSMutableDictionary * dic = [NSMutableDictionary dictionary];
-        for (GDataXMLElement * ele in arr) {
-            [dic setValue:ele.stringValue forKey:ele.name];
-        }
-        Log([NSString stringWithFormat:@"获取配置参数\n%@",dic]);
-        ConfigModel * model = [ConfigModel mj_objectWithKeyValues:dic];
-        [LDDBTool saveConfigModel:model];
-    }];
++ (void)handleConfigParamMessage:(NSDictionary *)dataDic {
+    NSDictionary * configparamDic = dataDic[@"iq"][@"configparam"];
+    ConfigModel * model = [ConfigModel mj_objectWithKeyValues:configparamDic];
+    Log([NSString stringWithFormat:@"获取配置参数\n%@",configparamDic]);
+    [LDDBTool saveConfigModel:model];
 }
 
 @end

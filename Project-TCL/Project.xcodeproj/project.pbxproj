@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D11EBCE219D3F360025C4CC /* LDSocketTool+LDSocketTool_loginReceive.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D11EBCD219D3F360025C4CC /* LDSocketTool+LDSocketTool_loginReceive.m */; };
+		0D11EBD2219D48CF0025C4CC /* LDHTTPTool+Home.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D11EBD1219D48CF0025C4CC /* LDHTTPTool+Home.m */; };
+		0D11EBD7219D549A0025C4CC /* H5DeviceURLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D11EBD6219D549A0025C4CC /* H5DeviceURLModel.m */; };
+		0D11EBD9219D58E10025C4CC /* H5CtrCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D11EBD8219D58E10025C4CC /* H5CtrCV.swift */; };
 		0D121C0A2182E0C9001A9231 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D121C092182E0C9001A9231 /* Alert.swift */; };
 		0D121C1121830F5D001A9231 /* UserInfoModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D121C0E21830F5D001A9231 /* UserInfoModel.mm */; };
 		0D2533912170A28E00310FFA /* LDSysTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25338F2170A28D00310FFA /* LDSysTool.m */; };
@@ -39,6 +43,7 @@
 		0D5C108E219516480041B337 /* XMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5C108D219516480041B337 /* XMLWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0D5C1091219516A50041B337 /* XMLTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5C1090219516A50041B337 /* XMLTool.m */; };
 		0D5C1094219517B00041B337 /* NSString+str2Dic2str.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5C1093219517B00041B337 /* NSString+str2Dic2str.m */; };
+		0D5C1097219537730041B337 /* LDBaseWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5C1096219537730041B337 /* LDBaseWebVC.swift */; };
 		0D6900BA2079F0430090D89A /* LDHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A32079F0420090D89A /* LDHomeVC.xib */; };
 		0D6900BC2079F0430090D89A /* first_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A72079F0420090D89A /* first_normal.png */; };
 		0D6900BD2079F0430090D89A /* first_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D6900A82079F0420090D89A /* first_selected.png */; };
@@ -85,7 +90,7 @@
 		0D8FE554217426870092955B /* LDAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE553217426870092955B /* LDAppDelegate.swift */; };
 		0D8FE55621742ABF0092955B /* LDMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE55521742ABF0092955B /* LDMacro.swift */; };
 		0D8FE5602174416F0092955B /* Target_Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE55F2174416F0092955B /* Target_Login.m */; };
-		0D8FE5682174792E0092955B /* LDSocketTool+login.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE5672174792E0092955B /* LDSocketTool+login.m */; };
+		0D8FE5682174792E0092955B /* LDSocketTool+loginSend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8FE5672174792E0092955B /* LDSocketTool+loginSend.m */; };
 		0D8FE56C2174878D0092955B /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D8FE56B2174878D0092955B /* LoginVC.xib */; };
 		0DAA898D209AE17A008B5BEC /* MBProgressHUD+LDHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAA898C209AE17A008B5BEC /* MBProgressHUD+LDHUD.m */; };
 		0DAA898F209AE19C008B5BEC /* MBProgressHUD+LDHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0DAA898E209AE19B008B5BEC /* MBProgressHUD+LDHUD.bundle */; };
@@ -112,6 +117,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D11EBCC219D3F360025C4CC /* LDSocketTool+LDSocketTool_loginReceive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+LDSocketTool_loginReceive.h"; sourceTree = "<group>"; };
+		0D11EBCD219D3F360025C4CC /* LDSocketTool+LDSocketTool_loginReceive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+LDSocketTool_loginReceive.m"; sourceTree = "<group>"; };
+		0D11EBD0219D48CF0025C4CC /* LDHTTPTool+Home.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LDHTTPTool+Home.h"; sourceTree = "<group>"; };
+		0D11EBD1219D48CF0025C4CC /* LDHTTPTool+Home.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LDHTTPTool+Home.m"; sourceTree = "<group>"; };
+		0D11EBD5219D549A0025C4CC /* H5DeviceURLModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H5DeviceURLModel.h; sourceTree = "<group>"; };
+		0D11EBD6219D549A0025C4CC /* H5DeviceURLModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = H5DeviceURLModel.m; sourceTree = "<group>"; };
+		0D11EBD8219D58E10025C4CC /* H5CtrCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H5CtrCV.swift; sourceTree = "<group>"; };
 		0D121C092182E0C9001A9231 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		0D121C0E21830F5D001A9231 /* UserInfoModel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = UserInfoModel.mm; sourceTree = "<group>"; };
 		0D121C0F21830F5D001A9231 /* UserInfoModel+WCTTableCoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfoModel+WCTTableCoding.h"; sourceTree = "<group>"; };
@@ -173,6 +185,7 @@
 		0D5C1090219516A50041B337 /* XMLTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLTool.m; sourceTree = "<group>"; };
 		0D5C1092219517B00041B337 /* NSString+str2Dic2str.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+str2Dic2str.h"; sourceTree = "<group>"; };
 		0D5C1093219517B00041B337 /* NSString+str2Dic2str.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+str2Dic2str.m"; sourceTree = "<group>"; };
+		0D5C1096219537730041B337 /* LDBaseWebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDBaseWebVC.swift; sourceTree = "<group>"; };
 		0D6900A32079F0420090D89A /* LDHomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LDHomeVC.xib; sourceTree = "<group>"; };
 		0D6900A72079F0420090D89A /* first_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_normal.png; sourceTree = "<group>"; };
 		0D6900A82079F0420090D89A /* first_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_selected.png; sourceTree = "<group>"; };
@@ -254,8 +267,8 @@
 		0D8FE55521742ABF0092955B /* LDMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDMacro.swift; sourceTree = "<group>"; };
 		0D8FE55E2174416F0092955B /* Target_Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Target_Login.h; sourceTree = "<group>"; };
 		0D8FE55F2174416F0092955B /* Target_Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Target_Login.m; sourceTree = "<group>"; };
-		0D8FE5662174792D0092955B /* LDSocketTool+login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+login.h"; sourceTree = "<group>"; };
-		0D8FE5672174792E0092955B /* LDSocketTool+login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+login.m"; sourceTree = "<group>"; };
+		0D8FE5662174792D0092955B /* LDSocketTool+loginSend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LDSocketTool+loginSend.h"; sourceTree = "<group>"; };
+		0D8FE5672174792E0092955B /* LDSocketTool+loginSend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LDSocketTool+loginSend.m"; sourceTree = "<group>"; };
 		0D8FE56B2174878D0092955B /* LoginVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
 		0DAA898B209AE17A008B5BEC /* MBProgressHUD+LDHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+LDHUD.h"; sourceTree = "<group>"; };
 		0DAA898C209AE17A008B5BEC /* MBProgressHUD+LDHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+LDHUD.m"; sourceTree = "<group>"; };
@@ -294,6 +307,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D11EBCF219D48B00025C4CC /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				0D11EBD0219D48CF0025C4CC /* LDHTTPTool+Home.h */,
+				0D11EBD1219D48CF0025C4CC /* LDHTTPTool+Home.m */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
 		0D121C082182E08B001A9231 /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,8 +413,10 @@
 		0D2533D02170A47C00310FFA /* Socket */ = {
 			isa = PBXGroup;
 			children = (
-				0D8FE5662174792D0092955B /* LDSocketTool+login.h */,
-				0D8FE5672174792E0092955B /* LDSocketTool+login.m */,
+				0D8FE5662174792D0092955B /* LDSocketTool+loginSend.h */,
+				0D8FE5672174792E0092955B /* LDSocketTool+loginSend.m */,
+				0D11EBCC219D3F360025C4CC /* LDSocketTool+LDSocketTool_loginReceive.h */,
+				0D11EBCD219D3F360025C4CC /* LDSocketTool+LDSocketTool_loginReceive.m */,
 			);
 			path = Socket;
 			sourceTree = "<group>";
@@ -463,6 +487,7 @@
 		0D6900A02079F0420090D89A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0D11EBCF219D48B00025C4CC /* HTTP */,
 				0D2E34552186D6950071F5C4 /* View */,
 				0D6E3F7C2176E2F000B59EAC /* Model */,
 				0D6E3F81217707BC00B59EAC /* DBTool */,
@@ -631,6 +656,7 @@
 				0D6901B1207DD1880090D89A /* UIViewController+LDLogin.m */,
 				0D6901B2207DD1880090D89A /* UIViewController+LDNaviBar.h */,
 				0D6901B3207DD1880090D89A /* UIViewController+LDNaviBar.m */,
+				0D5C1096219537730041B337 /* LDBaseWebVC.swift */,
 			);
 			path = LDBase;
 			sourceTree = "<group>";
@@ -724,6 +750,7 @@
 				0D6E3F692175DBFD00B59EAC /* LDHomeVC.swift */,
 				0D6900A32079F0420090D89A /* LDHomeVC.xib */,
 				0D6E3F6B2175DC7200B59EAC /* LDOtherVC.swift */,
+				0D11EBD8219D58E10025C4CC /* H5CtrCV.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -748,6 +775,8 @@
 				0D2E34512186A9880071F5C4 /* SceneModel.mm */,
 				0D2E34522186A9880071F5C4 /* SceneModel+WCTTableCoding.h */,
 				0D2E34532186A9880071F5C4 /* SceneModel.h */,
+				0D11EBD5219D549A0025C4CC /* H5DeviceURLModel.h */,
+				0D11EBD6219D549A0025C4CC /* H5DeviceURLModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1027,9 +1056,10 @@
 				0D6901C4207DD1880090D89A /* UIViewController+LDLogin.m in Sources */,
 				0D2E345B2186E2120071F5C4 /* TransformTool.swift in Sources */,
 				0D2533C32170A3A100310FFA /* LDPacketHandle.m in Sources */,
+				0D11EBD2219D48CF0025C4CC /* LDHTTPTool+Home.m in Sources */,
 				0D6901C5207DD1880090D89A /* UIViewController+LDNaviBar.m in Sources */,
 				0D6901B8207DD1880090D89A /* LDMediator.m in Sources */,
-				0D8FE5682174792E0092955B /* LDSocketTool+login.m in Sources */,
+				0D8FE5682174792E0092955B /* LDSocketTool+loginSend.m in Sources */,
 				0D69020B207E2C970090D89A /* LDButtonBehavior.m in Sources */,
 				0D2533BA2170A3A100310FFA /* LDHTTPModel.m in Sources */,
 				0D121C0A2182E0C9001A9231 /* Alert.swift in Sources */,
@@ -1050,8 +1080,11 @@
 				0D2533B82170A3A100310FFA /* LDHTTPConst.m in Sources */,
 				0D6E3F802176E2FE00B59EAC /* DeviceModel.mm in Sources */,
 				0D69020C207E2C970090D89A /* LDBehavior.m in Sources */,
+				0D11EBCE219D3F360025C4CC /* LDSocketTool+LDSocketTool_loginReceive.m in Sources */,
 				0D6E3F622175BDDD00B59EAC /* LDNetTool.m in Sources */,
+				0D11EBD9219D58E10025C4CC /* H5CtrCV.swift in Sources */,
 				0D2533BE2170A3A100310FFA /* ErrorCode.m in Sources */,
+				0D5C1097219537730041B337 /* LDBaseWebVC.swift in Sources */,
 				0D2533BC2170A3A100310FFA /* Target_LDHTTP.m in Sources */,
 				0D2E345D218720590071F5C4 /* DeviceCell.swift in Sources */,
 				0D6901C3207DD1880090D89A /* UITabBarController+LDBase.m in Sources */,
@@ -1076,6 +1109,7 @@
 				0D2533BD2170A3A100310FFA /* Const.m in Sources */,
 				0DAA898D209AE17A008B5BEC /* MBProgressHUD+LDHUD.m in Sources */,
 				0DAA8995209AE78F008B5BEC /* LDPictureCutController.m in Sources */,
+				0D11EBD7219D549A0025C4CC /* H5DeviceURLModel.m in Sources */,
 				0D2E34592186E0F60071F5C4 /* UIColor+extension.swift in Sources */,
 				0D5C108E219516480041B337 /* XMLWriter.m in Sources */,
 				0D121C1121830F5D001A9231 /* UserInfoModel.mm in Sources */,

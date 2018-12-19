@@ -91,6 +91,9 @@ extension LDHomeVC : UICollectionViewDelegate,UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = LDDBTool.getDeviceList()[indexPath.row] as! DeviceModel
+        let webVC = H5CtrCV()
+        webVC.deviceObj = model
+        navigationController?.pushViewController(webVC, animated: true)
     }
     
     

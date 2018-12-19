@@ -7,22 +7,29 @@
 //
 
 #import "LDHTTPConst.h"
+NSString * const kLDHTTPImageUploadImageDataKey = @"";
+NSString * const kLDHTTPImageUploadImageNameKey = @"";
+NSString * const kLDHTTPImageUploadFileNameKey = @"";
+NSString * const kLDHTTPImageUploadMimeTypeKey = @"";
 
+#if IOS_TEST
 NSString * const kLDHTTPDeviceDomainURL = @"http://io.zx.test.tcljd.net:8080/"; //测试版
-//NSString * const kLDHTTPDomainURL = @"http://10.124.206.81:8500/"; //开发版
-//NSString * const kLDHTTPDomainURL = @"http://io.zx.tcljd.com:8080/";  //正式
-//
-//#define ServiceURL             @"http://ds.zx.test.tcljd.net:8500/" //测试版          @"http://10.124.206.81:8500/" // @"http://up.zx.dev.tcljd.cn:8500/" //开发版
-//#define ServiceURL             @"http://ds.zx.tcljd.com:8500/"  //正式
+#elif IOS_DEV
+NSString * const kLDHTTPDeviceDomainURL = @"http://10.124.206.81:8500/"; //开发版
+#else
+NSString * const kLDHTTPDeviceDomainURL = @"http://io.zx.tcljd.com:8080/" ; //正式
+#endif
 
+NSString * http_realDevicePath(NSString * path) {
+    NSString * localAddress = [[NSUserDefaults standardUserDefaults] objectForKey:@"address"];
+    if (localAddress.length <= 0) {
+        localAddress = kLDHTTPDeviceDomainURL;
+    }
+    NSString * realPath = [localAddress stringByAppendingString:path];
+    return realPath;
+}
 
-NSString * const kLDHTTPImageUploadImageDataKey = @"kHTTPImageUploadImageData";
-NSString * const kLDHTTPImageUploadImageNameKey = @"kHTTPImageUploadImageName";
-NSString * const kLDHTTPImageUploadFileNameKey = @"kHTTPImageUploadFileName";
-NSString * const kLDHTTPImageUploadMimeTypeKey = @"kHTTPImageUploadMimeType";
-
-
-NSString * http_realPath(NSString * path) {
+NSString * http_realServicePath(NSString * path) {
     NSString * localAddress = [[NSUserDefaults standardUserDefaults] objectForKey:@"address"];
     if (localAddress.length <= 0) {
         localAddress = kLDHTTPDeviceDomainURL;

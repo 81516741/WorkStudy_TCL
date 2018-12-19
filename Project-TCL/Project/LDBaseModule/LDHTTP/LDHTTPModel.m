@@ -17,6 +17,11 @@
     model.dataClass = dataClass;
     return model;
 }
++(LDHTTPModel *)model:(NSString *)url {
+    LDHTTPModel * model = [LDHTTPModel new];
+    model.url = url;
+    return model;
+}
 @end
 
 @implementation LDHTTPUpdateTokenModel

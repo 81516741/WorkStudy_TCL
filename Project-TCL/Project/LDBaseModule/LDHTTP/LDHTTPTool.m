@@ -28,6 +28,7 @@ NSMutableDictionary * taskDescriptions;
         }
     } failure:failure];
 }
+
 +(void)sendModel:(LDHTTPModel *)model success:(void (^)(LDHTTPModel * responseObject))success failure:(void (^)(LDHTTPModel * responseObject))failure
 {
     if (taskDescriptions == nil) {
@@ -43,8 +44,8 @@ NSMutableDictionary * taskDescriptions;
         responseObject.dataOrigin = [[NSString alloc] initWithData:(NSData *)responseObject.dataOrigin encoding:NSUTF8StringEncoding];
         //打印回调信息
         NSLog(@"\n[发起请求的类:%@][请求描述:%@][请求URL:%@][请求参数:%@][服务器返回的数据:%@]",responseObject.VCName,responseObject.taskDescription,[responseObject.url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[responseObject.parameters description],responseObject.dataOrigin);
-        if ([[responseObject.dataOrigin tcl_errorCode] isEqualToString:@"0"] ||
-            [[responseObject.dataOrigin tcl_errorCode] isEqualToString:@"0"]) {
+        if ([[responseObject.dataOrigin  tcl_errorCode] isEqualToString:@"0"] ||
+            [responseObject.dataOrigin tcl_errorCode] == nil ) {
             if (success) {
               success(responseObject);
             }

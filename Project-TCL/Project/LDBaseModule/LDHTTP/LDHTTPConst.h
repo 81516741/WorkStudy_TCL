@@ -7,6 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#ifndef IOS_TEST    //测试环境
+    #define IOS_TEST 1
+#endif
+#ifndef IOS_DEV     //开发环境
+    #define IOS_DEV  0
+#endif
+#ifndef IOS_DIS      //发布环境
+    #define IOS_DIS  0
+#endif
 
 extern NSString * const kLDHTTPDeviceDomainURL;
 
@@ -15,8 +24,8 @@ extern NSString * const kLDHTTPImageUploadImageNameKey;
 extern NSString * const kLDHTTPImageUploadFileNameKey;
 extern NSString * const kLDHTTPImageUploadMimeTypeKey;
 
-NSString * http_realPath(NSString * path);
+NSString * http_realDevicePath(NSString * path);
+NSString * http_realServicePath(NSString * path);
 
-//这个写在这里的原因是因为登录失败的重新请求需要在这里
-#define kHTTPLoginRequest http_realPath(@"/ldapp/applogin")
+
 

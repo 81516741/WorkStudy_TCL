@@ -27,6 +27,10 @@ typedef void(^ _Nonnull Block)( LDHTTPModel * _Nonnull );
  @param dataClass 返回数据需要转成的模型类型，可以为nil
  */
 +(LDHTTPModel *)model:(NSString *)taskDescription VCName:(NSString *)VCName dataClass:(Class)dataClass;
+/**
+ 快速生成简易请求的URLmodel
+ */
++(LDHTTPModel *)model:(NSString *)url;
 
 /**
  * 请求类型

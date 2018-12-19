@@ -43,14 +43,33 @@
     }
 }
 
-+(void)handleElement:(GDataXMLElement*)element {
-    for (GDataXMLElement*c in element.children) {
-        if (c.stringValue.length > 0) {
-            [element addChild:c];
+/*
+ 将
+ <confing>
+    <name>
+      <id>3</id>
+    </name>
+    <address>2</address>
+ </config>
+ 转化成
+ <config address='2'>
+    <name id='3'/>
+ </config>
+ */
++ (void)handElementText:(GDataXMLElement *)element {
+    NSMutableArray * shouldRemoveEle = [NSMutableArray array];
+    for (GDataXMLElement * child in element.children) {
+        if (child.children.count == 1 && [child.children.firstObject children] == nil) {
+            [shouldRemoveEle addObject:child];
+            [element addAttribute:child];
         }
     }
-    for (GDataXMLElement*e in element.children) {
-        [self handleElementAttr:e];
+    for (GDataXMLElement * el in shouldRemoveEle) {
+        [element removeChild:el];
+    }
+    
+    for (GDataXMLElement * el in element.children) {
+        [self handElementText:el];
     }
 }
 
@@ -66,6 +85,19 @@
     [self handleElementAttr:rootEle];
     NSString * result = rootEle.XMLString;
     return result;
+}
+
++ (NSDictionary *)dicFromXML:(NSString *)xmlStr {
+    NSError * error = nil;
+    GDataXMLDocument * doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr error:&error];
+    if (error != nil) {
+        NSLog(@"需要转成json的XML格式不对");
+        return nil;
+    }
+    GDataXMLElement * rootEle = doc.rootElement;
+    [self handElementText:rootEle];
+    NSDictionary * dict = [XMLReader dictionaryForXMLString:rootEle.XMLString error:&error];
+    return dict;
 }
 
 + (NSString *)h5ParamFromXML:(NSString *)xmlStr {

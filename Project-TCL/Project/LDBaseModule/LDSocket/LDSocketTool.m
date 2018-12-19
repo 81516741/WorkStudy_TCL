@@ -107,7 +107,7 @@ typedef enum {
                     [LDSocketTool buildConnectingSuccess:nil failure:nil];
                 } else if ([LDSocketTool shared].connectState == handed && checkCount > 4) {
                     checkCount = 0;
-                    [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
+                    [LDSocketTool sendHearMessge];
                 }
             }
         });
@@ -222,8 +222,6 @@ typedef enum {
                     }
                 });
             }
-        
-        
     }
 }
 
@@ -266,7 +264,7 @@ typedef enum {
             if (![data isEqualToString:quickHand0]) {
                 Log(@"\n不启用SSL加密");
                 [LDSocketTool shared].connectState = handed;
-                [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
+                [LDSocketTool sendHearMessge];
                 if (success) {
                     success(nil);
                 }
@@ -283,7 +281,7 @@ typedef enum {
             if (success) {
                 Log(@"\n快速握手完成");
                 [LDSocketTool shared].connectState = handed;
-                [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
+                [LDSocketTool sendHearMessge];
                 return ;
             }
         }
@@ -294,7 +292,7 @@ typedef enum {
             [LDSocketTool sendMessage:endHandshakeMessage messageID:[LDSocketTool shared].endHandMessgeID success:^(id data) {
                 Log(@"\n握手成功");
                 [LDSocketTool shared].connectState = handed;
-                [LDSocketTool sendHeartMessageSuccess:nil failure:nil];
+                [LDSocketTool sendHearMessge];
                 if (success) {
                     success(nil);
                 }

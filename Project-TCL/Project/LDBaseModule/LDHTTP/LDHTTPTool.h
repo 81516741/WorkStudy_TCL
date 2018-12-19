@@ -12,7 +12,11 @@
 
 
 @interface LDHTTPTool : NSObject
+/**
+ 获取IP 和  Port
+ */
 + (void)getIPAndPortSuccess:(void (^)(LDHTTPModel *))success failure:(void (^)(LDHTTPModel *))failure;
+
 /**
  发送请求
  */

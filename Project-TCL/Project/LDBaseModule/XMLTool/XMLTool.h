@@ -11,4 +11,5 @@
 @interface XMLTool : NSObject
 +(NSString *)XMLFromJson:(NSString *)jsonStr;
 +(NSString *)h5ParamFromXML:(NSString *)xmlStr;
++(NSDictionary *)dicFromXML:(NSString *)xmlStr;
 @end
