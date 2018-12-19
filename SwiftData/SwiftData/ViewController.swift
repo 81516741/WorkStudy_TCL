@@ -26,10 +26,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         ConnectSocketTool.connectSocket()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         netRequest()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         //查 增 删 改
         models = DBTool.getModels()
         addButton.rx.tap.subscribe(onNext:{
@@ -66,7 +65,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func sendMsg(_ sender: Any) {
-        
+        SocketLoginTool.login({
+            print($0)
+        }) {
+            print($0)
+        }
     }
     
     @IBAction func sendHeart(_ sender: Any) {

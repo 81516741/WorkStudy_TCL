@@ -89,7 +89,7 @@ class ConnectSocketTool: NSObject {
     }
     fileprivate class func startHeart() {
         stopHeart()
-        timerHeart = startTimer(timeInterval: 3){SocketTool.sendHeart()}
+        timerHeart = startTimer(timeInterval: 20){SocketTool.sendHeart()}
     }
     fileprivate class func stopHeart() {
         if let timer = timerHeart {

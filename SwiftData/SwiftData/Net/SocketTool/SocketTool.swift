@@ -17,16 +17,17 @@ enum OpenStreamStep {
     case secondStream
     case ok
 }
+typealias resultBlock = (Any)->()
 class SocketTool: NSObject {
     static let openStreamBehavior = BehaviorRelay<OpenStreamStep>(value: .none)
-    static var blocks = [[String:((String)->())]]()
+    static var blocks = [[String:Array<resultBlock>]]()
     
-    class func send(message msg:String,result:@escaping ((String)->())) {
+    class func send(_ msg:String,_ success:@escaping resultBlock,_ failure:@escaping resultBlock) {
         if openStreamBehavior.value == .none {
-            result("当前网络未连接")
+            failure("当前网络未连接")
             return
         }
-        addBlock(msg, result)
+        addBlock(msg,[failure,success])
     }
     class func buildConnect(toHost:String?,toPort:String?) {
         SocketManager.default.connect(toHost: toHost, toPort: toPort)
@@ -57,20 +58,28 @@ class SocketTool: NSObject {
             }
         }
     }
-    fileprivate class func addBlock(_ message:String,_ block:@escaping ((String)->())) {
+    fileprivate class func addBlock(_ message:String,_ blocks:Array<resultBlock>) {
         let msgID = "消息ID"
-        blocks.append([msgID:block])
+        self.blocks.append([msgID:blocks])
         if blocks.count > 100 {
-            blocks.removeFirst()
+            self.blocks.removeFirst()
         }
     }
-    class func callBack(_ message:String) {
+    class func resultCallBack(_ msg:Any?,_ err:String? = nil) {
         let msgID = "消息ID"
         for value in blocks {
             if let key = value.keys.first {
                 if key == msgID {
                     DispatchQueue.main.async {
-                       value.values.first?(message)
+                        if let err = err {
+                            value.values.first?.first?(err)
+                        } else {
+                            if let msg = msg {
+                               value.values.first?.last?(msg)
+                            } else {
+                               value.values.first?.first?("赞无数据")
+                            }
+                        }
                     }
                 }
             }
