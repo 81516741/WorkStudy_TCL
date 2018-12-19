@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import Alamofire
 
 enum OpenStreamStep {
     case none
@@ -22,11 +21,12 @@ class SocketTool: NSObject {
     static let openStreamBehavior = BehaviorRelay<OpenStreamStep>(value: .none)
     static var blocks = [[String:((String)->())]]()
     
-    class func send(message msg:String,result:((String)->())) {
-        if openStreamBehavior.value != .ok {
+    class func send(message msg:String,result:@escaping ((String)->())) {
+        if openStreamBehavior.value == .none {
             result("当前网络未连接")
             return
         }
+        addBlock(msg, result)
     }
     class func buildConnect(toHost:String?,toPort:String?) {
         SocketManager.default.connect(toHost: toHost, toPort: toPort)
@@ -41,8 +41,36 @@ class SocketTool: NSObject {
     }
     fileprivate class func msgHandle() -> AnyObserver<String> {
         return AnyObserver { event in
-            if let _ = event.element {
-                
+            if let msg = event.element {
+                if msg.contains("login_module") {
+                    
+                } else if msg.contains("A_module") {
+                    
+                } else if msg.contains("B_module") {
+                    
+                } else if msg.contains("C_module") {
+                    
+                } else if msg.contains("D_module") {
+                    
+                }
+                SocketLoginTool.receive(msg)
+            }
+        }
+    }
+    fileprivate class func addBlock(_ message:String,_ block:@escaping ((String)->())) {
+        let msgID = "消息ID"
+        blocks.append([msgID:block])
+        if blocks.count > 100 {
+            blocks.removeFirst()
+        }
+    }
+    class func callBack(_ message:String) {
+        let msgID = "消息ID"
+        for value in blocks {
+            if let key = value.keys.first {
+                if key == msgID {
+                    value.values.first?(message)
+                }
             }
         }
     }

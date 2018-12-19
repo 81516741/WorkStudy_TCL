@@ -26,7 +26,7 @@ class ConnectSocketTool: NSObject {
         //监听开流状态
         let _ = SocketTool.openStreamBehavior.bind(to: openStreamHandle())
         //监听连接状态
-        let _ = SocketManager.connectSubject.bind(to: connectStateHandle())
+        let _ = SocketManager.connectRelay.bind(to: connectStateHandle())
         //监听网络网络
         let _ = NetCheckTool.netState.bind(to: netStateHandle())
     }

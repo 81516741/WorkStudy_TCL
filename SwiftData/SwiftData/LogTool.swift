@@ -9,8 +9,8 @@
 import Foundation
 
 func Log<T>(_ messsage : T, file : String = #file, funcName : String = #function, lineNum : Int = #line) {
-    #if TEST
-    let fileName = (file as NSString).lastPathComponent
-    print("\(fileName):(\(lineNum))-\(messsage)")
-    #endif
+    if isTest {
+        let fileName = (file as NSString).lastPathComponent
+        print("\(fileName):(\(lineNum))-\(messsage)")
+    }
 }

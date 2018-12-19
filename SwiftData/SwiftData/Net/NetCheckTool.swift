@@ -12,11 +12,12 @@ import RxSwift
 import RxCocoa
 
 enum NetState {
+    case none
     case noNet
     case hasNet
 }
 class NetCheckTool {
-    static let netState : BehaviorRelay<NetState> = BehaviorRelay(value: .noNet)
+    static let netState : BehaviorRelay<NetState> = BehaviorRelay(value: .none)
     static let manager = NetworkReachabilityManager(host: "www.baidu.com")
     class func checkNet() {
         manager?.listener = { status in

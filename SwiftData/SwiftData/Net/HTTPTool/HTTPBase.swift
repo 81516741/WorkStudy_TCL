@@ -11,15 +11,25 @@ import RxSwift
 import Moya
 import MJExtension
 import SwiftyJSON
+import Alamofire
+
+let myMrg = getManager()
+fileprivate func getManager() -> Alamofire.SessionManager {
+    let configuration = URLSessionConfiguration.default
+    configuration.httpAdditionalHeaders = Manager.defaultHTTPHeaders
+    configuration.timeoutIntervalForRequest = 15
+    let manager = Manager(configuration: configuration)
+    manager.startRequestsImmediately = false
+    return manager
+}
 
 extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Response {
-    
     func map<T:NSObject>(_ type: T.Type) -> Single<T?> {
         return flatMap { response -> Single<T?> in
             let xmlStr = String(data: response.data, encoding: String.Encoding.utf8)
             guard let xmlDic = XMLTool.dic(fromXML: xmlStr) as? [String:Any] else {
                 return Single<T?>.create { single in
-                    single(.error(MyError.netError("服务器数据错误")))
+                    single(.error(HTTPError.httpError("服务器数据错误")))
                     return Disposables.create()
                 }
             }
@@ -33,7 +43,7 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Respo
                 }
             } else {
                 return Single<T?>.create { single in
-                    single(.error(MyError.netError("服务器数据错误")))
+                    single(.error(HTTPError.httpError("服务器数据错误")))
                     return Disposables.create()
                 }
             }
@@ -45,7 +55,7 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Respo
             let xmlStr = String(data: response.data, encoding: String.Encoding.utf8)
             guard let xmlDic = XMLTool.dic(fromXML: xmlStr) as? [String:Any] else {
                 return Single<JSON?>.create { single in
-                    single(.error(MyError.netError("服务器数据错误")))
+                    single(.error(HTTPError.httpError("服务器数据错误")))
                     return Disposables.create()
                 }
             }
@@ -55,16 +65,6 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Respo
                 single(.success(dataJson))
                 return Disposables.create()
             }
-        }
-    }
-}
-enum MyError : Error {
-    case netError(String)
-    
-    var localizedDescription: String {
-        switch self {
-        case let .netError(str):
-            return str
         }
     }
 }

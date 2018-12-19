@@ -16,15 +16,16 @@ enum HTTPLoginServices {
 
 extension HTTPLoginServices: TargetType {
     var baseURL: URL {
-        #if TEST
-        return URL.url(string: "http://ds.zx.test.tcljd.net:8500")
-        #else
-        return URL.url(string: "https://www.baidu.com")
-        #endif
+        if isTest {
+            return URL.url(string: "http://ds.zx.test.tcljd.net:8500")
+        } else {
+            return URL.url(string: "https://www.baidu.com")
+        }
     }
     var path: String {
         switch self {
-            case .getIP(_): return "/distribute-server/get_as_addr"
+            case .getIP(_):
+                return "/distribute-server/get_as_addr"
             default : return "hello"
         }
     }
@@ -36,10 +37,6 @@ extension HTTPLoginServices: TargetType {
                 return .post
         }
     }
-    var sampleData: Data {
-        return "".data(using: .utf8)!
-    }
-    
     var task: Task {
         switch self {
             case .getIP(let userID):
@@ -53,6 +50,9 @@ extension HTTPLoginServices: TargetType {
             default:
                 return .requestPlain
         }
+    }
+    var sampleData: Data {
+        return "".data(using: .utf8)!
     }
     var validationType: ValidationType {
         return .none

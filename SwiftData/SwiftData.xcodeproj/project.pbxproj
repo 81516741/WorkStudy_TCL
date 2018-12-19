@@ -14,6 +14,8 @@
 		0D2C104C21C8994A009C6FAB /* SocketLoginTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104B21C8994A009C6FAB /* SocketLoginTool.swift */; };
 		0D2C104E21C8D50C009C6FAB /* NetCheckTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104D21C8D50C009C6FAB /* NetCheckTool.swift */; };
 		0D2C105121C8DDB9009C6FAB /* ConnectSocketTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C105021C8DDB9009C6FAB /* ConnectSocketTool.swift */; };
+		0D609FF021CA0137008C0BC0 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D609FEF21CA0137008C0BC0 /* Const.swift */; };
+		0D609FF221CA1AB4008C0BC0 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D609FF121CA1AB4008C0BC0 /* HTTPError.swift */; };
 		0DBBA73A21B5311900CF501A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA73921B5311900CF501A /* AppDelegate.swift */; };
 		0DBBA73C21B5311900CF501A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA73B21B5311900CF501A /* ViewController.swift */; };
 		0DBBA73F21B5311900CF501A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DBBA73D21B5311900CF501A /* Main.storyboard */; };
@@ -39,6 +41,8 @@
 		0D2C104B21C8994A009C6FAB /* SocketLoginTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketLoginTool.swift; sourceTree = "<group>"; };
 		0D2C104D21C8D50C009C6FAB /* NetCheckTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetCheckTool.swift; sourceTree = "<group>"; };
 		0D2C105021C8DDB9009C6FAB /* ConnectSocketTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectSocketTool.swift; sourceTree = "<group>"; };
+		0D609FEF21CA0137008C0BC0 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		0D609FF121CA1AB4008C0BC0 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		0DBBA73621B5311900CF501A /* SwiftData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DBBA73921B5311900CF501A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DBBA73B21B5311900CF501A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				0DD440D121BA113A00F41C39 /* SwiftData.entitlements */,
+				0D609FEF21CA0137008C0BC0 /* Const.swift */,
 				0D2C104721C88012009C6FAB /* LogTool.swift */,
 				0D2C104F21C8DD96009C6FAB /* Net */,
 				0DD440CE21B79C8000F41C39 /* DBTool */,
@@ -141,6 +146,7 @@
 		0DBBA75121B6288900CF501A /* HTTPTool */ = {
 			isa = PBXGroup;
 			children = (
+				0D609FF121CA1AB4008C0BC0 /* HTTPError.swift */,
 				0DBBA76421B6790000CF501A /* HTTPBase.swift */,
 				0DBBA76321B6790000CF501A /* HTTPLoginServices.swift */,
 				0DBBA76521B6790000CF501A /* HTTPLoginTool.swift */,
@@ -336,6 +342,8 @@
 				0D2C104821C88012009C6FAB /* LogTool.swift in Sources */,
 				0DBBA76E21B6907F00CF501A /* XMLTool.m in Sources */,
 				0DD440CA21B691C300F41C39 /* XMLWriter.m in Sources */,
+				0D609FF221CA1AB4008C0BC0 /* HTTPError.swift in Sources */,
+				0D609FF021CA0137008C0BC0 /* Const.swift in Sources */,
 				0D2C105121C8DDB9009C6FAB /* ConnectSocketTool.swift in Sources */,
 				0D2C104621C7B355009C6FAB /* DBTool.swift in Sources */,
 				0DBBA76921B6790000CF501A /* HTTPBase.swift in Sources */,

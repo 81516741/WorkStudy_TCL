@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ConnectSocketTool.connectSocket()
+//        ConnectSocketTool.connectSocket()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         netRequest()
         //查 增 删 改
@@ -55,20 +55,18 @@ class ViewController: UIViewController {
         Observable.changeset(from: models)
             .subscribe(onNext:{[unowned self] result,changes in
                 if let changes = changes {
-                    print("有变化")
-                    print(changes)
+                    Log("有变化")
+                    Log(changes)
                     self.tableView.applyChangeset(changes)
                 } else {
-                    print("没有变化")
+                    Log("没有变化")
                     self.tableView.reloadData()
                 }
             }).disposed(by: bag)
     }
     
     @IBAction func sendMsg(_ sender: Any) {
-        SocketTool.send(message: "nihao") {
-            print($0)
-        }
+        
     }
     
     @IBAction func sendHeart(_ sender: Any) {
@@ -76,15 +74,10 @@ class ViewController: UIViewController {
     }
     
     func netRequest() {
-//        HTTPTool.getIP0(count: "2004050", bag: bag, success: { (model:Model0) in
-//            print(model)
-//            DBTool.saveModel(model: model)
-//        }, failure: nil)
-        
-        //这个网络请求是不需要存数据库的
-//        HTTPTool.getIP(count: "2004050", bag: bag, success: { (model:Model) in
-//            print(model)
-//        }, failure: nil)
+        HTTPTool.getIPSaveDB(count: "2004050", bag: bag, success: { (model:Model0) in
+            Log(model)
+            DBTool.saveModel(model: model)
+        }, failure: nil)
     }
 }
 
