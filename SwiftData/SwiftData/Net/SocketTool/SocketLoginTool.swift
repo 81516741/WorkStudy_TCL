@@ -16,8 +16,8 @@ class SocketLoginTool: NSObject {
         //从数据库取出相关信息
         //判断是否可以自动登录
     }
-    class func login(count:String?,password:String?) {
-        
+    class func login(result:@escaping (String)->()) {
+        SocketTool.send(message: "", result: result)
     }
     class func receive(_ message:String) {
         SocketTool.callBack("我是消息")

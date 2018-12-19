@@ -69,7 +69,9 @@ class SocketTool: NSObject {
         for value in blocks {
             if let key = value.keys.first {
                 if key == msgID {
-                    value.values.first?(message)
+                    DispatchQueue.main.async {
+                       value.values.first?(message)
+                    }
                 }
             }
         }

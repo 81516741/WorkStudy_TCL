@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        ConnectSocketTool.connectSocket()
+        ConnectSocketTool.connectSocket()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         netRequest()
         //查 增 删 改

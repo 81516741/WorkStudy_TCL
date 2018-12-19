@@ -43,6 +43,7 @@ extension ViewController {//自定义观察者
     }
 }
 
+//-------------------------------------------------------
 extension ViewController {//第一个例子
     func complexBind() {
         let minimalCountLength = 6

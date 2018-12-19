@@ -14,6 +14,7 @@ class ConnectSocketTool: NSObject {
         HTTPTool.getIP(count: "2004050", success: { (model:Model) in
             if let host = model.reply?.myIP,let port = model.reply?.port {
                 observer.onNext([host,port])
+                observer.onCompleted()
             }
         }, failure: nil)
         return Disposables.create()
@@ -88,7 +89,7 @@ class ConnectSocketTool: NSObject {
     }
     fileprivate class func startHeart() {
         stopHeart()
-        timerHeart = startTimer(timeInterval: 28){SocketTool.sendHeart()}
+        timerHeart = startTimer(timeInterval: 3){SocketTool.sendHeart()}
     }
     fileprivate class func stopHeart() {
         if let timer = timerHeart {
