@@ -22,6 +22,9 @@ fileprivate func getManager() -> Alamofire.SessionManager {
     manager.startRequestsImmediately = false
     return manager
 }
+func loginProvider() -> MoyaProvider<HTTPLoginServices> {
+    return MoyaProvider<HTTPLoginServices>(manager:myMrg)
+}
 
 extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Response {
     func map<T:NSObject>(_ type: T.Type) -> Single<T?> {

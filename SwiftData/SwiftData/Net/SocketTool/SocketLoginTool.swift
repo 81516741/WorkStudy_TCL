@@ -21,6 +21,6 @@ class SocketLoginTool: NSObject {
     }
     class func receive(_ message:String) {
         let model = Model0()
-        SocketTool.resultCallBack(model)
+        SocketTool.resultCallBack(model,nil)
     }
 }

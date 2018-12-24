@@ -27,33 +27,30 @@ class ConnectSocketTool: NSObject {
         //监听开流状态
         let _ = SocketTool.openStreamBehavior.bind(to: openStreamHandle())
         //监听连接状态
-        let _ = SocketManager.connectRelay.bind(to: connectStateHandle())
+        let _ = SocketManager.default.connectRelay.bind(to: connectStateHandle())
         //监听网络网络
         let _ = NetCheckTool.netState.bind(to: netStateHandle())
     }
     fileprivate class func openStreamHandle() -> AnyObserver<OpenStreamStep> {
         return AnyObserver { event in
             if let openStreanStep = event.element {
-                if openStreanStep == .startTLS{
-                    startHeart()
-                } else if openStreanStep == .ok {
+                if openStreanStep == .ok {
                     SocketLoginTool.autoLogin()
+                    startHeart()
                 }
             }
         }
     }
-    fileprivate class func connectStateHandle() -> AnyObserver<Bool> {
+    fileprivate class func connectStateHandle() -> AnyObserver<ConnectState> {
         return AnyObserver { event in
-            if let connected = event.element {
-                if connected {//连接成功
+            if let state = event.element {
+                if state == .connected {//连接成功
                     SocketTool.openStream()
-                } else {
+                } else if state == .disConnect {
                     SocketTool.openStreamBehavior.accept(.none)
                     stopHeart()
                     //有网络才去重连,且存在host 和 port
-                    if NetCheckTool.netState.value == .hasNet &&
-                        SocketManager.default.port.count != 0 &&
-                        SocketManager.default.host.count != 0  {
+                    if NetCheckTool.netState.value == .hasNet {
                         SocketTool.buildConnect(toHost: SocketManager.default.host, toPort: SocketManager.default.port)
                     }
                 }
@@ -88,6 +85,7 @@ class ConnectSocketTool: NSObject {
         }
     }
     fileprivate class func startHeart() {
+        Log("-------开启心跳-------")
         stopHeart()
         timerHeart = startTimer(timeInterval: 20){SocketTool.sendHeart()}
     }

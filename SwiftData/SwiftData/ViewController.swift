@@ -73,7 +73,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func sendHeart(_ sender: Any) {
-        
+        HTTPTool.getIP(count: "", success: nil, failure: nil)
     }
     
     func netRequest() {

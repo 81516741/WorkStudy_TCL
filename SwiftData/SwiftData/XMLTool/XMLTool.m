@@ -84,7 +84,6 @@
     GDataXMLElement * rootEle = doc.rootElement;
     [self handleElementAttr:rootEle];
     NSString * result = rootEle.XMLString;
-    NSLog(@"\njson转XML\nJson:%@\nXML:%@",jsonStr,result);
     return result;
 }
 
@@ -96,7 +95,6 @@
     NSString * convertXmlStr = doc.rootElement.XMLString;
     NSDictionary * dict;
     dict = [XMLReader dictionaryForXMLString:convertXmlStr error:&error];
-    NSLog(@"\nXML转字典\nXML:%@\nDic:%@",xmlStr,dict);
     return dict;
 }
 

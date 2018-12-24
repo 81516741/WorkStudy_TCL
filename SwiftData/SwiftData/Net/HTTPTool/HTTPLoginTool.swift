@@ -9,14 +9,11 @@
 import Foundation
 import RxSwift
 import Moya
-import SwiftyJSON
-import Realm
-import Alamofire
 
 class HTTPTool : NSObject {
     class func getIP(count:String,success: ((Model)->())?,failure:((String)->())?) {
-        let provider = MoyaProvider<HTTPLoginServices>(manager:myMrg)
-        let _ = provider.rx.request(.getIP(count))
+        let p = loginProvider()
+        let _ = p.rx.request(.getIP(count))
             .map(Model.self).subscribe { result in
             switch result {
             case .success(let element):
@@ -27,8 +24,8 @@ class HTTPTool : NSObject {
         }
     
     class func getIPSaveDB(count:String,bag:DisposeBag,success: ((Model0)->())?,failure:((String)->())?) {
-        let provider = MoyaProvider<HTTPLoginServices>()
-        provider.rx.request(.getIP(count))
+        let p = loginProvider()
+        p.rx.request(.getIP(count))
             .map().subscribe { result in
                 switch result {
                 case .success(let json):
