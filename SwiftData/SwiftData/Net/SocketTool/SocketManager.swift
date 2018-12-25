@@ -34,7 +34,7 @@ class SocketManager: NSObject {
             Log("port为nil")
             return
         }
-        guard let portUInt16 = UInt16(port0)else {
+        guard let portUInt16 = UInt16(port0) else {
             Log("port:" + port0 + "不是UInt16格式")
             return
         }

@@ -11,16 +11,17 @@ import RxSwift
 import Moya
 
 class HTTPTool : NSObject {
-    class func getIP(count:String,success: ((Model)->())?,failure:((String)->())?) {
-        let p = loginProvider()
-        let _ = p.rx.request(.getIP(count))
-            .map(Model.self).subscribe { result in
-            switch result {
-            case .success(let element):
-                success?(element!)
-            case .error(let error):
-                failure?(error.localizedDescription)
-            }}
+    class func getIP(count:String,success: ((Model)->())?,failure:((String)->())?) -> Disposable {
+            let p = loginProvider()
+            let disposable = p.rx.request(.getIP(count))
+                .map(Model.self).subscribe { result in
+                switch result {
+                case .success(let element):
+                    success?(element!)
+                case .error(let error):
+                    failure?(error.localizedDescription)
+                }}
+            return disposable
         }
     
     class func getIPSaveDB(count:String,bag:DisposeBag,success: ((Model0)->())?,failure:((String)->())?) {

@@ -38,10 +38,10 @@
         }
         self.host = host;
         self.port = port;
-        self.inputStream=(__bridge_transfer NSInputStream *)readStream;
-        self.outputStream=(__bridge_transfer NSOutputStream *)writeStram;
-        self.inputStream.delegate=self;
-        self.outputStream.delegate=self;
+        self.inputStream = (__bridge NSInputStream *)readStream;
+        self.outputStream = (__bridge NSOutputStream *)writeStram;
+        self.inputStream.delegate = self;
+        self.outputStream.delegate = self;
     }
     [_inputStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [_outputStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
@@ -149,8 +149,8 @@
     [_outputStream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [_inputStream close];
     [_outputStream close];
-    _inputStream=nil;
-    _outputStream=nil;
+    _inputStream = nil;
+    _outputStream = nil;
     return YES;
 }
 #pragma mark NSStreamDelegate

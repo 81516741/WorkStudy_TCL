@@ -11,14 +11,17 @@ import RxCocoa
 import RxSwift
 class ConnectSocketTool: NSObject {
     static let hostPortOB: Observable<[String]> = Observable.create { observer -> Disposable in
-        HTTPTool.getIP(count: "2004050", success: { (model:Model) in
+        let disposable = HTTPTool.getIP(count: "2004050", success: { (model:Model) in
             if let host = model.reply?.myIP,let port = model.reply?.port {
                 observer.onNext([host,port])
                 observer.onCompleted()
             }
-        }, failure: nil)
-        return Disposables.create()
+        }, failure: { (err) in
+            Log(err)
+        })
+        return disposable
     }
+    static var posables = [Disposable]()
     static var timerHeart:DispatchSourceTimer?
     static var timerAddress:DispatchSourceTimer?
     class func connectSocket() {
@@ -65,8 +68,10 @@ class ConnectSocketTool: NSObject {
                     if SocketManager.default.port.count != 0 && SocketManager.default.host.count != 0 {
                         SocketTool.buildConnect(toHost: SocketManager.default.host, toPort: SocketManager.default.port)
                     } else {
-                        timerAddress = startTimer(timeInterval: 10) {
-                            let _ = hostPortOB.bind(to: connect())
+                        timerAddress = startTimer(timeInterval: 0.5) {
+                            if NetCheckTool.netState.value == .hasNet {
+                                posables.append(hostPortOB.bind(to: connect()))
+                            }
                         }
                     }
                 }
@@ -80,7 +85,11 @@ class ConnectSocketTool: NSObject {
                     timer.cancel()
                     self.timerAddress = nil
                 }
-                SocketTool.buildConnect(toHost: host, toPort: port)
+                if SocketManager.default.host.count > 0 {
+                    for ob in posables { ob.dispose() }
+                } else {
+                    SocketTool.buildConnect(toHost: host, toPort: port)
+                }
             }
         }
     }
