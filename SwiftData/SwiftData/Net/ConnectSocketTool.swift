@@ -116,13 +116,4 @@ class ConnectSocketTool: NSObject {
             self.timerHeart = nil
         }
     }
-    class func startTimer(timeInterval:TimeInterval,handler:@escaping (()->()))->DispatchSourceTimer {
-        let timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
-        timer.schedule(deadline: .now(), repeating: timeInterval)
-        timer.setEventHandler {
-            DispatchQueue.main.async { handler() }
-        }
-        timer.resume()
-        return timer
-    }
 }

@@ -9,14 +9,13 @@
 /* Begin PBXBuildFile section */
 		0D2C104421C77DAC009C6FAB /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104321C77DAC009C6FAB /* SocketManager.swift */; };
 		0D2C104621C7B355009C6FAB /* DBTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104521C7B355009C6FAB /* DBTool.swift */; };
-		0D2C104821C88012009C6FAB /* LogTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104721C88012009C6FAB /* LogTool.swift */; };
 		0D2C104A21C88C76009C6FAB /* SocketTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104921C88C76009C6FAB /* SocketTool.swift */; };
 		0D2C104C21C8994A009C6FAB /* SocketLoginTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104B21C8994A009C6FAB /* SocketLoginTool.swift */; };
 		0D2C104E21C8D50C009C6FAB /* NetCheckTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104D21C8D50C009C6FAB /* NetCheckTool.swift */; };
 		0D2C105121C8DDB9009C6FAB /* ConnectSocketTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C105021C8DDB9009C6FAB /* ConnectSocketTool.swift */; };
 		0D4E9B9D21CCDF5B00F35E2D /* ios_client.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 0D4E9B9C21CCDF5A00F35E2D /* ios_client.p12 */; };
 		0D4E9BA021CCE67A00F35E2D /* Socket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4E9B9F21CCE67A00F35E2D /* Socket.m */; };
-		0D609FF021CA0137008C0BC0 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D609FEF21CA0137008C0BC0 /* Const.swift */; };
+		0D609FF021CA0137008C0BC0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D609FEF21CA0137008C0BC0 /* Common.swift */; };
 		0D609FF221CA1AB4008C0BC0 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D609FF121CA1AB4008C0BC0 /* HTTPError.swift */; };
 		0D90051421D089C200C9B550 /* UdpSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90051321D089C200C9B550 /* UdpSocketManager.swift */; };
 		0D90051621D0B34C00C9B550 /* LocalDeviceUdpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90051521D0B34C00C9B550 /* LocalDeviceUdpTool.swift */; };
@@ -40,7 +39,6 @@
 /* Begin PBXFileReference section */
 		0D2C104321C77DAC009C6FAB /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		0D2C104521C7B355009C6FAB /* DBTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBTool.swift; sourceTree = "<group>"; };
-		0D2C104721C88012009C6FAB /* LogTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTool.swift; sourceTree = "<group>"; };
 		0D2C104921C88C76009C6FAB /* SocketTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketTool.swift; sourceTree = "<group>"; };
 		0D2C104B21C8994A009C6FAB /* SocketLoginTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketLoginTool.swift; sourceTree = "<group>"; };
 		0D2C104D21C8D50C009C6FAB /* NetCheckTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetCheckTool.swift; sourceTree = "<group>"; };
@@ -48,7 +46,7 @@
 		0D4E9B9C21CCDF5A00F35E2D /* ios_client.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ios_client.p12; sourceTree = "<group>"; };
 		0D4E9B9E21CCE67A00F35E2D /* Socket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Socket.h; sourceTree = "<group>"; };
 		0D4E9B9F21CCE67A00F35E2D /* Socket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Socket.m; sourceTree = "<group>"; };
-		0D609FEF21CA0137008C0BC0 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		0D609FEF21CA0137008C0BC0 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		0D609FF121CA1AB4008C0BC0 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		0D90051321D089C200C9B550 /* UdpSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdpSocketManager.swift; sourceTree = "<group>"; };
 		0D90051521D0B34C00C9B550 /* LocalDeviceUdpTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeviceUdpTool.swift; sourceTree = "<group>"; };
@@ -142,8 +140,7 @@
 			children = (
 				0D4E9B9C21CCDF5A00F35E2D /* ios_client.p12 */,
 				0DD440D121BA113A00F41C39 /* SwiftData.entitlements */,
-				0D609FEF21CA0137008C0BC0 /* Const.swift */,
-				0D2C104721C88012009C6FAB /* LogTool.swift */,
+				0D609FEF21CA0137008C0BC0 /* Common.swift */,
 				0D2C104F21C8DD96009C6FAB /* Net */,
 				0DD440CE21B79C8000F41C39 /* DBTool */,
 				0DBBA76B21B6906B00CF501A /* XMLTool */,
@@ -356,11 +353,10 @@
 				0D2C104A21C88C76009C6FAB /* SocketTool.swift in Sources */,
 				0D2C104C21C8994A009C6FAB /* SocketLoginTool.swift in Sources */,
 				0DBBA76621B6790000CF501A /* Model.swift in Sources */,
-				0D2C104821C88012009C6FAB /* LogTool.swift in Sources */,
 				0DBBA76E21B6907F00CF501A /* XMLTool.m in Sources */,
 				0DD440CA21B691C300F41C39 /* XMLWriter.m in Sources */,
 				0D609FF221CA1AB4008C0BC0 /* HTTPError.swift in Sources */,
-				0D609FF021CA0137008C0BC0 /* Const.swift in Sources */,
+				0D609FF021CA0137008C0BC0 /* Common.swift in Sources */,
 				0D2C105121C8DDB9009C6FAB /* ConnectSocketTool.swift in Sources */,
 				0D2C104621C7B355009C6FAB /* DBTool.swift in Sources */,
 				0DBBA76921B6790000CF501A /* HTTPBase.swift in Sources */,
