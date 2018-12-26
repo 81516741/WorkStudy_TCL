@@ -52,6 +52,8 @@ class ConnectSocketTool: NSObject {
                 if state == .connected {//连接成功
                     SocketTool.openStream()
                 } else if state == .disConnect {
+                    /*因为SocketTool的send方法会根据openStreamBehavior的值
+                    判断是否可以发送消息，具体请看对应方法*/
                     SocketTool.openStreamBehavior.accept(.none)
                     stopHeart()
                     //有网络才去重连，如果连接成功了，那么host和port是一定存在的
@@ -71,7 +73,6 @@ class ConnectSocketTool: NSObject {
                         SocketTool.buildConnect(toHost: SocketManager.default.host, toPort: SocketManager.default.port)
                     } else {
                         stopTimeAddress()
-                        cancelAllIPRequest()
                         timerAddress = startTimer(timeInterval: requestIT) {
                             if NetCheckTool.netState.value == .hasNet {
                                 posables.append(hostPortOB.bind(to: connect()))
