@@ -13,7 +13,7 @@ import Moya
 class HTTPTool : NSObject {
     class func getIP(count:String,success: ((Model)->())?,failure:((String)->())?) -> Disposable {
             let p = loginProvider()
-            let disposable = p.rx.request(.getIP(count))
+            return p.rx.request(.getIP(count))
                 .map(Model.self).subscribe { result in
                 switch result {
                 case .success(let element):
@@ -21,12 +21,11 @@ class HTTPTool : NSObject {
                 case .error(let error):
                     failure?(error.localizedDescription)
                 }}
-            return disposable
         }
     
-    class func getIPSaveDB(count:String,bag:DisposeBag,success: ((Model0)->())?,failure:((String)->())?) {
+    class func getIPSaveDB(count:String,success: ((Model0)->())?,failure:((String)->())?) -> Disposable  {
         let p = loginProvider()
-        p.rx.request(.getIP(count))
+        return p.rx.request(.getIP(count))
             .map().subscribe { result in
                 switch result {
                 case .success(let json):
@@ -37,7 +36,7 @@ class HTTPTool : NSObject {
                     break
                 case .error(let error):
                     failure?(error.localizedDescription)
-                }}.disposed(by: bag)
+                }}
     }
 }
 

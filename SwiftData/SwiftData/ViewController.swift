@@ -73,14 +73,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func sendHeart(_ sender: Any) {
-        HTTPTool.getIP(count: "", success: nil, failure: nil)
+        HTTPTool.getIP(count: "", success: nil, failure: nil).disposed(by: bag)
     }
     
     func netRequest() {
-        HTTPTool.getIPSaveDB(count: "2004050", bag: bag, success: { (model:Model0) in
+        HTTPTool.getIPSaveDB(count: "2004050", success: { (model:Model0) in
             Log(model)
             DBTool.saveModel(model: model)
-        }, failure: nil)
+        }, failure: nil).disposed(by: bag)
     }
 }
 

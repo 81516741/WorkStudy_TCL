@@ -22,19 +22,19 @@ class ConnectSocketTool: NSObject {
         return disposable
     }
     static let heartIT : TimeInterval = 28
-    static let requestIT : TimeInterval = 2
+    static let requestIT : TimeInterval = 15
     static var posables = [Disposable]()
     static var timerHeart:DispatchSourceTimer?
     static var timerAddress:DispatchSourceTimer?
     class func connectSocket() {
-        SocketTool.prepareSocket()
-        NetCheckTool.checkNet()
         //监听开流状态
         let _ = SocketTool.openStreamBehavior.bind(to: openStreamHandle())
         //监听连接状态
         let _ = SocketManager.default.connectRelay.bind(to: connectStateHandle())
         //监听网络网络
         let _ = NetCheckTool.netState.bind(to: netStateHandle())
+        SocketTool.prepareSocket()
+        NetCheckTool.checkNet()
     }
     fileprivate class func openStreamHandle() -> AnyObserver<OpenStreamStep> {
         return AnyObserver { event in
@@ -54,7 +54,7 @@ class ConnectSocketTool: NSObject {
                 } else if state == .disConnect {
                     SocketTool.openStreamBehavior.accept(.none)
                     stopHeart()
-                    //有网络才去重连,且存在host 和 port
+                    //有网络才去重连，如果连接成功了，那么host和port是一定存在的
                     if NetCheckTool.netState.value == .hasNet {
                         SocketTool.buildConnect(toHost: SocketManager.default.host, toPort: SocketManager.default.port)
                     }
@@ -70,6 +70,8 @@ class ConnectSocketTool: NSObject {
                     if SocketManager.default.host.count != 0 {
                         SocketTool.buildConnect(toHost: SocketManager.default.host, toPort: SocketManager.default.port)
                     } else {
+                        stopTimeAddress()
+                        cancelAllIPRequest()
                         timerAddress = startTimer(timeInterval: requestIT) {
                             if NetCheckTool.netState.value == .hasNet {
                                 posables.append(hostPortOB.bind(to: connect()))
@@ -83,18 +85,24 @@ class ConnectSocketTool: NSObject {
     fileprivate class func connect() -> AnyObserver<[String]> {
         return AnyObserver { event in
             if let host = event.element?.first,let port = event.element?.last {
-                if let timer = timerAddress {
-                    timer.cancel()
-                    self.timerAddress = nil
-                }
+                stopTimeAddress()
                 //已经连接过 取消所有请求(port 和 host 必是同时有值的)
                 if SocketManager.default.host.count > 0 {
-                    for ob in posables { ob.dispose() }
+                    cancelAllIPRequest()
                 } else {
                     SocketTool.buildConnect(toHost: host, toPort: port)
                 }
             }
         }
+    }
+    fileprivate class func stopTimeAddress() {
+        if let timer = timerAddress {
+            timer.cancel()
+            self.timerAddress = nil
+        }
+    }
+    fileprivate class func cancelAllIPRequest() {
+        for ob in posables { ob.dispose() }
     }
     fileprivate class func startHeart() {
         Log("-------开启心跳-------")
