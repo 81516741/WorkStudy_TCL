@@ -112,6 +112,35 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		0D12681821D47FBA008A5547 /* File */ = {
+			isa = PBXGroup;
+			children = (
+				0D4E9B9C21CCDF5A00F35E2D /* ios_client.p12 */,
+			);
+			path = File;
+			sourceTree = "<group>";
+		};
+		0D12681921D47FE6008A5547 /* SystemCreate */ = {
+			isa = PBXGroup;
+			children = (
+				0DBBA74021B5311A00CF501A /* Assets.xcassets */,
+				0DBBA74221B5311A00CF501A /* LaunchScreen.storyboard */,
+				0DBBA74521B5311A00CF501A /* Info.plist */,
+				0DD440D121BA113A00F41C39 /* SwiftData.entitlements */,
+			);
+			path = SystemCreate;
+			sourceTree = "<group>";
+		};
+		0D12681A21D48BF1008A5547 /* ViewLayer */ = {
+			isa = PBXGroup;
+			children = (
+				0DBBA73921B5311900CF501A /* AppDelegate.swift */,
+				0DBBA73B21B5311900CF501A /* ViewController.swift */,
+				0DBBA73D21B5311900CF501A /* Main.storyboard */,
+			);
+			path = ViewLayer;
+			sourceTree = "<group>";
+		};
 		0D2C104221C77D58009C6FAB /* SocketTool */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,17 +189,12 @@
 		0DBBA73821B5311900CF501A /* SwiftData */ = {
 			isa = PBXGroup;
 			children = (
-				0D4E9B9C21CCDF5A00F35E2D /* ios_client.p12 */,
-				0DD440D121BA113A00F41C39 /* SwiftData.entitlements */,
+				0D12681A21D48BF1008A5547 /* ViewLayer */,
+				0D12681921D47FE6008A5547 /* SystemCreate */,
+				0D12681821D47FBA008A5547 /* File */,
 				0D12681421D45DAB008A5547 /* Utils */,
 				0D12681321D45D97008A5547 /* ServiceLayer */,
 				0D12681221D45D3F008A5547 /* DataLayer */,
-				0DBBA73921B5311900CF501A /* AppDelegate.swift */,
-				0DBBA73B21B5311900CF501A /* ViewController.swift */,
-				0DBBA73D21B5311900CF501A /* Main.storyboard */,
-				0DBBA74021B5311A00CF501A /* Assets.xcassets */,
-				0DBBA74221B5311A00CF501A /* LaunchScreen.storyboard */,
-				0DBBA74521B5311A00CF501A /* Info.plist */,
 			);
 			path = SwiftData;
 			sourceTree = "<group>";
@@ -535,7 +559,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BHD34642BX;
-				INFOPLIST_FILE = SwiftData/Info.plist;
+				INFOPLIST_FILE = SwiftData/SystemCreate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -559,7 +583,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BHD34642BX;
-				INFOPLIST_FILE = SwiftData/Info.plist;
+				INFOPLIST_FILE = SwiftData/SystemCreate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
