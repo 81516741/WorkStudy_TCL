@@ -15,7 +15,7 @@
 		0D2C105121C8DDB9009C6FAB /* ConnectSocketTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C105021C8DDB9009C6FAB /* ConnectSocketTool.swift */; };
 		0D4E9B9D21CCDF5B00F35E2D /* ios_client.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 0D4E9B9C21CCDF5A00F35E2D /* ios_client.p12 */; };
 		0D4E9BA021CCE67A00F35E2D /* Socket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4E9B9F21CCE67A00F35E2D /* Socket.m */; };
-		0D609FF021CA0137008C0BC0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D609FEF21CA0137008C0BC0 /* Common.swift */; };
+		0D609FF021CA0137008C0BC0 /* FunctionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D609FEF21CA0137008C0BC0 /* FunctionUtil.swift */; };
 		0D609FF221CA1AB4008C0BC0 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D609FF121CA1AB4008C0BC0 /* HTTPError.swift */; };
 		0D90051421D089C200C9B550 /* UdpSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90051321D089C200C9B550 /* UdpSocketManager.swift */; };
 		0D90051621D0B34C00C9B550 /* LocalDeviceUdpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90051521D0B34C00C9B550 /* LocalDeviceUdpTool.swift */; };
@@ -24,12 +24,11 @@
 		0DBBA73F21B5311900CF501A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DBBA73D21B5311900CF501A /* Main.storyboard */; };
 		0DBBA74121B5311A00CF501A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DBBA74021B5311A00CF501A /* Assets.xcassets */; };
 		0DBBA74421B5311A00CF501A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DBBA74221B5311A00CF501A /* LaunchScreen.storyboard */; };
-		0DBBA75021B5314000CF501A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0DBBA74F21B5314000CF501A /* Podfile */; };
 		0DBBA76621B6790000CF501A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA76121B6790000CF501A /* Model.swift */; };
 		0DBBA76821B6790000CF501A /* HTTPLoginServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA76321B6790000CF501A /* HTTPLoginServices.swift */; };
 		0DBBA76921B6790000CF501A /* HTTPBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA76421B6790000CF501A /* HTTPBase.swift */; };
 		0DBBA76A21B6790000CF501A /* HTTPLoginTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA76521B6790000CF501A /* HTTPLoginTool.swift */; };
-		0DBBA76E21B6907F00CF501A /* XMLTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA76D21B6907F00CF501A /* XMLTool.m */; };
+		0DBBA76E21B6907F00CF501A /* XMLUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA76D21B6907F00CF501A /* XMLUtil.m */; };
 		0DD440C921B691C300F41C39 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD440C521B691C200F41C39 /* XMLReader.m */; };
 		0DD440CA21B691C300F41C39 /* XMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD440C721B691C300F41C39 /* XMLWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0DD440CD21B693D100F41C39 /* NSString+str2Dic2str.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD440CB21B693D100F41C39 /* NSString+str2Dic2str.m */; };
@@ -46,7 +45,7 @@
 		0D4E9B9C21CCDF5A00F35E2D /* ios_client.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ios_client.p12; sourceTree = "<group>"; };
 		0D4E9B9E21CCE67A00F35E2D /* Socket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Socket.h; sourceTree = "<group>"; };
 		0D4E9B9F21CCE67A00F35E2D /* Socket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Socket.m; sourceTree = "<group>"; };
-		0D609FEF21CA0137008C0BC0 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		0D609FEF21CA0137008C0BC0 /* FunctionUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionUtil.swift; sourceTree = "<group>"; };
 		0D609FF121CA1AB4008C0BC0 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		0D90051321D089C200C9B550 /* UdpSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdpSocketManager.swift; sourceTree = "<group>"; };
 		0D90051521D0B34C00C9B550 /* LocalDeviceUdpTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeviceUdpTool.swift; sourceTree = "<group>"; };
@@ -58,13 +57,12 @@
 		0DBBA74321B5311A00CF501A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0DBBA74521B5311A00CF501A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DBBA74B21B5312900CF501A /* SwiftData-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftData-Bridging-Header.h"; sourceTree = "<group>"; };
-		0DBBA74F21B5314000CF501A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0DBBA76121B6790000CF501A /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		0DBBA76321B6790000CF501A /* HTTPLoginServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPLoginServices.swift; sourceTree = "<group>"; };
 		0DBBA76421B6790000CF501A /* HTTPBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPBase.swift; sourceTree = "<group>"; };
 		0DBBA76521B6790000CF501A /* HTTPLoginTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPLoginTool.swift; sourceTree = "<group>"; };
-		0DBBA76C21B6907F00CF501A /* XMLTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLTool.h; sourceTree = "<group>"; };
-		0DBBA76D21B6907F00CF501A /* XMLTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLTool.m; sourceTree = "<group>"; };
+		0DBBA76C21B6907F00CF501A /* XMLUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLUtil.h; sourceTree = "<group>"; };
+		0DBBA76D21B6907F00CF501A /* XMLUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLUtil.m; sourceTree = "<group>"; };
 		0DD440C521B691C200F41C39 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		0DD440C621B691C300F41C39 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
 		0DD440C721B691C300F41C39 /* XMLWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLWriter.m; sourceTree = "<group>"; };
@@ -89,6 +87,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D12681221D45D3F008A5547 /* DataLayer */ = {
+			isa = PBXGroup;
+			children = (
+				0D2C104F21C8DD96009C6FAB /* Net */,
+				0DD440CE21B79C8000F41C39 /* DBTool */,
+			);
+			path = DataLayer;
+			sourceTree = "<group>";
+		};
+		0D12681321D45D97008A5547 /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ServiceLayer;
+			sourceTree = "<group>";
+		};
+		0D12681421D45DAB008A5547 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0D609FEF21CA0137008C0BC0 /* FunctionUtil.swift */,
+				0DBBA76B21B6906B00CF501A /* XMLUtil */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		0D2C104221C77D58009C6FAB /* SocketTool */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,7 +141,6 @@
 		0DBBA72D21B5311900CF501A = {
 			isa = PBXGroup;
 			children = (
-				0DBBA74F21B5314000CF501A /* Podfile */,
 				0DBBA74B21B5312900CF501A /* SwiftData-Bridging-Header.h */,
 				0DBBA73821B5311900CF501A /* SwiftData */,
 				0DBBA73721B5311900CF501A /* Products */,
@@ -140,10 +162,9 @@
 			children = (
 				0D4E9B9C21CCDF5A00F35E2D /* ios_client.p12 */,
 				0DD440D121BA113A00F41C39 /* SwiftData.entitlements */,
-				0D609FEF21CA0137008C0BC0 /* Common.swift */,
-				0D2C104F21C8DD96009C6FAB /* Net */,
-				0DD440CE21B79C8000F41C39 /* DBTool */,
-				0DBBA76B21B6906B00CF501A /* XMLTool */,
+				0D12681421D45DAB008A5547 /* Utils */,
+				0D12681321D45D97008A5547 /* ServiceLayer */,
+				0D12681221D45D3F008A5547 /* DataLayer */,
 				0DBBA73921B5311900CF501A /* AppDelegate.swift */,
 				0DBBA73B21B5311900CF501A /* ViewController.swift */,
 				0DBBA73D21B5311900CF501A /* Main.storyboard */,
@@ -165,7 +186,7 @@
 			path = HTTPTool;
 			sourceTree = "<group>";
 		};
-		0DBBA76B21B6906B00CF501A /* XMLTool */ = {
+		0DBBA76B21B6906B00CF501A /* XMLUtil */ = {
 			isa = PBXGroup;
 			children = (
 				0DD440CC21B693D100F41C39 /* NSString+str2Dic2str.h */,
@@ -174,10 +195,10 @@
 				0DD440C521B691C200F41C39 /* XMLReader.m */,
 				0DD440C821B691C300F41C39 /* XMLWriter.h */,
 				0DD440C721B691C300F41C39 /* XMLWriter.m */,
-				0DBBA76C21B6907F00CF501A /* XMLTool.h */,
-				0DBBA76D21B6907F00CF501A /* XMLTool.m */,
+				0DBBA76C21B6907F00CF501A /* XMLUtil.h */,
+				0DBBA76D21B6907F00CF501A /* XMLUtil.m */,
 			);
-			path = XMLTool;
+			path = XMLUtil;
 			sourceTree = "<group>";
 		};
 		0DD440CE21B79C8000F41C39 /* DBTool */ = {
@@ -273,7 +294,6 @@
 			files = (
 				0DBBA74421B5311A00CF501A /* LaunchScreen.storyboard in Resources */,
 				0DBBA74121B5311A00CF501A /* Assets.xcassets in Resources */,
-				0DBBA75021B5314000CF501A /* Podfile in Resources */,
 				0D4E9B9D21CCDF5B00F35E2D /* ios_client.p12 in Resources */,
 				0DBBA73F21B5311900CF501A /* Main.storyboard in Resources */,
 			);
@@ -353,10 +373,10 @@
 				0D2C104A21C88C76009C6FAB /* SocketTool.swift in Sources */,
 				0D2C104C21C8994A009C6FAB /* SocketLoginTool.swift in Sources */,
 				0DBBA76621B6790000CF501A /* Model.swift in Sources */,
-				0DBBA76E21B6907F00CF501A /* XMLTool.m in Sources */,
+				0DBBA76E21B6907F00CF501A /* XMLUtil.m in Sources */,
 				0DD440CA21B691C300F41C39 /* XMLWriter.m in Sources */,
 				0D609FF221CA1AB4008C0BC0 /* HTTPError.swift in Sources */,
-				0D609FF021CA0137008C0BC0 /* Common.swift in Sources */,
+				0D609FF021CA0137008C0BC0 /* FunctionUtil.swift in Sources */,
 				0D2C105121C8DDB9009C6FAB /* ConnectSocketTool.swift in Sources */,
 				0D2C104621C7B355009C6FAB /* DBTool.swift in Sources */,
 				0DBBA76921B6790000CF501A /* HTTPBase.swift in Sources */,

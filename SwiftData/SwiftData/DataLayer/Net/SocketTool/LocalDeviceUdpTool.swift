@@ -23,7 +23,7 @@ class LocalDeviceUdpTool: NSObject {
     class func msgHandle()->AnyObserver<String> {
         return AnyObserver { event in
             if let value = event.element {
-                let json = JSON(XMLTool.dic(fromXML: value))
+                let json = JSON(XMLUtil.dic(fromXML: value))
                 guard let deviceID = json["deviceInfo"]["tid"].rawValue as? String else {
                     return
                 }

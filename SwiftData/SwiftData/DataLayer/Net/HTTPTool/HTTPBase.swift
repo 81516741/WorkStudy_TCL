@@ -30,7 +30,7 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Respo
     func map<T:NSObject>(_ type: T.Type) -> Single<T?> {
         return flatMap { response -> Single<T?> in
             let xmlStr = String(data: response.data, encoding: String.Encoding.utf8)
-            guard let xmlDic = XMLTool.dic(fromXML: xmlStr) as? [String:Any] else {
+            guard let xmlDic = XMLUtil.dic(fromXML: xmlStr) as? [String:Any] else {
                 return Single<T?>.create { single in
                     single(.error(HTTPError.httpError("服务器数据错误")))
                     return Disposables.create()
@@ -56,7 +56,7 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Respo
     func map() -> Single<JSON?> {
         return flatMap { response -> Single<JSON?> in
             let xmlStr = String(data: response.data, encoding: String.Encoding.utf8)
-            guard let xmlDic = XMLTool.dic(fromXML: xmlStr) as? [String:Any] else {
+            guard let xmlDic = XMLUtil.dic(fromXML: xmlStr) as? [String:Any] else {
                 return Single<JSON?>.create { single in
                     single(.error(HTTPError.httpError("服务器数据错误")))
                     return Disposables.create()

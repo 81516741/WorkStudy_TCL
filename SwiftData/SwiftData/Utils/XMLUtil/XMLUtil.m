@@ -6,13 +6,13 @@
 //  Copyright © 2018年 tcl. All rights reserved.
 //
 
-#import "XMLTool.h"
+#import "XMLUtil.h"
 #import "XMLWriter.h"
 #import "XMLReader.h"
 #import "GDataXMLNode.h"
 #import "NSString+str2Dic2str.h"
 
-@implementation XMLTool
+@implementation XMLUtil
 
 /*
  将

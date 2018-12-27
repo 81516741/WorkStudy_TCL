@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XMLTool : NSObject
+@interface XMLUtil : NSObject
 +(NSString *)XMLFromJson:(NSString *)jsonStr;
 +(NSDictionary *)dicFromXML:(NSString *)xmlStr;
 @end
