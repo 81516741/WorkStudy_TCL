@@ -3,6 +3,7 @@ PODS:
   - CocoaAsyncSocket (7.6.3)
   - GDataXML-HTML (1.4.1)
   - Masonry (1.1.0)
+  - MBProgressHUD (0.9.2)
   - MJExtension (3.0.13)
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
@@ -28,6 +29,7 @@ DEPENDENCIES:
   - CocoaAsyncSocket
   - GDataXML-HTML (~> 1.4.1)
   - Masonry (= 1.1.0)
+  - MBProgressHUD (= 0.9.2)
   - MJExtension
   - Moya/RxSwift
   - RxCocoa
@@ -40,6 +42,7 @@ SPEC REPOS:
     - CocoaAsyncSocket
     - GDataXML-HTML
     - Masonry
+    - MBProgressHUD
     - MJExtension
     - Moya
     - Realm
@@ -55,6 +58,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   GDataXML-HTML: a4f11079b48d9fe96ff1fe478943a317185227e2
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   Realm: 0378021c424e4e2bd6a0e63b27881e929d9b9ad1
@@ -65,6 +69,6 @@ SPEC CHECKSUMS:
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 8ef76ee5eb6ffd754ef7f8aa8c2bfa707831c4e1
+PODFILE CHECKSUM: b779dab12c1a458f65f0d5c7da8deea1a537e524
 
 COCOAPODS: 1.5.3

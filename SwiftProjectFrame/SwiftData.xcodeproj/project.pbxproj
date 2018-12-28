@@ -45,6 +45,9 @@
 		0D1268D021D5CE62008A5547 /* MediatorTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1268CF21D5CE62008A5547 /* MediatorTool.swift */; };
 		0D1268D221D5D253008A5547 /* OtherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1268D121D5D253008A5547 /* OtherVC.swift */; };
 		0D1268D421D5E3A1008A5547 /* OtherVC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1268D321D5E3A1008A5547 /* OtherVC1.swift */; };
+		0D1268D921D5EE8C008A5547 /* MBProgressHUD+LDHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0D1268D621D5EE8C008A5547 /* MBProgressHUD+LDHUD.bundle */; };
+		0D1268DA21D5EE8C008A5547 /* MBProgressHUD+LDHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1268D821D5EE8C008A5547 /* MBProgressHUD+LDHUD.m */; };
+		0D1268DC21D5F0A3008A5547 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1268DB21D5F0A3008A5547 /* AlertView.swift */; };
 		0D2C104421C77DAC009C6FAB /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104321C77DAC009C6FAB /* SocketManager.swift */; };
 		0D2C104621C7B355009C6FAB /* DBTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104521C7B355009C6FAB /* DBTool.swift */; };
 		0D2C104A21C88C76009C6FAB /* SocketTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104921C88C76009C6FAB /* SocketTool.swift */; };
@@ -120,6 +123,10 @@
 		0D1268CF21D5CE62008A5547 /* MediatorTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediatorTool.swift; sourceTree = "<group>"; };
 		0D1268D121D5D253008A5547 /* OtherVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherVC.swift; sourceTree = "<group>"; };
 		0D1268D321D5E3A1008A5547 /* OtherVC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherVC1.swift; sourceTree = "<group>"; };
+		0D1268D621D5EE8C008A5547 /* MBProgressHUD+LDHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "MBProgressHUD+LDHUD.bundle"; sourceTree = "<group>"; };
+		0D1268D721D5EE8C008A5547 /* MBProgressHUD+LDHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+LDHUD.h"; sourceTree = "<group>"; };
+		0D1268D821D5EE8C008A5547 /* MBProgressHUD+LDHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+LDHUD.m"; sourceTree = "<group>"; };
+		0D1268DB21D5F0A3008A5547 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		0D2C104321C77DAC009C6FAB /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		0D2C104521C7B355009C6FAB /* DBTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBTool.swift; sourceTree = "<group>"; };
 		0D2C104921C88C76009C6FAB /* SocketTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketTool.swift; sourceTree = "<group>"; };
@@ -227,11 +234,13 @@
 		0D12687021D5BA95008A5547 /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
+				0D1268D521D5EE8C008A5547 /* MBProgress+LDHUD */,
 				0D12687121D5BA95008A5547 /* CellView.swift */,
 				0D12687221D5BA95008A5547 /* GridView.swift */,
 				0D12687321D5BA95008A5547 /* TableHeaderView.swift */,
 				0D12687421D5BA95008A5547 /* TopImageBottomWordView.swift */,
 				0D12687521D5BA95008A5547 /* TransSizeTool.swift */,
+				0D1268DB21D5F0A3008A5547 /* AlertView.swift */,
 			);
 			path = CommonView;
 			sourceTree = "<group>";
@@ -317,6 +326,16 @@
 				0D1268C821D5CB3B008A5547 /* MeVC.xib */,
 			);
 			path = Me;
+			sourceTree = "<group>";
+		};
+		0D1268D521D5EE8C008A5547 /* MBProgress+LDHUD */ = {
+			isa = PBXGroup;
+			children = (
+				0D1268D621D5EE8C008A5547 /* MBProgressHUD+LDHUD.bundle */,
+				0D1268D721D5EE8C008A5547 /* MBProgressHUD+LDHUD.h */,
+				0D1268D821D5EE8C008A5547 /* MBProgressHUD+LDHUD.m */,
+			);
+			path = "MBProgress+LDHUD";
 			sourceTree = "<group>";
 		};
 		0D2C104221C77D58009C6FAB /* SocketTool */ = {
@@ -494,6 +513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D1268BA21D5BA95008A5547 /* P3.png in Resources */,
+				0D1268D921D5EE8C008A5547 /* MBProgressHUD+LDHUD.bundle in Resources */,
 				0DBBA74421B5311A00CF501A /* LaunchScreen.storyboard in Resources */,
 				0D1268B921D5BA95008A5547 /* P2.png in Resources */,
 				0D1268B521D5BA95008A5547 /* BTN_entre.png in Resources */,
@@ -539,6 +559,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/GDataXML-HTML/GDataXML_HTML.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
@@ -555,6 +576,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GDataXML_HTML.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
@@ -586,6 +608,7 @@
 				0D4E9BA021CCE67A00F35E2D /* Socket.m in Sources */,
 				0D1268C121D5BA95008A5547 /* Mediator.m in Sources */,
 				0D1268A521D5BA95008A5547 /* TopImageBottomWordView.swift in Sources */,
+				0D1268DA21D5EE8C008A5547 /* MBProgressHUD+LDHUD.m in Sources */,
 				0D2C104E21C8D50C009C6FAB /* NetCheckTool.swift in Sources */,
 				0D1268CC21D5CB70008A5547 /* Target_Me.swift in Sources */,
 				0D1268A321D5BA95008A5547 /* GridView.swift in Sources */,
@@ -598,6 +621,7 @@
 				0D1268C321D5BB27008A5547 /* Target_Home.swift in Sources */,
 				0DD440CA21B691C300F41C39 /* XMLWriter.m in Sources */,
 				0D609FF221CA1AB4008C0BC0 /* HTTPError.swift in Sources */,
+				0D1268DC21D5F0A3008A5547 /* AlertView.swift in Sources */,
 				0D609FF021CA0137008C0BC0 /* FunctionUtil.swift in Sources */,
 				0D1268A621D5BA95008A5547 /* TransSizeTool.swift in Sources */,
 				0D1268B321D5BA95008A5547 /* LDLoadBaseSourceUtil.m in Sources */,
