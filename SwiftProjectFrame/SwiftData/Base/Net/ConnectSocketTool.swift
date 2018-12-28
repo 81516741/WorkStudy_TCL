@@ -31,12 +31,7 @@ class ConnectSocketTool: NSObject {
             if let openStreanStep = $0.element {
                 if openStreanStep == .ok {
                     result?(true)
-                }
-            }
-        })
-        let _ =  SocketManager.default.connectRelay.subscribe({
-            if let state = $0.element {
-                if state == .disConnect {
+                } else if openStreanStep == .none {
                     result?(false)
                 }
             }
