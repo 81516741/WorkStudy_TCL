@@ -56,7 +56,9 @@ class SocketManager: NSObject {
                 }
             }
         }
-        socket.connect(host, toPort: portUInt16)
+        DispatchQueue(label: "socketConnectQueue").async {
+            self.socket.connect(host, toPort: portUInt16)
+        }
     }
     
     func send(message msg:String?) {
@@ -70,7 +72,13 @@ class SocketManager: NSObject {
         }
         if let data = msg0.data(using: .utf8) {
             Log("发送消息：\(msg0)")
-            socket.send(data)
+            DispatchQueue(label: "sendMsgQueue").async {
+                if (self.socket.send(data)) {
+                    Log("发送成功")
+                } else {
+                    Log("发送失败")
+                }
+            }
         } else {
             Log(msg0 + "无法转成data")
         }

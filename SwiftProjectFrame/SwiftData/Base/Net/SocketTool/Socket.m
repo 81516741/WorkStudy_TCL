@@ -21,7 +21,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.eventQueue=dispatch_queue_create("socket的消息队列",NULL);
+        self.eventQueue = dispatch_queue_create("socket回包的消息队列",NULL);
         self.isOpenInputStream = false;
         self.isOpenOutputStream = false;
     }
@@ -89,7 +89,9 @@
     } else {
         rcvBuffLen=0;
         if (self.msgResult) {
-            self.msgResult(rcvString);
+            dispatch_async(dispatch_get_main_queue(), ^{
+               self.msgResult(rcvString);
+            });
         }
     }
     return YES;
@@ -170,7 +172,9 @@
                                if (self.isOpenInputStream &&
                                    self.isOpenOutputStream) {
                                    if (self.connectResult) {
-                                       self.connectResult(true);
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           self.connectResult(true);
+                                       });
                                    }
                                }
                                break;
@@ -191,7 +195,9 @@
                                    NSLog(@"连接错误");
                                    [self closeSocket];
                                    if (self.connectResult) {
-                                       self.connectResult(false);
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           self.connectResult(false);
+                                       });
                                    }
                                }
                                break;
@@ -207,7 +213,9 @@
                                    NSLog(@"连接结束");
                                    [self closeSocket];
                                    if (self.connectResult) {
-                                       self.connectResult(false);
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           self.connectResult(false);
+                                       });
                                    }
                                }
                                break;
