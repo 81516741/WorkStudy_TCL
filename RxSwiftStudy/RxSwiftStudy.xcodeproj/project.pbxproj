@@ -110,16 +110,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0D12681521D47F2A008A5547 /* ViewLayer */ = {
-			isa = PBXGroup;
-			children = (
-				0D76595821AF8438001421D3 /* AppDelegate.swift */,
-				0D12681721D47F8F008A5547 /* Mine */,
-				0D12681621D47F65008A5547 /* Base */,
-			);
-			path = ViewLayer;
-			sourceTree = "<group>";
-		};
 		0D12681621D47F65008A5547 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,8 +177,10 @@
 		0D76595721AF8438001421D3 /* RxSwiftStudy */ = {
 			isa = PBXGroup;
 			children = (
+				0D76595821AF8438001421D3 /* AppDelegate.swift */,
+				0D12681721D47F8F008A5547 /* Mine */,
+				0D12681621D47F65008A5547 /* Base */,
 				0D12681B21D48DE5008A5547 /* SystemCreate */,
-				0D12681521D47F2A008A5547 /* ViewLayer */,
 			);
 			path = RxSwiftStudy;
 			sourceTree = "<group>";

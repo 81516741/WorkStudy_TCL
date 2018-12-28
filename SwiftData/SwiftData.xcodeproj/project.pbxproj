@@ -87,22 +87,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0D12681221D45D3F008A5547 /* DataLayer */ = {
-			isa = PBXGroup;
-			children = (
-				0D2C104F21C8DD96009C6FAB /* Net */,
-				0DD440CE21B79C8000F41C39 /* DBTool */,
-			);
-			path = DataLayer;
-			sourceTree = "<group>";
-		};
-		0D12681321D45D97008A5547 /* ServiceLayer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ServiceLayer;
-			sourceTree = "<group>";
-		};
 		0D12681421D45DAB008A5547 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,14 +115,14 @@
 			path = SystemCreate;
 			sourceTree = "<group>";
 		};
-		0D12681A21D48BF1008A5547 /* ViewLayer */ = {
+		0D12681A21D48BF1008A5547 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				0DBBA73921B5311900CF501A /* AppDelegate.swift */,
 				0DBBA73B21B5311900CF501A /* ViewController.swift */,
 				0DBBA73D21B5311900CF501A /* Main.storyboard */,
 			);
-			path = ViewLayer;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		0D2C104221C77D58009C6FAB /* SocketTool */ = {
@@ -158,9 +142,9 @@
 		0D2C104F21C8DD96009C6FAB /* Net */ = {
 			isa = PBXGroup;
 			children = (
+				0DBBA76121B6790000CF501A /* Model.swift */,
 				0D2C105021C8DDB9009C6FAB /* ConnectSocketTool.swift */,
 				0D2C104D21C8D50C009C6FAB /* NetCheckTool.swift */,
-				0DBBA76121B6790000CF501A /* Model.swift */,
 				0DBBA75121B6288900CF501A /* HTTPTool */,
 				0D2C104221C77D58009C6FAB /* SocketTool */,
 			);
@@ -189,12 +173,12 @@
 		0DBBA73821B5311900CF501A /* SwiftData */ = {
 			isa = PBXGroup;
 			children = (
-				0D12681A21D48BF1008A5547 /* ViewLayer */,
+				0D12681A21D48BF1008A5547 /* Main */,
 				0D12681921D47FE6008A5547 /* SystemCreate */,
 				0D12681821D47FBA008A5547 /* File */,
 				0D12681421D45DAB008A5547 /* Utils */,
-				0D12681321D45D97008A5547 /* ServiceLayer */,
-				0D12681221D45D3F008A5547 /* DataLayer */,
+				0D2C104F21C8DD96009C6FAB /* Net */,
+				0DD440CE21B79C8000F41C39 /* DBTool */,
 			);
 			path = SwiftData;
 			sourceTree = "<group>";
