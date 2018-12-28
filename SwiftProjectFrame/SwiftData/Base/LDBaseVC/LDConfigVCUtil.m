@@ -43,9 +43,7 @@ NSString * const kLoginStateKey = @"kLoginStateKey";
 
 + (void)configLoginVCToRootVC
 {
-#warning TODO:
-//    UINavigationController * loginVCNavi = [[LDMediator sharedInstance] login_getLoginController];
-    UINavigationController * loginVCNavi;
+    UINavigationController * loginVCNavi = [[Mediator sharedInstance] login_getLoginController];
     if (loginVCNavi != nil) {
         //是否需要展示新特性
         if ([self isShowIntroductionVC]) {

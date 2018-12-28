@@ -48,6 +48,11 @@
 		0D1268D921D5EE8C008A5547 /* MBProgressHUD+LDHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0D1268D621D5EE8C008A5547 /* MBProgressHUD+LDHUD.bundle */; };
 		0D1268DA21D5EE8C008A5547 /* MBProgressHUD+LDHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1268D821D5EE8C008A5547 /* MBProgressHUD+LDHUD.m */; };
 		0D1268DC21D5F0A3008A5547 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1268DB21D5F0A3008A5547 /* AlertView.swift */; };
+		0D1268DF21D5F814008A5547 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D1268DE21D5F814008A5547 /* LoginVC.xib */; };
+		0D1268E221D5F884008A5547 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1268E121D5F884008A5547 /* LoginVC.swift */; };
+		0D1268E421D5FBE9008A5547 /* Target_Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1268E321D5FBE9008A5547 /* Target_Login.swift */; };
+		0D1268E621D5FC30008A5547 /* Mediator+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1268E521D5FC30008A5547 /* Mediator+Login.swift */; };
+		0D1268E821D600F8008A5547 /* XIbCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1268E721D600F8008A5547 /* XIbCornerRadius.swift */; };
 		0D2C104421C77DAC009C6FAB /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104321C77DAC009C6FAB /* SocketManager.swift */; };
 		0D2C104621C7B355009C6FAB /* DBTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104521C7B355009C6FAB /* DBTool.swift */; };
 		0D2C104A21C88C76009C6FAB /* SocketTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C104921C88C76009C6FAB /* SocketTool.swift */; };
@@ -127,6 +132,11 @@
 		0D1268D721D5EE8C008A5547 /* MBProgressHUD+LDHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+LDHUD.h"; sourceTree = "<group>"; };
 		0D1268D821D5EE8C008A5547 /* MBProgressHUD+LDHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+LDHUD.m"; sourceTree = "<group>"; };
 		0D1268DB21D5F0A3008A5547 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		0D1268DE21D5F814008A5547 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
+		0D1268E121D5F884008A5547 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		0D1268E321D5FBE9008A5547 /* Target_Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target_Login.swift; sourceTree = "<group>"; };
+		0D1268E521D5FC30008A5547 /* Mediator+Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Mediator+Login.swift"; sourceTree = "<group>"; };
+		0D1268E721D600F8008A5547 /* XIbCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XIbCornerRadius.swift; sourceTree = "<group>"; };
 		0D2C104321C77DAC009C6FAB /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		0D2C104521C7B355009C6FAB /* DBTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBTool.swift; sourceTree = "<group>"; };
 		0D2C104921C88C76009C6FAB /* SocketTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketTool.swift; sourceTree = "<group>"; };
@@ -251,6 +261,7 @@
 				0D12687721D5BA95008A5547 /* LDBehavior */,
 				0D12688521D5BA95008A5547 /* XibConstraintAdapter.swift */,
 				0D12688621D5BA95008A5547 /* XibFontAdapter.m */,
+				0D1268E721D600F8008A5547 /* XIbCornerRadius.swift */,
 			);
 			path = LDAboutXib;
 			sourceTree = "<group>";
@@ -308,6 +319,7 @@
 		0D12689E21D5BA95008A5547 /* LDMediator */ = {
 			isa = PBXGroup;
 			children = (
+				0D1268E521D5FC30008A5547 /* Mediator+Login.swift */,
 				0D1268CD21D5CBEE008A5547 /* Mediator+Me.swift */,
 				0D12689F21D5BA95008A5547 /* Mediator+Home.swift */,
 				0D1268A021D5BA95008A5547 /* Mediator.h */,
@@ -336,6 +348,16 @@
 				0D1268D821D5EE8C008A5547 /* MBProgressHUD+LDHUD.m */,
 			);
 			path = "MBProgress+LDHUD";
+			sourceTree = "<group>";
+		};
+		0D1268DD21D5F7EA008A5547 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0D1268E321D5FBE9008A5547 /* Target_Login.swift */,
+				0D1268DE21D5F814008A5547 /* LoginVC.xib */,
+				0D1268E121D5F884008A5547 /* LoginVC.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		0D2C104221C77D58009C6FAB /* SocketTool */ = {
@@ -387,8 +409,9 @@
 			isa = PBXGroup;
 			children = (
 				0DBBA73921B5311900CF501A /* AppDelegate.swift */,
-				0D12681921D47FE6008A5547 /* SystemCreate */,
 				0D12686F21D5BA95008A5547 /* Base */,
+				0D12681921D47FE6008A5547 /* SystemCreate */,
+				0D1268DD21D5F7EA008A5547 /* Login */,
 				0D1268C621D5CB22008A5547 /* Me */,
 				0D12681A21D48BF1008A5547 /* Home */,
 			);
@@ -524,6 +547,7 @@
 				0D4E9B9D21CCDF5B00F35E2D /* ios_client.p12 in Resources */,
 				0D1268B621D5BA95008A5547 /* icon_back_gray.png in Resources */,
 				0D1268C521D5C73F008A5547 /* HomeVC.xib in Resources */,
+				0D1268DF21D5F814008A5547 /* LoginVC.xib in Resources */,
 				0D1268B721D5BA95008A5547 /* icon_back_white.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -559,6 +583,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/GDataXML-HTML/GDataXML_HTML.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
@@ -576,6 +601,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GDataXML_HTML.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
@@ -606,6 +632,7 @@
 				0D1268A221D5BA95008A5547 /* CellView.swift in Sources */,
 				0D90051421D089C200C9B550 /* UdpSocketManager.swift in Sources */,
 				0D4E9BA021CCE67A00F35E2D /* Socket.m in Sources */,
+				0D1268E621D5FC30008A5547 /* Mediator+Login.swift in Sources */,
 				0D1268C121D5BA95008A5547 /* Mediator.m in Sources */,
 				0D1268A521D5BA95008A5547 /* TopImageBottomWordView.swift in Sources */,
 				0D1268DA21D5EE8C008A5547 /* MBProgressHUD+LDHUD.m in Sources */,
@@ -614,6 +641,8 @@
 				0D1268A321D5BA95008A5547 /* GridView.swift in Sources */,
 				0D2C104A21C88C76009C6FAB /* SocketTool.swift in Sources */,
 				0D2C104C21C8994A009C6FAB /* SocketLoginTool.swift in Sources */,
+				0D1268E421D5FBE9008A5547 /* Target_Login.swift in Sources */,
+				0D1268E821D600F8008A5547 /* XIbCornerRadius.swift in Sources */,
 				0D1268B421D5BA95008A5547 /* NSObject+LDMonitor.m in Sources */,
 				0DBBA76621B6790000CF501A /* Model.swift in Sources */,
 				0D1268A721D5BA95008A5547 /* ButtonBehavior.swift in Sources */,
@@ -646,6 +675,7 @@
 				0D1268C921D5CB3B008A5547 /* MeVC.swift in Sources */,
 				0D1268AB21D5BA95008A5547 /* LDBehavior.m in Sources */,
 				0D1268CE21D5CBEE008A5547 /* Mediator+Me.swift in Sources */,
+				0D1268E221D5F884008A5547 /* LoginVC.swift in Sources */,
 				0D1268B221D5BA95008A5547 /* LDConfigVCUtil.m in Sources */,
 				0DD440CD21B693D100F41C39 /* NSString+str2Dic2str.m in Sources */,
 				0DD440C921B691C300F41C39 /* XMLReader.m in Sources */,

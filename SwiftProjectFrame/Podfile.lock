@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.7.2)
   - CocoaAsyncSocket (7.6.3)
   - GDataXML-HTML (1.4.1)
+  - IQKeyboardManagerSwift (6.0.3)
   - Masonry (1.1.0)
   - MBProgressHUD (0.9.2)
   - MJExtension (3.0.13)
@@ -28,6 +29,7 @@ PODS:
 DEPENDENCIES:
   - CocoaAsyncSocket
   - GDataXML-HTML (~> 1.4.1)
+  - IQKeyboardManagerSwift (= 6.0.3)
   - Masonry (= 1.1.0)
   - MBProgressHUD (= 0.9.2)
   - MJExtension
@@ -41,6 +43,7 @@ SPEC REPOS:
     - Alamofire
     - CocoaAsyncSocket
     - GDataXML-HTML
+    - IQKeyboardManagerSwift
     - Masonry
     - MBProgressHUD
     - MJExtension
@@ -57,6 +60,7 @@ SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   GDataXML-HTML: a4f11079b48d9fe96ff1fe478943a317185227e2
+  IQKeyboardManagerSwift: 04e8679f85e496bb2c474eeb9284052f1b3c391c
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
@@ -69,6 +73,6 @@ SPEC CHECKSUMS:
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: b779dab12c1a458f65f0d5c7da8deea1a537e524
+PODFILE CHECKSUM: 9308c38017f97cea901d3e653ecff02fc37528ab
 
 COCOAPODS: 1.5.3

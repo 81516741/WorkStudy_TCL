@@ -26,6 +26,22 @@ class ConnectSocketTool: NSObject {
     static var posables = [Disposable]()
     static var timerHeart:DispatchSourceTimer?
     static var timerAddress:DispatchSourceTimer?
+    class func connectState(_ result:((Bool)->())?) {
+        let _  = SocketTool.openStreamBehavior.subscribe({
+            if let openStreanStep = $0.element {
+                if openStreanStep == .ok {
+                    result?(true)
+                }
+            }
+        })
+        let _ =  SocketManager.default.connectRelay.subscribe({
+            if let state = $0.element {
+                if state == .disConnect {
+                    result?(false)
+                }
+            }
+        })
+    }
     class func connectSocket() {
         //监听开流状态
         let _ = SocketTool.openStreamBehavior.bind(to: openStreamHandle())

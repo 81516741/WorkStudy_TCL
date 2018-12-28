@@ -43,9 +43,11 @@
 }
 + (void)showTipMessageInView:(UIView *)view message:(NSString *)message timer:(NSTimeInterval)aTimer dimBackground:(BOOL)dimBackground
 {
-    MBProgressHUD *hud = [self createMBProgressHUDviewWithMessage:message inView:view dimBackground:dimBackground];
-    hud.mode = MBProgressHUDModeText;
-    [hud hide:YES afterDelay:aTimer];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        MBProgressHUD *hud = [self createMBProgressHUDviewWithMessage:message inView:view dimBackground:dimBackground];
+        hud.mode = MBProgressHUDModeText;
+        [hud hide:YES afterDelay:aTimer];
+    });
 }
 
 #pragma mark----------- show Activity -------------
@@ -67,11 +69,13 @@
 }
 + (void)showActivityMessageInView:(UIView *)view message:(NSString *)message timer:(NSTimeInterval)aTimer dimBackground:(BOOL)dimBackground
 {
-    MBProgressHUD *hud  =  [self createMBProgressHUDviewWithMessage:message inView:view dimBackground:dimBackground];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    if (aTimer>0) {
-        [hud hide:YES afterDelay:aTimer];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        MBProgressHUD *hud  =  [self createMBProgressHUDviewWithMessage:message inView:view dimBackground:dimBackground];
+        hud.mode = MBProgressHUDModeIndeterminate;
+        if (aTimer>0) {
+            [hud hide:YES afterDelay:aTimer];
+        }
+    });
 }
 
 #pragma mark--------  show Image ------------
@@ -116,22 +120,28 @@
 
 + (void)showCustomIconInView:(UIView *)view iconName:(NSString *)iconName message:(NSString *)message timer:(NSTimeInterval)aTimer dimBackground:(BOOL)dimBackground
 {
-    MBProgressHUD *hud  =  [self createMBProgressHUDviewWithMessage:message inView:view dimBackground:dimBackground];
-    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:iconName]];
-    hud.mode = MBProgressHUDModeCustomView;
-    hud.userInteractionEnabled = NO;
-    [hud hide:YES afterDelay:2];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        MBProgressHUD *hud  =  [self createMBProgressHUDviewWithMessage:message inView:view dimBackground:dimBackground];
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:iconName]];
+        hud.mode = MBProgressHUDModeCustomView;
+        hud.userInteractionEnabled = NO;
+        [hud hide:YES afterDelay:2];
+    });
     
 }
 + (void)hideHUDInWindow
 {
-    UIView  * winView =(UIView*)[UIApplication sharedApplication].delegate.window;
-    [self hideAllHUDsForView:winView animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIView  * winView =(UIView*)[UIApplication sharedApplication].delegate.window;
+        [self hideAllHUDsForView:winView animated:YES];
+    });
 }
 
 + (void)hideHUDInView:(UIView *)view
 {
-    [self hideAllHUDsForView:view animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self hideAllHUDsForView:view animated:YES];
+    });
 }
 
 @end
