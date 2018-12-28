@@ -11,6 +11,7 @@
 @property(strong, nonatomic) NSInputStream * inputStream;
 @property(strong, nonatomic) NSOutputStream * outputStream;
 @property(strong, nonatomic) dispatch_queue_t eventQueue;
+@property(strong, nonatomic) dispatch_queue_t writeQueue;
 @property(copy, nonatomic) NSString * host;
 @property(assign, nonatomic) UInt16 port;
 @property(assign, nonatomic) BOOL isOpenInputStream;
@@ -21,20 +22,23 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.eventQueue = dispatch_queue_create("socket回包的消息队列",NULL);
+        self.eventQueue = dispatch_queue_create("socket回包的队列",NULL);
+        self.writeQueue = dispatch_queue_create("socket发送消息的队列",NULL);
         self.isOpenInputStream = false;
         self.isOpenOutputStream = false;
     }
     return self;
 }
 
--(BOOL)connect:(NSString *)host toPort:(UInt16)port {
+-(void)connect:(NSString *)host toPort:(UInt16)port {
     if (_inputStream == nil || _outputStream == nil) {
         CFReadStreamRef   readStream;
         CFWriteStreamRef  writeStram;
         CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)host,(int)port,&readStream, &writeStram);
         if (readStream == nil || writeStram == nil) {
-            return NO;
+            if (self.connectResult) {
+                self.connectResult(NO);
+            }
         }
         self.host = host;
         self.port = port;
@@ -47,21 +51,31 @@
     [_outputStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [_inputStream open];
     [_outputStream open];
-    return YES;
 }
 
-- (BOOL)send:(NSData *)data {
+- (void)send:(NSData *)data {
     if(nil == data) {
-        return NO;
+        if (self.sendResult) {
+            self.sendResult(NO);
+        }
     }
     if(nil == _outputStream) {
-        return NO;
+        if (self.sendResult) {
+            self.sendResult(NO);
+        }
     }
-    NSInteger sendLen = [_outputStream write:data.bytes maxLength:data.length];
-    if(sendLen != data.length) {
-        return NO;
-    }
-    return YES;
+    dispatch_async(self.eventQueue, ^{
+        NSInteger sendLen = [self.outputStream write:data.bytes maxLength:data.length];
+        if(sendLen != data.length) {
+            if (self.sendResult) {
+                self.sendResult(NO);
+            }
+        } else {
+            if (self.sendResult) {
+                self.sendResult(YES);
+            }
+        }
+    });
 }
 -(BOOL)recvData {
     static unsigned char * rcvBuff=NULL;

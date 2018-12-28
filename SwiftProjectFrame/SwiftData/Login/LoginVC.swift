@@ -12,6 +12,7 @@ class LoginVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ld_hideNavigationBar = true
     }
     @IBAction func clickLoginBtn(_ sender: UIButton) {
         LDConfigVCUtil.configTabCToRootVC()

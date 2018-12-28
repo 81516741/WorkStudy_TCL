@@ -23,24 +23,40 @@ class SocketTool: NSObject {
     static var timer:DispatchSourceTimer?
     static let openStreamBehavior = BehaviorRelay<OpenStreamStep>(value: .none)
     static var blocks = [[String:Array<resultBlock>]]()
-    
+    static var msgID = 1//测试属性
     class func send(_ msg:String,_ success:@escaping resultBlock,_ failure:@escaping resultBlock) {
         if openStreamBehavior.value == .none {
             failure("当前网络未连接")
             return
         }
         addBlock(msg,[failure,success])
+        SocketManager.default.send(message: msg)
     }
     class func buildConnect(toHost:String?,toPort:String?) {
         SocketManager.default.connect(toHost: toHost, toPort: toPort)
     }
     class func prepareSocket() {
+        listenSendState()
         listenMessage()
         listenStreamMsg()
         listenOpenStream()
     }
+    fileprivate class func listenSendState() {
+        _ = SocketManager.default.sendMsdSubject.bind(to: sendStateHandle())
+    }
     fileprivate class func listenMessage() {
-        let _ = SocketManager.default.messageSubject.bind(to: msgHandle())
+        _ = SocketManager.default.messageSubject.bind(to: msgHandle())
+    }
+    
+    fileprivate class func sendStateHandle() -> AnyObserver<String> {
+        return AnyObserver { event in
+            if let msg = event.element {
+                if msg != SocketManager.sendMsgSuccess {
+                    let msgID = msg //msgID可从msg中获得
+                    SocketTool.resultCallBack(nil, msgID,"消息发送失败")
+                }
+            }
+        }
     }
     fileprivate class func msgHandle() -> AnyObserver<String> {
         return AnyObserver { event in
@@ -56,19 +72,25 @@ class SocketTool: NSObject {
                 } else if msg.contains("D_module") {
                     
                 }
-                SocketLoginTool.receive(msg)
+                //测试逻辑
+                if !msg.contains("heartMessage") {
+                   SocketLoginTool.receive(msg)
+                }
             }
         }
     }
-    fileprivate class func addBlock(_ message:String,_ blocks:Array<resultBlock>) {
-        let msgID = "消息ID"
+    fileprivate class func addBlock(_ msg:String,_ blocks:Array<resultBlock>) {
+        //测试代码，真正的msgID是根据msg获取的
+        self.msgID = self.msgID + 1
+        let msgID = "消息ID\(self.msgID)"
         self.blocks.append([msgID:blocks])
         if blocks.count > 100 {
             self.blocks.removeFirst()
         }
     }
     class func resultCallBack(_ msg:Any?,_ msgID:String?,_ err:String? = nil) {
-        let msgID = msgID ?? "消息ID"
+        //测试代码
+        let msgID = "消息ID\(self.msgID)"
         for value in blocks {
             if let key = value.keys.first {
                 if key == msgID {
@@ -95,10 +117,10 @@ extension SocketTool {
         openStreamBehavior.accept(.fristStream)
     }
     fileprivate class func listenStreamMsg() {
-        let _ = SocketManager.default.messageSubject.bind(to: streamMsgHandle())
+        _ = SocketManager.default.messageSubject.bind(to: streamMsgHandle())
     }
     fileprivate class func listenOpenStream() {
-        let _ = openStreamBehavior.bind(to: openStreamHandle())
+        _ = openStreamBehavior.bind(to: openStreamHandle())
     }
     fileprivate class func streamMsgHandle() -> AnyObserver<String> {
         return AnyObserver { event in
@@ -162,10 +184,15 @@ extension SocketTool {
 extension SocketTool {
     class func sendHeart(){
         let heartMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><iq id=\"heartMessage\" to=\"tcl.com\" type=\"get\"><ping xmlns=\"urn:xmpp:ping\"></ping></iq>"
-        SocketManager.default.send(message: heartMsg)
+//        SocketManager.default.send(message: heartMsg)
+        send(heartMsg, { (msg) in
+            print(msg)
+        }) { (msg) in
+            print(msg)
+        }
     }
     fileprivate class func listenHeartMessage() {
-        let _ = SocketManager.default.messageSubject.bind(to: heartMsgHandle())
+        _ = SocketManager.default.messageSubject.bind(to: heartMsgHandle())
     }
     fileprivate class func heartMsgHandle() -> AnyObserver<String> {
         return AnyObserver { event in

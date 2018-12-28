@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface Socket : NSObject
-- (BOOL)connect:(NSString *)host toPort:(UInt16)port;
-- (BOOL)send:(NSData *)data;
+- (void)connect:(NSString *)host toPort:(UInt16)port;
+- (void)send:(NSData *)data;
 - (BOOL)startTSL;
 @property(copy, nonatomic) void(^connectResult)(BOOL isConnected);
+@property(copy, nonatomic) void(^sendResult)(BOOL isSended);
 @property(copy, nonatomic) void(^msgResult)(NSString * msg);
 @end

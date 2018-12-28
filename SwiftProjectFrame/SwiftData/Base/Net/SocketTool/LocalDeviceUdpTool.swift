@@ -14,8 +14,8 @@ class LocalDeviceUdpTool: NSObject {
     static var localDeviceList = [JSON]()
     class func startSearchDevice() {
         UdpSocketManager.default.send("<searchDevice></searchDevice>")
-        let _ = UdpSocketManager.default.messageSubject.bind(to: msgHandle())
-        let _ = UdpSocketManager.default.errorSubject.bind(to: errHandle())
+        _ = UdpSocketManager.default.messageSubject.bind(to: msgHandle())
+        _ = UdpSocketManager.default.errorSubject.bind(to: errHandle())
     }
     class func stopSearchDevice() {
         UdpSocketManager.default.closeUdpSocket()

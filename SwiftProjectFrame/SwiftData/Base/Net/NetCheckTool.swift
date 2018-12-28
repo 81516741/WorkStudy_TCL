@@ -13,8 +13,8 @@ import RxCocoa
 
 enum NetState {
     case none
-    case noNet
-    case hasNet
+    case netNone
+    case netHas
 }
 class NetCheckTool {
     static let netState : BehaviorRelay<NetState> = BehaviorRelay(value: .none)
@@ -23,10 +23,10 @@ class NetCheckTool {
         manager?.listener = { status in
             switch status {
             case .unknown,.notReachable:
-                netState.accept(.noNet)
+                netState.accept(.netNone)
                 break
             case .reachable:
-                netState.accept(.hasNet)
+                netState.accept(.netHas)
                 break
             }
         }

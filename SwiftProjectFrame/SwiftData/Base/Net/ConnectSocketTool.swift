@@ -26,8 +26,9 @@ class ConnectSocketTool: NSObject {
     static var posables = [Disposable]()
     static var timerHeart:DispatchSourceTimer?
     static var timerAddress:DispatchSourceTimer?
+    
     class func connectState(_ result:((Bool)->())?) {
-        let _  = SocketTool.openStreamBehavior.subscribe({
+        _ = SocketTool.openStreamBehavior.subscribe({
             if let openStreanStep = $0.element {
                 if openStreanStep == .ok {
                     result?(true)
@@ -39,11 +40,11 @@ class ConnectSocketTool: NSObject {
     }
     class func connectSocket() {
         //监听开流状态
-        let _ = SocketTool.openStreamBehavior.bind(to: openStreamHandle())
+        _ = SocketTool.openStreamBehavior.bind(to: openStreamHandle())
         //监听连接状态
-        let _ = SocketManager.default.connectRelay.bind(to: connectStateHandle())
+        _ = SocketManager.default.connectRelay.bind(to: connectStateHandle())
         //监听网络网络
-        let _ = NetCheckTool.netState.bind(to: netStateHandle())
+        _ = NetCheckTool.netState.bind(to: netStateHandle())
         SocketTool.prepareSocket()
         NetCheckTool.checkNet()
     }
@@ -68,7 +69,7 @@ class ConnectSocketTool: NSObject {
                     SocketTool.openStreamBehavior.accept(.none)
                     stopHeart()
                     //有网络才去重连，如果连接成功了，那么host和port是一定存在的
-                    if NetCheckTool.netState.value == .hasNet {
+                    if NetCheckTool.netState.value == .netHas {
                         SocketTool.buildConnect(toHost: SocketManager.default.host, toPort: SocketManager.default.port)
                     }
                 }
@@ -78,14 +79,14 @@ class ConnectSocketTool: NSObject {
     fileprivate class func netStateHandle() -> AnyObserver<NetState> {
         return AnyObserver { event in
             if let netState = event.element {
-                if netState == .hasNet {
+                if netState == .netHas {
                     //已经获取了port 和 host(port 和 host 必是同时有值的)
                     if SocketManager.default.host.count != 0 {
                         SocketTool.buildConnect(toHost: SocketManager.default.host, toPort: SocketManager.default.port)
                     } else {
                         stopTimeAddress()
                         timerAddress = startTimer(timeInterval: requestIT) {
-                            if NetCheckTool.netState.value == .hasNet {
+                            if NetCheckTool.netState.value == .netHas {
                                 posables.append(hostPortOB.bind(to: connect()))
                             }
                         }

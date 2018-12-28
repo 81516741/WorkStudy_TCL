@@ -16,10 +16,11 @@ enum ConnectState {
     case connected
     case disConnect
 }
-
 class SocketManager: NSObject {
     static let `default` = SocketManager()
+    static let sendMsgSuccess = "sendMsgSuccess"
     let messageSubject = PublishSubject<String>()
+    let sendMsdSubject = PublishSubject<String>()
     let connectRelay = BehaviorRelay<ConnectState>(value: .none)
     var socket:Socket!
     var host:String = ""
@@ -51,9 +52,8 @@ class SocketManager: NSObject {
             }
             socket.msgResult = {
                 if let msg = $0 {
-                  Log("收到消息:\(msg)")
-                    self.messageSubject.onNext(msg)
-                }
+                    Log("收到消息:\(msg)")
+                    self.messageSubject.onNext(msg)                }
             }
         }
         DispatchQueue(label: "socketConnectQueue").async {
@@ -61,26 +61,26 @@ class SocketManager: NSObject {
         }
     }
     
-    func send(message msg:String?) {
+    func send(message msg:String) {
         if connectRelay.value != .connected {
             Log("socket没有连接服务器")
-            return
+            self.sendMsdSubject.onNext(msg)
         }
-        guard let msg0 = msg else {
-            Log("发给服务器的消息为nil")
-            return
-        }
-        if let data = msg0.data(using: .utf8) {
-            Log("发送消息：\(msg0)")
-            DispatchQueue(label: "sendMsgQueue").async {
-                if (self.socket.send(data)) {
-                    Log("发送成功")
+        if let data = msg.data(using: .utf8) {
+            Log("发送消息：\(msg)")
+            self.socket.send(data)
+            self.socket.sendResult = {
+                if $0 {
+                    Log("发送 成功")
+                    self.sendMsdSubject.onNext(SocketManager.sendMsgSuccess)
                 } else {
-                    Log("发送失败")
+                    Log("发送 失败")
+                    self.sendMsdSubject.onNext(msg)
                 }
             }
         } else {
-            Log(msg0 + "无法转成data")
+            Log(msg + "无法转成data")
+            self.sendMsdSubject.onNext(msg)
         }
     }
     func startTLS() {

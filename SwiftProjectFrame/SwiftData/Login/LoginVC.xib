@@ -24,9 +24,9 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="Dvk-zH-oKS">
-                            <rect key="frame" x="127.5" y="58" width="120" height="120"/>
+                            <rect key="frame" x="147.5" y="30" width="80" height="80"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="120" id="3Q8-Ia-ZQj">
+                                <constraint firstAttribute="width" constant="80" id="3Q8-Ia-ZQj">
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="adjustWidth" value="YES"/>
                                     </userDefinedRuntimeAttributes>
@@ -40,9 +40,9 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入账号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4pD-zU-AfU">
-                            <rect key="frame" x="30" y="236" width="315" height="50"/>
+                            <rect key="frame" x="30" y="130" width="315" height="38"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="50" id="2Qz-pG-G2P">
+                                <constraint firstAttribute="height" constant="38" id="2Qz-pG-G2P">
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="adjustHeight" value="YES"/>
                                     </userDefinedRuntimeAttributes>
@@ -53,9 +53,9 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yXQ-FE-u6J">
-                            <rect key="frame" x="30" y="316" width="315" height="50"/>
+                            <rect key="frame" x="30" y="198" width="315" height="38"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="50" id="dYE-cY-da1">
+                                <constraint firstAttribute="height" constant="38" id="dYE-cY-da1">
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="adjustHeight" value="YES"/>
                                     </userDefinedRuntimeAttributes>
@@ -66,10 +66,10 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8KZ-Xa-VF0">
-                            <rect key="frame" x="20" y="424" width="335" height="50"/>
+                            <rect key="frame" x="20" y="256" width="335" height="38"/>
                             <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="50" id="ijo-h2-7yN">
+                                <constraint firstAttribute="height" constant="38" id="ijo-h2-7yN">
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="adjustHeight" value="YES"/>
                                     </userDefinedRuntimeAttributes>
@@ -89,15 +89,27 @@
                                 <action selector="clickLoginBtn:" destination="-1" eventType="touchUpInside" id="kGU-5z-E7x"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码长度至少1位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNL-yF-kOA">
+                            <rect key="frame" x="30" y="236" width="99" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账号长度至少6位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoC-kH-aob">
+                            <rect key="frame" x="30" y="168" width="101.5" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="8KZ-Xa-VF0" firstAttribute="top" secondItem="yXQ-FE-u6J" secondAttribute="bottom" constant="58" id="ExV-zN-zmn">
+                        <constraint firstItem="8KZ-Xa-VF0" firstAttribute="top" secondItem="yXQ-FE-u6J" secondAttribute="bottom" constant="20" id="ExV-zN-zmn">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="adjustHeight" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </constraint>
-                        <constraint firstItem="Dvk-zH-oKS" firstAttribute="top" secondItem="CtT-zT-uom" secondAttribute="top" constant="58" id="FIl-IN-W38">
+                        <constraint firstItem="Dvk-zH-oKS" firstAttribute="top" secondItem="CtT-zT-uom" secondAttribute="top" constant="30" id="FIl-IN-W38">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="adjustHeight" value="YES"/>
                             </userDefinedRuntimeAttributes>
@@ -107,17 +119,20 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="adjustWidth" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </constraint>
+                        <constraint firstItem="iNL-yF-kOA" firstAttribute="top" secondItem="yXQ-FE-u6J" secondAttribute="bottom" id="LTX-eE-2QM"/>
+                        <constraint firstItem="DoC-kH-aob" firstAttribute="leading" secondItem="4pD-zU-AfU" secondAttribute="leading" id="MyH-Ud-hMp"/>
                         <constraint firstAttribute="trailing" secondItem="yXQ-FE-u6J" secondAttribute="trailing" constant="30" id="aah-bw-Bwc">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="adjustWidth" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </constraint>
-                        <constraint firstItem="4pD-zU-AfU" firstAttribute="top" secondItem="Dvk-zH-oKS" secondAttribute="bottom" constant="58" id="bH6-bm-Hsx">
+                        <constraint firstItem="4pD-zU-AfU" firstAttribute="top" secondItem="Dvk-zH-oKS" secondAttribute="bottom" constant="20" id="bH6-bm-Hsx">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="adjustHeight" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </constraint>
                         <constraint firstItem="Dvk-zH-oKS" firstAttribute="centerX" secondItem="CtT-zT-uom" secondAttribute="centerX" id="i0p-LY-gZK"/>
+                        <constraint firstItem="DoC-kH-aob" firstAttribute="top" secondItem="4pD-zU-AfU" secondAttribute="bottom" id="iut-Qg-tXR"/>
                         <constraint firstItem="4pD-zU-AfU" firstAttribute="leading" secondItem="CtT-zT-uom" secondAttribute="leading" constant="30" id="jBP-MF-3NF">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="adjustWidth" value="YES"/>
@@ -133,6 +148,7 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="adjustHeight" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </constraint>
+                        <constraint firstItem="iNL-yF-kOA" firstAttribute="leading" secondItem="yXQ-FE-u6J" secondAttribute="leading" id="tnl-Jw-5uv"/>
                         <constraint firstItem="8KZ-Xa-VF0" firstAttribute="leading" secondItem="CtT-zT-uom" secondAttribute="leading" constant="20" id="uBc-rG-11c">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="adjustWidth" value="YES"/>
@@ -153,6 +169,7 @@
                 <constraint firstAttribute="bottom" secondItem="CtT-zT-uom" secondAttribute="bottom" id="NWP-ge-nBj"/>
                 <constraint firstAttribute="trailing" secondItem="CtT-zT-uom" secondAttribute="trailing" id="ff7-JP-W4x"/>
             </constraints>
+            <point key="canvasLocation" x="39.5" y="131.5"/>
         </view>
         <customObject id="rUs-HR-xBl" userLabel="账号" customClass="TextFieldBehavior" customModule="SwiftData" customModuleProvider="target">
             <userDefinedRuntimeAttributes>
@@ -190,6 +207,30 @@
                 <outlet property="owner" destination="-1" id="xyv-zF-D6C"/>
                 <outletCollection property="behaviors" destination="rUs-HR-xBl" collectionClass="NSMutableArray" id="Oqx-I7-1td"/>
                 <outletCollection property="behaviors" destination="wbI-5c-syX" collectionClass="NSMutableArray" id="hMR-YA-aN3"/>
+            </connections>
+        </customObject>
+        <customObject id="D69-Ba-PJG" userLabel="账号tip" customClass="LabelBehavior" customModule="SwiftData" customModuleProvider="target">
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="color">
+                    <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="label" destination="DoC-kH-aob" id="DTL-ba-wl9"/>
+                <outlet property="owner" destination="-1" id="hac-6V-uFe"/>
+                <outletCollection property="behaviors" destination="rUs-HR-xBl" collectionClass="NSMutableArray" id="jm3-Do-x8M"/>
+            </connections>
+        </customObject>
+        <customObject id="ID9-zH-9bL" userLabel="密码tip" customClass="LabelBehavior" customModule="SwiftData" customModuleProvider="target">
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="color">
+                    <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="label" destination="iNL-yF-kOA" id="fH7-PE-JOD"/>
+                <outlet property="owner" destination="-1" id="mB8-QP-lpQ"/>
+                <outletCollection property="behaviors" destination="wbI-5c-syX" collectionClass="NSMutableArray" id="eEA-be-LhD"/>
             </connections>
         </customObject>
     </objects>
