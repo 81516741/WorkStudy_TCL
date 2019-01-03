@@ -1,0 +1,6 @@
+framework module Pods_SwiftHttps {
+  umbrella header "Pods-SwiftHttps-umbrella.h"
+
+  export *
+  module * { export * }
+}
