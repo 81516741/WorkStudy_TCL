@@ -29,6 +29,15 @@
         }
     });
 }
+-(UIViewController *)childViewControllerForStatusBarStyle
+{
+    return self.visibleViewController;
+}
+
+-(UIViewController *)childViewControllerForStatusBarHidden
+{
+    return self.visibleViewController;
+}
 
 #pragma mark - hook method
 -(void)ld_pushViewController:(UIViewController *)viewController animated:(BOOL)animated

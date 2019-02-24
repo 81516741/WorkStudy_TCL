@@ -21,11 +21,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ld_theme = .blue
         complexBind()
         ZDYGCZ()
     }
     @objc func Action_nativeFetchMineVC(params:NSDictionary) -> UIViewController{
         return ViewController()
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        navigationController?.pushViewController(ViewController1(), animated: true)
     }
 }
 
@@ -92,7 +96,10 @@ extension ViewController {//第一个例子
             .disposed(by: bag)
         
         loginBtn.rx.tap
-            .subscribe(onNext: {print("被点击了")})
+            .subscribe(onNext: {
+                print("被点击了")
+                self.navigationController?.pushViewController(ViewController1(), animated: true)
+            })
             .disposed(by: bag)
         
     }

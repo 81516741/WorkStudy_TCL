@@ -19,7 +19,6 @@ typedef NS_ENUM(NSInteger){
  导航条主题颜色
  */
 @property (nonatomic,assign) NaviBarTheme ld_theme;
-
 /**
  导航条title颜色
  */

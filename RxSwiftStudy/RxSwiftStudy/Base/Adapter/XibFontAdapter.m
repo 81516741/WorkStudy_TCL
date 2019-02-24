@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
 CGFloat referenceWidth = 375.0;
-int ignoreTag = 666;
+int adaptTag = 666;
 @implementation UILabel (ld_adjustFont)
 
 + (void)load{
@@ -21,7 +21,7 @@ int ignoreTag = 666;
 - (id)ld_initWithCoder:(NSCoder*)aDecode{
     [self ld_initWithCoder:aDecode];
     if (self) {
-        if(self.tag != ignoreTag){
+        if(self.tag == adaptTag){
             CGFloat fontSize = self.font.pointSize;
             self.font = [UIFont systemFontOfSize:fontSize * [UIScreen mainScreen].bounds.size.width/referenceWidth];
         }
@@ -42,7 +42,7 @@ int ignoreTag = 666;
 - (id)ld_initWithCoder:(NSCoder*)aDecode{
     [self ld_initWithCoder:aDecode];
     if (self) {
-        if(self.tag != ignoreTag){
+        if(self.tag == adaptTag){
             CGFloat fontSize = self.titleLabel.font.pointSize;
             self.titleLabel.font = [UIFont systemFontOfSize:fontSize * [UIScreen mainScreen].bounds.size.width/referenceWidth];
         }
@@ -62,7 +62,7 @@ int ignoreTag = 666;
 - (id)ld_initWithCoder:(NSCoder*)aDecode{
     [self ld_initWithCoder:aDecode];
     if (self) {
-        if(self.tag != ignoreTag){
+        if(self.tag == adaptTag){
             CGFloat fontSize = self.font.pointSize;
             self.font = [UIFont systemFontOfSize:fontSize * [UIScreen mainScreen].bounds.size.width/referenceWidth];
         }

@@ -1,4 +1,4 @@
-//
+ //
 //  UINavigationController+LDBase.m
 //  MainArch_Example
 //
@@ -28,6 +28,16 @@
             method_exchangeImplementations(originalMethod, swizzledMethod);
         }
     });
+}
+
+-(UIViewController *)childViewControllerForStatusBarStyle
+{
+    return self.visibleViewController;
+}
+
+-(UIViewController *)childViewControllerForStatusBarHidden
+{
+    return self.visibleViewController;
 }
 
 #pragma mark - hook method

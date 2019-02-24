@@ -14,7 +14,7 @@ class LDAppDelegate : UIResponder,UIApplicationDelegate  {
         LDLogTool.configDDLog()
         LDDBTool.createDatabaseAndAllTable()
         LDDBTool.updateConfigModelOtherDeviceLoginState(otherDeviceLoginStateNone)
-        LDConfigVCUtil.config(true)
+        LDConfigVCUtil.config(false)
         LDSocketTool.startConnectAndHeart()
     }
 }

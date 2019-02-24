@@ -26,8 +26,15 @@ class LDHomeVC: UIViewController {
         configSubViews()
         addNoti()
         netRequest()
+        ld_theme = .white;
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        navigationController?.pushViewController(LDOtherVC(), animated: true)
+    }
     func configSubViews() {
         view.addSubview(topBarSelectView)
         view.addSubview(contentScrollView)

@@ -14,6 +14,7 @@
 		0D76595E21AF8438001421D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D76595C21AF8438001421D3 /* Main.storyboard */; };
 		0D76596021AF843A001421D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D76595F21AF843A001421D3 /* Assets.xcassets */; };
 		0D76596321AF843A001421D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D76596121AF843A001421D3 /* LaunchScreen.storyboard */; };
+		0D8DA150222280D70079DE4D /* XibConstraintAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8DA14F222280D70079DE4D /* XibConstraintAdapter.swift */; };
 		0DBBA6B221B23BB800CF501A /* TextFieldBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6B121B23BB800CF501A /* TextFieldBehavior.swift */; };
 		0DBBA6B421B23BC900CF501A /* ImageViewBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6B321B23BC900CF501A /* ImageViewBehavior.swift */; };
 		0DBBA6B621B2680D00CF501A /* FunctionBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6B521B2680D00CF501A /* FunctionBehavior.swift */; };
@@ -35,13 +36,13 @@
 		0DBBA6EF21B2746F00CF501A /* Mediator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6EA21B2746F00CF501A /* Mediator.m */; };
 		0DBBA6F121B275ED00CF501A /* Mediator+Mine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6F021B275ED00CF501A /* Mediator+Mine.swift */; };
 		0DBBA6F321B279F800CF501A /* Target_Mine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6F221B279F800CF501A /* Target_Mine.swift */; };
-		0DBBA6F621B4C9D500CF501A /* XibConstraintAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6F521B4C9D500CF501A /* XibConstraintAdapter.swift */; };
 		0DBBA6FC21B4D76F00CF501A /* XibFontAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6FB21B4D76F00CF501A /* XibFontAdapter.m */; };
 		0DBBA70321B503C800CF501A /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6FF21B503C800CF501A /* CellView.swift */; };
 		0DBBA70421B503C800CF501A /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA70021B503C800CF501A /* GridView.swift */; };
 		0DBBA70521B503C800CF501A /* TopImageBottomWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA70121B503C800CF501A /* TopImageBottomWordView.swift */; };
 		0DBBA70621B503C800CF501A /* TableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA70221B503C800CF501A /* TableHeaderView.swift */; };
-		0DBBA70821B5065E00CF501A /* TransSizeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA70721B5065E00CF501A /* TransSizeTool.swift */; };
+		0DBBA70821B5065E00CF501A /* Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA70721B5065E00CF501A /* Adapter.swift */; };
+		0DE687E6222006C4008CA598 /* ViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE687E5222006C4008CA598 /* ViewController1.swift */; };
 		6285221CA706D2BE2CEEAFD5 /* Pods_RxSwiftStudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A4339A47FD57D5B814E862 /* Pods_RxSwiftStudy.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		0D76595F21AF843A001421D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D76596221AF843A001421D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D76596421AF843A001421D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D8DA14F222280D70079DE4D /* XibConstraintAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XibConstraintAdapter.swift; path = RxSwiftStudy/Base/Adapter/XibConstraintAdapter.swift; sourceTree = SOURCE_ROOT; };
 		0DBBA6B121B23BB800CF501A /* TextFieldBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBehavior.swift; sourceTree = "<group>"; };
 		0DBBA6B321B23BC900CF501A /* ImageViewBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewBehavior.swift; sourceTree = "<group>"; };
 		0DBBA6B521B2680D00CF501A /* FunctionBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionBehavior.swift; sourceTree = "<group>"; };
@@ -87,13 +89,13 @@
 		0DBBA6EA21B2746F00CF501A /* Mediator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mediator.m; sourceTree = "<group>"; };
 		0DBBA6F021B275ED00CF501A /* Mediator+Mine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mediator+Mine.swift"; sourceTree = "<group>"; };
 		0DBBA6F221B279F800CF501A /* Target_Mine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target_Mine.swift; sourceTree = "<group>"; };
-		0DBBA6F521B4C9D500CF501A /* XibConstraintAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibConstraintAdapter.swift; sourceTree = "<group>"; };
 		0DBBA6FB21B4D76F00CF501A /* XibFontAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XibFontAdapter.m; sourceTree = "<group>"; };
 		0DBBA6FF21B503C800CF501A /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		0DBBA70021B503C800CF501A /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		0DBBA70121B503C800CF501A /* TopImageBottomWordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopImageBottomWordView.swift; sourceTree = "<group>"; };
 		0DBBA70221B503C800CF501A /* TableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableHeaderView.swift; sourceTree = "<group>"; };
-		0DBBA70721B5065E00CF501A /* TransSizeTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransSizeTool.swift; sourceTree = "<group>"; };
+		0DBBA70721B5065E00CF501A /* Adapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Adapter.swift; sourceTree = "<group>"; };
+		0DE687E5222006C4008CA598 /* ViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController1.swift; sourceTree = "<group>"; };
 		2AA4637B64CE844D6A0E95DB /* Pods-RxSwiftStudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftStudy.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftStudy/Pods-RxSwiftStudy.release.xcconfig"; sourceTree = "<group>"; };
 		82A4339A47FD57D5B814E862 /* Pods_RxSwiftStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSwiftStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -113,6 +115,7 @@
 		0D12681621D47F65008A5547 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				0D8DA1512222810D0079DE4D /* Adapter */,
 				0DBBA6FE21B503AB00CF501A /* CommonView */,
 				0DBBA6F421B4C99200CF501A /* LDAboutXib */,
 				0DBBA6E021B2746F00CF501A /* LDMediator */,
@@ -127,6 +130,7 @@
 				0D76595A21AF8438001421D3 /* ViewController.swift */,
 				0D76595C21AF8438001421D3 /* Main.storyboard */,
 				0DBBA6F221B279F800CF501A /* Target_Mine.swift */,
+				0DE687E5222006C4008CA598 /* ViewController1.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -185,6 +189,16 @@
 			path = RxSwiftStudy;
 			sourceTree = "<group>";
 		};
+		0D8DA1512222810D0079DE4D /* Adapter */ = {
+			isa = PBXGroup;
+			children = (
+				0DBBA70721B5065E00CF501A /* Adapter.swift */,
+				0D8DA14F222280D70079DE4D /* XibConstraintAdapter.swift */,
+				0DBBA6FB21B4D76F00CF501A /* XibFontAdapter.m */,
+			);
+			path = Adapter;
+			sourceTree = "<group>";
+		};
 		0DBBA6BB21B2740100CF501A /* LDBaseVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,8 +249,6 @@
 			isa = PBXGroup;
 			children = (
 				0D6B4F3021B234760030DC33 /* LDBehavior */,
-				0DBBA6F521B4C9D500CF501A /* XibConstraintAdapter.swift */,
-				0DBBA6FB21B4D76F00CF501A /* XibFontAdapter.m */,
 			);
 			path = LDAboutXib;
 			sourceTree = "<group>";
@@ -248,7 +260,6 @@
 				0DBBA70021B503C800CF501A /* GridView.swift */,
 				0DBBA70221B503C800CF501A /* TableHeaderView.swift */,
 				0DBBA70121B503C800CF501A /* TopImageBottomWordView.swift */,
-				0DBBA70721B5065E00CF501A /* TransSizeTool.swift */,
 			);
 			path = CommonView;
 			sourceTree = "<group>";
@@ -400,14 +411,16 @@
 				0DBBA6FC21B4D76F00CF501A /* XibFontAdapter.m in Sources */,
 				0DBBA70521B503C800CF501A /* TopImageBottomWordView.swift in Sources */,
 				0DBBA6B621B2680D00CF501A /* FunctionBehavior.swift in Sources */,
-				0DBBA70821B5065E00CF501A /* TransSizeTool.swift in Sources */,
+				0DBBA70821B5065E00CF501A /* Adapter.swift in Sources */,
 				0D76595B21AF8438001421D3 /* ViewController.swift in Sources */,
 				0DBBA6B221B23BB800CF501A /* TextFieldBehavior.swift in Sources */,
 				0D76595921AF8438001421D3 /* AppDelegate.swift in Sources */,
+				0D8DA150222280D70079DE4D /* XibConstraintAdapter.swift in Sources */,
 				0D6B4F3921B234760030DC33 /* LDBehavior.m in Sources */,
 				0DBBA6DF21B2740100CF501A /* UIViewController+LDNaviBar.m in Sources */,
 				0DBBA6F321B279F800CF501A /* Target_Mine.swift in Sources */,
 				0DBBA70621B503C800CF501A /* TableHeaderView.swift in Sources */,
+				0DE687E6222006C4008CA598 /* ViewController1.swift in Sources */,
 				0DBBA6EF21B2746F00CF501A /* Mediator.m in Sources */,
 				0DBBA6D321B2740100CF501A /* LDLoadBaseSourceUtil.m in Sources */,
 				0DBBA6F121B275ED00CF501A /* Mediator+Mine.swift in Sources */,
@@ -417,7 +430,6 @@
 				0DBBA6DC21B2740100CF501A /* UINavigationController+LDBase.m in Sources */,
 				0DBBA6DD21B2740100CF501A /* UITabBarController+LDBase.m in Sources */,
 				0D6B4F3E21B2349C0030DC33 /* ButtonBehavior.swift in Sources */,
-				0DBBA6F621B4C9D500CF501A /* XibConstraintAdapter.swift in Sources */,
 				0DBBA70321B503C800CF501A /* CellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

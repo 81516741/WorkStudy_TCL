@@ -14,6 +14,9 @@ class LDOtherVC: UIViewController {
         super.viewDidLoad()
         title = "你妹的";
         view.backgroundColor = UIColor.yellow
+        ld_theme = .white;
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
 }

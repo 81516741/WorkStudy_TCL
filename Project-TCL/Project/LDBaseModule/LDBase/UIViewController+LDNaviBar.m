@@ -56,11 +56,20 @@
     if (self.ld_titleColor) {
         NSDictionary * dict = [NSDictionary dictionaryWithObject:self.ld_titleColor forKey:NSForegroundColorAttributeName];
         self.navigationController.navigationBar.titleTextAttributes = dict;
-
     }
-
+    UIStatusBarStyle style = UIStatusBarStyleLightContent;
+    if (self.ld_theme ==  NaviBarThemeWhite) {
+        style = UIStatusBarStyleDefault;
+    }
+    UIApplication.sharedApplication.statusBarStyle = style;
 }
-
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    UIStatusBarStyle style = UIStatusBarStyleLightContent;
+    if (self.ld_theme ==  NaviBarThemeWhite) {
+        style = UIStatusBarStyleDefault;
+    }
+    return style;
+}
 #pragma mark - public method
 -(void)ld_setNavibarColor:(UIColor *)color
 {
@@ -105,6 +114,11 @@
 #pragma  mark - private method
 - (void)ld_configNavigationBar
 {
+    if (self.ld_theme == NaviBarThemeWhite) {
+        [self ld_setNavibarColor:[UIColor whiteColor]];
+    } else if (self.ld_theme == NaviBarThemeBlue) {
+        [self ld_setNavibarColor:[UIColor blueColor]];
+    }
     if (self.navigationController.childViewControllers.count == 1)
     {
         
@@ -114,11 +128,9 @@
         if (self.ld_theme == NaviBarThemeWhite) {
             worldColor = [UIColor grayColor];
             backIconName = @"icon_back_gray";
-            [self ld_setNavibarColor:[UIColor whiteColor]];
         } else if (self.ld_theme == NaviBarThemeBlue) {
             worldColor = [UIColor whiteColor];
             backIconName = @"icon_back_white";
-            [self ld_setNavibarColor:[UIColor blueColor]];
         }
         
         UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];

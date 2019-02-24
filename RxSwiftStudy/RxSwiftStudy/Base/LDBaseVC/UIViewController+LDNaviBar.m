@@ -38,6 +38,21 @@
     });
 }
 
+#pragma mark - statusBarStyle Setting
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    UIStatusBarStyle style = UIStatusBarStyleLightContent;
+    if (self.ld_theme ==  NaviBarThemeWhite) {
+        style = UIStatusBarStyleDefault;
+    }
+    return style;
+}
+- (void)configStatusBarStyle {
+    UIStatusBarStyle style = UIStatusBarStyleLightContent;
+    if (self.ld_theme ==  NaviBarThemeWhite) {
+        style = UIStatusBarStyleDefault;
+    }
+    UIApplication.sharedApplication.statusBarStyle = style;
+}
 #pragma mark - hook method
 - (void)ld_viewDidLoad
 {
@@ -53,9 +68,8 @@
     if (self.ld_naviBarColor) {
         [self ld_setNavibarColor:self.ld_naviBarColor];
     }
-
+    [self configStatusBarStyle];
 }
-
 #pragma mark - public method
 -(void)ld_setNavibarColor:(UIColor *)color
 {
@@ -100,6 +114,11 @@
 #pragma  mark - private method
 - (void)ld_configNavigationBar
 {
+    if (self.ld_theme == NaviBarThemeWhite) {
+        [self ld_setNavibarColor:[UIColor whiteColor]];
+    } else if (self.ld_theme == NaviBarThemeBlue) {
+        [self ld_setNavibarColor:[UIColor blueColor]];
+    }
     if (self.navigationController.childViewControllers.count == 1)
     {
         
@@ -109,13 +128,10 @@
         if (self.ld_theme == NaviBarThemeWhite) {
             worldColor = [UIColor grayColor];
             backIconName = @"icon_back_gray";
-            [self ld_setNavibarColor:[UIColor whiteColor]];
         } else if (self.ld_theme == NaviBarThemeBlue) {
             worldColor = [UIColor whiteColor];
             backIconName = @"icon_back_white";
-            [self ld_setNavibarColor:[UIColor blueColor]];
         }
-        
         UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [backButton addTarget:self action:@selector(ld_back) forControlEvents:UIControlEventTouchUpInside];
         backButton.frame = CGRectMake(0, 0, 58, 44);
