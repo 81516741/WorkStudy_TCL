@@ -40,16 +40,16 @@
 
 #pragma mark - statusBarStyle Setting
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    UIStatusBarStyle style = UIStatusBarStyleLightContent;
-    if (self.ld_theme ==  NaviBarThemeWhite) {
-        style = UIStatusBarStyleDefault;
+    UIStatusBarStyle style = UIStatusBarStyleDefault;
+    if (self.ld_theme ==  NaviBarThemeBlue) {
+        style = UIStatusBarStyleLightContent;
     }
     return style;
 }
 - (void)configStatusBarStyle {
-    UIStatusBarStyle style = UIStatusBarStyleLightContent;
-    if (self.ld_theme ==  NaviBarThemeWhite) {
-        style = UIStatusBarStyleDefault;
+    UIStatusBarStyle style = UIStatusBarStyleDefault;
+    if (self.ld_theme ==  NaviBarThemeBlue) {
+        style = UIStatusBarStyleLightContent;
     }
     UIApplication.sharedApplication.statusBarStyle = style;
 }

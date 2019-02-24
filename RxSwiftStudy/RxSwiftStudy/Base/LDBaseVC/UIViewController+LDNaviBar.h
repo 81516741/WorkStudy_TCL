@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger){
-    NaviBarThemeWhite = 0,//默认的them
+    NaviBarThemeWhite = 0,//默认的theme
     NaviBarThemeBlue
 }NaviBarTheme;
 
