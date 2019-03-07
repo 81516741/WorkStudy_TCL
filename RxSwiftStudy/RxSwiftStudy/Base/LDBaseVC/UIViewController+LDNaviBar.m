@@ -66,16 +66,20 @@
     [self ld_configNavigationBar];
     [self.navigationController setNavigationBarHidden:self.ld_hideNavigationBar animated:animated];
     if (self.ld_naviBarColor) {
-        [self ld_setNavibarColor:self.ld_naviBarColor];
+        [self ld_setNavibarColor:self.ld_naviBarColor showdefaultBottomLine:NO];
     }
     [self configStatusBarStyle];
 }
 #pragma mark - public method
--(void)ld_setNavibarColor:(UIColor *)color
+-(void)ld_setNavibarColor:(UIColor *)color showdefaultBottomLine:(BOOL)isShow
 {
     CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
     [self.navigationController.navigationBar setBackgroundImage:[UIViewController ld_imageWithBgColor:color size:CGSizeMake(screenW, 64)] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIViewController ld_imageWithBgColor:[UIColor clearColor] size:CGSizeMake(screenW, 1/[UIScreen mainScreen].scale)];
+    if (isShow) {
+        self.navigationController.navigationBar.shadowImage = nil;
+    } else {
+        self.navigationController.navigationBar.shadowImage = [UIViewController ld_imageWithBgColor:[UIColor clearColor] size:CGSizeMake(screenW, 1/[UIScreen mainScreen].scale)];
+    }
 }
 
 - (void)ld_setNaviBarRightItemText:(NSString *)text color:(UIColor *)color sel:(SEL)sel
@@ -115,9 +119,9 @@
 - (void)ld_configNavigationBar
 {
     if (self.ld_theme == NaviBarThemeWhite) {
-        [self ld_setNavibarColor:[UIColor whiteColor]];
+        [self ld_setNavibarColor:[UIColor whiteColor] showdefaultBottomLine:YES];
     } else if (self.ld_theme == NaviBarThemeBlue) {
-        [self ld_setNavibarColor:[UIColor blueColor]];
+        [self ld_setNavibarColor:[UIColor blueColor] showdefaultBottomLine:NO];
     }
     if (self.navigationController.childViewControllers.count == 1)
     {
