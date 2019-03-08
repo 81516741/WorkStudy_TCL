@@ -18,7 +18,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.yellowColor;
     self.ld_theme = NaviBarThemeBlue;
-    TestView * v = [[TestView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
+    TestView * v = [[TestView alloc] initWithFrame:CGRectMake(100, 0, 100, 50)];
     v.backgroundColor = UIColor.redColor;
     [self.view addSubview:v];
 }

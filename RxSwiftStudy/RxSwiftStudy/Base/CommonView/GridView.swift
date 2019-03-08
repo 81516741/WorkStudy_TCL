@@ -78,7 +78,7 @@ class GridView: UIScrollView {
                         }
                     }
                     if i == itemCount - 1 {
-                        contentSize = CGSize(width: x + itemW + config.edge.left, height: 0)
+                        contentSize = CGSize(width: x + itemW + config.edge.right, height: 0)
                     }
                 }
             }
@@ -100,7 +100,7 @@ class GridView: UIScrollView {
                     })
                 }
                 if i == Int(itemCount - 1) {
-                    gridViewHeight = y + itemH + config.edge.bottom + 8
+                    gridViewHeight = y + itemH + config.edge.bottom
                     contentSize = CGSize(width: 0, height: gridViewHeight)
                 }
             }
@@ -125,6 +125,18 @@ class GridView: UIScrollView {
         
         shapeLayer.path = path
         lineView.layer.addSublayer(shapeLayer)
+    }
+    
+    func removeAllSubView() {
+        for subView in subviews {
+            subView.removeFromSuperview()
+        }
+    }
+    
+    func calculateHeight(configModel:GridViewConfigModel,itemCount:Int)->CGFloat {
+        let row = (CGFloat(itemCount) + (configModel.colCount - 1)) / configModel.colCount
+        let height = row * configModel.itemHeight + (row - 1) * configModel.itemRowMargin + configModel.edge.top + configModel.edge.bottom
+        return height
     }
     
     //MARK:懒加载
