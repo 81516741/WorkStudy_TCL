@@ -15,6 +15,7 @@
 		0D76595E21AF8438001421D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D76595C21AF8438001421D3 /* Main.storyboard */; };
 		0D76596021AF843A001421D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D76595F21AF843A001421D3 /* Assets.xcassets */; };
 		0D76596321AF843A001421D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D76596121AF843A001421D3 /* LaunchScreen.storyboard */; };
+		0D78C17422368C9B00ECC48E /* UIFont+Adapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D78C17322368C9B00ECC48E /* UIFont+Adapter.m */; };
 		0DA52372223108E40033A8F6 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA52371223108E40033A8F6 /* Extension.swift */; };
 		0DA5237522310A6F0033A8F6 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA5237422310A6F0033A8F6 /* ViewController2.m */; };
 		0DA5237F223133360033A8F6 /* ViewController2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DA5237E223133360033A8F6 /* ViewController2.xib */; };
@@ -62,6 +63,7 @@
 		0D76595F21AF843A001421D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D76596221AF843A001421D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D76596421AF843A001421D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D78C17322368C9B00ECC48E /* UIFont+Adapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Adapter.m"; sourceTree = "<group>"; };
 		0DA52371223108E40033A8F6 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		0DA5237322310A6F0033A8F6 /* ViewController2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
 		0DA5237422310A6F0033A8F6 /* ViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				0DBBA70721B5065E00CF501A /* Adapter.swift */,
+				0D78C17322368C9B00ECC48E /* UIFont+Adapter.m */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				0DBBA6DE21B2740100CF501A /* UIViewController+LDLogin.m in Sources */,
 				0DBBA6D221B2740100CF501A /* LDConfigVCUtil.m in Sources */,
 				0DBBA6B421B23BC900CF501A /* ImageViewBehavior.swift in Sources */,
+				0D78C17422368C9B00ECC48E /* UIFont+Adapter.m in Sources */,
 				0DBBA70521B503C800CF501A /* TopImageBottomWordView.swift in Sources */,
 				0DBBA6B621B2680D00CF501A /* FunctionBehavior.swift in Sources */,
 				0DBBA70821B5065E00CF501A /* Adapter.swift in Sources */,

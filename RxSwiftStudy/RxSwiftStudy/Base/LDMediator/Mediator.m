@@ -117,7 +117,12 @@
     
 - (void)releaseCachedTargetWithTargetName:(NSString *)targetName
     {
+        //移除oc的
         NSString *targetClassString = [NSString stringWithFormat:@"Target_%@", targetName];
+        [self.cachedTarget removeObjectForKey:targetClassString];
+        //移除swift的
+        NSString * executableFile = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleExecutableKey];
+        targetClassString = [NSString stringWithFormat:@"%@.%@",executableFile,targetClassString];
         [self.cachedTarget removeObjectForKey:targetClassString];
     }
     
@@ -130,63 +135,36 @@
         }
         const char* retType = [methodSig methodReturnType];
         
-        if (strcmp(retType, @encode(void)) == 0) {
-            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
-            [invocation setArgument:&params atIndex:2];
-            [invocation setSelector:action];
-            [invocation setTarget:target];
-            [invocation invoke];
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
+        [invocation setArgument:&params atIndex:2];
+        [invocation setSelector:action];
+        [invocation setTarget:target];
+        [invocation invoke];
+        //void 也可以用 @encode(void) 获取 "v"
+        if (strcmp(retType, "v") == 0) {
             return nil;
         }
-        
-        if (strcmp(retType, @encode(NSInteger)) == 0) {
-            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
-            [invocation setArgument:&params atIndex:2];
-            [invocation setSelector:action];
-            [invocation setTarget:target];
-            [invocation invoke];
-            NSInteger result = 0;
+        //bool  char short  int  long    long long
+        if (strcmp(retType, "B") == 0 ||strcmp(retType, "c") == 0 ||strcmp(retType, "s") == 0 ||strcmp(retType, "i") == 0 ||strcmp(retType, "l") == 0 ||strcmp(retType, "q") == 0 ) {
+            long long result = 0;
             [invocation getReturnValue:&result];
             return @(result);
         }
         
-        if (strcmp(retType, @encode(BOOL)) == 0) {
-            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
-            [invocation setArgument:&params atIndex:2];
-            [invocation setSelector:action];
-            [invocation setTarget:target];
-            [invocation invoke];
-            BOOL result = 0;
+        //float  double
+        if (strcmp(retType, "f") == 0 ||strcmp(retType, "d") == 0 ) {
+            double result = 0.0;
             [invocation getReturnValue:&result];
             return @(result);
         }
         
-        if (strcmp(retType, @encode(CGFloat)) == 0) {
-            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
-            [invocation setArgument:&params atIndex:2];
-            [invocation setSelector:action];
-            [invocation setTarget:target];
-            [invocation invoke];
-            CGFloat result = 0;
+        //NSObject
+        if (strcmp(retType, "@") == 0) {
+            __autoreleasing NSObject * result=nil;
             [invocation getReturnValue:&result];
-            return @(result);
+            return result;
         }
-        
-        if (strcmp(retType, @encode(NSUInteger)) == 0) {
-            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
-            [invocation setArgument:&params atIndex:2];
-            [invocation setSelector:action];
-            [invocation setTarget:target];
-            [invocation invoke];
-            NSUInteger result = 0;
-            [invocation getReturnValue:&result];
-            return @(result);
-        }
-        
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        return [target performSelector:action withObject:params];
-#pragma clang diagnostic pop
+        return nil;
     }
     
 #pragma mark - getters and setters

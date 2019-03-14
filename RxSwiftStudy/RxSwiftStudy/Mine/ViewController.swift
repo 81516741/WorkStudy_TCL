@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ld_theme = .blue
+        ld_theme = NaviBarThemeBlue
         complexBind()
         ZDYGCZ()
     }

@@ -9,6 +9,7 @@
 #import "ViewController2.h"
 #import "RxSwiftStudy-Swift.h"
 @interface ViewController2 ()
+@property (weak, nonatomic) IBOutlet UILabel *label;
 
 @end
 
@@ -21,6 +22,7 @@
     TestView * v = [[TestView alloc] initWithFrame:CGRectMake(100, 0, 100, 50)];
     v.backgroundColor = UIColor.redColor;
     [self.view addSubview:v];
+    self.label.font = [UIFont systemFontOfSize:40];
 }
 - (void)routerEventWithTypeWithEventType:(NSString *)eventType userInfo:(id)userInfo {
     NSLog(@"%@--%@",eventType,userInfo);
