@@ -35,7 +35,6 @@
 		0DBBA6DB21B2740100CF501A /* P4.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBBA6C921B2740100CF501A /* P4.png */; };
 		0DBBA6DC21B2740100CF501A /* UINavigationController+LDBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6CB21B2740100CF501A /* UINavigationController+LDBase.m */; };
 		0DBBA6DD21B2740100CF501A /* UITabBarController+LDBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6CD21B2740100CF501A /* UITabBarController+LDBase.m */; };
-		0DBBA6DE21B2740100CF501A /* UIViewController+LDLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6CF21B2740100CF501A /* UIViewController+LDLogin.m */; };
 		0DBBA6DF21B2740100CF501A /* UIViewController+LDNaviBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6D121B2740100CF501A /* UIViewController+LDNaviBar.m */; };
 		0DBBA6EF21B2746F00CF501A /* Mediator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6EA21B2746F00CF501A /* Mediator.m */; };
 		0DBBA6F121B275ED00CF501A /* Mediator+Mine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBBA6F021B275ED00CF501A /* Mediator+Mine.swift */; };
@@ -89,8 +88,6 @@
 		0DBBA6CB21B2740100CF501A /* UINavigationController+LDBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+LDBase.m"; sourceTree = "<group>"; };
 		0DBBA6CC21B2740100CF501A /* UITabBarController+LDBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+LDBase.h"; sourceTree = "<group>"; };
 		0DBBA6CD21B2740100CF501A /* UITabBarController+LDBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+LDBase.m"; sourceTree = "<group>"; };
-		0DBBA6CE21B2740100CF501A /* UIViewController+LDLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LDLogin.h"; sourceTree = "<group>"; };
-		0DBBA6CF21B2740100CF501A /* UIViewController+LDLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LDLogin.m"; sourceTree = "<group>"; };
 		0DBBA6D021B2740100CF501A /* UIViewController+LDNaviBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LDNaviBar.h"; sourceTree = "<group>"; };
 		0DBBA6D121B2740100CF501A /* UIViewController+LDNaviBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LDNaviBar.m"; sourceTree = "<group>"; };
 		0DBBA6E921B2746F00CF501A /* Mediator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mediator.h; sourceTree = "<group>"; };
@@ -240,8 +237,6 @@
 				0DBBA6CB21B2740100CF501A /* UINavigationController+LDBase.m */,
 				0DBBA6CC21B2740100CF501A /* UITabBarController+LDBase.h */,
 				0DBBA6CD21B2740100CF501A /* UITabBarController+LDBase.m */,
-				0DBBA6CE21B2740100CF501A /* UIViewController+LDLogin.h */,
-				0DBBA6CF21B2740100CF501A /* UIViewController+LDLogin.m */,
 				0DBBA6D021B2740100CF501A /* UIViewController+LDNaviBar.h */,
 				0DBBA6D121B2740100CF501A /* UIViewController+LDNaviBar.m */,
 			);
@@ -384,20 +379,22 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-RxSwiftStudy/Pods-RxSwiftStudy-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-RxSwiftStudy/Pods-RxSwiftStudy-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RxSwiftStudy/Pods-RxSwiftStudy-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RxSwiftStudy/Pods-RxSwiftStudy-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E3752D43A4770193FACFF4C5 /* [CP] Check Pods Manifest.lock */ = {
@@ -426,7 +423,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D0562162225420E0093CA6F /* TestView.swift in Sources */,
-				0DBBA6DE21B2740100CF501A /* UIViewController+LDLogin.m in Sources */,
 				0DBBA6D221B2740100CF501A /* LDConfigVCUtil.m in Sources */,
 				0DBBA6B421B23BC900CF501A /* ImageViewBehavior.swift in Sources */,
 				0D78C17422368C9B00ECC48E /* UIFont+Adapter.m in Sources */,

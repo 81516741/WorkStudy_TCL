@@ -10,7 +10,6 @@
 #import "RxSwiftStudy-Swift.h"
 @interface ViewController2 ()
 @property (weak, nonatomic) IBOutlet UILabel *label;
-
 @end
 
 @implementation ViewController2

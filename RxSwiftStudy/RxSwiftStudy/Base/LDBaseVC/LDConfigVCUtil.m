@@ -9,7 +9,6 @@
 #import "LDConfigVCUtil.h"
 #import "LDLoadBaseSourceUtil.h"
 #import "UITabBarController+LDBase.h"
-#import "UIViewController+LDLogin.h"
 
 NSString * const kVersionKey = @"CFBundleShortVersionString";
 NSString * const kLoginStateKey = @"kLoginStateKey";

@@ -118,11 +118,13 @@
 #pragma  mark - private method
 - (void)ld_configNavigationBar
 {
+    //设置导航栏的颜色
     if (self.ld_theme == NaviBarThemeWhite) {
         [self ld_setNavibarColor:[UIColor whiteColor] showdefaultBottomLine:YES];
     } else if (self.ld_theme == NaviBarThemeBlue) {
         [self ld_setNavibarColor:[UIColor blueColor] showdefaultBottomLine:NO];
     }
+    //设置返回键的UI
     if (self.navigationController.childViewControllers.count == 1)
     {
         

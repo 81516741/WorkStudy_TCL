@@ -14,7 +14,6 @@ typedef NS_ENUM(NSInteger){
 }NaviBarTheme;
 
 @interface UIViewController (LDNaviBar)
-
 /**
  导航条主题颜色
  */
