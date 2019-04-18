@@ -1,0 +1,6 @@
+framework module TCLConfigNet {
+  umbrella header "TCLConfigNet-umbrella.h"
+
+  export *
+  module * { export * }
+}

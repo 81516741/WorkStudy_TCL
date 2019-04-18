@@ -1,0 +1,16 @@
+PODS:
+  - StaticFrameWork (0.1.0)
+
+DEPENDENCIES:
+  - StaticFrameWork (from `../`)
+
+EXTERNAL SOURCES:
+  StaticFrameWork:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  StaticFrameWork: dfdace57331ce36505341e69d35721688236f4eb
+
+PODFILE CHECKSUM: 09343d2ba9a19c8810ab1f3b557c9207f8a4504b
+
+COCOAPODS: 1.6.1

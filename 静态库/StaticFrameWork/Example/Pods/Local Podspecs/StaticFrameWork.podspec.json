@@ -1,0 +1,22 @@
+{
+  "name": "StaticFrameWork",
+  "version": "0.1.0",
+  "summary": "A short description of StaticFrameWork.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/81516741@qq.com/StaticFrameWork",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "81516741@qq.com": "81516741@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/81516741@qq.com/StaticFrameWork.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "StaticFrameWork/Classes/**/*"
+}
