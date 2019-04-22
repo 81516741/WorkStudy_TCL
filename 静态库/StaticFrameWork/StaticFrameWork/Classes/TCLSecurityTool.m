@@ -40,8 +40,8 @@
     return [strM copy];
 }
 + (NSString *)loginPassword:(NSString *)password {
-    NSString * loginPassword = [NSString stringWithFormat:@"TCL%@TCL",self];
-    loginPassword = [[self md5String:password] uppercaseString];
+    NSString * loginPassword = [NSString stringWithFormat:@"TCL%@TCL",password];
+    loginPassword = [[self md5String:loginPassword] uppercaseString];
     return loginPassword;
 }
 + (NSString *)bleDataWithSSID:(NSString *)ssid password:(NSString *)password bindCode:(NSString *)bindCode {

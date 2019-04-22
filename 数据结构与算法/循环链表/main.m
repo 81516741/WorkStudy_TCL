@@ -38,16 +38,24 @@ int CycleLinkListLength(CycleLinkList list) {
 }
 
 
-CycleLinkList CycleLinkListInit() {
+CycleLinkList CycleLinkListInit(int capacity) {
     CycleLinkList list = NULL;
-    ElemType item;
+    ElemType item = 0;
     CycleLinkList temp;
     CycleLinkList target;
     while (1) {
-        printf("请输入:\n");
-        scanf("%d",&item);
-        if (item == 0) {
-            return list;
+        if (capacity < 0) {
+            printf("请输入:\n");
+            scanf("%d",&item);
+            if (item == 0) {
+                return list;
+            }
+        } else {
+            capacity--;
+            item ++;
+            if (capacity == -1) {
+                return list;
+            }
         }
         if (list == NULL) {
             list = (Node *)malloc(sizeof(CycleLinkList));
@@ -72,7 +80,7 @@ CycleLinkList CycleLinkListInit() {
     }
 }
 
-Status CycleLinkListInSet(CycleLinkList * list , int i) {
+Status CycleLinkListInSet(CycleLinkList * list , int i,ElemType data) {
     if (i > CycleLinkListLength(*list) - 1 || i < 0) {
         exit(0);
         return ERROR;
@@ -174,13 +182,85 @@ void CycleLinkListPrintAll(CycleLinkList list) {
     } while ((temp = temp->next) != list);
     printf("\n");
 }
+void CycleLinkListSetAllValue(CycleLinkList * list,ElemType value) {
+    CycleLinkList temp = *list;
+    while (temp->next != *list) {
+        temp->data = value;
+        temp = temp->next;
+    }
+    temp->data = value;
+}
+void yusefu(int capacity) {
+    printf("约瑟夫问题\n");
+    int count = 3;
+    CycleLinkList list = CycleLinkListInit(capacity);
+    CycleLinkList temp;
+    while (list != list->next) {
+        for (int i = 0; i<count-2; i++) {
+            list = list->next;
+        }
+        temp = list->next;
+        printf("干掉:%d\n",temp->data);
+        list->next = list->next->next;
+        list = list->next;
+        free(temp);
+    }
+    printf("活下来:%d\n",list->data);
+}
+
+void moshushi(int capacity) {
+//    1,8,2,5,10,3,12,11,9,4,7,6,13,
+    printf("魔术师发牌问题\n");
+    CycleLinkList list = CycleLinkListInit(capacity);
+    CycleLinkListSetAllValue(&list, 0);
+    int count = 1;
+    CycleLinkList temp = list;
+    temp->data = count;
+    count ++;
+    while (1) {
+        for (int i = 0; i < count; i ++) {
+            temp = temp->next;
+            if (temp->data != 0) {
+                i--;
+            }
+        }
+        temp->data = count;
+        count ++;
+        if (count == capacity + 1) {
+            break;
+        }
+    }
+    CycleLinkListPrintAll(list);
+}
+
+void ladingfangzheng(int n) {
+    printf("拉丁方正问题\n");
+    CycleLinkList list = CycleLinkListInit(n);
+    CycleLinkList temp = list;
+    int count = n;
+    while (count) {
+        for (int i = 0; i < n; i++) {
+            printf("%d ",temp->data);
+            temp = temp->next;
+        }
+        printf("\n");
+        list = list->next;
+        temp = list;
+        count--;
+    }
+}
 
 int main(int argc, const char * argv[]) {
-    ElemType data;
-    CycleLinkList list = CycleLinkListInit();
-    CycleLinkListInSet(&list, 2);
-    CycleLinkListInDelete(&list, 2);
-    CycleLinkListGet(list, &data);
-    CycleLinkListPrintAll(list);
+//    ElemType data;
+//    CycleLinkList list = CycleLinkListInit(-1);
+//    CycleLinkListInSet(&list, 2,0);
+//    CycleLinkListInDelete(&list, 2);
+//    CycleLinkListGet(list, &data);
+//    CycleLinkListPrintAll(list);
+//    yusefu(41);
+//    moshushi(13);
+    ladingfangzheng(9);
     return 0;
 }
+
+
