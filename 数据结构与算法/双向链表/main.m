@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #define OK      1
 #define ERROR   0
 #define TRUE    1
 #define FALSE   0
-typedef unsigned int ElemType;
+typedef int ElemType;
 
 typedef int Status;
 typedef struct Node{
@@ -154,9 +155,14 @@ Status LinkListDoubleAppend(LinkListDouble * list,ElemType data) {
     temp->next = p;
     return OK;
 }
-
-
-int main(int argc, const char * argv[]) {
+void LinkListDoublePrintAll(LinkListDouble list) {
+    LinkListDouble temp = list;
+    while (temp->next != list) {
+        temp = temp->next;
+        printf("%d,",temp->data);
+    }
+}
+void test() {
     LinkListDouble list = LinkListDoubleCreateTail(5);
     int length = LinkListDoubleLength(list);
     ElemType data;
@@ -170,5 +176,117 @@ int main(int argc, const char * argv[]) {
     LinkListDoubleAppend(&list, 118);
     LinkListDoubleClear(&list);
     length = LinkListDoubleLength(list);
+}
+
+LinkListDouble createData() {
+    LinkListDouble list = LinkListDoubleCreateHead(0);
+    LinkListDoubleAppend(&list, 'A');
+    LinkListDoubleAppend(&list, 'B');
+    LinkListDoubleAppend(&list, 'C');
+    LinkListDoubleAppend(&list, 'D');
+    LinkListDoubleAppend(&list, 'E');
+    LinkListDoubleAppend(&list, 'F');
+    LinkListDoubleAppend(&list, 'G');
+    LinkListDoubleAppend(&list, 'H');
+    LinkListDoubleAppend(&list, 'I');
+    LinkListDoubleAppend(&list, 'J');
+    LinkListDoubleAppend(&list, 'K');
+    LinkListDoubleAppend(&list, 'L');
+    LinkListDoubleAppend(&list, 'M');
+    LinkListDoubleAppend(&list, 'N');
+    LinkListDoubleAppend(&list, 'O');
+    LinkListDoubleAppend(&list, 'P');
+    LinkListDoubleAppend(&list, 'Q');
+    LinkListDoubleAppend(&list, 'R');
+    LinkListDoubleAppend(&list, 'S');
+    LinkListDoubleAppend(&list, 'T');
+    LinkListDoubleAppend(&list, 'U');
+    LinkListDoubleAppend(&list, 'V');
+    LinkListDoubleAppend(&list, 'W');
+    LinkListDoubleAppend(&list, 'X');
+    LinkListDoubleAppend(&list, 'Y');
+    LinkListDoubleAppend(&list, 'Z');
+    return list;
+}
+
+LinkListDouble movePosition(LinkListDouble * list0,int n) {
+    LinkListDouble list = * list0;
+    n = n % 26;
+    if (n == 0) {
+        return list;
+    }
+    LinkListDouble temp = list;
+    if (n < 0) {
+        n = 26 + n;
+    }
+    while (n) {
+        temp = temp->next;
+        n--;
+    }
+    LinkListDouble tempF = list->next;
+    list->next = temp->next;
+    temp->next->pre = list;
+    
+    list->pre->next = tempF;
+    tempF->pre = list->pre;
+    
+    list->pre = temp;
+    temp->next = list;
+    
+    return list;
+}
+
+int location(int s) {
+    LinkListDouble list = createData();
+    int location = 0;
+    while (list->data != s) {
+        list = list->next;
+        location ++;
+    }
+    return location;
+}
+
+void encode(LinkListDouble miyue,char * data,char * result) {
+    int count = LinkListDoubleLength(miyue);
+    for (int i = 0; i < count; i ++) {
+        LinkListDouble list = createData();
+        int data0;
+        LinkListDoubleGet(miyue, i, &data0);
+        movePosition(&list, location(data[i]) - 1 + data0);
+        printf("%c",list->next->data);
+        char dataChar = (char)list->next->data;
+        result[i] = dataChar;
+    }
+    printf("\n");
+}
+void decode(LinkListDouble miyue,char * data,char * result) {
+    int count = LinkListDoubleLength(miyue);
+    for (int i = 0; i < count; i ++) {
+        LinkListDouble list = createData();
+        int data0;
+        LinkListDoubleGet(miyue, i, &data0);
+        movePosition(&list, location(data[i]) - 1 - data0);
+        printf("%c",list->next->data);
+        char dataChar = (char)list->next->data;
+        result[i] = dataChar;
+    }
+    printf("\n");
+}
+
+void testJiamiJiemi() {
+    char result1[5];
+    char result2[5];
+    LinkListDouble list = LinkListDoubleCreateHead(0);
+    LinkListDoubleAppend(&list, 3);
+    LinkListDoubleAppend(&list, 8);
+    LinkListDoubleAppend(&list, 26);
+    LinkListDoubleAppend(&list, 21);
+    char * data = "JNPM";
+    encode(list, data,result1);
+    decode(list, result1,result2);
+}
+
+int main(int argc, const char * argv[]) {
+    testJiamiJiemi();
     return 0;
 }

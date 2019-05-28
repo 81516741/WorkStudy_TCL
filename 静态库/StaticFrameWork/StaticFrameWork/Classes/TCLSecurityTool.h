@@ -15,4 +15,5 @@
 + (NSString *)S_UUID;
 + (NSString *)N_UUID;
 + (NSString *)W_UUID;
++ (NSString *)uuidString;
 @end
